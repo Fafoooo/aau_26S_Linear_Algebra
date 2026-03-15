@@ -70,7 +70,12 @@ Aus Zeile 1: $x + 2y + t + w = 5 \Rightarrow x = 5 - 2y - t - w$
 
 \section*{Gauß-Jordan-Elimination (reduzierte Stufenform)}
 
-Wir normieren Zeile 2 und eliminieren nach oben.
+\textbf{Bemerkung:} Die Gauß-Jordan-Elimination bringt hier kaum etwas Neues.
+Das Ziel von Gauß-Jordan ist es, auch \textbf{oberhalb} der Pivots zu eliminieren, damit jede
+Pivot-Variable nur noch in \textbf{einer} Gleichung vorkommt.
+
+Aber in unserem Fall steht in Zeile 1 bereits eine $0$ in der Pivot-Spalte von Zeile 2 (Spalte 3).
+Es gibt also \textbf{nichts zu eliminieren} -- wir müssen nur noch das Pivot in Zeile 2 normieren.
 
 \textbf{Schritt 3:} $Z_2 \leftarrow -Z_2$ (Pivot normieren)
 
@@ -82,9 +87,20 @@ Wir normieren Zeile 2 und eliminieren nach oben.
 \end{array}\right)
 \]
 
-Zeile 1 hat bereits eine 0 in der Pivot-Spalte von Zeile 2 (Spalte 3), also ist nichts weiter zu tun.
+Dies ist die \textbf{reduzierte Zeilenstufenform} (RREF). Man liest ab:
+\begin{align*}
+\text{Zeile 1:} \quad & x + 2y + t + w = 5 \\
+\text{Zeile 2:} \quad & z - 2t + 3w = -3
+\end{align*}
 
-Dies ist bereits die \textbf{reduzierte Zeilenstufenform} (RREF):
+Das ist \textbf{exakt dasselbe} wie beim Rückwärtseinsetzen oben.
+Die Gauß-Jordan-Elimination hat hier also nur das Vorzeichen gedreht -- die Information ist dieselbe.
+
+\newpage
+\section*{Allgemeine Lösung -- Schritt für Schritt erklärt}
+
+Ab hier kommt der Teil, der über die reine Elimination hinausgeht.
+Wir haben die RREF:
 
 \[
 \left(\begin{array}{ccccc|c}
@@ -94,19 +110,73 @@ Dies ist bereits die \textbf{reduzierte Zeilenstufenform} (RREF):
 \end{array}\right)
 \]
 
-\section*{Allgemeine Lösung}
+\subsection*{Schritt 1: Pivot-Variablen vs.\ freie Variablen}
 
-\textbf{Pivot-Variablen:} $x, z$ \quad \textbf{Freie Variablen:} $y, t, w$
+\textbf{Pivot-Spalten} sind die Spalten mit einer führenden 1: Spalte 1 ($x$) und Spalte 3 ($z$).
 
-Setze $y = s$, $t = r$, $w = q$ mit $s, r, q \in \mathbb{R}$.
+$\Rightarrow$ $x$ und $z$ sind \textbf{Pivot-Variablen}: Sie werden durch die Gleichungen bestimmt
+(sobald man die restlichen Variablen kennt).
 
-\subsection*{Closed Form (als $n$-Tupel)}
+\textbf{Spalten ohne Pivot}: Spalte 2 ($y$), Spalte 4 ($t$), Spalte 5 ($w$).
+
+$\Rightarrow$ $y$, $t$ und $w$ sind \textbf{freie Variablen}: Für sie gibt es keine eigene Gleichung.
+Sie dürfen \textbf{jeden beliebigen Wert} annehmen -- das System ist trotzdem erfüllt.
+
+\subsection*{Schritt 2: Freie Variablen als Parameter}
+
+Wir geben den freien Variablen neue Namen (um sie von den berechneten zu unterscheiden):
+
+\[
+y = s, \quad t = r, \quad w = q \qquad \text{mit } s, r, q \in \mathbb{R}
+\]
+
+Das bedeutet nur: \glqq $y$ darf irgendeine reelle Zahl sein -- wir nennen sie $s$.\grqq{}
+Die Buchstaben $s, r, q$ sind Platzhalter für \textbf{alle möglichen Wahlen}.
+
+\subsection*{Schritt 3: Pivot-Variablen ausdrücken}
+
+Jetzt setzen wir $y = s$, $t = r$, $w = q$ in die zwei Gleichungen ein:
+
+\begin{align*}
+\text{Aus Zeile 2:} \quad z &= -3 + 2r - 3q \\
+\text{Aus Zeile 1:} \quad x &= 5 - 2s - r - q
+\end{align*}
+
+\subsection*{Schritt 4: Closed Form -- alles zusammen hinschreiben}
+
+Alle 5 Variablen in einer Zeile als Tupel:
 
 \[
 \boxed{(x,y,z,t,w) = (5 - 2s - r - q,\; s,\; -3 + 2r - 3q,\; r,\; q), \quad s, r, q \in \mathbb{R}}
 \]
 
-\subsection*{Expanded Form (Vektordarstellung)}
+Jede konkrete Wahl von $s, r, q$ liefert eine konkrete Lösung. Z.\,B.:
+\begin{itemize}
+\item $s = 0, r = 0, q = 0 \Rightarrow (5, 0, -3, 0, 0)$
+\item $s = 1, r = 0, q = 0 \Rightarrow (3, 1, -3, 0, 0)$
+\item $s = 0, r = 1, q = 1 \Rightarrow (3, 0, -4, 1, 1)$
+\end{itemize}
+
+\subsection*{Schritt 5: Expanded Form -- in Vektoren zerlegen}
+
+Die Idee: Trenne den \textbf{fixen Anteil} (wenn alle Parameter $= 0$ sind)
+von den \textbf{veränderbaren Anteilen} (was sich ändert, wenn $s$, $r$ oder $q$ variiert).
+
+Schreibe die Closed Form untereinander und sortiere nach Parametern:
+
+\[
+\begin{pmatrix} x \\ y \\ z \\ t \\ w \end{pmatrix}
+=
+\begin{pmatrix} 5 \\ 0 \\ -3 \\ 0 \\ 0 \end{pmatrix}
++
+\begin{pmatrix} -2s \\ s \\ 0 \\ 0 \\ 0 \end{pmatrix}
++
+\begin{pmatrix} -r \\ 0 \\ 2r \\ r \\ 0 \end{pmatrix}
++
+\begin{pmatrix} -q \\ 0 \\ -3q \\ 0 \\ q \end{pmatrix}
+\]
+
+Den Parameter kann man vor den Vektor ziehen:
 
 \[
 \begin{pmatrix} x \\ y \\ z \\ t \\ w \end{pmatrix}
@@ -121,7 +191,34 @@ Setze $y = s$, $t = r$, $w = q$ mit $s, r, q \in \mathbb{R}$.
 \boxed{\vec{x} = v_0 + s \cdot v_1 + r \cdot v_2 + q \cdot v_3, \quad s, r, q \in \mathbb{R}}
 \]
 
-wobei $v_0 = (5,0,-3,0,0)^T$ eine \textbf{partikuläre Lösung} ist und $v_1, v_2, v_3$ die Richtungen des Lösungsraums aufspannen.
+\subsection*{Was bedeuten die Vektoren?}
+
+\begin{itemize}
+\item $v_0 = (5, 0, -3, 0, 0)^T$ ist \textbf{eine} konkrete Lösung (die \glqq Basislösung\grqq{} für $s = r = q = 0$).
+\item $v_1 = (-2, 1, 0, 0, 0)^T$ beschreibt, wie sich die Lösung ändert, wenn man $y$ (also $s$) um 1 erhöht.
+\item $v_2 = (-1, 0, 2, 1, 0)^T$ beschreibt die Änderung, wenn man $t$ (also $r$) um 1 erhöht.
+\item $v_3 = (-1, 0, -3, 0, 1)^T$ beschreibt die Änderung, wenn man $w$ (also $q$) um 1 erhöht.
+\end{itemize}
+
+\textbf{Anschaulich:} $v_0$ ist ein Startpunkt. $v_1, v_2, v_3$ sind drei Richtungen,
+in die man sich bewegen kann, ohne die Gleichungen zu verletzen.
+Jede Kombination aus diesen Richtungen ergibt eine gültige Lösung.
+
+\subsection*{Woher kommen die Vektoren konkret?}
+
+Man liest sie direkt aus der Closed Form ab. Für jede Variable notiert man:
+\begin{center}
+\begin{tabular}{c|c|cccc}
+Variable & fixer Anteil & Koeff.\ von $s$ & Koeff.\ von $r$ & Koeff.\ von $q$ \\ \hline
+$x = 5 - 2s - r - q$ & $5$ & $-2$ & $-1$ & $-1$ \\
+$y = s$ & $0$ & $1$ & $0$ & $0$ \\
+$z = -3 + 2r - 3q$ & $-3$ & $0$ & $2$ & $-3$ \\
+$t = r$ & $0$ & $0$ & $1$ & $0$ \\
+$w = q$ & $0$ & $0$ & $0$ & $1$ \\
+\end{tabular}
+\end{center}
+
+Jede \textbf{Spalte} dieser Tabelle ist ein Vektor: Die erste Spalte ist $v_0$, die zweite $v_1$, usw.
 
 \section*{Probe}
 
