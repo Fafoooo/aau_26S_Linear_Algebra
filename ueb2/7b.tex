@@ -1,0 +1,106 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+
+\title{Aufgabe 7(b) -- Gauß- und Gauß-Jordan-Elimination}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section*{Gleichungssystem}
+
+\[
+\begin{cases}
+4x + 7y = 1 \\
+y - 2z = -5 \\
+2x + y = -3 \\
+x + y + z = 2
+\end{cases}
+\]
+
+\textbf{Hinweis:} Dieses System unterscheidet sich von 7(a) nur in der rechten Seite der ersten Gleichung ($1$ statt $-1$).
+
+\section*{Erweiterte Koeffizientenmatrix}
+
+\[
+\left(\begin{array}{ccc|c}
+4 & 7 & 0 & 1 \\
+0 & 1 & -2 & -5 \\
+2 & 1 & 0 & -3 \\
+1 & 1 & 1 & 2
+\end{array}\right)
+\]
+
+\section*{Gauß-Elimination (Stufenform)}
+
+\textbf{Schritt 1:} $Z_1 \leftrightarrow Z_4$
+
+\[
+\left(\begin{array}{ccc|c}
+1 & 1 & 1 & 2 \\
+0 & 1 & -2 & -5 \\
+2 & 1 & 0 & -3 \\
+4 & 7 & 0 & 1
+\end{array}\right)
+\]
+
+\textbf{Schritt 2:} $Z_3 \leftarrow Z_3 - 2Z_1$ und $Z_4 \leftarrow Z_4 - 4Z_1$
+
+\[
+\left(\begin{array}{ccc|c}
+1 & 1 & 1 & 2 \\
+0 & 1 & -2 & -5 \\
+0 & -1 & -2 & -7 \\
+0 & 3 & -4 & -7
+\end{array}\right)
+\]
+
+\textbf{Schritt 3:} $Z_3 \leftarrow Z_3 + Z_2$ und $Z_4 \leftarrow Z_4 - 3Z_2$
+
+\[
+\left(\begin{array}{ccc|c}
+1 & 1 & 1 & 2 \\
+0 & 1 & -2 & -5 \\
+0 & 0 & -4 & -12 \\
+0 & 0 & 2 & 8
+\end{array}\right)
+\]
+
+\textbf{Schritt 4:} $Z_4 \leftarrow 2Z_4 + Z_3$
+
+\[
+\left(\begin{array}{ccc|c}
+1 & 1 & 1 & 2 \\
+0 & 1 & -2 & -5 \\
+0 & 0 & -4 & -12 \\
+0 & 0 & 0 & 4
+\end{array}\right)
+\]
+
+\section*{Ergebnis}
+
+Die letzte Zeile lautet:
+\[
+0x + 0y + 0z = 4
+\]
+Das ist ein \textbf{Widerspruch} ($0 = 4$).
+
+\[
+\boxed{\text{Das Gleichungssystem hat \textbf{keine Lösung}.}}
+\]
+
+\subsection*{Erklärung}
+
+Das System ist \textbf{inkonsistent}. Die vier Gleichungen widersprechen sich gegenseitig.
+Im Vergleich zu 7(a) wurde nur die rechte Seite der ersten Gleichung von $-1$ auf $1$ geändert --
+das reicht aus, um das System unlösbar zu machen.
+
+Da das System inkonsistent ist, wird \textbf{keine} Gauß-Jordan-Elimination durchgeführt
+(diese ist nur für konsistente Systeme gefordert).
+
+\end{document}

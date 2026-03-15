@@ -1,0 +1,151 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+
+\title{Aufgabe 7(a) -- Gauß- und Gauß-Jordan-Elimination}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section*{Gleichungssystem}
+
+\[
+\begin{cases}
+4x + 7y = -1 \\
+y - 2z = -5 \\
+2x + y = -3 \\
+x + y + z = 2
+\end{cases}
+\]
+
+\section*{Erweiterte Koeffizientenmatrix}
+
+\[
+\left(\begin{array}{ccc|c}
+4 & 7 & 0 & -1 \\
+0 & 1 & -2 & -5 \\
+2 & 1 & 0 & -3 \\
+1 & 1 & 1 & 2
+\end{array}\right)
+\]
+
+\textbf{Tipp:} Wir tauschen Zeile 1 und Zeile 4, damit wir eine 1 links oben haben -- das macht die Rechnung einfacher.
+
+\section*{Gauß-Elimination (Stufenform)}
+
+\textbf{Schritt 1:} $Z_1 \leftrightarrow Z_4$
+
+\[
+\left(\begin{array}{ccc|c}
+1 & 1 & 1 & 2 \\
+0 & 1 & -2 & -5 \\
+2 & 1 & 0 & -3 \\
+4 & 7 & 0 & -1
+\end{array}\right)
+\]
+
+\textbf{Schritt 2:} $Z_3 \leftarrow Z_3 - 2Z_1$ und $Z_4 \leftarrow Z_4 - 4Z_1$
+
+\[
+\left(\begin{array}{ccc|c}
+1 & 1 & 1 & 2 \\
+0 & 1 & -2 & -5 \\
+0 & -1 & -2 & -7 \\
+0 & 3 & -4 & -9
+\end{array}\right)
+\]
+
+\textbf{Schritt 3:} $Z_3 \leftarrow Z_3 + Z_2$ und $Z_4 \leftarrow Z_4 - 3Z_2$
+
+\[
+\left(\begin{array}{ccc|c}
+1 & 1 & 1 & 2 \\
+0 & 1 & -2 & -5 \\
+0 & 0 & -4 & -12 \\
+0 & 0 & 2 & 6
+\end{array}\right)
+\]
+
+\textbf{Schritt 4:} $Z_4 \leftarrow 2Z_4 + Z_3$
+
+\[
+\left(\begin{array}{ccc|c}
+1 & 1 & 1 & 2 \\
+0 & 1 & -2 & -5 \\
+0 & 0 & -4 & -12 \\
+0 & 0 & 0 & 0
+\end{array}\right)
+\]
+
+\textbf{Ergebnis:} Die Stufenform hat 3 Pivot-Elemente und keine Widerspruchszeile $\Rightarrow$ das System ist \textbf{konsistent} mit einer \textbf{eindeutigen Lösung}.
+
+\subsection*{Rückwärtseinsetzen}
+
+Aus Zeile 3: $-4z = -12 \Rightarrow z = 3$
+
+Aus Zeile 2: $y - 2z = -5 \Rightarrow y = -5 + 2 \cdot 3 = 1$
+
+Aus Zeile 1: $x + y + z = 2 \Rightarrow x = 2 - 1 - 3 = -2$
+
+\[
+\boxed{(x, y, z) = (-2, 1, 3)}
+\]
+
+\section*{Gauß-Jordan-Elimination (reduzierte Stufenform)}
+
+Wir starten von der Stufenform und eliminieren nach oben.
+
+\textbf{Schritt 5:} $Z_3 \leftarrow -\frac{1}{4} Z_3$ (Pivot normieren)
+
+\[
+\left(\begin{array}{ccc|c}
+1 & 1 & 1 & 2 \\
+0 & 1 & -2 & -5 \\
+0 & 0 & 1 & 3 \\
+0 & 0 & 0 & 0
+\end{array}\right)
+\]
+
+\textbf{Schritt 6:} $Z_2 \leftarrow Z_2 + 2Z_3$ und $Z_1 \leftarrow Z_1 - Z_3$
+
+\[
+\left(\begin{array}{ccc|c}
+1 & 1 & 0 & -1 \\
+0 & 1 & 0 & 1 \\
+0 & 0 & 1 & 3 \\
+0 & 0 & 0 & 0
+\end{array}\right)
+\]
+
+\textbf{Schritt 7:} $Z_1 \leftarrow Z_1 - Z_2$
+
+\[
+\left(\begin{array}{ccc|c}
+1 & 0 & 0 & -2 \\
+0 & 1 & 0 & 1 \\
+0 & 0 & 1 & 3 \\
+0 & 0 & 0 & 0
+\end{array}\right)
+\]
+
+Dies ist die \textbf{reduzierte Zeilenstufenform} (RREF). Man liest direkt ab:
+
+\[
+\boxed{(x, y, z) = (-2, 1, 3)}
+\]
+
+\section*{Probe}
+
+\begin{align*}
+4(-2) + 7(1) &= -8 + 7 = -1 \checkmark \\
+1 - 2(3) &= 1 - 6 = -5 \checkmark \\
+2(-2) + 1 &= -4 + 1 = -3 \checkmark \\
+-2 + 1 + 3 &= 2 \checkmark
+\end{align*}
+
+\end{document}

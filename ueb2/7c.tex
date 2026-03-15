@@ -1,0 +1,136 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+
+\title{Aufgabe 7(c) -- Gauß- und Gauß-Jordan-Elimination}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section*{Gleichungssystem}
+
+\[
+\begin{cases}
+x + 2y + t + w = 5 \\
+-z + 2t - 3w = 3 \\
+2x + 4y + z + 5w = 7
+\end{cases}
+\]
+
+Variablen: $x, y, z, t, w$ (5 Unbekannte, 3 Gleichungen).
+
+\section*{Erweiterte Koeffizientenmatrix}
+
+\[
+\left(\begin{array}{ccccc|c}
+1 & 2 & 0 & 1 & 1 & 5 \\
+0 & 0 & -1 & 2 & -3 & 3 \\
+2 & 4 & 1 & 0 & 5 & 7
+\end{array}\right)
+\]
+
+\section*{Gauß-Elimination (Stufenform)}
+
+\textbf{Schritt 1:} $Z_3 \leftarrow Z_3 - 2Z_1$
+
+\[
+\left(\begin{array}{ccccc|c}
+1 & 2 & 0 & 1 & 1 & 5 \\
+0 & 0 & -1 & 2 & -3 & 3 \\
+0 & 0 & 1 & -2 & 3 & -3
+\end{array}\right)
+\]
+
+\textbf{Schritt 2:} $Z_3 \leftarrow Z_3 + Z_2$
+
+\[
+\left(\begin{array}{ccccc|c}
+1 & 2 & 0 & 1 & 1 & 5 \\
+0 & 0 & -1 & 2 & -3 & 3 \\
+0 & 0 & 0 & 0 & 0 & 0
+\end{array}\right)
+\]
+
+\textbf{Ergebnis:} 2 Pivot-Spalten (Spalte 1 und Spalte 3), keine Widerspruchszeile.
+
+Das System ist \textbf{konsistent} mit \textbf{unendlich vielen Lösungen}.
+
+Freie Variablen: $y, t, w$ (3 freie Variable).
+
+\subsection*{Rückwärtseinsetzen}
+
+Aus Zeile 2: $-z + 2t - 3w = 3 \Rightarrow z = 2t - 3w - 3$
+
+Aus Zeile 1: $x + 2y + t + w = 5 \Rightarrow x = 5 - 2y - t - w$
+
+\section*{Gauß-Jordan-Elimination (reduzierte Stufenform)}
+
+Wir normieren Zeile 2 und eliminieren nach oben.
+
+\textbf{Schritt 3:} $Z_2 \leftarrow -Z_2$ (Pivot normieren)
+
+\[
+\left(\begin{array}{ccccc|c}
+1 & 2 & 0 & 1 & 1 & 5 \\
+0 & 0 & 1 & -2 & 3 & -3 \\
+0 & 0 & 0 & 0 & 0 & 0
+\end{array}\right)
+\]
+
+Zeile 1 hat bereits eine 0 in der Pivot-Spalte von Zeile 2 (Spalte 3), also ist nichts weiter zu tun.
+
+Dies ist bereits die \textbf{reduzierte Zeilenstufenform} (RREF):
+
+\[
+\left(\begin{array}{ccccc|c}
+1 & 2 & 0 & 1 & 1 & 5 \\
+0 & 0 & 1 & -2 & 3 & -3 \\
+0 & 0 & 0 & 0 & 0 & 0
+\end{array}\right)
+\]
+
+\section*{Allgemeine Lösung}
+
+\textbf{Pivot-Variablen:} $x, z$ \quad \textbf{Freie Variablen:} $y, t, w$
+
+Setze $y = s$, $t = r$, $w = q$ mit $s, r, q \in \mathbb{R}$.
+
+\subsection*{Closed Form (als $n$-Tupel)}
+
+\[
+\boxed{(x,y,z,t,w) = (5 - 2s - r - q,\; s,\; -3 + 2r - 3q,\; r,\; q), \quad s, r, q \in \mathbb{R}}
+\]
+
+\subsection*{Expanded Form (Vektordarstellung)}
+
+\[
+\begin{pmatrix} x \\ y \\ z \\ t \\ w \end{pmatrix}
+=
+\underbrace{\begin{pmatrix} 5 \\ 0 \\ -3 \\ 0 \\ 0 \end{pmatrix}}_{v_0}
++ s \underbrace{\begin{pmatrix} -2 \\ 1 \\ 0 \\ 0 \\ 0 \end{pmatrix}}_{v_1}
++ r \underbrace{\begin{pmatrix} -1 \\ 0 \\ 2 \\ 1 \\ 0 \end{pmatrix}}_{v_2}
++ q \underbrace{\begin{pmatrix} -1 \\ 0 \\ -3 \\ 0 \\ 1 \end{pmatrix}}_{v_3}
+\]
+
+\[
+\boxed{\vec{x} = v_0 + s \cdot v_1 + r \cdot v_2 + q \cdot v_3, \quad s, r, q \in \mathbb{R}}
+\]
+
+wobei $v_0 = (5,0,-3,0,0)^T$ eine \textbf{partikuläre Lösung} ist und $v_1, v_2, v_3$ die Richtungen des Lösungsraums aufspannen.
+
+\section*{Probe}
+
+Setze z.\,B.\ $s = 0, r = 0, q = 0$, also $(x,y,z,t,w) = (5,0,-3,0,0)$:
+
+\begin{align*}
+5 + 2(0) + 0 + 0 &= 5 \checkmark \\
+-(-3) + 2(0) - 3(0) &= 3 \checkmark \\
+2(5) + 4(0) + (-3) + 5(0) &= 10 - 3 = 7 \checkmark
+\end{align*}
+
+\end{document}
