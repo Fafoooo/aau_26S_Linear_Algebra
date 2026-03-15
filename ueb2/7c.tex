@@ -97,85 +97,62 @@ Erkenntnisse dazu. Deshalb sparen wir uns diesen Schritt und arbeiten direkt
 mit dem Ergebnis des Rückwärtseinsetzens weiter.
 
 \newpage
-\section*{Allgemeine Lösung -- Schritt für Schritt erklärt}
+\section*{Allgemeine Lösung}
 
-Wir starten vom Ergebnis des Rückwärtseinsetzens. Die Stufenform war:
-
-\[
-\left(\begin{array}{ccccc|c}
-1 & 2 & 0 & 1 & 1 & 5 \\
-0 & 0 & -1 & 2 & -3 & 3 \\
-0 & 0 & 0 & 0 & 0 & 0
-\end{array}\right)
-\]
-
-\subsection*{Schritt 1: Pivot-Variablen vs.\ freie Variablen}
-
-\textbf{Pivot-Spalten} sind die Spalten mit einer führenden 1: Spalte 1 ($x$) und Spalte 3 ($z$).
-
-$\Rightarrow$ $x$ und $z$ sind \textbf{Pivot-Variablen}: Sie werden durch die Gleichungen bestimmt
-(sobald man die restlichen Variablen kennt).
-
-\textbf{Spalten ohne Pivot}: Spalte 2 ($y$), Spalte 4 ($t$), Spalte 5 ($w$).
-
-$\Rightarrow$ $y$, $t$ und $w$ sind \textbf{freie Variablen}: Für sie gibt es keine eigene Gleichung.
-Sie dürfen \textbf{jeden beliebigen Wert} annehmen -- das System ist trotzdem erfüllt.
-
-\subsection*{Schritt 2: Freie Variablen als Parameter}
-
-Wir geben den freien Variablen neue Namen (um sie von den berechneten zu unterscheiden):
-
-\[
-y = s, \quad t = r, \quad w = q \qquad \text{mit } s, r, q \in \mathbb{R}
-\]
-
-Das bedeutet nur: \glqq $y$ darf irgendeine reelle Zahl sein -- wir nennen sie $s$.\grqq{}
-Die Buchstaben $s, r, q$ sind Platzhalter für \textbf{alle möglichen Wahlen}.
-
-\subsection*{Schritt 3: Pivot-Variablen ausdrücken}
-
-Jetzt setzen wir $y = s$, $t = r$, $w = q$ in die zwei Gleichungen ein:
-
+Wir wissen jetzt:
 \begin{align*}
-\text{Aus Zeile 2:} \quad z &= -3 + 2r - 3q \\
-\text{Aus Zeile 1:} \quad x &= 5 - 2s - r - q
+x &= 5 - 2y - t - w \\
+z &= 2t - 3w - 3
 \end{align*}
 
-\subsection*{Schritt 4: Closed Form -- alles zusammen hinschreiben}
+Und $y$, $t$, $w$ sind frei -- dürfen alles sein.
+\textbf{Ab hier sind es nur noch 3 mechanische Schritte.}
 
-Alle 5 Variablen in einer Zeile als Tupel:
+\subsection*{Schritt A: Umbenennen}
+
+Wir ersetzen $y \to s$, $t \to r$, $w \to q$.
+Das ist reine Kosmetik -- damit klar ist, dass $y$, $t$, $w$ jetzt keine
+Unbekannten mehr sind, sondern frei wählbare Parameter.
+
+Einsetzen:
+\begin{align*}
+x &= 5 - 2s - r - q \\
+z &= -3 + 2r - 3q
+\end{align*}
+
+\subsection*{Schritt B: Closed Form (Tupel hinschreiben)}
+
+Jetzt schreibt man einfach alle 5 Variablen der Reihe nach als Tupel hin.
+Für $x$ und $z$ setzt man die Formeln ein, für $y$, $t$, $w$ schreibt man $s$, $r$, $q$:
 
 \[
 \boxed{(x,y,z,t,w) = (5 - 2s - r - q,\; s,\; -3 + 2r - 3q,\; r,\; q), \quad s, r, q \in \mathbb{R}}
 \]
 
-Jede konkrete Wahl von $s, r, q$ liefert eine konkrete Lösung. Z.\,B.:
+Das \textbf{ist} schon die Closed Form. Jede Wahl von $s, r, q$ liefert eine Lösung:
 \begin{itemize}
-\item $s = 0, r = 0, q = 0 \Rightarrow (5, 0, -3, 0, 0)$
-\item $s = 1, r = 0, q = 0 \Rightarrow (3, 1, -3, 0, 0)$
-\item $s = 0, r = 1, q = 1 \Rightarrow (3, 0, -4, 1, 1)$
+\item $s{=}0, r{=}0, q{=}0 \Rightarrow (5,\; 0,\; {-}3,\; 0,\; 0)$
+\item $s{=}1, r{=}0, q{=}0 \Rightarrow (3,\; 1,\; {-}3,\; 0,\; 0)$
 \end{itemize}
 
-\subsection*{Schritt 5: Expanded Form -- in Vektoren zerlegen}
+\subsection*{Schritt C: Expanded Form (Tabelle $\to$ Vektoren)}
 
-Die Idee: Trenne den \textbf{fixen Anteil} (wenn alle Parameter $= 0$ sind)
-von den \textbf{veränderbaren Anteilen} (was sich ändert, wenn $s$, $r$ oder $q$ variiert).
+Man nimmt die Closed Form und fragt sich für jede Variable: \textbf{Welche Zahl steht
+ohne Parameter (fix)? Welche Zahl steht vor $s$? Vor $r$? Vor $q$?}
 
-Schreibe die Closed Form untereinander und sortiere nach Parametern:
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{l|c|c|c|c}
+ & fix & $\times s$ & $\times r$ & $\times q$ \\ \hline
+$x = 5 - 2s - r - q$ & $5$ & $-2$ & $-1$ & $-1$ \\
+$y = s$ & $0$ & $1$ & $0$ & $0$ \\
+$z = -3 + 2r - 3q$ & $-3$ & $0$ & $2$ & $-3$ \\
+$t = r$ & $0$ & $0$ & $1$ & $0$ \\
+$w = q$ & $0$ & $0$ & $0$ & $1$ \\
+\end{tabular}
+\end{center}
 
-\[
-\begin{pmatrix} x \\ y \\ z \\ t \\ w \end{pmatrix}
-=
-\begin{pmatrix} 5 \\ 0 \\ -3 \\ 0 \\ 0 \end{pmatrix}
-+
-\begin{pmatrix} -2s \\ s \\ 0 \\ 0 \\ 0 \end{pmatrix}
-+
-\begin{pmatrix} -r \\ 0 \\ 2r \\ r \\ 0 \end{pmatrix}
-+
-\begin{pmatrix} -q \\ 0 \\ -3q \\ 0 \\ q \end{pmatrix}
-\]
-
-Den Parameter kann man vor den Vektor ziehen:
+Jede \textbf{Spalte} dieser Tabelle wird ein Vektor:
 
 \[
 \begin{pmatrix} x \\ y \\ z \\ t \\ w \end{pmatrix}
@@ -189,35 +166,6 @@ Den Parameter kann man vor den Vektor ziehen:
 \[
 \boxed{\vec{x} = v_0 + s \cdot v_1 + r \cdot v_2 + q \cdot v_3, \quad s, r, q \in \mathbb{R}}
 \]
-
-\subsection*{Was bedeuten die Vektoren?}
-
-\begin{itemize}
-\item $v_0 = (5, 0, -3, 0, 0)^T$ ist \textbf{eine} konkrete Lösung (die \glqq Basislösung\grqq{} für $s = r = q = 0$).
-\item $v_1 = (-2, 1, 0, 0, 0)^T$ beschreibt, wie sich die Lösung ändert, wenn man $y$ (also $s$) um 1 erhöht.
-\item $v_2 = (-1, 0, 2, 1, 0)^T$ beschreibt die Änderung, wenn man $t$ (also $r$) um 1 erhöht.
-\item $v_3 = (-1, 0, -3, 0, 1)^T$ beschreibt die Änderung, wenn man $w$ (also $q$) um 1 erhöht.
-\end{itemize}
-
-\textbf{Anschaulich:} $v_0$ ist ein Startpunkt. $v_1, v_2, v_3$ sind drei Richtungen,
-in die man sich bewegen kann, ohne die Gleichungen zu verletzen.
-Jede Kombination aus diesen Richtungen ergibt eine gültige Lösung.
-
-\subsection*{Woher kommen die Vektoren konkret?}
-
-Man liest sie direkt aus der Closed Form ab. Für jede Variable notiert man:
-\begin{center}
-\begin{tabular}{c|c|cccc}
-Variable & fixer Anteil & Koeff.\ von $s$ & Koeff.\ von $r$ & Koeff.\ von $q$ \\ \hline
-$x = 5 - 2s - r - q$ & $5$ & $-2$ & $-1$ & $-1$ \\
-$y = s$ & $0$ & $1$ & $0$ & $0$ \\
-$z = -3 + 2r - 3q$ & $-3$ & $0$ & $2$ & $-3$ \\
-$t = r$ & $0$ & $0$ & $1$ & $0$ \\
-$w = q$ & $0$ & $0$ & $0$ & $1$ \\
-\end{tabular}
-\end{center}
-
-Jede \textbf{Spalte} dieser Tabelle ist ein Vektor: Die erste Spalte ist $v_0$, die zweite $v_1$, usw.
 
 \section*{Probe}
 
