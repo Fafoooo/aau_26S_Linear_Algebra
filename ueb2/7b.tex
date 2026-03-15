@@ -5,7 +5,7 @@
 \usepackage{geometry}
 \geometry{margin=2.5cm}
 
-\title{Aufgabe 7(b) -- Gauß-Elimination}
+\title{Aufgabe 7(b) -- Gauß- und Gauß-Jordan-Elimination}
 \author{}
 \date{}
 
@@ -23,22 +23,44 @@ x + y + z = 2
 \end{cases}
 \]
 
-\section*{Endergebnis}
+\textbf{Hinweis:} Dieses System unterscheidet sich von 7(a) nur in der rechten Seite der ersten Gleichung ($1$ statt $-1$).
+
+\section*{Erweiterte Koeffizientenmatrix}
 
 \[
-\boxed{\text{Das Gleichungssystem hat \textbf{keine Lösung} (inkonsistent).}}
+\left(\begin{array}{ccc|c}
+4 & 7 & 0 & 1 \\
+0 & 1 & -2 & -5 \\
+2 & 1 & 0 & -3 \\
+1 & 1 & 1 & 2
+\end{array}\right)
 \]
 
-\section*{Änderung gegenüber 7(a)}
+\section*{Gauß-Elimination (Stufenform)}
 
-Das System unterscheidet sich von 7(a) \textbf{nur} in der rechten Seite der ersten Gleichung: $1$ statt $-1$.
+\textbf{Schritt 1:} $Z_1 \leftrightarrow Z_4$
 
-Die Koeffizientenmatrix (linke Seite) ist identisch, daher sind alle Zeilenoperationen dieselben.
-Es ändert sich nur die letzte Spalte (rechte Seite) in den Schritten, wo Zeile 4 beteiligt ist.
+\[
+\left(\begin{array}{ccc|c}
+1 & 1 & 1 & 2 \\
+0 & 1 & -2 & -5 \\
+2 & 1 & 0 & -3 \\
+4 & 7 & 0 & 1
+\end{array}\right)
+\]
 
-\subsection*{Was sich ändert}
+\textbf{Schritt 2:} $Z_3 \leftarrow Z_3 - 2Z_1$ und $Z_4 \leftarrow Z_4 - 4Z_1$
 
-Die Schritte 1--3 aus 7(a) ergeben hier:
+\[
+\left(\begin{array}{ccc|c}
+1 & 1 & 1 & 2 \\
+0 & 1 & -2 & -5 \\
+0 & -1 & -2 & -7 \\
+0 & 3 & -4 & -7
+\end{array}\right)
+\]
+
+\textbf{Schritt 3:} $Z_3 \leftarrow Z_3 + Z_2$ und $Z_4 \leftarrow Z_4 - 3Z_2$
 
 \[
 \left(\begin{array}{ccc|c}
@@ -49,14 +71,7 @@ Die Schritte 1--3 aus 7(a) ergeben hier:
 \end{array}\right)
 \]
 
-Der einzige Unterschied zu 7(a) liegt in Zeile 4: dort stand $6$, hier steht $8$.
-
-Dies entsteht, weil in Schritt 2 ($Z_4 \leftarrow Z_4 - 4Z_1$) die rechte Seite nun $1 - 4 \cdot 2 = -7$ ergibt (statt $-1 - 4 \cdot 2 = -9$),
-und in Schritt 3 ($Z_4 \leftarrow Z_4 - 3Z_2$) dann $-7 - 3 \cdot (-5) = 8$ (statt $-9 - 3 \cdot (-5) = 6$).
-
-\subsection*{Der entscheidende Schritt}
-
-Schritt 4: $Z_4 \leftarrow 2Z_4 + Z_3$
+\textbf{Schritt 4:} $Z_4 \leftarrow 2Z_4 + Z_3$
 
 \[
 \left(\begin{array}{ccc|c}
@@ -67,10 +82,25 @@ Schritt 4: $Z_4 \leftarrow 2Z_4 + Z_3$
 \end{array}\right)
 \]
 
-In 7(a) ergab sich in der letzten Zeile $0 = 0$ (konsistent).
-Hier ergibt sich $0 = 4$ -- ein \textbf{Widerspruch}.
+\section*{Ergebnis}
 
-Das System ist daher \textbf{inkonsistent} und hat keine Lösung.
-Da das System inkonsistent ist, entfällt die Gauß-Jordan-Elimination.
+Die letzte Zeile lautet:
+\[
+0x + 0y + 0z = 4
+\]
+Das ist ein \textbf{Widerspruch} ($0 = 4$).
+
+\[
+\boxed{\text{Das Gleichungssystem hat \textbf{keine Lösung}.}}
+\]
+
+\subsection*{Erklärung}
+
+Das System ist \textbf{inkonsistent}. Die vier Gleichungen widersprechen sich gegenseitig.
+Im Vergleich zu 7(a) wurde nur die rechte Seite der ersten Gleichung von $-1$ auf $1$ geändert --
+das reicht aus, um das System unlösbar zu machen.
+
+Da das System inkonsistent ist, wird \textbf{keine} Gauß-Jordan-Elimination durchgeführt
+(diese ist nur für konsistente Systeme gefordert).
 
 \end{document}
