@@ -1,0 +1,161 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+
+\title{Aufgabe 7(d) -- Gauß- und Gauß-Jordan-Elimination}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section*{Matrixgleichung}
+
+\[
+\begin{pmatrix} 1 & 0 & 0 & 0 & 3 \\ 0 & 1 & 0 & 2 & 0 \\ 0 & 1 & 0 & 1 & 0 \\ 2 & 3 & 0 & 4 & 6 \end{pmatrix}
+\begin{pmatrix} x \\ y \\ z \\ t \\ w \end{pmatrix}
+=
+\begin{pmatrix} 2 \\ 2 \\ 1 \\ 8 \end{pmatrix}
+\]
+
+Das entspricht dem Gleichungssystem:
+\[
+\begin{cases}
+x + 3w = 2 \\
+y + 2t = 2 \\
+y + t = 1 \\
+2x + 3y + 4t + 6w = 8
+\end{cases}
+\]
+
+\section*{Erweiterte Koeffizientenmatrix}
+
+\[
+\left(\begin{array}{ccccc|c}
+1 & 0 & 0 & 0 & 3 & 2 \\
+0 & 1 & 0 & 2 & 0 & 2 \\
+0 & 1 & 0 & 1 & 0 & 1 \\
+2 & 3 & 0 & 4 & 6 & 8
+\end{array}\right)
+\]
+
+\section*{Gauß-Elimination (Stufenform)}
+
+\textbf{Schritt 1:} $Z_4 \leftarrow Z_4 - 2Z_1$
+
+\[
+\left(\begin{array}{ccccc|c}
+1 & 0 & 0 & 0 & 3 & 2 \\
+0 & 1 & 0 & 2 & 0 & 2 \\
+0 & 1 & 0 & 1 & 0 & 1 \\
+0 & 3 & 0 & 4 & 0 & 4
+\end{array}\right)
+\]
+
+\textbf{Schritt 2:} $Z_3 \leftarrow Z_3 - Z_2$ und $Z_4 \leftarrow Z_4 - 3Z_2$
+
+\[
+\left(\begin{array}{ccccc|c}
+1 & 0 & 0 & 0 & 3 & 2 \\
+0 & 1 & 0 & 2 & 0 & 2 \\
+0 & 0 & 0 & -1 & 0 & -1 \\
+0 & 0 & 0 & -2 & 0 & -2
+\end{array}\right)
+\]
+
+\textbf{Schritt 3:} $Z_4 \leftarrow Z_4 - 2Z_3$
+
+\[
+\left(\begin{array}{ccccc|c}
+1 & 0 & 0 & 0 & 3 & 2 \\
+0 & 1 & 0 & 2 & 0 & 2 \\
+0 & 0 & 0 & -1 & 0 & -1 \\
+0 & 0 & 0 & 0 & 0 & 0
+\end{array}\right)
+\]
+
+\textbf{Ergebnis:} 3 Pivot-Elemente in den Spalten 1, 2 und 4. Keine Widerspruchszeile.
+
+Freie Variablen: $z$ und $w$ (Spalten 3 und 5 haben kein Pivot).
+
+Das System ist \textbf{konsistent} mit \textbf{unendlich vielen Lösungen}.
+
+\textbf{Bemerkung:} Die Variable $z$ kommt in keiner Gleichung vor (Spalte 3 besteht nur aus Nullen), sie ist also komplett frei.
+
+\subsection*{Rückwärtseinsetzen}
+
+Aus Zeile 3: $-t = -1 \Rightarrow t = 1$
+
+Aus Zeile 2: $y + 2t = 2 \Rightarrow y = 2 - 2 \cdot 1 = 0$
+
+Aus Zeile 1: $x + 3w = 2 \Rightarrow x = 2 - 3w$
+
+\section*{Gauß-Jordan-Elimination (reduzierte Stufenform)}
+
+Wir starten von der Stufenform und normieren/eliminieren nach oben.
+
+\textbf{Schritt 4:} $Z_3 \leftarrow -Z_3$ (Pivot normieren)
+
+\[
+\left(\begin{array}{ccccc|c}
+1 & 0 & 0 & 0 & 3 & 2 \\
+0 & 1 & 0 & 2 & 0 & 2 \\
+0 & 0 & 0 & 1 & 0 & 1 \\
+0 & 0 & 0 & 0 & 0 & 0
+\end{array}\right)
+\]
+
+\textbf{Schritt 5:} $Z_2 \leftarrow Z_2 - 2Z_3$ (eliminiere $t$ aus Zeile 2)
+
+\[
+\left(\begin{array}{ccccc|c}
+1 & 0 & 0 & 0 & 3 & 2 \\
+0 & 1 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 1 & 0 & 1 \\
+0 & 0 & 0 & 0 & 0 & 0
+\end{array}\right)
+\]
+
+Zeile 1 hat bereits 0 in den Pivot-Spalten 2 und 4, also ist dies die \textbf{reduzierte Zeilenstufenform} (RREF).
+
+\section*{Allgemeine Lösung}
+
+\textbf{Pivot-Variablen:} $x, y, t$ \quad \textbf{Freie Variablen:} $z, w$
+
+Setze $z = s$, $w = q$ mit $s, q \in \mathbb{R}$.
+
+\subsection*{Closed Form (als $n$-Tupel)}
+
+\[
+\boxed{(x,y,z,t,w) = (2-3q,\; 0,\; s,\; 1,\; q), \quad s, q \in \mathbb{R}}
+\]
+
+\subsection*{Expanded Form (Vektordarstellung)}
+
+\[
+\begin{pmatrix} x \\ y \\ z \\ t \\ w \end{pmatrix}
+=
+\underbrace{\begin{pmatrix} 2 \\ 0 \\ 0 \\ 1 \\ 0 \end{pmatrix}}_{v_0}
++ s \underbrace{\begin{pmatrix} 0 \\ 0 \\ 1 \\ 0 \\ 0 \end{pmatrix}}_{v_1}
++ q \underbrace{\begin{pmatrix} -3 \\ 0 \\ 0 \\ 0 \\ 1 \end{pmatrix}}_{v_2}
+\]
+
+\[
+\boxed{\vec{x} = v_0 + s \cdot v_1 + q \cdot v_2, \quad s, q \in \mathbb{R}}
+\]
+
+\section*{Probe}
+
+Setze z.\,B.\ $s = 0, q = 0$, also $(x,y,z,t,w) = (2,0,0,1,0)$:
+
+\begin{align*}
+2 + 3 \cdot 0 &= 2 \checkmark \\
+0 + 2 \cdot 1 &= 2 \checkmark \\
+0 + 1 &= 1 \checkmark \\
+2 \cdot 2 + 3 \cdot 0 + 4 \cdot 1 + 6 \cdot 0 &= 4 + 4 = 8 \checkmark
+\end{align*}
+
+\end{document}

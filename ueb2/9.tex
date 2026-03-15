@@ -1,0 +1,98 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+
+\title{Aufgabe 9 -- Eigenschaften von $Ax = b$}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section*{Fragestellung}
+
+Sei $Ax = b$ ein lineares Gleichungssystem mit $A \in \mathbb{R}^{m \times n}$.
+Sind die folgenden Situationen möglich? Wenn ja: einfaches Beispiel. Wenn nein: kurze Begründung.
+
+\bigskip
+
+\subsection*{(i) $m > n$ und das System hat eine eindeutige Lösung}
+
+\textbf{Ja, das ist möglich.}
+
+\textbf{Beispiel:} $m = 3$, $n = 2$:
+\[
+\begin{pmatrix} 1 & 0 \\ 0 & 1 \\ 1 & 1 \end{pmatrix}
+\begin{pmatrix} x \\ y \end{pmatrix}
+=
+\begin{pmatrix} 1 \\ 2 \\ 3 \end{pmatrix}
+\]
+
+Das entspricht:
+\[
+\begin{cases}
+x = 1 \\
+y = 2 \\
+x + y = 3
+\end{cases}
+\]
+
+Die ersten zwei Gleichungen liefern eindeutig $x = 1, y = 2$.
+Die dritte Gleichung ist damit auch erfüllt ($1 + 2 = 3$).
+
+\textbf{Erklärung:} Bei $m > n$ gibt es mehr Gleichungen als Unbekannte. Wenn der Rang von $(A \mid b)$ gleich dem Rang von $A$ ist (konsistent) und der Rang gleich $n$ ist (alle Variablen sind Pivot-Variablen), dann gibt es eine eindeutige Lösung. Die überschüssigen Gleichungen sind dann redundant.
+
+\bigskip
+
+\subsection*{(ii) $m > n$ und das System hat unendlich viele Lösungen}
+
+\textbf{Ja, das ist möglich.}
+
+\textbf{Beispiel:} $m = 3$, $n = 2$:
+\[
+\begin{pmatrix} 1 & 1 \\ 2 & 2 \\ 3 & 3 \end{pmatrix}
+\begin{pmatrix} x \\ y \end{pmatrix}
+=
+\begin{pmatrix} 1 \\ 2 \\ 3 \end{pmatrix}
+\]
+
+Das entspricht:
+\[
+\begin{cases}
+x + y = 1 \\
+2x + 2y = 2 \\
+3x + 3y = 3
+\end{cases}
+\]
+
+Alle drei Gleichungen sagen dasselbe aus: $x + y = 1$.
+Der Rang ist 1, aber wir haben $n = 2$ Unbekannte.
+Also gibt es eine freie Variable und unendlich viele Lösungen: $(x, y) = (1 - s,\; s)$ für $s \in \mathbb{R}$.
+
+\textbf{Erklärung:} Obwohl $m > n$, kann der Rang von $A$ kleiner als $n$ sein, wenn die Gleichungen linear abhängig sind. Dann gibt es freie Variablen und somit unendlich viele Lösungen.
+
+\bigskip
+
+\subsection*{(iii) $m < n$ und das System hat eine eindeutige Lösung}
+
+\textbf{Nein, das ist nicht möglich.}
+
+\textbf{Begründung:}
+
+Der Rang von $A$ kann höchstens $\min(m, n) = m$ sein (da $m < n$).
+Also gilt:
+\[
+\text{Rang}(A) \leq m < n
+\]
+
+Falls das System konsistent ist, gibt es $n - \text{Rang}(A) \geq n - m > 0$ freie Variablen.
+Das bedeutet: Wenn es überhaupt eine Lösung gibt, dann gibt es \textbf{unendlich viele}.
+
+Falls das System inkonsistent ist, gibt es \textbf{keine} Lösung.
+
+In beiden Fällen ist eine \textbf{eindeutige} Lösung unmöglich.
+
+\end{document}

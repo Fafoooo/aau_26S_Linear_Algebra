@@ -1,0 +1,154 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+
+\title{Aufgabe 8 -- Parametrisches Gleichungssystem}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section*{Gleichungssystem}
+
+\[
+\begin{cases}
+(k+1)x + (k^2-2k-3)y = k^2-k+2 \\
+(k-1)x + (k^2-2k+1)y = k^2-k
+\end{cases}
+\]
+
+\textbf{Hinweis:} Es werden \textbf{keine Determinanten} verwendet, sondern nur Gauß-Elimination mit dem Parameter $k$.
+
+\section*{Faktorisierung der Koeffizienten}
+
+Zunächst faktorisieren wir, um die Struktur besser zu erkennen:
+\begin{align*}
+k^2-2k-3 &= (k+1)(k-3) \\
+k^2-2k+1 &= (k-1)^2
+\end{align*}
+
+\section*{Erweiterte Koeffizientenmatrix}
+
+\[
+\left(\begin{array}{cc|c}
+k+1 & (k+1)(k-3) & k^2-k+2 \\
+k-1 & (k-1)^2 & k^2-k
+\end{array}\right)
+\]
+
+\section*{Gauß-Elimination}
+
+Wir wollen die erste Spalte in Zeile 2 eliminieren. Um ganzzahlig zu bleiben, rechnen wir:
+
+\textbf{Schritt 1:} $Z_2 \leftarrow (k+1) \cdot Z_2 - (k-1) \cdot Z_1$
+
+\textbf{Neue Zeile 2, Spalte für $y$:}
+\begin{align*}
+(k+1)(k-1)^2 - (k-1)(k+1)(k-3) &= (k+1)(k-1)\big[(k-1) - (k-3)\big] \\
+&= (k+1)(k-1) \cdot 2 \\
+&= 2(k^2-1)
+\end{align*}
+
+\textbf{Neue Zeile 2, rechte Seite:}
+\begin{align*}
+(k+1)(k^2-k) - (k-1)(k^2-k+2) &= k^3 - k^2 + k^2 - k - (k^3 - k^2 + 2k - k^2 + k - 2) \\
+&= k^3 - k - k^3 + 2k^2 - 3k + 2 \\
+&= 2k^2 - 4k + 2 \\
+&= 2(k-1)^2
+\end{align*}
+
+Die Matrix nach der Elimination:
+
+\[
+\left(\begin{array}{cc|c}
+k+1 & (k+1)(k-3) & k^2-k+2 \\
+0 & 2(k^2-1) & 2(k-1)^2
+\end{array}\right)
+\]
+
+Da $k^2-1 = (k-1)(k+1)$, lautet Zeile 2:
+
+\[
+2(k-1)(k+1) \cdot y = 2(k-1)^2
+\]
+
+\section*{Fallunterscheidung}
+
+\subsection*{Fall 1: $k \neq 1$ und $k \neq -1$}
+
+Wir können durch $2(k-1)$ kürzen:
+
+\[
+(k+1) \cdot y = (k-1) \quad \Rightarrow \quad y = \frac{k-1}{k+1}
+\]
+
+Aus Zeile 1 (mit $k+1 \neq 0$):
+\begin{align*}
+(k+1)x &= k^2-k+2 - (k+1)(k-3) \cdot \frac{k-1}{k+1} \\
+&= k^2-k+2 - (k-3)(k-1) \\
+&= k^2-k+2 - (k^2-4k+3) \\
+&= 3k - 1
+\end{align*}
+
+\[
+x = \frac{3k-1}{k+1}
+\]
+
+\[
+\boxed{\text{Für } k \neq \pm 1: \text{ eindeutige Lösung } \left(\frac{3k-1}{k+1},\; \frac{k-1}{k+1}\right)}
+\]
+
+\subsection*{Fall 2: $k = 1$}
+
+Setze $k = 1$ direkt in das Gleichungssystem ein:
+\begin{align*}
+2x + (-4)y &= 2 \\
+0 \cdot x + 0 \cdot y &= 0
+\end{align*}
+
+Zeile 2 wird zu $0 = 0$ (keine Information). Aus Zeile 1:
+\[
+2x - 4y = 2 \quad \Rightarrow \quad x = 1 + 2y
+\]
+
+Die Variable $y$ ist frei. Setze $y = s$ mit $s \in \mathbb{R}$.
+
+\[
+\boxed{\text{Für } k = 1: \text{ unendlich viele Lösungen } (x, y) = (1 + 2s,\; s), \quad s \in \mathbb{R}}
+\]
+
+\subsection*{Fall 3: $k = -1$}
+
+Setze $k = -1$ direkt in das Gleichungssystem ein:
+\begin{align*}
+0 \cdot x + (1+2-3)y &= 1+1+2 \\
+(-2)x + (1+2+1)y &= 1+1
+\end{align*}
+
+Also:
+\begin{align*}
+0 \cdot x + 0 \cdot y &= 4 \\
+-2x + 4y &= 2
+\end{align*}
+
+Zeile 1 ergibt $0 = 4$ -- ein \textbf{Widerspruch}.
+
+\[
+\boxed{\text{Für } k = -1: \text{ keine Lösung (inkonsistent)}}
+\]
+
+\section*{Zusammenfassung}
+
+\[
+\begin{cases}
+k \neq \pm 1: & \text{eindeutige Lösung} \\
+k = 1: & \text{unendlich viele Lösungen} \\
+k = -1: & \text{keine Lösung}
+\end{cases}
+\]
+
+\end{document}
