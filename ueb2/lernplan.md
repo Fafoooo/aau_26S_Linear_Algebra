@@ -39,9 +39,10 @@
 - Wieder beide Verfahren + closed/expanded form falls unendlich viele Lösungen.
 
 **Kreuz 4 — Aufgabe 8:**
-- Determinante der 2×2 Koeffizientenmatrix berechnen (hängt von k ab):
-  - Det ≠ 0 → eindeutige Lösung
-  - Det = 0 → Gleichungen einsetzen, prüfen ob unendlich viele oder keine Lösung
+- **Keine Determinanten verwenden!** Stattdessen Gauß-Elimination mit Parameter $k$ durchführen:
+  - Erweiterte Matrix aufstellen und Zeilenumformungen mit k durchführen
+  - Fallunterscheidung: Wann wird ein Pivot-Element 0? → Für welche k-Werte?
+  - Dann je nach Fall prüfen: eindeutige Lösung / unendlich viele / keine Lösung
 
 ### Dienstag 17. März — Kreuz 5 + Kontrolle (5/5 Kreuze, ~30min)
 
