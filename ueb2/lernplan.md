@@ -1,49 +1,57 @@
 # HW02 - Lernplan
 
-**Deadline: Mittwoch 18. März, 10:00 Uhr**
+**Deadline: Mittwoch 18. März, 10:30 Uhr**
 **Peter schreibt das Blatt per Hand ab.**
 
-## Übersicht der Aufgaben
+## Kreuzelliste (5 Kreuze, gleichgewichtet)
 
-| Aufgabe | Thema | Aufwand | Schwierigkeit |
-|---------|-------|---------|---------------|
-| **7a** | Gauß + Gauß-Jordan, 4×3 System | ~30 min | Mittel |
-| **7b** | Gleiches System, leicht geändert (RHS=1 statt -1) | ~25 min | Mittel |
-| **7c** | 3×5 System (unendlich viele Lösungen erwartet) → closed + expanded form | ~40 min | Mittel-Schwer |
-| **7d** | 4×5 Matrixgleichung → gleich wie 7c aber als Matrix | ~40 min | Mittel-Schwer |
-| **8** | Parametrisches 2×2 System, Fallunterscheidung nach k | ~30 min | Mittel |
-| **9** | Theoretische Fragen zu Ax=b (m>n, m<n), Beispiele/Begründungen | ~20 min | Leicht-Mittel |
+| # | Kreuz | Thema | Aufwand | Schwierigkeit |
+|---|-------|-------|---------|---------------|
+| 1 | **7(a,b)** | Gauß + Gauß-Jordan, 4×3 System (2 Varianten, nur RHS unterschiedlich) | ~55 min | Mittel |
+| 2 | **7(c)** | 3×5 System → unendlich viele Lösungen, closed + expanded form | ~40 min | Mittel-Schwer |
+| 3 | **7(d)** | 4×5 Matrixgleichung, gleiche Prozedur wie 7c | ~40 min | Mittel-Schwer |
+| 4 | **8** | Parametrisches 2×2 System, Fallunterscheidung nach k | ~30 min | Mittel |
+| 5 | **9** | Theoretische Fragen zu Ax=b (m>n, m<n) | ~20 min | Leicht-Mittel |
 
 **Gesamtaufwand: ca. 3 Stunden**
 
 ## 3-Tage-Plan
 
-### Sonntag 15. März — Aufgabe 7a + 7b (~55 min)
+### Sonntag 15. März — Kreuz 1 + 2 (2/5 Kreuze, ~1h 35min)
 
-- **7a & 7b** sind fast identische Systeme (nur die rechte Seite von Gleichung 1 unterscheidet sich: -1 vs 1). Mach beides hintereinander.
+**Kreuz 1 — Aufgabe 7(a,b):**
+- Sind fast identische Systeme (nur RHS von Gleichung 1: -1 vs 1). Mach beides hintereinander.
 - **Vorgehen:** Erweiterte Koeffizientenmatrix aufstellen → Gauß-Elimination (Stufenform) → Rückwärtseinsetzen → dann nochmal Gauß-Jordan (reduzierte Stufenform). Alle Schritte mit ganzzahligen Koeffizienten!
-- Eines wird vermutlich konsistent sein, das andere nicht (oder unterschiedliche Lösungen) — achte auf Widersprüche.
+- Eines wird vermutlich konsistent sein, das andere nicht — achte auf Widersprüche.
 
-### Montag 16. März — Aufgabe 7c + 7d (~1h 20min)
-
-- **7c:** 3 Gleichungen, 5 Unbekannte → wird unendlich viele Lösungen haben. Du musst:
+**Kreuz 2 — Aufgabe 7(c):**
+- 3 Gleichungen, 5 Unbekannte → unendlich viele Lösungen.
   1. Gauß-Elimination
   2. Gauß-Jordan
   3. Lösung als **n-Tupel** (closed form)
   4. Lösung als **v₀ + t₁v₁ + ... + tₖvₖ** (expanded form)
-- **7d:** Gleiche Prozedur, nur als Matrixgleichung gegeben. Matrix aufstellen und los.
-- **Tipp:** Bei freien Variablen systematisch vorgehen — freie Variablen = Parameter setzen, gebundene Variablen ausdrücken.
+- **Tipp:** Freie Variablen = Parameter setzen, gebundene Variablen ausdrücken.
 
-### Dienstag 17. März — Aufgabe 8 + 9 (~50 min)
+### Montag 16. März — Kreuz 3 + 4 (4/5 Kreuze, ~1h 10min)
 
-- **8:** Determinante der 2×2 Koeffizientenmatrix berechnen (hängt von k ab). Dann:
+**Kreuz 3 — Aufgabe 7(d):**
+- Gleiche Prozedur wie 7c, nur als Matrixgleichung gegeben. Matrix aufstellen und los.
+- Wieder beide Verfahren + closed/expanded form falls unendlich viele Lösungen.
+
+**Kreuz 4 — Aufgabe 8:**
+- Determinante der 2×2 Koeffizientenmatrix berechnen (hängt von k ab):
   - Det ≠ 0 → eindeutige Lösung
   - Det = 0 → Gleichungen einsetzen, prüfen ob unendlich viele oder keine Lösung
-- **9:** Theorieaufgabe. Für jede der 3 Situationen:
+
+### Dienstag 17. März — Kreuz 5 + Kontrolle (5/5 Kreuze, ~30min)
+
+**Kreuz 5 — Aufgabe 9:**
+- Theorieaufgabe. Für jede der 3 Situationen:
   - m > n, eindeutige Lösung → **ja**, Beispiel angeben
   - m > n, unendlich viele → **ja**, Beispiel angeben
-  - m < n, eindeutige Lösung → **nein**, begründen (mehr Unbekannte als Gleichungen → mindestens eine freie Variable, falls konsistent)
-- **Abends:** Alles nochmal durchschauen, sauber abschreiben.
+  - m < n, eindeutige Lösung → **nein**, begründen (mehr Unbekannte als Gleichungen)
+
+**Abends:** Alles durchschauen, Peter gibt die Reinschrift ab.
 
 ## Wichtige Hinweise aus der Angabe
 
