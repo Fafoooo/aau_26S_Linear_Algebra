@@ -68,44 +68,43 @@ Aus Zeile 2: $-z + 2t - 3w = 3 \Rightarrow z = 2t - 3w - 3$
 
 Aus Zeile 1: $x + 2y + t + w = 5 \Rightarrow x = 5 - 2y - t - w$
 
-\section*{Gauß-Jordan-Elimination (reduzierte Stufenform)}
+\section*{Warum wir nach dem Rückwärtseinsetzen schon fertig sind}
 
-\textbf{Bemerkung:} Die Gauß-Jordan-Elimination bringt hier kaum etwas Neues.
-Das Ziel von Gauß-Jordan ist es, auch \textbf{oberhalb} der Pivots zu eliminieren, damit jede
-Pivot-Variable nur noch in \textbf{einer} Gleichung vorkommt.
+\textbf{Gauß-Jordan wird hier nicht durchgeführt}, weil die Gauß-Elimination
+bereits alles liefert, was wir brauchen. Hier ist der Grund:
 
-Aber in unserem Fall steht in Zeile 1 bereits eine $0$ in der Pivot-Spalte von Zeile 2 (Spalte 3).
-Es gibt also \textbf{nichts zu eliminieren} -- wir müssen nur noch das Pivot in Zeile 2 normieren.
+Bei 7(a) hatten wir 3 Gleichungen und 3 Unbekannte -- jede Variable hatte
+eine \glqq eigene\grqq{} Gleichung, und wir konnten $x$, $y$, $z$ als konkrete Zahlen berechnen.
+Dort war Gauß-Jordan sinnvoll: Man eliminiert nach oben und liest die Lösung direkt ab.
 
-\textbf{Schritt 3:} $Z_2 \leftarrow -Z_2$ (Pivot normieren)
+Hier ist die Situation anders: Wir haben \textbf{5 Unbekannte, aber nur 2 echte Gleichungen}
+(die dritte Zeile ist $0 = 0$ geworden). Das heißt:
+\begin{itemize}
+\item Es gibt \textbf{nicht genug Gleichungen}, um alle Variablen eindeutig festzulegen.
+\item Zwei Variablen ($x$ und $z$) können wir durch die anderen ausdrücken.
+\item Die restlichen drei ($y$, $t$, $w$) dürfen \textbf{beliebige Werte} annehmen.
+\end{itemize}
 
-\[
-\left(\begin{array}{ccccc|c}
-1 & 2 & 0 & 1 & 1 & 5 \\
-0 & 0 & 1 & -2 & 3 & -3 \\
-0 & 0 & 0 & 0 & 0 & 0
-\end{array}\right)
-\]
-
-Dies ist die \textbf{reduzierte Zeilenstufenform} (RREF). Man liest ab:
+Genau das steht schon beim Rückwärtseinsetzen:
 \begin{align*}
-\text{Zeile 1:} \quad & x + 2y + t + w = 5 \\
-\text{Zeile 2:} \quad & z - 2t + 3w = -3
+z &= 2t - 3w - 3 \quad \text{($z$ hängt von $t$ und $w$ ab)} \\
+x &= 5 - 2y - t - w \quad \text{($x$ hängt von $y$, $t$ und $w$ ab)}
 \end{align*}
 
-Das ist \textbf{exakt dasselbe} wie beim Rückwärtseinsetzen oben.
-Die Gauß-Jordan-Elimination hat hier also nur das Vorzeichen gedreht -- die Information ist dieselbe.
+Gauß-Jordan würde hier nur das Pivot in Zeile 2 normieren ($Z_2 \leftarrow -Z_2$), also das
+Vorzeichen drehen. Die \textbf{Information ändert sich nicht} -- es kommen keine neuen
+Erkenntnisse dazu. Deshalb sparen wir uns diesen Schritt und arbeiten direkt
+mit dem Ergebnis des Rückwärtseinsetzens weiter.
 
 \newpage
 \section*{Allgemeine Lösung -- Schritt für Schritt erklärt}
 
-Ab hier kommt der Teil, der über die reine Elimination hinausgeht.
-Wir haben die RREF:
+Wir starten vom Ergebnis des Rückwärtseinsetzens. Die Stufenform war:
 
 \[
 \left(\begin{array}{ccccc|c}
 1 & 2 & 0 & 1 & 1 & 5 \\
-0 & 0 & 1 & -2 & 3 & -3 \\
+0 & 0 & -1 & 2 & -3 & 3 \\
 0 & 0 & 0 & 0 & 0 & 0
 \end{array}\right)
 \]
