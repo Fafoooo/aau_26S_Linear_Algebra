@@ -1,0 +1,136 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable}
+
+\newtcolorbox{merkbox}[1][]{colback=blue!5, colframe=blue!40, fonttitle=\bfseries, title={Merke}, breakable, #1}
+\newtcolorbox{analogie}[1][]{colback=green!5, colframe=green!40, fonttitle=\bfseries, title={Analogie}, breakable, #1}
+
+\title{Cheat-Sheet -- Untervektorr\"aume}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+%-----------------------------------------------------------------------------
+\section*{1. Was ist ein Vektorraum?}
+
+Ein \textbf{Vektorraum} ist einfach eine Menge von ``Objekten'', mit denen man zwei Dinge machen kann:
+\begin{itemize}
+    \item \textbf{Addieren:} Zwei Objekte zusammenz\"ahlen $\rightarrow$ Ergebnis ist wieder so ein Objekt.
+    \item \textbf{Skalarmultiplikation:} Ein Objekt mit einer reellen Zahl multiplizieren $\rightarrow$ Ergebnis ist wieder so ein Objekt.
+\end{itemize}
+
+\begin{analogie}
+Stell dir einen \textbf{Club} vor. Der Club hat Regeln (die Vektorraum-Axiome). Jedes Mitglied ist ein ``Vektor''. Die Regeln sagen zum Beispiel: Wenn du zwei Mitglieder ``addierst'', kommt wieder ein Mitglied raus. Wenn du ein Mitglied ``skalierst'', kommt wieder ein Mitglied raus.
+\end{analogie}
+
+\textbf{Beispiele f\"ur Vektorr\"aume:}
+\begin{itemize}
+    \item $\mathbb{R}^n$ -- die ``normalen'' Vektoren, z.B.\ $(1, 2, 3) \in \mathbb{R}^3$
+    \item $\mathbb{R}^{n \times n}$ -- alle $n \times n$-Matrizen
+    \item $\mathbb{R}[x]$ -- alle Polynome mit reellen Koeffizienten (z.B.\ $3x^2 + x - 5$)
+    \item $\mathrm{FUNC}(\mathbb{R})$ -- alle Funktionen $f \colon \mathbb{R} \to \mathbb{R}$
+\end{itemize}
+
+Ein Vektorraum hat viele Regeln (Axiome): Assoziativit\"at, Kommutativit\"at, Nullelement, inverse Elemente, Distributivgesetze usw.\ -- insgesamt 8+ St\"uck. Die alle zu pr\"ufen w\"are m\"uhsam. Deshalb gibt es einen Trick...
+
+%-----------------------------------------------------------------------------
+\section*{2. Was ist ein Untervektorraum (Unterraum)?}
+
+Ein \textbf{Untervektorraum} (kurz: Unterraum, abgek\"urzt UR) einer Menge $V$ ist eine \textbf{Teilmenge} $W \subseteq V$, die \textbf{selbst wieder ein Vektorraum} ist.
+
+\begin{analogie}
+Denk an eine \textbf{Firma} (= der gro\ss e Vektorraum $V$). Eine \textbf{Abteilung} innerhalb der Firma (= der Unterraum $W$) ist ein Teil der Firma. Aber die Abteilung muss alle Firmenregeln einhalten -- sie darf keine eigenen Regeln machen, die gegen die Firmenregeln versto\ss en.
+
+Also: $W$ ist eine Teilmenge von $V$, und $W$ muss sich an alle Regeln von $V$ halten.
+\end{analogie}
+
+%-----------------------------------------------------------------------------
+\section*{3. Der Unterraum-Test -- die 3 magischen Bedingungen}
+
+\begin{merkbox}[title={Der Unterraum-Test (URT)}]
+Sei $V$ ein Vektorraum und $W \subseteq V$. Dann ist $W$ ein Unterraum von $V$ genau dann, wenn:
+
+\medskip
+\textbf{(U1) Nullvektor:} $\vec{0} \in W$ \quad (``Der leere/neutrale Zustand muss dabei sein'')
+
+\medskip
+\textbf{(U2) Abgeschlossen unter Addition:}\\
+F\"ur alle $u, v \in W$ gilt: $u + v \in W$\\
+(``Wenn ich zwei Dinge aus $W$ addiere, muss das Ergebnis wieder in $W$ sein'')
+
+\medskip
+\textbf{(U3) Abgeschlossen unter Skalarmultiplikation:}\\
+F\"ur alle $u \in W$ und alle $\lambda \in \mathbb{R}$ gilt: $\lambda \cdot u \in W$\\
+(``Wenn ich etwas aus $W$ mit irgendeiner Zahl multipliziere, muss das Ergebnis wieder in $W$ sein'')
+\end{merkbox}
+
+\textbf{Warum reichen diese 3 Bedingungen?} Normalerweise m\"usste man ALLE 8+ Axiome eines Vektorraums pr\"ufen. Aber da $W$ eine Teilmenge von $V$ ist und $V$ schon ein Vektorraum ist, ``erbt'' $W$ automatisch die meisten Regeln von $V$:
+\begin{itemize}
+    \item Assoziativit\"at? Gilt schon in $V$ f\"ur alle Elemente, also auch f\"ur die in $W$.
+    \item Kommutativit\"at? Gilt schon in $V$, also auch in $W$.
+    \item Distributivgesetze? Genauso.
+\end{itemize}
+
+Die einzigen Dinge, die man EXTRA pr\"ufen muss, sind:
+\begin{itemize}
+    \item Ist das Nullelement dabei? (U1)
+    \item Bleibt man ``drinnen'', wenn man addiert? (U2)
+    \item Bleibt man ``drinnen'', wenn man skaliert? (U3)
+\end{itemize}
+
+\begin{analogie}
+Die Firma hat schon alle Gesetze. F\"ur eine Abteilung musst du nur pr\"ufen: (1) Hat die Abteilung einen Chef (Nullelement/neutrales Element)? (2) Wenn zwei Leute in der Abteilung zusammenarbeiten, bleibt das Ergebnis in der Abteilung? (3) Wenn jemand aus der Abteilung eine Aufgabe skaliert (vergr\"o\ss ert/verkleinert), bleibt das in der Abteilung?
+\end{analogie}
+
+%-----------------------------------------------------------------------------
+\section*{4. Strategie}
+
+\begin{merkbox}[title={Strategie-\"Ubersicht}]
+\textbf{Wenn du zeigen willst, dass $W$ ein Unterraum IST:}\\
+$\rightarrow$ Beweise ALLE 3 Bedingungen (U1), (U2), (U3). Jede einzelne.
+
+\medskip
+\textbf{Wenn du zeigen willst, dass $W$ KEIN Unterraum ist:}\\
+$\rightarrow$ Finde EIN konkretes Gegenbeispiel, das EINE der 3 Bedingungen verletzt.\\
+(Tipp: Am einfachsten ist oft (U1) -- pr\"ufe, ob der Nullvektor drin ist!)
+\end{merkbox}
+
+%-----------------------------------------------------------------------------
+\section*{5. Typische Fallen -- Woran erkenne ich sofort KEIN Unterraum?}
+
+\begin{merkbox}[title={Rote Flaggen -- KEIN Unterraum}]
+\textbf{Falle 1: Inhomogene Gleichungen}\\
+Wenn die Bedingung so aussieht wie $a + 2c = b - 3$ (also eine Konstante $\neq 0$ auf einer Seite steht), dann ist der \textbf{Nullvektor meistens nicht drin}. Denn: Setzt man alle Variablen $= 0$, wird die Gleichung zu $0 = -3$, was falsch ist.
+
+\medskip
+Vergleiche: $a + 2c = b - 3d$ ist \textbf{homogen} (alle Terme enthalten Variablen, keine ``nackte'' Konstante). Setzt man alles $= 0$: $0 = 0$ \checkmark
+
+\bigskip
+\textbf{Falle 2: Ungleichungen ($\leq$, $<$, $\geq$, $>$)}\\
+Meistens \textbf{nicht abgeschlossen unter Skalarmultiplikation}. Warum? Wenn du mit $-1$ multiplizierst, dreht sich das Vorzeichen um, und $\leq$ wird zu $\geq$!
+
+\bigskip
+\textbf{Falle 3: Produkte, Quadrate, Betr\"age}\\
+Bedingungen wie $ac \leq 0$, $A^2 = 0$, $|a| \leq |c|$, $p(1) \cdot p(2) = 0$ sind meistens \textbf{nicht abgeschlossen unter Addition}. Nichtlineare Bedingungen vertragen sich schlecht mit Addition.
+
+\bigskip
+\textbf{Falle 4: $\neq$ (Ungleich)}\\
+Wenn die Bedingung ein $\neq$ enth\"alt, ist der Nullvektor oft nicht drin, oder die Abgeschlossenheit scheitert.
+\end{merkbox}
+
+\begin{merkbox}[title={Gr\"une Flagge -- JA, Unterraum!}]
+\textbf{Homogene lineare Bedingungen sind IMMER Untervektorr\"aume.}\\
+Das hei\ss t: Wenn die Bedingung eine lineare Gleichung ist, bei der auf einer Seite $0$ steht (oder sich alles zu $0$ vereinfachen l\"asst), dann ist es ein Unterraum.
+
+\medskip
+Beispiele: $a + 2c = b - 3d$ (\"aquivalent zu $a - b + 2c + 3d = 0$), $A^\top = -A$, $p(1) = 0$, $f(-x) = -f(x)$.
+\end{merkbox}
+
+\end{document}
