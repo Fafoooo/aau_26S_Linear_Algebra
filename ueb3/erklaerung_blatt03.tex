@@ -190,50 +190,6 @@ Also $\lambda u \in W$.
 $\Rightarrow$ \textbf{$W$ ist ein Unterraum von $\mathbb{R}^4$.} \hfill $\blacksquare$
 
 %-----------------------------------------------------------------------------
-\subsection*{(b) \quad $V = \mathbb{R}^4$, \quad $W = \{(a,b,c,d) \in \mathbb{R}^4 : a + 2c = b - 3\}$}
-
-\textbf{Was bedeutet die Bedingung?}\\
-Fast wie (a), ABER rechts steht $b - 3$ statt $b - 3d$. Die $-3$ ist eine \textbf{Konstante}, nicht $-3d$ (ein Variablen-Term). Umgeschrieben: $a - b + 2c = -3$. Das ist eine \textbf{inhomogene} Gleichung (rechts steht $-3 \neq 0$).
-
-\begin{merkbox}
-Inhomogene Gleichung $\Rightarrow$ Nullvektor wahrscheinlich nicht drin $\Rightarrow$ kein Unterraum!
-\end{merkbox}
-
-\textbf{$W$ ist KEIN Unterraum.}
-
-\textbf{Gegenbeispiel (U1 verletzt):} Teste den Nullvektor $(0,0,0,0)$:
-\[
-0 + 2 \cdot 0 = 0 - 3 \quad \Leftrightarrow \quad 0 = -3 \quad \text{\Lightning}
-\]
-Der Nullvektor erf\"ullt die Bedingung \textbf{nicht}. Also $(0,0,0,0) \notin W$.
-
-$\Rightarrow$ \textbf{$W$ ist kein Unterraum.} \hfill $\blacksquare$
-
-%-----------------------------------------------------------------------------
-\subsection*{(c) \quad $V = \mathbb{R}^3$, \quad $W = \{(a,b,c) \in \mathbb{R}^3 : a \leq c\}$}
-
-\textbf{Was bedeutet die Bedingung?}\\
-Alle Vektoren $(a,b,c)$, bei denen die erste Komponente $a$ kleiner oder gleich der dritten Komponente $c$ ist. Zum Beispiel: $(1, 5, 3) \in W$ weil $1 \leq 3$. Aber $(4, 5, 2) \notin W$ weil $4 \not\leq 2$.
-
-\begin{merkbox}
-Ungleichung ($\leq$) $\Rightarrow$ Vorsicht bei Skalarmultiplikation mit negativen Zahlen!
-\end{merkbox}
-
-\textbf{$W$ ist KEIN Unterraum.}
-
-\textbf{Gegenbeispiel (U3 verletzt):} Nimm $u = (1, 0, 2) \in W$ (denn $1 \leq 2$ \checkmark) und $\lambda = -1$.
-
-\[
-\lambda \cdot u = -1 \cdot (1, 0, 2) = (-1, 0, -2)
-\]
-
-Pr\"ufe: $a \leq c$? $\quad -1 \leq -2$? $\quad$ \textbf{NEIN!} ($-1 > -2$) \quad \Lightning
-
-\textbf{Warum passiert das?} Wenn man mit $-1$ multipliziert, drehen sich die Vorzeichen um. Aus $1 \leq 2$ wird $-1 \leq -2$, was falsch ist. Die $\leq$-Richtung ``kippt'' bei negativer Skalarmultiplikation!
-
-$\Rightarrow$ \textbf{$W$ ist kein Unterraum.} \hfill $\blacksquare$
-
-%-----------------------------------------------------------------------------
 \subsection*{(d) \quad $V = \mathbb{R}^3$, \quad $W = \{(a,b,c) \in \mathbb{R}^3 : |a| \leq |c|\}$}
 
 \textbf{Was bedeutet die Bedingung?}\\
@@ -294,35 +250,6 @@ Pr\"ufe: $ac = 1 \cdot 1 = 1 \leq 0$? $\quad$ \textbf{NEIN!} ($1 > 0$) \quad \Li
 $\Rightarrow$ \textbf{$W$ ist kein Unterraum.} \hfill $\blacksquare$
 
 %-----------------------------------------------------------------------------
-\subsection*{(f) \quad $V = \mathbb{R}^3$, \quad $W = \{(a,b,c) \in \mathbb{R}^3 : a + b \neq c + 1\}$}
-
-\textbf{Was bedeutet die Bedingung?}\\
-Alle Vektoren, bei denen $a + b$ \textbf{nicht gleich} $c + 1$ ist. Also: fast alle Vektoren AUSSER die, wo $a + b = c + 1$ gilt.
-
-\textbf{$W$ ist KEIN Unterraum.}
-
-\textbf{Gegenbeispiel (U2 verletzt):} Nimm:
-\[
-u = (2, 0, 0) \in W \quad \text{(denn } 2 + 0 = 2 \neq 0 + 1 = 1 \text{ \checkmark)}
-\]
-\[
-v = (0, 0, 1) \in W \quad \text{(denn } 0 + 0 = 0 \neq 1 + 1 = 2 \text{ \checkmark)}
-\]
-\[
-u + v = (2, 0, 1)
-\]
-
-Pr\"ufe: $a + b \neq c + 1$? $\quad 2 + 0 \neq 1 + 1$? $\quad 2 \neq 2$? $\quad$ \textbf{DOCH, 2 = 2!} \quad \Lightning
-
-Also $u + v \notin W$.
-
-\textbf{Warum passiert das?} Man kann immer zwei Vektoren so w\"ahlen, dass sie sich zu einem addieren, der genau die ``verbotene'' Gleichung erf\"ullt.
-
-\textbf{Hinweis:} Man h\"atte auch (U1) pr\"ufen k\"onnen: $(0,0,0)$ -- ist $0 + 0 \neq 0 + 1$? $0 \neq 1$? Ja, also $(0,0,0) \in W$, (U1) ist erf\"ullt. Deshalb brauchten wir hier (U2).
-
-$\Rightarrow$ \textbf{$W$ ist kein Unterraum.} \hfill $\blacksquare$
-
-%-----------------------------------------------------------------------------
 \subsection*{(g) \quad $V = \mathbb{R}^4$, \quad $W = \{\ell \in \mathbb{R}^4 : \ell \text{ ist eine arithmetische Folge}\}$}
 
 \textbf{Erstmal: Was ist eine arithmetische Folge?}\\
@@ -371,64 +298,6 @@ Genauso f\"ur die zweite Gleichung.
 
 $\Rightarrow$ \textbf{$W$ ist ein Unterraum von $\mathbb{R}^4$.} \hfill $\blacksquare$
 
-%-----------------------------------------------------------------------------
-\subsection*{(h) \quad $V = \mathbb{R}^4$, \quad $W = \{\ell \in \mathbb{R}^4 : \ell \text{ ist eine geometrische Folge}\}$}
-
-\textbf{Was ist eine geometrische Folge?}\\
-Eine Folge $(a, b, c, d)$ hei\ss t \textbf{geometrisch}, wenn das \textbf{Verh\"altnis} zwischen aufeinanderfolgenden Gliedern immer gleich ist.
-
-Beispiele:
-\begin{itemize}
-    \item $(1, 2, 4, 8)$ -- Verh\"altnis immer $\times 2$ \checkmark
-    \item $(1, 3, 9, 27)$ -- Verh\"altnis immer $\times 3$ \checkmark
-    \item $(81, 27, 9, 3)$ -- Verh\"altnis immer $\times \frac{1}{3}$ \checkmark
-\end{itemize}
-
-\textbf{Mathematisch:} $\frac{b}{a} = \frac{c}{b} = \frac{d}{c}$ (also $b^2 = ac$ und $c^2 = bd$). Das sind \textbf{quadratische} (nichtlineare!) Bedingungen.
-
-\textbf{$W$ ist KEIN Unterraum.}
-
-\textbf{Gegenbeispiel (U2 verletzt):}
-\[
-u = (1, 2, 4, 8) \in W \quad \text{(Verh\"altnis $= 2$)}
-\]
-\[
-v = (1, 3, 9, 27) \in W \quad \text{(Verh\"altnis $= 3$)}
-\]
-\[
-u + v = (2, 5, 13, 35)
-\]
-
-Ist das eine geometrische Folge? Pr\"ufe: $\frac{5}{2} = 2{,}5$ aber $\frac{13}{5} = 2{,}6$. Die Verh\"altnisse sind \textbf{nicht gleich}! \Lightning
-
-\textbf{Warum passiert das?} Geometrische Folgen sind durch \textbf{Multiplikation} definiert (Verh\"altnisse), aber wir \textbf{addieren} die Vektoren. Multiplikation und Addition vertragen sich hier nicht.
-
-$\Rightarrow$ \textbf{$W$ ist kein Unterraum.} \hfill $\blacksquare$
-
-%-----------------------------------------------------------------------------
-\subsection*{(i) \quad $V = \mathbb{R}^3$, \quad $W = \mathbb{R}^2$}
-
-\textbf{Was bedeutet das?}\\
-Hier ist $V = \mathbb{R}^3$ (Vektoren mit 3 Komponenten) und $W = \mathbb{R}^2$ (Vektoren mit 2 Komponenten).
-
-\textbf{$W$ ist KEIN Unterraum.}
-
-\textbf{Warum?} Der allererste Schritt: $W$ muss eine \textbf{Teilmenge} von $V$ sein ($W \subseteq V$). Aber:
-\begin{itemize}
-    \item Ein Element von $\mathbb{R}^2$ sieht so aus: $(x, y)$ -- zwei Komponenten.
-    \item Ein Element von $\mathbb{R}^3$ sieht so aus: $(x, y, z)$ -- drei Komponenten.
-\end{itemize}
-
-Das sind \textbf{verschiedene Typen von Objekten}! $(1, 2) \in \mathbb{R}^2$, aber $(1, 2) \notin \mathbb{R}^3$, weil in $\mathbb{R}^3$ jeder Vektor \textbf{drei} Komponenten braucht.
-
-\begin{analogie}
-Das ist so, als w\"urdest du sagen: ``Die Abteilung Fische ist ein Teil der Firma Autos.'' Das geht nicht, weil Fische keine Autos sind -- sie sind etwas komplett anderes.
-\end{analogie}
-
-Also: $\mathbb{R}^2 \not\subseteq \mathbb{R}^3$, und damit kann $W$ kein Unterraum sein.
-
-$\Rightarrow$ \textbf{$W$ ist kein Unterraum von $V$.} \hfill $\blacksquare$
-
 \newpage
 
 %=============================================================================
@@ -456,33 +325,6 @@ Beispiel: $\mathrm{Spur}\begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix} = 1 + 4 = 5
 \textbf{Stufenmatrix (Zeilenstufenform):} Jede Zeile beginnt weiter rechts als die dar\"uber, und Nullzeilen stehen ganz unten.\\
 Beispiel: $\begin{pmatrix} 1 & 2 & 3 \\ 0 & 1 & 5 \\ 0 & 0 & 1 \end{pmatrix}$ -- jede ``Stufe'' geht nach rechts.
 \end{merkbox}
-
-%-----------------------------------------------------------------------------
-\subsection*{(a) \quad $W$ = Menge aller schiefsymmetrischen Matrizen ($A^\top = -A$)}
-
-\textbf{Was bedeutet die Bedingung?}\\
-$A^\top = -A$ hei\ss t: Wenn man die Matrix transponiert (Zeilen $\leftrightarrow$ Spalten), bekommt man $-A$. Die Diagonale muss $0$ sein (denn $a_{ii} = -a_{ii}$ geht nur f\"ur $a_{ii} = 0$), und die Eintr\"age au\ss erhalb der Diagonalen spiegeln sich mit Vorzeichenwechsel.
-
-\begin{merkbox}
-$A^\top = -A$ ist eine \textbf{lineare Bedingung} an die Eintr\"age von $A$. Also erwarten wir: JA, Unterraum!
-\end{merkbox}
-
-\textbf{Beweis: $W$ ist ein Unterraum.}
-
-\textbf{(U1) Nullmatrix:} $0^\top = 0 = -0$ \checkmark. Also $0 \in W$.
-
-\textbf{(U2) Addition:} Seien $A, B \in W$, also $A^\top = -A$ und $B^\top = -B$.
-\[
-(A + B)^\top = A^\top + B^\top = (-A) + (-B) = -(A + B) \quad \checkmark
-\]
-(Wir nutzen hier: die Transponierte einer Summe ist die Summe der Transponierten.)
-
-\textbf{(U3) Skalarmultiplikation:} Sei $A \in W$, $\lambda \in \mathbb{R}$.
-\[
-(\lambda A)^\top = \lambda \cdot A^\top = \lambda \cdot (-A) = -(\lambda A) \quad \checkmark
-\]
-
-$\Rightarrow$ \textbf{$W$ ist ein Unterraum von $\mathbb{R}^{n \times n}$.} \hfill $\blacksquare$
 
 %-----------------------------------------------------------------------------
 \subsection*{(b) \quad $W = \{A \in \mathbb{R}^{n \times n} : A^2 = 0\}$}
@@ -526,58 +368,6 @@ A + B = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}
 $\Rightarrow$ \textbf{$W$ ist kein Unterraum.} \hfill $\blacksquare$
 
 %-----------------------------------------------------------------------------
-\subsection*{(c) \quad $W$ = Menge aller $A \in \mathbb{R}^{n \times n}$ mit $A \begin{pmatrix} 1 \\ 2 \\ \vdots \\ n \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \\ \vdots \\ 0 \end{pmatrix}$}
-
-\textbf{Was bedeutet die Bedingung?}\\
-Wir nennen $w = (1, 2, \ldots, n)^\top$. Die Bedingung ist: $Aw = 0$. Das hei\ss t: wenn man $A$ auf den speziellen Vektor $w$ anwendet, kommt der Nullvektor raus. $W$ ist also der \textbf{Kern} der Abbildung ``multipliziere mit $w$''.
-
-\begin{merkbox}
-$Aw = 0$ ist eine \textbf{homogene lineare Bedingung} an $A$ (man multipliziert $A$ mit einem festen Vektor und fordert, dass $0$ rauskommt). Also: JA, Unterraum!
-\end{merkbox}
-
-\textbf{Beweis: $W$ ist ein Unterraum.}
-
-\textbf{(U1)} $0 \cdot w = 0$ \checkmark. Die Nullmatrix multipliziert mit allem ergibt $0$.
-
-\textbf{(U2)} Seien $A, B \in W$, also $Aw = 0$ und $Bw = 0$.
-\[
-(A + B)w = Aw + Bw = 0 + 0 = 0 \quad \checkmark
-\]
-
-\textbf{(U3)} Sei $A \in W$, $\lambda \in \mathbb{R}$.
-\[
-(\lambda A)w = \lambda (Aw) = \lambda \cdot 0 = 0 \quad \checkmark
-\]
-
-$\Rightarrow$ \textbf{$W$ ist ein Unterraum von $\mathbb{R}^{n \times n}$.} \hfill $\blacksquare$
-
-%-----------------------------------------------------------------------------
-\subsection*{(d) \quad $W$ = Menge aller Stufenmatrizen in $\mathbb{R}^{n \times n}$}
-
-\textbf{Was bedeutet die Bedingung?}\\
-$W$ enth\"alt alle Matrizen, die in \textbf{Zeilenstufenform} sind. In der Zeilenstufenform beginnt jede nicht-Null-Zeile weiter rechts als die dar\"uber, und Nullzeilen stehen unten.
-
-\textbf{$W$ ist KEIN Unterraum.}
-
-\textbf{Gegenbeispiel (U2 verletzt) f\"ur $n = 2$:}
-
-\[
-A = \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix} \quad \text{(Stufenform \checkmark -- das ist sogar die Einheitsmatrix)}
-\]
-\[
-B = \begin{pmatrix} -1 & 0 \\ 0 & 0 \end{pmatrix} \quad \text{(Stufenform \checkmark -- zweite Zeile ist Nullzeile)}
-\]
-\[
-A + B = \begin{pmatrix} 0 & 0 \\ 0 & 1 \end{pmatrix}
-\]
-
-Ist $A + B$ in Stufenform? Die erste Zeile ist $(0, 0)$ (Nullzeile), die zweite Zeile ist $(0, 1)$ (nicht-Nullzeile). Aber in Stufenform m\"ussen Nullzeilen \textbf{unten} stehen! Hier steht die Nullzeile \textbf{oben}. \Lightning
-
-\textbf{Warum passiert das?} Stufenform h\"angt von der \textbf{Position} der f\"uhrenden Eintr\"age ab. Addition kann die f\"uhrenden Eintr\"age wegl\"oschen und damit die Stufenstruktur zerst\"oren.
-
-$\Rightarrow$ \textbf{$W$ ist kein Unterraum.} \hfill $\blacksquare$
-
-%-----------------------------------------------------------------------------
 \subsection*{(e) \quad $W = \{A \in \mathbb{R}^{n \times n} : KAM = A^\top\}$, wobei $K, M$ fest sind}
 
 \textbf{Was bedeutet die Bedingung?}\\
@@ -601,34 +391,6 @@ K(A+B)M = KAM + KBM = A^\top + B^\top = (A+B)^\top \quad \checkmark
 \textbf{(U3) Skalarmultiplikation:} Sei $A \in W$, $\lambda \in \mathbb{R}$.
 \[
 K(\lambda A)M = \lambda (KAM) = \lambda A^\top = (\lambda A)^\top \quad \checkmark
-\]
-
-$\Rightarrow$ \textbf{$W$ ist ein Unterraum von $\mathbb{R}^{n \times n}$.} \hfill $\blacksquare$
-
-%-----------------------------------------------------------------------------
-\subsection*{(f) \quad $W$ = Menge aller $A \in \mathbb{R}^{n \times n}$ mit Spur$(A) = 0$}
-
-\textbf{Was bedeutet die Bedingung?}\\
-Die \textbf{Spur} einer Matrix ist die Summe der Diagonaleintr\"age. Wir wollen alle Matrizen, deren Diagonalsumme $0$ ist.
-
-Zum Beispiel f\"ur $n = 2$: $A = \begin{pmatrix} 3 & 7 \\ -1 & -3 \end{pmatrix}$ hat $\mathrm{Spur}(A) = 3 + (-3) = 0$ \checkmark.
-
-\begin{merkbox}
-Die Spur ist eine \textbf{lineare Funktion}: $\mathrm{Spur}(A + B) = \mathrm{Spur}(A) + \mathrm{Spur}(B)$ und $\mathrm{Spur}(\lambda A) = \lambda \cdot \mathrm{Spur}(A)$. Lineare Bedingung $= 0$ $\Rightarrow$ Unterraum!
-\end{merkbox}
-
-\textbf{Beweis: $W$ ist ein Unterraum.}
-
-\textbf{(U1) Nullmatrix:} $\mathrm{Spur}(0) = 0 + 0 + \ldots + 0 = 0$ \checkmark.
-
-\textbf{(U2) Addition:} Seien $A, B \in W$, also $\mathrm{Spur}(A) = 0$ und $\mathrm{Spur}(B) = 0$.
-\[
-\mathrm{Spur}(A + B) = \mathrm{Spur}(A) + \mathrm{Spur}(B) = 0 + 0 = 0 \quad \checkmark
-\]
-
-\textbf{(U3) Skalarmultiplikation:} Sei $A \in W$, $\lambda \in \mathbb{R}$.
-\[
-\mathrm{Spur}(\lambda A) = \lambda \cdot \mathrm{Spur}(A) = \lambda \cdot 0 = 0 \quad \checkmark
 \]
 
 $\Rightarrow$ \textbf{$W$ ist ein Unterraum von $\mathbb{R}^{n \times n}$.} \hfill $\blacksquare$
@@ -689,32 +451,6 @@ Lineare Bedingung $= 0$ $\Rightarrow$ Unterraum!
 $\Rightarrow$ \textbf{$W$ ist ein Unterraum von $\mathbb{R}[x]$.} \hfill $\blacksquare$
 
 %-----------------------------------------------------------------------------
-\subsection*{(b) \quad $W = \{p(x) \in \mathbb{R}[x] : p(1) = p(2) = 0\}$}
-
-\textbf{Was bedeutet die Bedingung?}\\
-Alle Polynome, die SOWOHL bei $x = 1$ als auch bei $x = 2$ den Wert $0$ haben. Also: $1$ und $2$ sind beides Nullstellen.
-
-Das ist einfach die \textbf{Kombination} von zwei linearen Bedingungen: $p(1) = 0$ UND $p(2) = 0$. Jede einzelne ergibt einen Unterraum, und der \textbf{Durchschnitt von Untervektorr\"aumen ist wieder ein Unterraum}.
-
-Aber wir k\"onnen es auch direkt beweisen:
-
-\textbf{Beweis: $W$ ist ein Unterraum.}
-
-\textbf{(U1)} $0(1) = 0$ und $0(2) = 0$ \checkmark.
-
-\textbf{(U2)} Seien $p, q \in W$. Dann:
-\[
-(p+q)(1) = p(1) + q(1) = 0 + 0 = 0, \quad (p+q)(2) = p(2) + q(2) = 0 + 0 = 0 \quad \checkmark
-\]
-
-\textbf{(U3)} Sei $p \in W$, $\lambda \in \mathbb{R}$.
-\[
-(\lambda p)(1) = \lambda \cdot 0 = 0, \quad (\lambda p)(2) = \lambda \cdot 0 = 0 \quad \checkmark
-\]
-
-$\Rightarrow$ \textbf{$W$ ist ein Unterraum von $\mathbb{R}[x]$.} \hfill $\blacksquare$
-
-%-----------------------------------------------------------------------------
 \subsection*{(c) \quad $W = \{p(x) \in \mathbb{R}[x] : p(1) \cdot p(2) = 0\}$}
 
 \textbf{Was bedeutet die Bedingung?}\\
@@ -753,87 +489,6 @@ Jetzt:
 \textbf{Warum passiert das?} $p$ hat Nullstelle bei $1$, $q$ hat Nullstelle bei $2$. Aber die Summe $p + q$ hat Nullstelle bei $x = 3/2$ -- weder bei $1$ noch bei $2$!
 
 $\Rightarrow$ \textbf{$W$ ist kein Unterraum.} \hfill $\blacksquare$
-
-%-----------------------------------------------------------------------------
-\subsection*{(d) \quad $W = \{p(x) \in \mathbb{R}[x] : p(1) \leq p(2)\}$}
-
-\textbf{Was bedeutet die Bedingung?}\\
-Der Wert des Polynoms an der Stelle $1$ muss kleiner oder gleich dem Wert an der Stelle $2$ sein.
-
-\begin{merkbox}
-Ungleichung $\Rightarrow$ Skalarmultiplikation mit negativer Zahl dreht die Richtung um!
-\end{merkbox}
-
-\textbf{$W$ ist KEIN Unterraum.}
-
-\textbf{Gegenbeispiel (U3 verletzt):} Nimm $p(x) = x$ und $\lambda = -1$.
-
-$p \in W$? $\quad p(1) = 1 \leq 2 = p(2)$ \checkmark.
-
-$(-1) \cdot p(x) = -x$. Dann: $(-p)(1) = -1$ und $(-p)(2) = -2$.
-
-$-1 \leq -2$? \textbf{NEIN!} ($-1 > -2$) \quad \Lightning
-
-\textbf{Warum?} Multiplizieren mit $-1$ dreht die Ungleichung um: aus $1 \leq 2$ wird $-1 \geq -2$.
-
-$\Rightarrow$ \textbf{$W$ ist kein Unterraum.} \hfill $\blacksquare$
-
-%-----------------------------------------------------------------------------
-\subsection*{(e) \quad $W = \{p(x) \in \mathbb{R}[x] : p(1) = p(2) + p(3)\}$}
-
-\textbf{Was bedeutet die Bedingung?}\\
-Der Wert bei $x = 1$ muss gleich der Summe der Werte bei $x = 2$ und $x = 3$ sein. Umgeschrieben: $p(1) - p(2) - p(3) = 0$. Das ist eine \textbf{lineare Bedingung} an $p$ (weil Einsetzen linear ist), und rechts steht $0$.
-
-\textbf{Beweis: $W$ ist ein Unterraum.}
-
-\textbf{(U1)} Nullpolynom: $0 = 0 + 0$ \checkmark.
-
-\textbf{(U2)} Seien $p, q \in W$, also $p(1) = p(2) + p(3)$ und $q(1) = q(2) + q(3)$.
-\begin{align*}
-(p+q)(1) &= p(1) + q(1) = \bigl(p(2) + p(3)\bigr) + \bigl(q(2) + q(3)\bigr) \\
-&= \bigl(p(2) + q(2)\bigr) + \bigl(p(3) + q(3)\bigr) = (p+q)(2) + (p+q)(3) \quad \checkmark
-\end{align*}
-
-\textbf{(U3)} Sei $p \in W$, $\lambda \in \mathbb{R}$.
-\[
-(\lambda p)(1) = \lambda \cdot p(1) = \lambda \bigl(p(2) + p(3)\bigr) = \lambda p(2) + \lambda p(3) = (\lambda p)(2) + (\lambda p)(3) \quad \checkmark
-\]
-
-$\Rightarrow$ \textbf{$W$ ist ein Unterraum von $\mathbb{R}[x]$.} \hfill $\blacksquare$
-
-%-----------------------------------------------------------------------------
-\subsection*{(f) \quad $W = \{p(x) \in \mathbb{R}[x] : p'(1) = p(0)\}$}
-
-\textbf{Was bedeutet die Bedingung?}\\
-$p'(x)$ ist die \textbf{Ableitung} von $p(x)$. Die Bedingung sagt: Die Ableitung ausgewertet bei $x = 1$ muss gleich dem Wert des Polynoms bei $x = 0$ sein.
-
-Beispiel: $p(x) = x^2$. Dann $p'(x) = 2x$, also $p'(1) = 2$ und $p(0) = 0$. Ist $2 = 0$? Nein $\Rightarrow$ $p \notin W$.
-
-Anderes Beispiel: $p(x) = x$. Dann $p'(x) = 1$, also $p'(1) = 1$ und $p(0) = 0$. Ist $1 = 0$? Nein $\Rightarrow$ $p \notin W$.
-
-Beispiel das klappt: $p(x) = x^2 - x$. Dann $p'(x) = 2x - 1$, also $p'(1) = 1$ und $p(0) = 0$. Hmm, $1 \neq 0$. Probiere: $p(x) = 0$: $p'(1) = 0 = p(0)$ \checkmark.
-
-\begin{merkbox}
-$p'(1) = p(0)$ ist \"aquivalent zu $p'(1) - p(0) = 0$. Sowohl Ableiten als auch Einsetzen sind \textbf{lineare Operationen}. Also ist die Bedingung linear und homogen $\Rightarrow$ Unterraum!
-\end{merkbox}
-
-\textbf{Beweis: $W$ ist ein Unterraum.}
-
-\textbf{(U1)} Nullpolynom: $0' = 0$, also $0'(1) = 0 = 0(0)$ \checkmark.
-
-\textbf{(U2)} Seien $p, q \in W$, also $p'(1) = p(0)$ und $q'(1) = q(0)$.
-
-Die Ableitung ist linear: $(p+q)' = p' + q'$. Also:
-\[
-(p+q)'(1) = p'(1) + q'(1) = p(0) + q(0) = (p+q)(0) \quad \checkmark
-\]
-
-\textbf{(U3)} Sei $p \in W$, $\lambda \in \mathbb{R}$. Es gilt $(\lambda p)' = \lambda p'$, also:
-\[
-(\lambda p)'(1) = \lambda \cdot p'(1) = \lambda \cdot p(0) = (\lambda p)(0) \quad \checkmark
-\]
-
-$\Rightarrow$ \textbf{$W$ ist ein Unterraum von $\mathbb{R}[x]$.} \hfill $\blacksquare$
 
 \newpage
 
@@ -908,60 +563,6 @@ Also $(f+g)(1) = 0$, obwohl $1 \neq 0$. Die Summe ist die Nullfunktion, die die 
 
 $\Rightarrow$ \textbf{$W$ ist kein Unterraum.} \hfill $\blacksquare$
 
-%-----------------------------------------------------------------------------
-\subsection*{(c) \quad $W = \{f \in V : f(x) = f(x+1) \text{ f\"ur alle } x \in \mathbb{R}\}$}
-
-\textbf{Was bedeutet die Bedingung?}\\
-Die Funktion ist \textbf{periodisch mit Periode 1}. Das hei\ss t: Wenn man $x$ um $1$ nach rechts verschiebt, \"andert sich der Funktionswert nicht. Der Graph wiederholt sich alle $1$ Einheiten.
-
-Beispiele:
-\begin{itemize}
-    \item $f(x) = \sin(2\pi x)$ ist periodisch mit Periode 1 \checkmark
-    \item Jede konstante Funktion $f(x) = c$ \checkmark{} (denn $c = c$)
-    \item $f(x) = x$ ist NICHT periodisch ($x \neq x + 1$)
-\end{itemize}
-
-\begin{merkbox}
-$f(x) = f(x+1)$ ist eine lineare Bedingung an $f$ $\Rightarrow$ Unterraum!
-\end{merkbox}
-
-\textbf{Beweis: $W$ ist ein Unterraum.}
-
-\textbf{(U1)} Nullfunktion: $0 = 0$ f\"ur alle $x$ \checkmark{} (die Nullfunktion ist trivialerweise periodisch).
-
-\textbf{(U2)} Seien $f, g \in W$, also $f(x) = f(x+1)$ und $g(x) = g(x+1)$ f\"ur alle $x$.
-\[
-(f+g)(x) = f(x) + g(x) = f(x+1) + g(x+1) = (f+g)(x+1) \quad \checkmark
-\]
-
-\textbf{(U3)} Sei $f \in W$, $\lambda \in \mathbb{R}$.
-\[
-(\lambda f)(x) = \lambda \cdot f(x) = \lambda \cdot f(x+1) = (\lambda f)(x+1) \quad \checkmark
-\]
-
-$\Rightarrow$ \textbf{$W$ ist ein Unterraum von $\mathrm{FUNC}(\mathbb{R})$.} \hfill $\blacksquare$
-
-%-----------------------------------------------------------------------------
-\subsection*{(d) \quad $W = \{f \in V : f(x) + 1 = f(x+1) \text{ f\"ur alle } x \in \mathbb{R}\}$}
-
-\textbf{Was bedeutet die Bedingung?}\\
-Wenn man $x$ um $1$ erh\"oht, erh\"oht sich der Funktionswert um genau $1$. Beispiel: $f(x) = x$ erf\"ullt das: $x + 1 = (x + 1)$.
-
-\textbf{Aber Achtung:} Umgeschrieben: $f(x+1) - f(x) = 1$. Die rechte Seite ist $1 \neq 0$! Das ist eine \textbf{inhomogene} Bedingung.
-
-\textbf{$W$ ist KEIN Unterraum.}
-
-\textbf{Gegenbeispiel (U1 verletzt):} Teste die Nullfunktion $f(x) = 0$:
-\[
-f(x) + 1 = 0 + 1 = 1, \quad f(x + 1) = 0
-\]
-
-$1 = 0$? \textbf{NEIN!} \quad \Lightning
-
-Die Nullfunktion erf\"ullt die Bedingung nicht, weil $0 + 1 = 1 \neq 0$.
-
-$\Rightarrow$ \textbf{$W$ ist kein Unterraum.} \hfill $\blacksquare$
-
 \newpage
 
 %=============================================================================
@@ -971,19 +572,19 @@ $\Rightarrow$ \textbf{$W$ ist kein Unterraum.} \hfill $\blacksquare$
 
 \begin{merkbox}[title={\"Ubersicht aller Ergebnisse}]
 \textbf{Aufgabe 10 ($\mathbb{R}^n$):}\\
-(a) JA \quad (b) NEIN \quad (c) NEIN \quad (d) NEIN \quad (e) NEIN \quad (f) NEIN \quad (g) JA \quad (h) NEIN \quad (i) NEIN
+(a) JA \quad (d) NEIN \quad (e) NEIN \quad (g) JA
 
 \medskip
 \textbf{Aufgabe 11 ($\mathbb{R}^{n \times n}$):}\\
-(a) JA \quad (b) NEIN \quad (c) JA \quad (d) NEIN \quad (e) JA \quad (f) JA
+(b) NEIN \quad (e) JA
 
 \medskip
 \textbf{Aufgabe 12 ($\mathbb{R}[x]$):}\\
-(a) JA \quad (b) JA \quad (c) NEIN \quad (d) NEIN \quad (e) JA \quad (f) JA
+(a) JA \quad (c) NEIN
 
 \medskip
 \textbf{Aufgabe 13 ($\mathrm{FUNC}(\mathbb{R})$):}\\
-(a) JA \quad (b) NEIN \quad (c) JA \quad (d) NEIN
+(a) JA \quad (b) NEIN
 \end{merkbox}
 
 \begin{merkbox}[title={Die goldenen Regeln f\"ur Unterraum-Aufgaben}]

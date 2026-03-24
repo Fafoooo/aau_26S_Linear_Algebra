@@ -7,7 +7,7 @@
 \usepackage{enumitem}
 \usepackage{booktabs}
 
-\title{Übungsblatt 3 -- Lösungen \\ \large Linear Algebra}
+\title{\"Ubungsblatt 3 -- L\"osungen \\ \large Linear Algebra}
 \author{}
 \date{}
 
@@ -15,617 +15,225 @@
 \maketitle
 
 \noindent
-\textbf{Erinnerung:} Zum Nachweis, dass eine Teilmenge $W$ ein Unterraum eines Vektorraums $V$ ist, prüfen wir drei Bedingungen:
-\begin{enumerate}
-    \item Der Nullvektor liegt in $W$: $\mathbf{0} \in W$.
-    \item $W$ ist abgeschlossen unter Addition: $\mathbf{u}, \mathbf{v} \in W \Rightarrow \mathbf{u} + \mathbf{v} \in W$.
-    \item $W$ ist abgeschlossen unter Skalarmultiplikation: $\mathbf{u} \in W,\; k \in \mathbb{R} \Rightarrow k\mathbf{u} \in W$.
+Zum Nachweis, dass $W$ ein Unterraum von $V$ ist, pr\"ufe ich drei Bedingungen:
+\begin{enumerate}[nosep]
+    \item Nullvektor $\mathbf{0} \in W$
+    \item Abgeschlossen unter Addition: $\mathbf{u}, \mathbf{v} \in W \Rightarrow \mathbf{u} + \mathbf{v} \in W$
+    \item Abgeschlossen unter Skalarmultiplikation: $\mathbf{u} \in W,\; k \in \mathbb{R} \Rightarrow k\mathbf{u} \in W$
 \end{enumerate}
+Wenn $W$ \emph{kein} Unterraum ist, reicht ein Gegenbeispiel, das eine Bedingung verletzt.
 
 %% ============================================================
-\subsection*{Aufgabe 10: Ist $W$ ein Unterraum von $V$?}
+\subsection*{Aufgabe 10}
 %% ============================================================
 
-\begin{enumerate}[label=(\alph*)]
+\textbf{(a)} $V = \mathbb{R}^4$, \;$W = \{(a,b,c,d) \in \mathbb{R}^4 : a + 2c = b - 3d\}$.
 
-%% --- 10(a) ---
-\item $V = \mathbb{R}^4$, \quad $W = \{(a,b,c,d) \in \mathbb{R}^4 : a + 2c = b - 3d\}$.
-
-Die Bedingung lässt sich äquivalent als homogene lineare Gleichung schreiben:
-\[
-a - b + 2c + 3d = 0.
-\]
+Die Bedingung ist eine homogene lineare Gleichung: $a - b + 2c + 3d = 0$.
 
 \textbf{Nullvektor:}
-Für $(0,0,0,0)$ gilt $0 - 0 + 2 \cdot 0 + 3 \cdot 0 = 0$. Also $\mathbf{0} \in W$. \checkmark
+$0 + 2 \cdot 0 = 0 - 3 \cdot 0 \;\checkmark$
 
-\textbf{Abgeschlossenheit unter Addition:}
+\textbf{Addition:}
 Seien $\mathbf{u} = (a_1,b_1,c_1,d_1), \mathbf{v} = (a_2,b_2,c_2,d_2) \in W$.
-Dann gilt $a_1 + 2c_1 = b_1 - 3d_1$ und $a_2 + 2c_2 = b_2 - 3d_2$.
-Für $\mathbf{u} + \mathbf{v} = (a_1+a_2,\, b_1+b_2,\, c_1+c_2,\, d_1+d_2)$:
 \[
-(a_1+a_2) + 2(c_1+c_2) = (a_1+2c_1) + (a_2+2c_2) = (b_1-3d_1) + (b_2-3d_2) = (b_1+b_2) - 3(d_1+d_2).
+(a_1{+}a_2) + 2(c_1{+}c_2)
+= \underbrace{(a_1{+}2c_1)}_{=b_1-3d_1} + \underbrace{(a_2{+}2c_2)}_{=b_2-3d_2}
+= (b_1{+}b_2) - 3(d_1{+}d_2). \;\checkmark
 \]
-Also $\mathbf{u}+\mathbf{v} \in W$. \checkmark
 
-\textbf{Abgeschlossenheit unter Skalarmultiplikation:}
-Sei $\mathbf{u} = (a,b,c,d) \in W$ und $k \in \mathbb{R}$. Dann $a + 2c = b - 3d$ und:
-\[
-ka + 2(kc) = k(a+2c) = k(b-3d) = kb - 3(kd).
-\]
-Also $k\mathbf{u} \in W$. \checkmark
+\textbf{Skalarmultiplikation:}
+$k(a+2c) = k(b-3d) \;\Rightarrow\; ka + 2kc = kb - 3kd. \;\checkmark$
 
-\textbf{$W$ ist ein Unterraum von $\mathbb{R}^4$.} $\square$
-
-\bigskip
-
-%% --- 10(b) ---
-\item $V = \mathbb{R}^4$, \quad $W = \{(a,b,c,d) \in \mathbb{R}^4 : a + 2c = b - 3\}$.
-
-\textbf{Nullvektor:}
-Für $(0,0,0,0)$: $a + 2c = 0 + 0 = 0$ und $b - 3 = 0 - 3 = -3$.
-Da $0 \neq -3$, gilt $\mathbf{0} \notin W$.
-
-Da der Nullvektor nicht in $W$ liegt, ist die erste Bedingung verletzt.
-
-\textbf{$W$ ist kein Unterraum von $\mathbb{R}^4$.} $\square$
-
-\bigskip
-
-%% --- 10(c) ---
-\item $V = \mathbb{R}^3$, \quad $W = \{(a,b,c) \in \mathbb{R}^3 : a \leq c\}$.
-
-\textbf{Nullvektor:} $(0,0,0)$: $0 \leq 0$ ist wahr, also $\mathbf{0} \in W$. \checkmark
-
-\textbf{Abgeschlossenheit unter Skalarmultiplikation -- Gegenbeispiel:}
-Wähle $\mathbf{u} = (1, 0, 2) \in W$, denn $1 \leq 2$. \checkmark
-
-Für $k = -1$: $k\mathbf{u} = (-1)(1,0,2) = (-1, 0, -2)$.
-Prüfe: $a = -1$, $c = -2$. Ist $-1 \leq -2$? \textbf{Nein}, denn $-1 > -2$.
-
-Also ist $k\mathbf{u} \notin W$. Die Abgeschlossenheit unter Skalarmultiplikation ist verletzt.
-
-\textbf{$W$ ist kein Unterraum von $\mathbb{R}^3$.} $\square$
+\textbf{$W$ ist ein Unterraum.} $\square$
 
 \bigskip
 
 %% --- 10(d) ---
-\item $V = \mathbb{R}^3$, \quad $W = \{(a,b,c) \in \mathbb{R}^3 : |a| \leq |c|\}$.
+\textbf{(d)} $V = \mathbb{R}^3$, \;$W = \{(a,b,c) \in \mathbb{R}^3 : |a| \leq |c|\}$.
 
-\textbf{Nullvektor:} $(0,0,0)$: $|0| \leq |0|$ ist wahr, also $\mathbf{0} \in W$. \checkmark
+\textbf{Gegenbeispiel (Addition):}
 
-\textbf{Abgeschlossenheit unter Addition -- Gegenbeispiel:}
-Wähle $\mathbf{u} = (1, 0, -1) \in W$, denn $|1| = 1 \leq 1 = |-1|$. \checkmark
+$\mathbf{u} = (1, 0, -1) \in W$ \;($|1| \leq |-1|$, also $1 \leq 1$ \checkmark)
 
-Wähle $\mathbf{v} = (1, 0, 1) \in W$, denn $|1| = 1 \leq 1 = |1|$. \checkmark
+$\mathbf{v} = (1, 0, 1) \in W$ \;($|1| \leq |1|$ \checkmark)
 
-$\mathbf{u} + \mathbf{v} = (2, 0, 0)$.
-Prüfe: $|2| = 2 \leq 0 = |0|$? \textbf{Nein}, denn $2 > 0$.
+$\mathbf{u} + \mathbf{v} = (2, 0, 0)$. \;Ist $|2| \leq |0|$? $\;2 \leq 0$? \textbf{Nein.}
 
-Also ist $\mathbf{u}+\mathbf{v} \notin W$. Die Abgeschlossenheit unter Addition ist verletzt.
+Die $a$-Komponenten addieren sich zu $2$, aber die $c$-Komponenten heben sich auf zu $0$.
 
-\textbf{$W$ ist kein Unterraum von $\mathbb{R}^3$.} $\square$
+\textbf{$W$ ist kein Unterraum} (nicht abgeschlossen unter Addition). $\square$
 
 \bigskip
 
 %% --- 10(e) ---
-\item $V = \mathbb{R}^3$, \quad $W = \{(a,b,c) \in \mathbb{R}^3 : ac \leq 0\}$.
+\textbf{(e)} $V = \mathbb{R}^3$, \;$W = \{(a,b,c) \in \mathbb{R}^3 : ac \leq 0\}$.
 
-\textbf{Nullvektor:} $(0,0,0)$: $0 \cdot 0 = 0 \leq 0$. Also $\mathbf{0} \in W$. \checkmark
+\textbf{Gegenbeispiel (Addition):}
 
-\textbf{Abgeschlossenheit unter Addition -- Gegenbeispiel:}
-Wähle $\mathbf{u} = (1, 0, 0) \in W$, denn $1 \cdot 0 = 0 \leq 0$. \checkmark
+$\mathbf{u} = (1, 0, 0) \in W$ \;($1 \cdot 0 = 0 \leq 0$ \checkmark)
 
-Wähle $\mathbf{v} = (0, 0, 1) \in W$, denn $0 \cdot 1 = 0 \leq 0$. \checkmark
+$\mathbf{v} = (0, 0, 1) \in W$ \;($0 \cdot 1 = 0 \leq 0$ \checkmark)
 
-$\mathbf{u} + \mathbf{v} = (1, 0, 1)$.
-Prüfe: $1 \cdot 1 = 1 \leq 0$? \textbf{Nein}, denn $1 > 0$.
+$\mathbf{u} + \mathbf{v} = (1, 0, 1)$. \;Ist $1 \cdot 1 = 1 \leq 0$? \textbf{Nein.}
 
-Also ist $\mathbf{u}+\mathbf{v} \notin W$. Die Abgeschlossenheit unter Addition ist verletzt.
+Einzeln hat je eine Komponente den Wert $0$ (Produkt $= 0$), aber in der Summe sind beide positiv.
 
-\textbf{$W$ ist kein Unterraum von $\mathbb{R}^3$.} $\square$
-
-\bigskip
-
-%% --- 10(f) ---
-\item $V = \mathbb{R}^3$, \quad $W = \{(a,b,c) \in \mathbb{R}^3 : a + b \neq c + 1\}$.
-
-\textbf{Nullvektor:}
-Für $(0,0,0)$: $a+b = 0$ und $c+1 = 1$. Da $0 \neq 1$, gilt $\mathbf{0} \in W$. \checkmark
-
-\textbf{Abgeschlossenheit unter Addition -- Gegenbeispiel:}
-Wähle $\mathbf{u} = (2, 0, 0) \in W$, denn $2 + 0 = 2$ und $0 + 1 = 1$, also $2 \neq 1$. \checkmark
-
-Wähle $\mathbf{v} = (0, 0, 1) \in W$, denn $0 + 0 = 0$ und $1 + 1 = 2$, also $0 \neq 2$. \checkmark
-
-$\mathbf{u} + \mathbf{v} = (2, 0, 1)$.
-Prüfe: $a+b = 2+0 = 2$ und $c+1 = 1+1 = 2$. Es gilt $2 = 2$, also $a+b = c+1$.
-
-Damit ist $\mathbf{u}+\mathbf{v} \notin W$. Die Abgeschlossenheit unter Addition ist verletzt.
-
-\textbf{$W$ ist kein Unterraum von $\mathbb{R}^3$.} $\square$
+\textbf{$W$ ist kein Unterraum} (nicht abgeschlossen unter Addition). $\square$
 
 \bigskip
 
 %% --- 10(g) ---
-\item $V = \mathbb{R}^4$, \quad $W = \{\ell \in \mathbb{R}^4 : \ell \text{ ist eine arithmetische Folge}\}$.
+\textbf{(g)} $V = \mathbb{R}^4$, \;$W = \{\ell \in \mathbb{R}^4 : \ell \text{ ist arithmetische Folge}\}$.
 
-Eine arithmetische Folge in $\mathbb{R}^4$ hat die Form $(a,\, a+d,\, a+2d,\, a+3d)$ für $a, d \in \mathbb{R}$.
-Schreiben wir $\ell = (\ell_1, \ell_2, \ell_3, \ell_4)$, so ist $\ell$ genau dann arithmetisch, wenn die aufeinanderfolgenden Differenzen gleich sind:
-\[
-\ell_2 - \ell_1 = \ell_3 - \ell_2 = \ell_4 - \ell_3.
-\]
-Dies ist äquivalent zu den beiden homogenen linearen Gleichungen:
-\[
-\ell_1 - 2\ell_2 + \ell_3 = 0 \quad \text{und} \quad \ell_2 - 2\ell_3 + \ell_4 = 0.
-\]
+Eine arithmetische Folge hat die Form $(a,\, a{+}d,\, a{+}2d,\, a{+}3d)$.
+\"Aquivalent: $\ell_1 - 2\ell_2 + \ell_3 = 0$ und $\ell_2 - 2\ell_3 + \ell_4 = 0$ (homogene lineare Gleichungen).
 
 \textbf{Nullvektor:}
-$(0,0,0,0)$: arithmetisch mit $a=0, d=0$. Beide Gleichungen: $0-0+0=0$. Also $\mathbf{0} \in W$. \checkmark
+$(0,0,0,0)$ mit $a=0, d=0$. \;\checkmark
 
-\textbf{Abgeschlossenheit unter Addition:}
-Seien $\mathbf{u} = (a_1, a_1+d_1, a_1+2d_1, a_1+3d_1)$ und $\mathbf{v} = (a_2, a_2+d_2, a_2+2d_2, a_2+3d_2) \in W$.
-\begin{align*}
-\mathbf{u}+\mathbf{v} &= \big(a_1+a_2,\; (a_1+a_2)+(d_1+d_2),\; (a_1+a_2)+2(d_1+d_2),\; (a_1+a_2)+3(d_1+d_2)\big).
-\end{align*}
-Dies ist eine arithmetische Folge mit Anfangswert $a_1+a_2$ und Differenz $d_1+d_2$.
-Also $\mathbf{u}+\mathbf{v} \in W$. \checkmark
+\textbf{Addition:}
+$(a_1, a_1{+}d_1, \ldots) + (a_2, a_2{+}d_2, \ldots)
+= (a_1{+}a_2,\; (a_1{+}a_2){+}(d_1{+}d_2),\; \ldots)$
+$\Rightarrow$ arithmetisch mit Anfangswert $a_1{+}a_2$, Differenz $d_1{+}d_2$. \;\checkmark
 
-\textbf{Abgeschlossenheit unter Skalarmultiplikation:}
-Sei $\mathbf{u} = (a, a+d, a+2d, a+3d) \in W$ und $k \in \mathbb{R}$.
-\[
-k\mathbf{u} = (ka,\; ka+kd,\; ka+2kd,\; ka+3kd).
-\]
-Dies ist eine arithmetische Folge mit Anfangswert $ka$ und Differenz $kd$.
-Also $k\mathbf{u} \in W$. \checkmark
+\textbf{Skalarmultiplikation:}
+$k(a, a{+}d, a{+}2d, a{+}3d) = (ka, ka{+}kd, ka{+}2kd, ka{+}3kd)$
+$\Rightarrow$ arithmetisch mit Anfangswert $ka$, Differenz $kd$. \;\checkmark
 
-\textbf{$W$ ist ein Unterraum von $\mathbb{R}^4$.} $\square$
-
-\bigskip
-
-%% --- 10(h) ---
-\item $V = \mathbb{R}^4$, \quad $W = \{\ell \in \mathbb{R}^4 : \ell \text{ ist eine geometrische Folge}\}$.
-
-Eine geometrische Folge hat die Form $(b, bq, bq^2, bq^3)$ für $b, q \in \mathbb{R}$.
-
-\textbf{Abgeschlossenheit unter Addition -- Gegenbeispiel:}
-Wähle $\mathbf{u} = (1, 2, 4, 8) \in W$ (geometrisch mit $b=1, q=2$). \checkmark
-
-Wähle $\mathbf{v} = (1, 3, 9, 27) \in W$ (geometrisch mit $b=1, q=3$). \checkmark
-
-$\mathbf{u}+\mathbf{v} = (2, 5, 13, 35)$.
-
-Falls dies eine geometrische Folge wäre, müsste der Quotient konstant sein:
-\[
-\frac{5}{2} = 2{,}5 \quad \text{aber} \quad \frac{13}{5} = 2{,}6.
-\]
-Da $2{,}5 \neq 2{,}6$, ist $(2, 5, 13, 35)$ keine geometrische Folge.
-
-Also ist $\mathbf{u}+\mathbf{v} \notin W$. Die Abgeschlossenheit unter Addition ist verletzt.
-
-\textbf{$W$ ist kein Unterraum von $\mathbb{R}^4$.} $\square$
-
-\bigskip
-
-%% --- 10(i) ---
-\item $V = \mathbb{R}^3$, \quad $W = \mathbb{R}^2$.
-
-$\mathbb{R}^2$ besteht aus geordneten Paaren $(a,b)$ und $\mathbb{R}^3$ aus geordneten Tripeln $(a,b,c)$. Dies sind verschiedene mathematische Objekte: Ein Paar $(a,b)$ ist kein Element von $\mathbb{R}^3$, da die Elemente von $\mathbb{R}^3$ stets drei Komponenten haben.
-
-Da $\mathbb{R}^2 \not\subseteq \mathbb{R}^3$, kann $W = \mathbb{R}^2$ kein Unterraum von $V = \mathbb{R}^3$ sein. Die Frage ist bereits auf der Ebene der Mengenlehre nicht sinnvoll: $W$ ist keine Teilmenge von $V$.
-
-\textbf{$W$ ist kein Unterraum von $\mathbb{R}^3$.} $\square$
-
-\end{enumerate}
+\textbf{$W$ ist ein Unterraum.} $\square$
 
 \bigskip
 \hrule
 \bigskip
 
 %% ============================================================
-\subsection*{Aufgabe 11: Ist $W$ ein Unterraum von $\mathbb{R}^{n \times n}$ $(n > 1)$?}
+\subsection*{Aufgabe 11}
 %% ============================================================
 
-\begin{enumerate}[label=(\alph*)]
+\textbf{(b)} $V = \mathbb{R}^{n \times n}$, \;$W = \{A : A^2 = 0\}$.
 
-%% --- 11(a) ---
-\item $W = \{A \in \mathbb{R}^{n \times n} : A^\top = -A\}$ \quad (schiefsymmetrische Matrizen).
-
-\textbf{Nullvektor:}
-Die Nullmatrix $0$ erfüllt $0^\top = 0 = -0$. Also $0 \in W$. \checkmark
-
-\textbf{Abgeschlossenheit unter Addition:}
-Seien $A, B \in W$, also $A^\top = -A$ und $B^\top = -B$. Dann:
-\[
-(A+B)^\top = A^\top + B^\top = (-A) + (-B) = -(A+B).
-\]
-Also $A+B \in W$. \checkmark
-
-\textbf{Abgeschlossenheit unter Skalarmultiplikation:}
-Sei $A \in W$ und $k \in \mathbb{R}$. Dann $A^\top = -A$ und:
-\[
-(kA)^\top = kA^\top = k(-A) = -(kA).
-\]
-Also $kA \in W$. \checkmark
-
-\textbf{$W$ ist ein Unterraum von $\mathbb{R}^{n \times n}$.} $\square$
-
-\bigskip
-
-%% --- 11(b) ---
-\item $W = \{A \in \mathbb{R}^{n \times n} : A^2 = 0\}$.
-
-\textbf{Abgeschlossenheit unter Addition -- Gegenbeispiel:}
-Wähle $n = 2$ und:
+\textbf{Gegenbeispiel (Addition) f\"ur $n = 2$:}
 \[
 A = \begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix}, \qquad
 B = \begin{pmatrix} 0 & 0 \\ 1 & 0 \end{pmatrix}.
 \]
 
-Prüfe $A^2$:
-\[
-A^2 = \begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix} \begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix} = \begin{pmatrix} 0 & 0 \\ 0 & 0 \end{pmatrix} = 0. \checkmark
-\]
-
-Prüfe $B^2$:
-\[
-B^2 = \begin{pmatrix} 0 & 0 \\ 1 & 0 \end{pmatrix} \begin{pmatrix} 0 & 0 \\ 1 & 0 \end{pmatrix} = \begin{pmatrix} 0 & 0 \\ 0 & 0 \end{pmatrix} = 0. \checkmark
-\]
+$A^2 = \begin{pmatrix} 0 & 0 \\ 0 & 0 \end{pmatrix} = 0$ \;\checkmark \qquad
+$B^2 = \begin{pmatrix} 0 & 0 \\ 0 & 0 \end{pmatrix} = 0$ \;\checkmark
 
 Aber:
 \[
 A + B = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}, \qquad
-(A+B)^2 = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}\begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix} = \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix} = I \neq 0.
+(A+B)^2 = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}
+\begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}
+= \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix} = I \neq 0.
 \]
 
-Also ist $A+B \notin W$. Die Abgeschlossenheit unter Addition ist verletzt.
-
-\textbf{$W$ ist kein Unterraum von $\mathbb{R}^{n \times n}$.} $\square$
-
-\bigskip
-
-%% --- 11(c) ---
-\item $W = \{A \in \mathbb{R}^{n \times n} : A \cdot \mathbf{v} = \mathbf{0}\}$, wobei $\mathbf{v} = (1, 2, \ldots, n)^\top$.
-
-Dies ist der Kern der linearen Abbildung $\varphi \colon \mathbb{R}^{n \times n} \to \mathbb{R}^n$, $\varphi(A) = A\mathbf{v}$.
-
-\textbf{Nullvektor:}
-$0 \cdot \mathbf{v} = \mathbf{0}$. Also $0 \in W$. \checkmark
-
-\textbf{Abgeschlossenheit unter Addition:}
-Seien $A, B \in W$, also $A\mathbf{v} = \mathbf{0}$ und $B\mathbf{v} = \mathbf{0}$. Dann:
-\[
-(A+B)\mathbf{v} = A\mathbf{v} + B\mathbf{v} = \mathbf{0} + \mathbf{0} = \mathbf{0}.
-\]
-Also $A+B \in W$. \checkmark
-
-\textbf{Abgeschlossenheit unter Skalarmultiplikation:}
-Sei $A \in W$ und $k \in \mathbb{R}$. Dann:
-\[
-(kA)\mathbf{v} = k(A\mathbf{v}) = k \cdot \mathbf{0} = \mathbf{0}.
-\]
-Also $kA \in W$. \checkmark
-
-\textbf{$W$ ist ein Unterraum von $\mathbb{R}^{n \times n}$.} $\square$
-
-\bigskip
-
-%% --- 11(d) ---
-\item $W = \{A \in \mathbb{R}^{n \times n} : A \text{ ist in Zeilenstufenform}\}$.
-
-\textbf{Abgeschlossenheit unter Addition -- Gegenbeispiel:}
-Wähle $n = 2$ und:
-\[
-A = \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}, \qquad
-B = \begin{pmatrix} -1 & 0 \\ 0 & 0 \end{pmatrix}.
-\]
-
-$A$ ist in Zeilenstufenform (Pivots in Position $(1,1)$ und $(2,2)$). \checkmark
-
-$B$ ist in Zeilenstufenform (Pivot in Position $(1,1)$, zweite Zeile ist Nullzeile). \checkmark
-
-Aber:
-\[
-A + B = \begin{pmatrix} 0 & 0 \\ 0 & 1 \end{pmatrix}.
-\]
-
-Die erste Zeile ist eine Nullzeile, aber die zweite Zeile ist keine Nullzeile. In Zeilenstufenform müssen alle Nullzeilen unterhalb der Nicht-Nullzeilen stehen. Diese Bedingung ist verletzt.
-
-Also ist $A+B \notin W$. Die Abgeschlossenheit unter Addition ist verletzt.
-
-\textbf{$W$ ist kein Unterraum von $\mathbb{R}^{n \times n}$.} $\square$
+\textbf{$W$ ist kein Unterraum} (nicht abgeschlossen unter Addition). $\square$
 
 \bigskip
 
 %% --- 11(e) ---
-\item $W = \{A \in \mathbb{R}^{n \times n} : KAM = A^\top\}$, wobei $K, M \in \mathbb{R}^{n \times n}$ fest gewählt.
+\textbf{(e)} $V = \mathbb{R}^{n \times n}$, \;$W = \{A : KAM = A^\top\}$, \;$K, M$ fest.
 
 \textbf{Nullvektor:}
-$K \cdot 0 \cdot M = 0 = 0^\top$. Also $0 \in W$. \checkmark
+$K \cdot 0 \cdot M = 0 = 0^\top$. \;\checkmark
 
-\textbf{Abgeschlossenheit unter Addition:}
-Seien $A, B \in W$, also $KAM = A^\top$ und $KBM = B^\top$. Dann:
+\textbf{Addition:}
+Seien $A, B \in W$ (also $KAM = A^\top$, $KBM = B^\top$):
 \[
-K(A+B)M = KAM + KBM = A^\top + B^\top = (A+B)^\top.
+K(A+B)M = KAM + KBM = A^\top + B^\top = (A+B)^\top. \;\checkmark
 \]
-Also $A+B \in W$. \checkmark
 
-\textbf{Abgeschlossenheit unter Skalarmultiplikation:}
-Sei $A \in W$ und $k \in \mathbb{R}$. Dann:
+\textbf{Skalarmultiplikation:}
 \[
-K(kA)M = k(KAM) = kA^\top = (kA)^\top.
+K(kA)M = k(KAM) = kA^\top = (kA)^\top. \;\checkmark
 \]
-Also $kA \in W$. \checkmark
 
-\textbf{$W$ ist ein Unterraum von $\mathbb{R}^{n \times n}$.} $\square$
-
-\bigskip
-
-%% --- 11(f) ---
-\item $W = \{A \in \mathbb{R}^{n \times n} : \operatorname{Spur}(A) = 0\}$.
-
-Erinnerung: $\operatorname{Spur}(A) = \sum_{i=1}^{n} a_{ii}$.
-
-\textbf{Nullvektor:}
-$\operatorname{Spur}(0) = 0$. Also $0 \in W$. \checkmark
-
-\textbf{Abgeschlossenheit unter Addition:}
-Seien $A, B \in W$, also $\operatorname{Spur}(A) = 0$ und $\operatorname{Spur}(B) = 0$. Dann:
-\[
-\operatorname{Spur}(A+B) = \operatorname{Spur}(A) + \operatorname{Spur}(B) = 0 + 0 = 0.
-\]
-Also $A+B \in W$. \checkmark
-
-\textbf{Abgeschlossenheit unter Skalarmultiplikation:}
-Sei $A \in W$ und $k \in \mathbb{R}$. Dann:
-\[
-\operatorname{Spur}(kA) = k \cdot \operatorname{Spur}(A) = k \cdot 0 = 0.
-\]
-Also $kA \in W$. \checkmark
-
-\textbf{$W$ ist ein Unterraum von $\mathbb{R}^{n \times n}$.} $\square$
-
-\end{enumerate}
+\textbf{$W$ ist ein Unterraum.} $\square$
 
 \bigskip
 \hrule
 \bigskip
 
 %% ============================================================
-\subsection*{Aufgabe 12: Ist $W$ ein Unterraum von $\mathbb{R}[x]$?}
+\subsection*{Aufgabe 12}
 %% ============================================================
 
-Hier ist $\mathbb{R}[x]$ der Vektorraum aller Polynome mit reellen Koeffizienten.
+$V = \mathbb{R}[x]$ (Polynome mit reellen Koeffizienten).
 
-\begin{enumerate}[label=(\alph*)]
+\medskip
 
-%% --- 12(a) ---
-\item $W = \{p(x) \in \mathbb{R}[x] : p(1) = 0\}$.
+\textbf{(a)} $W = \{p(x) \in \mathbb{R}[x] : p(1) = 0\}$.
 
-\textbf{Nullvektor:}
-Das Nullpolynom $p(x) = 0$ erfüllt $p(1) = 0$. Also $0 \in W$. \checkmark
+\textbf{Nullvektor:} $0(1) = 0$. \;\checkmark
 
-\textbf{Abgeschlossenheit unter Addition:}
-Seien $p, q \in W$, also $p(1) = 0$ und $q(1) = 0$. Dann:
-\[
-(p+q)(1) = p(1) + q(1) = 0 + 0 = 0.
-\]
-Also $p+q \in W$. \checkmark
+\textbf{Addition:}
+$(p+q)(1) = p(1) + q(1) = 0 + 0 = 0$. \;\checkmark
 
-\textbf{Abgeschlossenheit unter Skalarmultiplikation:}
-Sei $p \in W$ und $k \in \mathbb{R}$. Dann:
-\[
-(kp)(1) = k \cdot p(1) = k \cdot 0 = 0.
-\]
-Also $kp \in W$. \checkmark
+\textbf{Skalarmultiplikation:}
+$(kp)(1) = k \cdot p(1) = k \cdot 0 = 0$. \;\checkmark
 
-\textbf{$W$ ist ein Unterraum von $\mathbb{R}[x]$.} $\square$
-
-\bigskip
-
-%% --- 12(b) ---
-\item $W = \{p(x) \in \mathbb{R}[x] : p(1) = 0 \text{ und } p(2) = 0\}$.
-
-\textbf{Nullvektor:}
-Das Nullpolynom erfüllt $0(1) = 0$ und $0(2) = 0$. Also $0 \in W$. \checkmark
-
-\textbf{Abgeschlossenheit unter Addition:}
-Seien $p, q \in W$. Dann $p(1) = q(1) = 0$ und $p(2) = q(2) = 0$.
-\[
-(p+q)(1) = p(1) + q(1) = 0 + 0 = 0, \qquad (p+q)(2) = p(2) + q(2) = 0 + 0 = 0.
-\]
-Also $p+q \in W$. \checkmark
-
-\textbf{Abgeschlossenheit unter Skalarmultiplikation:}
-Sei $p \in W$ und $k \in \mathbb{R}$.
-\[
-(kp)(1) = k \cdot p(1) = 0, \qquad (kp)(2) = k \cdot p(2) = 0.
-\]
-Also $kp \in W$. \checkmark
-
-\textbf{$W$ ist ein Unterraum von $\mathbb{R}[x]$.} $\square$
+\textbf{$W$ ist ein Unterraum.} $\square$
 
 \bigskip
 
 %% --- 12(c) ---
-\item $W = \{p(x) \in \mathbb{R}[x] : p(1) \cdot p(2) = 0\}$.
+\textbf{(c)} $W = \{p(x) \in \mathbb{R}[x] : p(1) \cdot p(2) = 0\}$.
 
-\textbf{Nullvektor:} $0(1) \cdot 0(2) = 0 \cdot 0 = 0$. Also $0 \in W$. \checkmark
+\textbf{Gegenbeispiel (Addition):}
 
-\textbf{Abgeschlossenheit unter Addition -- Gegenbeispiel:}
-Wähle $p(x) = x - 1$ und $q(x) = x - 2$.
+$p(x) = x - 1$: \;$p(1) = 0$, $p(2) = 1$ $\;\Rightarrow\; 0 \cdot 1 = 0$ \;\checkmark
 
-$p(1) = 0$, $p(2) = 1$: $p(1) \cdot p(2) = 0 \cdot 1 = 0$. Also $p \in W$. \checkmark
+$q(x) = x - 2$: \;$q(1) = -1$, $q(2) = 0$ $\;\Rightarrow\; (-1) \cdot 0 = 0$ \;\checkmark
 
-$q(1) = -1$, $q(2) = 0$: $q(1) \cdot q(2) = (-1) \cdot 0 = 0$. Also $q \in W$. \checkmark
+$(p+q)(x) = 2x - 3$: \;$(p{+}q)(1) = -1$, $(p{+}q)(2) = 1$
+$\;\Rightarrow\; (-1) \cdot 1 = -1 \neq 0$.
 
-$(p+q)(x) = 2x - 3$. Auswertung: $(p+q)(1) = -1$, $(p+q)(2) = 1$.
-\[
-(p+q)(1) \cdot (p+q)(2) = (-1) \cdot 1 = -1 \neq 0.
-\]
+Der Trick: $p$ hat eine Nullstelle bei $x=1$, $q$ bei $x=2$.
+Die Summe $2x-3$ hat ihre Nullstelle bei $x = 3/2$ -- also weder bei $1$ noch bei $2$.
 
-Also ist $p+q \notin W$. Die Abgeschlossenheit unter Addition ist verletzt.
-
-\textbf{$W$ ist kein Unterraum von $\mathbb{R}[x]$.} $\square$
-
-\bigskip
-
-%% --- 12(d) ---
-\item $W = \{p(x) \in \mathbb{R}[x] : p(1) \leq p(2)\}$.
-
-\textbf{Nullvektor:} $0(1) = 0 \leq 0 = 0(2)$. Also $0 \in W$. \checkmark
-
-\textbf{Abgeschlossenheit unter Skalarmultiplikation -- Gegenbeispiel:}
-Wähle $p(x) = x$. Dann $p(1) = 1 \leq 2 = p(2)$, also $p \in W$. \checkmark
-
-Für $k = -1$: $(-p)(x) = -x$. Auswertung: $(-p)(1) = -1$, $(-p)(2) = -2$.
-Ist $-1 \leq -2$? \textbf{Nein}, denn $-1 > -2$.
-
-Also ist $kp \notin W$. Die Abgeschlossenheit unter Skalarmultiplikation ist verletzt.
-
-\textbf{$W$ ist kein Unterraum von $\mathbb{R}[x]$.} $\square$
-
-\bigskip
-
-%% --- 12(e) ---
-\item $W = \{p(x) \in \mathbb{R}[x] : p(1) = p(2) + p(3)\}$.
-
-Die Bedingung $p(1) - p(2) - p(3) = 0$ ist eine lineare Bedingung an $p$ (die Auswertung an einer Stelle ist eine lineare Abbildung).
-
-\textbf{Nullvektor:} $0(1) = 0 = 0 + 0 = 0(2) + 0(3)$. Also $0 \in W$. \checkmark
-
-\textbf{Abgeschlossenheit unter Addition:}
-Seien $p, q \in W$, also $p(1) = p(2) + p(3)$ und $q(1) = q(2) + q(3)$. Dann:
-\begin{align*}
-(p+q)(1) &= p(1) + q(1) = \big(p(2) + p(3)\big) + \big(q(2) + q(3)\big) \\
-         &= \big(p(2) + q(2)\big) + \big(p(3) + q(3)\big) = (p+q)(2) + (p+q)(3).
-\end{align*}
-Also $p+q \in W$. \checkmark
-
-\textbf{Abgeschlossenheit unter Skalarmultiplikation:}
-Sei $p \in W$ und $k \in \mathbb{R}$. Dann:
-\[
-(kp)(1) = k \cdot p(1) = k\big(p(2) + p(3)\big) = kp(2) + kp(3) = (kp)(2) + (kp)(3).
-\]
-Also $kp \in W$. \checkmark
-
-\textbf{$W$ ist ein Unterraum von $\mathbb{R}[x]$.} $\square$
-
-\bigskip
-
-%% --- 12(f) ---
-\item $W = \{p(x) \in \mathbb{R}[x] : p'(1) = p(0)\}$.
-
-Die Bedingung $p'(1) - p(0) = 0$ ist linear, da sowohl die Auswertung $p \mapsto p(0)$ als auch $p \mapsto p'(1)$ lineare Abbildungen sind.
-
-\textbf{Nullvektor:}
-$0'(x) = 0$, also $0'(1) = 0 = 0(0)$. Also $0 \in W$. \checkmark
-
-\textbf{Abgeschlossenheit unter Addition:}
-Seien $p, q \in W$, also $p'(1) = p(0)$ und $q'(1) = q(0)$. Dann:
-\[
-(p+q)'(1) = p'(1) + q'(1) = p(0) + q(0) = (p+q)(0).
-\]
-Also $p+q \in W$. \checkmark
-
-\textbf{Abgeschlossenheit unter Skalarmultiplikation:}
-Sei $p \in W$ und $k \in \mathbb{R}$. Dann:
-\[
-(kp)'(1) = k \cdot p'(1) = k \cdot p(0) = (kp)(0).
-\]
-Also $kp \in W$. \checkmark
-
-\textbf{$W$ ist ein Unterraum von $\mathbb{R}[x]$.} $\square$
-
-\end{enumerate}
+\textbf{$W$ ist kein Unterraum} (nicht abgeschlossen unter Addition). $\square$
 
 \bigskip
 \hrule
 \bigskip
 
 %% ============================================================
-\subsection*{Aufgabe 13: Ist $W$ ein Unterraum von $\operatorname{FUNC}(\mathbb{R})$?}
+\subsection*{Aufgabe 13}
 %% ============================================================
 
-Hier ist $\operatorname{FUNC}(\mathbb{R})$ der Vektorraum aller Funktionen $f \colon \mathbb{R} \to \mathbb{R}$.
+$V = \operatorname{FUNC}(\mathbb{R})$ (alle Funktionen $\mathbb{R} \to \mathbb{R}$).
 
-\begin{enumerate}[label=(\alph*)]
+\medskip
 
-%% --- 13(a) ---
-\item $W = \{f \in \operatorname{FUNC}(\mathbb{R}) : f(-x) = -f(x) \text{ für alle } x \in \mathbb{R}\}$ \quad (ungerade Funktionen).
+\textbf{(a)} $W = \{f : f(-x) = -f(x) \text{ f\"ur alle } x\}$ \;(ungerade Funktionen).
 
-\textbf{Nullvektor:}
-Die Nullfunktion $f(x) = 0$ erfüllt $f(-x) = 0 = -0 = -f(x)$ für alle $x$. Also $0 \in W$. \checkmark
+\textbf{Nullvektor:} $0(-x) = 0 = -0 = -0(x)$. \;\checkmark
 
-\textbf{Abgeschlossenheit unter Addition:}
-Seien $f, g \in W$. Dann für alle $x \in \mathbb{R}$:
-\[
-(f+g)(-x) = f(-x) + g(-x) = -f(x) + (-g(x)) = -(f(x) + g(x)) = -(f+g)(x).
-\]
-Also $f+g \in W$. \checkmark
+\textbf{Addition:}
+$(f+g)(-x) = f(-x) + g(-x) = -f(x) + (-g(x)) = -(f+g)(x)$. \;\checkmark
 
-\textbf{Abgeschlossenheit unter Skalarmultiplikation:}
-Sei $f \in W$ und $k \in \mathbb{R}$. Dann für alle $x \in \mathbb{R}$:
-\[
-(kf)(-x) = k \cdot f(-x) = k \cdot (-f(x)) = -(kf)(x).
-\]
-Also $kf \in W$. \checkmark
+\textbf{Skalarmultiplikation:}
+$(kf)(-x) = k \cdot f(-x) = k \cdot (-f(x)) = -(kf)(x)$. \;\checkmark
 
-\textbf{$W$ ist ein Unterraum von $\operatorname{FUNC}(\mathbb{R})$.} $\square$
+\textbf{$W$ ist ein Unterraum.} $\square$
 
 \bigskip
 
 %% --- 13(b) ---
-\item $W = \{f \in \operatorname{FUNC}(\mathbb{R}) : f(x) \neq 0 \text{ für alle } x \neq 0\}$.
+\textbf{(b)} $W = \{f : f(x) \neq 0 \text{ f\"ur alle } x \neq 0\}$.
 
 \textbf{Nullvektor:}
-Die Nullfunktion $f(x) = 0$ erfüllt $f(1) = 0$, obwohl $1 \neq 0$. Damit ist $f \notin W$.
+Die Nullfunktion $f(x) = 0$ hat $f(1) = 0$, obwohl $1 \neq 0$.
+Also $f \notin W$.
 
-Da der Nullvektor nicht in $W$ liegt, ist die erste Bedingung verletzt.
+\textit{Zus\"atzlich (Addition):}
+$f(x) = x \in W$ und $g(x) = -x \in W$
+(beide $\neq 0$ f\"ur $x \neq 0$).
+Aber $(f+g)(x) = 0$ f\"ur alle $x$, also $f+g \notin W$.
 
-\textit{Alternativ} (Abgeschlossenheit unter Addition): Die Funktionen $f(x) = x$ und $g(x) = -x$ liegen beide in $W$ (für $x \neq 0$ gilt $f(x) = x \neq 0$ und $g(x) = -x \neq 0$). Aber $(f+g)(x) = 0$ für alle $x$, insbesondere $(f+g)(1) = 0$, also $f+g \notin W$.
-
-\textbf{$W$ ist kein Unterraum von $\operatorname{FUNC}(\mathbb{R})$.} $\square$
-
-\bigskip
-
-%% --- 13(c) ---
-\item $W = \{f \in \operatorname{FUNC}(\mathbb{R}) : f(x) = f(x+1) \text{ für alle } x \in \mathbb{R}\}$ \quad (1-periodische Funktionen).
-
-\textbf{Nullvektor:}
-$0(x) = 0 = 0(x+1)$ für alle $x$. Also $0 \in W$. \checkmark
-
-\textbf{Abgeschlossenheit unter Addition:}
-Seien $f, g \in W$, also $f(x) = f(x+1)$ und $g(x) = g(x+1)$ für alle $x$. Dann:
-\[
-(f+g)(x) = f(x) + g(x) = f(x+1) + g(x+1) = (f+g)(x+1).
-\]
-Also $f+g \in W$. \checkmark
-
-\textbf{Abgeschlossenheit unter Skalarmultiplikation:}
-Sei $f \in W$ und $k \in \mathbb{R}$. Dann für alle $x$:
-\[
-(kf)(x) = k \cdot f(x) = k \cdot f(x+1) = (kf)(x+1).
-\]
-Also $kf \in W$. \checkmark
-
-\textbf{$W$ ist ein Unterraum von $\operatorname{FUNC}(\mathbb{R})$.} $\square$
-
-\bigskip
-
-%% --- 13(d) ---
-\item $W = \{f \in \operatorname{FUNC}(\mathbb{R}) : f(x) + 1 = f(x+1) \text{ für alle } x \in \mathbb{R}\}$.
-
-\textbf{Nullvektor:}
-Die Nullfunktion $f(x) = 0$ erfüllt $f(x) + 1 = 0 + 1 = 1$ und $f(x+1) = 0$.
-Da $1 \neq 0$, gilt $f \notin W$.
-
-Da der Nullvektor nicht in $W$ liegt, ist die erste Bedingung verletzt.
-
-\textit{Bemerkung:} Ein Beispiel einer Funktion in $W$ wäre $f(x) = x$, denn $x + 1 = (x+1)$. Aber das Nullelement des Vektorraums liegt nicht in $W$.
-
-\textbf{$W$ ist kein Unterraum von $\operatorname{FUNC}(\mathbb{R})$.} $\square$
-
-\end{enumerate}
+\textbf{$W$ ist kein Unterraum} (Nullvektor nicht enthalten). $\square$
 
 \end{document}
