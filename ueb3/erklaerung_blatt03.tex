@@ -523,17 +523,51 @@ $f(-x) = -f(x)$ ist eine \textbf{lineare Bedingung} an $f$ (auf beiden Seiten st
 
 \textbf{Beweis: $W$ ist ein Unterraum.}
 
-\textbf{(U1)} Nullfunktion: $0(-x) = 0 = -0(-x)$? Nein, genauer: $f(x) = 0$ f\"ur alle $x$. Dann $f(-x) = 0 = -0 = -f(x)$ \checkmark.
-
-\textbf{(U2)} Seien $f, g \in W$, also $f(-x) = -f(x)$ und $g(-x) = -g(x)$ f\"ur alle $x$.
+\medskip
+\textbf{(U1) Nullvektor:}
+Die Nullfunktion ist die Funktion $f(x) = 0$ f\"ur \textbf{alle} $x \in \mathbb{R}$.
+Ich muss pr\"ufen: Gilt $f(-x) = -f(x)$?
 \[
-(f+g)(-x) = f(-x) + g(-x) = -f(x) + (-g(x)) = -(f(x) + g(x)) = -(f+g)(x) \quad \checkmark
+f(-x) = 0 \quad \text{und} \quad -f(x) = -0 = 0.
 \]
+$0 = 0$ \checkmark \quad Also ist die Nullfunktion ungerade $\Rightarrow$ Nullfunktion $\in W$.
 
-\textbf{(U3)} Sei $f \in W$, $\lambda \in \mathbb{R}$.
-\[
-(\lambda f)(-x) = \lambda \cdot f(-x) = \lambda \cdot (-f(x)) = -(\lambda f)(x) \quad \checkmark
-\]
+\medskip
+\textbf{(U2) Addition:}
+Seien $f, g \in W$, d.\,h.\ f\"ur alle $x$ gilt: $f(-x) = -f(x)$ und $g(-x) = -g(x)$.
+
+Ich muss zeigen: $(f+g)(-x) = -(f+g)(x)$ f\"ur alle $x$.
+
+Schritt f\"ur Schritt:
+\begin{align*}
+(f+g)(-x) &= f(-x) + g(-x)
+    && \text{(Definition der Addition von Funktionen)} \\
+  &= (-f(x)) + (-g(x))
+    && \text{(weil $f$ und $g$ ungerade sind)} \\
+  &= -(f(x) + g(x))
+    && \text{(Minus ausklammern)} \\
+  &= -(f+g)(x). \;\checkmark
+\end{align*}
+
+\begin{analogie}
+Stell dir vor, $f$ und $g$ sind wie zwei Waagen, die bei negativem Input das Vorzeichen umdrehen. Wenn ich zwei solche Waagen zusammenlege (addiere), dreht die kombinierte Waage immer noch das Vorzeichen um -- das Umdrehen ``\"uberlebt'' die Addition.
+\end{analogie}
+
+\textbf{(U3) Skalarmultiplikation:}
+Sei $f \in W$ (also $f(-x) = -f(x)$) und $k \in \mathbb{R}$.
+
+Ich muss zeigen: $(kf)(-x) = -(kf)(x)$ f\"ur alle $x$.
+
+Schritt f\"ur Schritt:
+\begin{align*}
+(kf)(-x) &= k \cdot f(-x)
+    && \text{(Definition: $(kf)$ bedeutet ``$k$ mal $f$'')} \\
+  &= k \cdot (-f(x))
+    && \text{(weil $f$ ungerade ist)} \\
+  &= -(k \cdot f(x))
+    && \text{(Minus rausziehen)} \\
+  &= -(kf)(x). \;\checkmark
+\end{align*}
 
 $\Rightarrow$ \textbf{$W$ ist ein Unterraum von $\mathrm{FUNC}(\mathbb{R})$.} \hfill $\blacksquare$
 
@@ -545,22 +579,45 @@ Die Funktion darf \textbf{nur} an der Stelle $x = 0$ den Wert $0$ haben. An alle
 
 \textbf{$W$ ist KEIN Unterraum.}
 
-\textbf{Gegenbeispiel 1 (U1 verletzt):} Die Nullfunktion $f(x) = 0$ hat $f(1) = 0$, obwohl $1 \neq 0$. Also erf\"ullt die Nullfunktion die Bedingung \textbf{nicht}: $f \notin W$.
+\medskip
+\textbf{Gegenbeispiel 1 -- Nullvektor (U1) verletzt:}
 
-Schon damit ist klar: $W$ ist kein Unterraum.
+Die Nullfunktion ist $f(x) = 0$ f\"ur alle $x$.
+Die Bedingung verlangt: $f(x) \neq 0$ f\"ur alle $x \neq 0$.
 
-\textbf{Gegenbeispiel 2 (U2 verletzt, zur Illustration):} Selbst wenn wir (U1) ignorieren:
+Testen wir z.\,B.\ $x = 1$ (das ist $\neq 0$):
 \[
-f(x) = x \in W \quad \text{(denn $f(x) = x \neq 0$ f\"ur $x \neq 0$ \checkmark)}
-\]
-\[
-g(x) = -x \in W \quad \text{(denn $g(x) = -x \neq 0$ f\"ur $x \neq 0$ \checkmark)}
-\]
-\[
-(f + g)(x) = x + (-x) = 0 \quad \text{f\"ur ALLE } x
+f(1) = 0 \quad \text{-- aber die Bedingung verlangt } f(1) \neq 0. \quad \Lightning
 \]
 
-Also $(f+g)(1) = 0$, obwohl $1 \neq 0$. Die Summe ist die Nullfunktion, die die Bedingung nicht erf\"ullt! \Lightning
+Die Nullfunktion gibt \"uberall $0$ zur\"uck -- also auch an Stellen $x \neq 0$.
+Das verletzt die Bedingung. $\Rightarrow$ Nullfunktion $\notin W$.
+
+\begin{merkbox}
+Schon damit ist klar: $W$ ist kein Unterraum, denn (U1) ist verletzt.
+\end{merkbox}
+
+\textbf{Gegenbeispiel 2 -- Addition (U2) verletzt:}
+
+Selbst wenn wir (U1) ignorieren, scheitert es auch an der Addition:
+
+\begin{itemize}
+\item $f(x) = x$: Ist $f \in W$?
+    F\"ur $x \neq 0$: $f(x) = x \neq 0$ \checkmark.
+    Also ja, $f \in W$.
+
+\item $g(x) = -x$: Ist $g \in W$?
+    F\"ur $x \neq 0$: $g(x) = -x \neq 0$ \checkmark.
+    Also ja, $g \in W$.
+
+\item Summe: $(f+g)(x) = x + (-x) = 0$ f\"ur \textbf{alle} $x$.
+    Die Summe ist die Nullfunktion!
+
+    Testen wir $x = 1$: $(f+g)(1) = 0$, aber $1 \neq 0$.
+    Die Bedingung verlangt $(f+g)(1) \neq 0$. \Lightning
+\end{itemize}
+
+Zwei Funktionen aus $W$ addiert ($x$ und $-x$) heben sich gegenseitig auf -- die Summe ist \"uberall $0$, und das ist nicht in $W$.
 
 $\Rightarrow$ \textbf{$W$ ist kein Unterraum.} \hfill $\blacksquare$
 
