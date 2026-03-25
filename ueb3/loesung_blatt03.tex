@@ -211,13 +211,31 @@ $V = \operatorname{FUNC}(\mathbb{R})$ (alle Funktionen $\mathbb{R} \to \mathbb{R
 
 \textbf{(a)} $W = \{f : f(-x) = -f(x) \text{ f\"ur alle } x\}$ \;(ungerade Funktionen).
 
-\textbf{Nullvektor:} $0(-x) = 0 = -0 = -0(x)$. \;\checkmark
+\textbf{Nullvektor:}
+Die Nullfunktion ist $f(x) = 0$ f\"ur alle $x$.
+Pr\"ufe die Bedingung: $f(-x) = 0$ und $-f(x) = -0 = 0$.
+Also $f(-x) = -f(x)$ \;\checkmark \quad $\Rightarrow$ Nullfunktion $\in W$.
 
 \textbf{Addition:}
-$(f+g)(-x) = f(-x) + g(-x) = -f(x) + (-g(x)) = -(f+g)(x)$. \;\checkmark
+Seien $f, g \in W$, d.\,h.\ $f(-x) = -f(x)$ und $g(-x) = -g(x)$
+f\"ur alle $x$.
+Ich muss zeigen: $(f+g)(-x) = -(f+g)(x)$.
+\begin{align*}
+(f+g)(-x) &= f(-x) + g(-x) \\
+           &= -f(x) + (-g(x)) \quad \text{(weil } f,g \in W\text{)} \\
+           &= -(f(x) + g(x)) \\
+           &= -(f+g)(x). \;\checkmark
+\end{align*}
 
 \textbf{Skalarmultiplikation:}
-$(kf)(-x) = k \cdot f(-x) = k \cdot (-f(x)) = -(kf)(x)$. \;\checkmark
+Sei $f \in W$ und $k \in \mathbb{R}$.
+Ich muss zeigen: $(kf)(-x) = -(kf)(x)$.
+\begin{align*}
+(kf)(-x) &= k \cdot f(-x) \\
+         &= k \cdot (-f(x)) \quad \text{(weil } f \in W\text{)} \\
+         &= -(k \cdot f(x)) \\
+         &= -(kf)(x). \;\checkmark
+\end{align*}
 
 \textbf{$W$ ist ein Unterraum.} $\square$
 
@@ -226,15 +244,27 @@ $(kf)(-x) = k \cdot f(-x) = k \cdot (-f(x)) = -(kf)(x)$. \;\checkmark
 %% --- 13(b) ---
 \textbf{(b)} $W = \{f : f(x) \neq 0 \text{ f\"ur alle } x \neq 0\}$.
 
+$W$ enth\"alt also alle Funktionen, die au\ss erhalb von $x = 0$
+\textbf{nirgends} den Wert $0$ annehmen.
+
 \textbf{Nullvektor:}
-Die Nullfunktion $f(x) = 0$ hat $f(1) = 0$, obwohl $1 \neq 0$.
-Also $f \notin W$.
+Die Nullfunktion ist $f(x) = 0$ f\"ur alle $x$.
+Setze z.\,B.\ $x = 1$ (also $x \neq 0$): $f(1) = 0$.
+Die Bedingung verlangt aber $f(1) \neq 0$. Widerspruch!
+$\Rightarrow$ Nullfunktion $\notin W$.
 
-\textit{Zus\"atzlich (Addition):}
-$f(x) = x \in W$ und $g(x) = -x \in W$
-(beide $\neq 0$ f\"ur $x \neq 0$).
-Aber $(f+g)(x) = 0$ f\"ur alle $x$, also $f+g \notin W$.
+\textit{Zus\"atzliches Gegenbeispiel (Addition):}
+\begin{itemize}[nosep]
+\item $f(x) = x$: F\"ur $x \neq 0$ ist $f(x) = x \neq 0$ \;\checkmark
+      $\;\Rightarrow f \in W$.
+\item $g(x) = -x$: F\"ur $x \neq 0$ ist $g(x) = -x \neq 0$ \;\checkmark
+      $\;\Rightarrow g \in W$.
+\item $(f+g)(x) = x + (-x) = 0$ f\"ur \textbf{alle} $x$.
+      Also $(f+g)(1) = 0$, obwohl $1 \neq 0$
+      $\;\Rightarrow f+g \notin W$.
+\end{itemize}
 
-\textbf{$W$ ist kein Unterraum} (Nullvektor nicht enthalten). $\square$
+\textbf{$W$ ist kein Unterraum} (Nullvektor nicht enthalten,
+und auch nicht abgeschlossen unter Addition). $\square$
 
 \end{document}
