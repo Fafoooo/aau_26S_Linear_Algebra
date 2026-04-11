@@ -1,0 +1,392 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+\usepackage{enumitem}
+\usepackage{booktabs}
+
+\title{\"Ubungsblatt 4 -- L\"osungen \\ \large Linear Algebra}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+%% ============================================================
+\subsection*{Aufgabe 14}
+%% ============================================================
+
+\[
+A = \begin{pmatrix} 0 & 1 \\ 1 & 2 \end{pmatrix},\quad
+B = \begin{pmatrix} 3 & 2 \\ -1 & 0 \end{pmatrix},\quad
+C = \begin{pmatrix} 3 & 6 \\ 3 & 8 \end{pmatrix},\quad
+M = \begin{pmatrix} 6 & 7 \\ 1 & 6 \end{pmatrix}
+\]
+
+\textbf{Ansatz:} $M = aA + bB + cC$. Eintragsweiser Vergleich liefert:
+\[
+\begin{cases}
+3b + 3c = 6 \\
+a + 2b + 6c = 7 \\
+a - b + 3c = 1 \\
+2a + 8c = 6
+\end{cases}
+\]
+
+\textbf{Erweiterte Koeffizientenmatrix} (Spalten $a, b, c$):
+\[
+\left(\begin{array}{ccc|c}
+0 & 3 & 3 & 6 \\
+1 & 2 & 6 & 7 \\
+1 & -1 & 3 & 1 \\
+2 & 0 & 8 & 6
+\end{array}\right)
+\]
+
+\textbf{Schritt 1:} $Z_1 \leftrightarrow Z_2$
+\[
+\left(\begin{array}{ccc|c}
+1 & 2 & 6 & 7 \\
+0 & 3 & 3 & 6 \\
+1 & -1 & 3 & 1 \\
+2 & 0 & 8 & 6
+\end{array}\right)
+\]
+
+\textbf{Schritt 2:} $Z_3 \leftarrow Z_3 - Z_1$,\; $Z_4 \leftarrow Z_4 - 2Z_1$
+\[
+\left(\begin{array}{ccc|c}
+1 & 2 & 6 & 7 \\
+0 & 3 & 3 & 6 \\
+0 & -3 & -3 & -6 \\
+0 & -4 & -4 & -8
+\end{array}\right)
+\]
+
+\textbf{Schritt 3:} $Z_3 \leftarrow Z_3 + Z_2$,\; $Z_4 \leftarrow 3Z_4 + 4Z_2$
+\[
+\left(\begin{array}{ccc|c}
+1 & 2 & 6 & 7 \\
+0 & 3 & 3 & 6 \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0
+\end{array}\right)
+\]
+
+\textbf{Auswertung:} 2 Pivots bei 3 Unbekannten, keine Widerspruchszeile. \\
+$\Rightarrow M \in \text{span}(A,B,C)$, und zwar auf \textbf{unendlich viele Arten}.
+
+\textbf{R\"uckw\"artseinsetzen} (Freie Variable $c = t$):
+\begin{align*}
+3b + 3t &= 6 \;\Rightarrow\; b = 2 - t \\
+a + 2(2-t) + 6t &= 7 \;\Rightarrow\; a = 3 - 4t
+\end{align*}
+
+\[
+\boxed{(a,b,c) = (3 - 4t,\; 2 - t,\; t), \quad t \in \mathbb{R}}
+\]
+
+\textbf{Drei konkrete Linearkombinationen:}
+
+\textbf{(1)} $t = 0 \Rightarrow (a,b,c) = (3, 2, 0)$:
+\[
+3A + 2B = \begin{pmatrix} 0 & 3 \\ 3 & 6 \end{pmatrix} + \begin{pmatrix} 6 & 4 \\ -2 & 0 \end{pmatrix}
+= \begin{pmatrix} 6 & 7 \\ 1 & 6 \end{pmatrix} = M \;\checkmark
+\]
+
+\textbf{(2)} $t = 1 \Rightarrow (a,b,c) = (-1, 1, 1)$:
+\[
+-A + B + C = \begin{pmatrix} 0 & -1 \\ -1 & -2 \end{pmatrix} + \begin{pmatrix} 3 & 2 \\ -1 & 0 \end{pmatrix} + \begin{pmatrix} 3 & 6 \\ 3 & 8 \end{pmatrix}
+= \begin{pmatrix} 6 & 7 \\ 1 & 6 \end{pmatrix} = M \;\checkmark
+\]
+
+\textbf{(3)} $t = -1 \Rightarrow (a,b,c) = (7, 3, -1)$:
+\[
+7A + 3B - C = \begin{pmatrix} 0 & 7 \\ 7 & 14 \end{pmatrix} + \begin{pmatrix} 9 & 6 \\ -3 & 0 \end{pmatrix} - \begin{pmatrix} 3 & 6 \\ 3 & 8 \end{pmatrix}
+= \begin{pmatrix} 6 & 7 \\ 1 & 6 \end{pmatrix} = M \;\checkmark
+\]
+
+\bigskip
+\hrule
+\bigskip
+
+%% ============================================================
+\subsection*{Aufgabe 15}
+%% ============================================================
+
+\textbf{(a)} $\{(x+1)(x-2),\; (x+1)(x-3),\; (x+1)(x-4)\}$ in $\mathbb{R}_2[x]$.
+
+\textbf{Ausmultiplizieren:}
+\begin{align*}
+p_1 &= (x+1)(x-2) = x^2 - x - 2 \\
+p_2 &= (x+1)(x-3) = x^2 - 2x - 3 \\
+p_3 &= (x+1)(x-4) = x^2 - 3x - 4
+\end{align*}
+
+\textbf{Ansatz:} $\alpha p_1 + \beta p_2 + \gamma p_3 = 0$ (als Polynom). Koeffizientenvergleich in Basis $\{1, x, x^2\}$:
+\[
+\begin{cases}
+x^2: & \alpha + \beta + \gamma = 0 \\
+x^1: & -\alpha - 2\beta - 3\gamma = 0 \\
+x^0: & -2\alpha - 3\beta - 4\gamma = 0
+\end{cases}
+\]
+
+\[
+\left(\begin{array}{ccc|c}
+1 & 1 & 1 & 0 \\
+-1 & -2 & -3 & 0 \\
+-2 & -3 & -4 & 0
+\end{array}\right)
+\xrightarrow[Z_3 + 2Z_1]{Z_2 + Z_1}
+\left(\begin{array}{ccc|c}
+1 & 1 & 1 & 0 \\
+0 & -1 & -2 & 0 \\
+0 & -1 & -2 & 0
+\end{array}\right)
+\xrightarrow{Z_3 - Z_2}
+\left(\begin{array}{ccc|c}
+1 & 1 & 1 & 0 \\
+0 & -1 & -2 & 0 \\
+0 & 0 & 0 & 0
+\end{array}\right)
+\]
+
+Nur 2 Pivots bei 3 Unbekannten $\Rightarrow$ nichttriviale L\"osung existiert $\Rightarrow$ \textbf{linear abh\"angig}.
+
+\textbf{Nichttriviale Linearkombination} (freie Variable $\gamma = 1$):
+\begin{align*}
+-\beta - 2\gamma = 0 &\;\Rightarrow\; \beta = -2 \\
+\alpha + \beta + \gamma = 0 &\;\Rightarrow\; \alpha = 1
+\end{align*}
+
+\[
+\boxed{1 \cdot p_1 - 2 \cdot p_2 + 1 \cdot p_3 = 0}
+\]
+
+\textbf{Probe:}
+\begin{align*}
+(x^2 - x - 2) - 2(x^2 - 2x - 3) + (x^2 - 3x - 4)
+&= (1-2+1)x^2 + (-1+4-3)x + (-2+6-4) \\
+&= 0 \;\checkmark
+\end{align*}
+
+\bigskip
+
+\textbf{(b)} $\{1,\; 2^x,\; 3^x\}$ in $\text{FUNC}(\mathbb{R})$.
+
+\textbf{Ansatz:} $\alpha \cdot 1 + \beta \cdot 2^x + \gamma \cdot 3^x = 0$ f\"ur alle $x \in \mathbb{R}$.
+
+Wenn diese Gleichung f\"ur \textbf{alle} $x$ gilt, dann insbesondere f\"ur drei konkret gew\"ahlte Werte. Wir setzen $x = 0, 1, 2$ ein:
+\begin{align*}
+x = 0: &\;\;\; \alpha + \beta + \gamma = 0 \\
+x = 1: &\;\;\; \alpha + 2\beta + 3\gamma = 0 \\
+x = 2: &\;\;\; \alpha + 4\beta + 9\gamma = 0
+\end{align*}
+
+\[
+\left(\begin{array}{ccc|c}
+1 & 1 & 1 & 0 \\
+1 & 2 & 3 & 0 \\
+1 & 4 & 9 & 0
+\end{array}\right)
+\xrightarrow[Z_3 - Z_1]{Z_2 - Z_1}
+\left(\begin{array}{ccc|c}
+1 & 1 & 1 & 0 \\
+0 & 1 & 2 & 0 \\
+0 & 3 & 8 & 0
+\end{array}\right)
+\xrightarrow{Z_3 - 3Z_2}
+\left(\begin{array}{ccc|c}
+1 & 1 & 1 & 0 \\
+0 & 1 & 2 & 0 \\
+0 & 0 & 2 & 0
+\end{array}\right)
+\]
+
+3 Pivots bei 3 Unbekannten $\Rightarrow$ nur die triviale L\"osung $\alpha = \beta = \gamma = 0$.
+
+\textbf{$\Rightarrow$ Die Menge ist linear unabh\"angig.}
+
+\bigskip
+\hrule
+\bigskip
+
+%% ============================================================
+\subsection*{Aufgabe 16}
+%% ============================================================
+
+Menge $\{v_1, v_2, v_3\}$ mit
+\[
+v_1 = (1,4,3,2),\quad v_2 = (1,2,3,4),\quad v_3 = (2, k+2, k-2, 2)
+\]
+
+\subsection*{Methode 1: Homogene Gleichung $\alpha v_1 + \beta v_2 + \gamma v_3 = 0$}
+
+Eintragsweise:
+\[
+\begin{cases}
+\alpha + \beta + 2\gamma = 0 \\
+4\alpha + 2\beta + (k+2)\gamma = 0 \\
+3\alpha + 3\beta + (k-2)\gamma = 0 \\
+2\alpha + 4\beta + 2\gamma = 0
+\end{cases}
+\]
+
+Erweiterte Matrix (Spalten $\alpha, \beta, \gamma$):
+\[
+\left(\begin{array}{ccc|c}
+1 & 1 & 2 & 0 \\
+4 & 2 & k+2 & 0 \\
+3 & 3 & k-2 & 0 \\
+2 & 4 & 2 & 0
+\end{array}\right)
+\]
+
+\textbf{Schritt 1:} $Z_2 \leftarrow Z_2 - 4Z_1$,\; $Z_3 \leftarrow Z_3 - 3Z_1$,\; $Z_4 \leftarrow Z_4 - 2Z_1$
+\[
+\left(\begin{array}{ccc|c}
+1 & 1 & 2 & 0 \\
+0 & -2 & k-6 & 0 \\
+0 & 0 & k-8 & 0 \\
+0 & 2 & -2 & 0
+\end{array}\right)
+\]
+
+\textbf{Schritt 2:} $Z_4 \leftarrow Z_4 + Z_2$
+\[
+\left(\begin{array}{ccc|c}
+1 & 1 & 2 & 0 \\
+0 & -2 & k-6 & 0 \\
+0 & 0 & k-8 & 0 \\
+0 & 0 & k-8 & 0
+\end{array}\right)
+\]
+
+\textbf{Schritt 3:} $Z_4 \leftarrow Z_4 - Z_3$
+\[
+\left(\begin{array}{ccc|c}
+1 & 1 & 2 & 0 \\
+0 & -2 & k-6 & 0 \\
+0 & 0 & k-8 & 0 \\
+0 & 0 & 0 & 0
+\end{array}\right)
+\]
+
+\textbf{Auswertung:} F\"ur linear unabh\"angig m\"ussen wir 3 Pivots haben.
+Das dritte Pivot $k-8$ darf also nicht $0$ sein.
+
+\[
+\boxed{\text{linear unabh\"angig} \iff k \neq 8}
+\]
+
+\textbf{Bei $k = 8$:} Zeile 3 wird zu $0 = 0$. Freie Variable $\gamma = 1$:
+\begin{align*}
+-2\beta + (k-6)\gamma &= 0 \;\Rightarrow\; -2\beta + 2 = 0 \;\Rightarrow\; \beta = 1 \\
+\alpha + \beta + 2\gamma &= 0 \;\Rightarrow\; \alpha = -3
+\end{align*}
+
+Nichttriviale Kombination: $-3v_1 + v_2 + v_3 = 0$.
+Probe: $-3(1,4,3,2) + (1,2,3,4) + (2,10,6,2) = (0,0,0,0)$ \checkmark
+
+\subsection*{Methode 2: Vektoren als Zeilen, Rang per Gau\ss{}}
+
+\[
+\left(\begin{array}{cccc}
+1 & 4 & 3 & 2 \\
+1 & 2 & 3 & 4 \\
+2 & k+2 & k-2 & 2
+\end{array}\right)
+\]
+
+\textbf{Schritt 1:} $Z_2 \leftarrow Z_2 - Z_1$,\; $Z_3 \leftarrow Z_3 - 2Z_1$
+\[
+\left(\begin{array}{cccc}
+1 & 4 & 3 & 2 \\
+0 & -2 & 0 & 2 \\
+0 & k-6 & k-8 & -2
+\end{array}\right)
+\]
+
+\textbf{Schritt 2:} $Z_3 \leftarrow 2Z_3 + (k-6)Z_2$
+\begin{itemize}[nosep]
+\item Spalte 2: $2(k-6) - 2(k-6) = 0$
+\item Spalte 3: $2(k-8) + 0 = 2(k-8)$
+\item Spalte 4: $-4 + 2(k-6) = 2k - 16 = 2(k-8)$
+\end{itemize}
+\[
+\left(\begin{array}{cccc}
+1 & 4 & 3 & 2 \\
+0 & -2 & 0 & 2 \\
+0 & 0 & 2(k-8) & 2(k-8)
+\end{array}\right)
+\]
+
+\textbf{Auswertung:} Die drei Vektoren sind linear unabh\"angig genau dann, wenn alle drei Zeilen Pivots haben.
+Zeile 3 hat nur dann einen Pivot, wenn $2(k-8) \neq 0$, also $k \neq 8$.
+
+\[
+\boxed{\text{linear unabh\"angig} \iff k \neq 8}
+\]
+
+\textbf{Beide Methoden liefern dasselbe Ergebnis.} \checkmark
+
+\bigskip
+\hrule
+\bigskip
+
+%% ============================================================
+\subsection*{Aufgabe 17}
+%% ============================================================
+
+\textbf{(a)} Wenn $\{v_1, v_2, v_3\}$ linear unabh\"angig ist, ist dann auch $\{v_1+v_2,\; v_2+v_3,\; v_2+2v_3\}$ linear unabh\"angig?
+
+\textbf{Ansatz:} Sei $\alpha(v_1+v_2) + \beta(v_2+v_3) + \gamma(v_2+2v_3) = 0$. Umsortieren nach $v_1, v_2, v_3$:
+\[
+\alpha \cdot v_1 + (\alpha + \beta + \gamma) \cdot v_2 + (\beta + 2\gamma) \cdot v_3 = 0
+\]
+
+Weil $\{v_1, v_2, v_3\}$ linear unabh\"angig ist, m\"ussen alle Koeffizienten $0$ sein:
+\[
+\begin{cases}
+\alpha = 0 \\
+\alpha + \beta + \gamma = 0 \\
+\beta + 2\gamma = 0
+\end{cases}
+\]
+
+Aus Gleichung 1: $\alpha = 0$.\\
+Einsetzen in Gleichung 2: $\beta + \gamma = 0 \Rightarrow \beta = -\gamma$.\\
+Einsetzen in Gleichung 3: $-\gamma + 2\gamma = \gamma = 0$, also $\gamma = 0$ und damit $\beta = 0$.
+
+Nur die triviale L\"osung $\Rightarrow$ die neue Menge ist \textbf{linear unabh\"angig}.
+
+\[
+\boxed{\text{Aussage (a) ist WAHR}}
+\]
+
+\bigskip
+
+\textbf{(b)} Ist $\{7v_1 - 11v_2,\; 11v_2 - 13v_3,\; 7v_1 - 13v_3\}$ notwendigerweise linear abh\"angig?
+
+\textbf{Idee:} Addiere die ersten beiden Vektoren:
+\[
+(7v_1 - 11v_2) + (11v_2 - 13v_3) = 7v_1 - 13v_3
+\]
+
+Das ist genau der dritte Vektor! Also:
+\[
+\underbrace{(7v_1 - 11v_2)}_{u_1} + \underbrace{(11v_2 - 13v_3)}_{u_2} - \underbrace{(7v_1 - 13v_3)}_{u_3} = 0
+\]
+
+Das ist eine \textbf{nichttriviale} Linearkombination der Null (Koeffizienten $1, 1, -1$), und zwar v\"ollig unabh\"angig davon, was $v_1, v_2, v_3$ genau sind.
+
+$\Rightarrow$ Die Menge ist immer linear abh\"angig, \textbf{egal} wie $v_1, v_2, v_3$ gew\"ahlt sind.
+
+\[
+\boxed{\text{Aussage (b) ist WAHR}}
+\]
+
+\end{document}

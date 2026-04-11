@@ -1,0 +1,482 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+\usepackage{enumitem}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable}
+
+\newtcolorbox{merkbox}[1][]{colback=blue!5, colframe=blue!40, fonttitle=\bfseries, title={Merke}, breakable, #1}
+\newtcolorbox{analogie}[1][]{colback=green!5, colframe=green!40, fonttitle=\bfseries, title={Analogie}, breakable, #1}
+\newtcolorbox{rezept}[1][]{colback=orange!5, colframe=orange!60, fonttitle=\bfseries, title={Kochrezept}, breakable, #1}
+
+\title{Erkl\"arung -- HW04: Linearkombinationen \& lineare (Un)Abh\"angigkeit}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+%=============================================================================
+%  TEIL 1: GRUNDLAGEN
+%=============================================================================
+\part*{Teil 1: Grundlagen -- Was du wissen musst, BEVOR du die Aufgaben machst}
+
+%-----------------------------------------------------------------------------
+\section*{1. Was ist eine Linearkombination?}
+
+Eine \textbf{Linearkombination} der Vektoren $v_1, v_2, \ldots, v_n$ ist einfach eine Summe der Form:
+\[
+a_1 v_1 + a_2 v_2 + \ldots + a_n v_n
+\]
+wobei $a_1, a_2, \ldots, a_n$ beliebige reelle Zahlen sind.
+
+\begin{analogie}
+Stell dir ein \textbf{Rezept} vor. Die Vektoren $v_1, v_2, v_3$ sind die Zutaten (Mehl, Zucker, Butter). Die Zahlen $a_1, a_2, a_3$ sind die Mengen. Eine Linearkombination ist dann ein konkretes Rezept: z.\,B.\ $200 \cdot \text{Mehl} + 100 \cdot \text{Zucker} + 50 \cdot \text{Butter}$.
+\end{analogie}
+
+\textbf{Wichtig:} Die Vektoren k\"onnen alles sein, was in einem Vektorraum lebt: normale Vektoren aus $\mathbb{R}^n$, Matrizen, Polynome, sogar Funktionen. Die Rechenregeln bleiben gleich.
+
+%-----------------------------------------------------------------------------
+\section*{2. Was ist der Span?}
+
+Der \textbf{Span} von $v_1, \ldots, v_n$ -- geschrieben $\text{span}(v_1, \ldots, v_n)$ -- ist die Menge \textbf{aller m\"oglichen} Linearkombinationen:
+\[
+\text{span}(v_1, \ldots, v_n) = \{a_1 v_1 + \ldots + a_n v_n : a_1, \ldots, a_n \in \mathbb{R}\}
+\]
+
+\begin{analogie}
+Der Span ist die Menge aller Gerichte, die du mit den gegebenen Zutaten kochen kannst. Wenn du Mehl, Zucker und Butter hast, ist dein Span z.\,B.\ alle m\"oglichen Kekse, Kuchen usw., aber \emph{nicht} eine Pizza (die braucht Hefe).
+\end{analogie}
+
+%-----------------------------------------------------------------------------
+\section*{3. Die Frage: ``Liegt $w$ im Span von $v_1, \ldots, v_n$?''}
+
+Das ist genau die Frage von Aufgabe 14. Du willst wissen: Kann ich $w$ als Linearkombination der $v_i$ schreiben? Also: Gibt es Zahlen $a_1, \ldots, a_n$ mit
+\[
+a_1 v_1 + a_2 v_2 + \ldots + a_n v_n = w \; ?
+\]
+
+\begin{rezept}[title={Kochrezept: ``Ist $w$ im Span?''}]
+\begin{enumerate}
+    \item Schreibe die Gleichung $a_1 v_1 + \ldots + a_n v_n = w$ hin.
+    \item Vergleiche \textbf{eintragsweise} (oder Koeffizient f\"ur Koeffizient): das gibt dir ein lineares Gleichungssystem f\"ur die Unbekannten $a_1, \ldots, a_n$.
+    \item L\"ose das System mit Gau\ss-Elimination.
+    \item Werte das Ergebnis aus:
+    \begin{itemize}
+        \item \textbf{Widerspruch} (z.\,B.\ $0 = 5$): $w \notin \text{span}$.
+        \item \textbf{Genau eine L\"osung}: $w \in \text{span}$, eindeutig.
+        \item \textbf{Unendlich viele L\"osungen}: $w \in \text{span}$, auf mehrere Arten.
+    \end{itemize}
+\end{enumerate}
+\end{rezept}
+
+%-----------------------------------------------------------------------------
+\section*{4. Lineare (Un)Abh\"angigkeit}
+
+\begin{merkbox}[title={Definition}]
+Eine Menge $\{v_1, \ldots, v_n\}$ hei\ss t \textbf{linear unabh\"angig}, wenn die einzige L\"osung der Gleichung
+\[
+a_1 v_1 + a_2 v_2 + \ldots + a_n v_n = 0
+\]
+die \textbf{triviale L\"osung} $a_1 = a_2 = \ldots = a_n = 0$ ist.
+
+\medskip
+Andernfalls (also wenn es eine L\"osung mit mindestens einem $a_i \neq 0$ gibt) hei\ss t die Menge \textbf{linear abh\"angig}.
+\end{merkbox}
+
+\begin{analogie}
+Stell dir eine Gruppe von Zutaten vor. Die Gruppe ist \emph{linear abh\"angig}, wenn eine Zutat \textbf{\"uberfl\"ussig} ist -- weil man sie durch die anderen ausdr\"ucken k\"onnte. Z.\,B.\ ``Doppelmehl = 2$\times$ Mehl'' -- dann ist Doppelmehl \"uberfl\"ussig, weil ich es aus Mehl herstellen kann.
+
+Die Gruppe ist \emph{linear unabh\"angig}, wenn \textbf{jede Zutat einzigartig} ist -- keine l\"asst sich aus den anderen zusammenbauen.
+\end{analogie}
+
+\textbf{\"Aquivalente Formulierung:} Die Vektoren sind linear abh\"angig $\iff$ mindestens einer l\"asst sich als Linearkombination der anderen schreiben.
+
+%-----------------------------------------------------------------------------
+\section*{5. Die zwei Methoden zum Testen}
+
+In der Vorlesung wurden zwei Methoden besprochen, um lineare Unabh\"angigkeit zu pr\"ufen. Beide enden in Gau\ss-Elimination.
+
+\begin{merkbox}[title={Methode 1: Homogene Gleichung}]
+Schreibe die definierende Gleichung hin:
+\[
+a_1 v_1 + a_2 v_2 + \ldots + a_n v_n = 0
+\]
+Das ergibt ein homogenes Gleichungssystem in den Unbekannten $a_1, \ldots, a_n$.
+L\"ose es mit Gau\ss.
+\begin{itemize}
+    \item \textbf{Nur triviale L\"osung} $\Rightarrow$ linear unabh\"angig.
+    \item \textbf{Nichttriviale L\"osung existiert} $\Rightarrow$ linear abh\"angig.
+\end{itemize}
+\end{merkbox}
+
+\begin{merkbox}[title={Methode 2: Vektoren als Zeilen, Rang per Gau\ss{}}]
+Schreibe die Vektoren als Zeilen in eine Matrix und bringe sie in Stufenform.
+\begin{itemize}
+    \item \textbf{Keine Nullzeile entsteht} $\Rightarrow$ alle Zeilen sind ``echt'' $\Rightarrow$ linear unabh\"angig.
+    \item \textbf{Mindestens eine Nullzeile entsteht} $\Rightarrow$ linear abh\"angig.
+\end{itemize}
+\textbf{Merkregel:} Anzahl der Pivots = Rang der Matrix. Linear unabh\"angig $\iff$ Rang $=$ Anzahl der Vektoren.
+\end{merkbox}
+
+\textbf{Bei Aufgabe 16 musst du beide Methoden zeigen!}
+
+%-----------------------------------------------------------------------------
+\section*{6. Spezialf\"alle: Polynome und Funktionen}
+
+Bei Aufgabe 15 geht es um Polynome bzw.\ Funktionen, nicht um Zahlenvektoren. Die Strategie ist trotzdem dieselbe -- aber mit einem Zwischenschritt.
+
+\begin{merkbox}[title={Polynome ($\mathbb{R}_n[x]$)}]
+Wandle jedes Polynom in seine \textbf{Koordinaten in der Basis} $\{1, x, x^2, \ldots\}$ um. Dann kannst du sie wie gew\"ohnliche Zahlenvektoren behandeln.
+
+\medskip
+Beispiel: $p = x^2 - x - 2 \leadsto (-2, -1, 1)$ \quad (in der Reihenfolge $1, x, x^2$).
+\end{merkbox}
+
+\begin{merkbox}[title={Funktionen ($\text{FUNC}(\mathbb{R})$)}]
+Setze die Gleichung $\alpha f_1 + \beta f_2 + \gamma f_3 = 0$ (als Funktionsgleichung) an ein paar konkreten Punkten $x_0, x_1, \ldots$ ein. Wenn schon f\"ur drei geschickt gew\"ahlte Punkte nur die triviale L\"osung herauskommt, dann kann es f\"ur alle Punkte gleichzeitig erst recht nur die triviale L\"osung geben.
+\end{merkbox}
+
+\newpage
+
+%=============================================================================
+%  TEIL 2: AUFGABE 14
+%=============================================================================
+\part*{Teil 2: Aufgabe 14 -- Ist $M \in \text{span}(A,B,C)$?}
+
+\textbf{Gegeben:}
+\[
+A = \begin{pmatrix} 0 & 1 \\ 1 & 2 \end{pmatrix},\;
+B = \begin{pmatrix} 3 & 2 \\ -1 & 0 \end{pmatrix},\;
+C = \begin{pmatrix} 3 & 6 \\ 3 & 8 \end{pmatrix},\;
+M = \begin{pmatrix} 6 & 7 \\ 1 & 6 \end{pmatrix}
+\]
+
+\textbf{Frage:} Geh\"ort $M$ zum Span? Und falls ja: eindeutig oder auf mehrere Arten?
+
+\subsection*{Schritt 1: Den Ansatz hinschreiben}
+
+Wir wollen Zahlen $a, b, c \in \mathbb{R}$ finden, sodass:
+\[
+a \cdot A + b \cdot B + c \cdot C = M
+\]
+
+Das ausmultipliziert:
+\[
+a \begin{pmatrix} 0 & 1 \\ 1 & 2 \end{pmatrix}
++ b \begin{pmatrix} 3 & 2 \\ -1 & 0 \end{pmatrix}
++ c \begin{pmatrix} 3 & 6 \\ 3 & 8 \end{pmatrix}
+= \begin{pmatrix} 6 & 7 \\ 1 & 6 \end{pmatrix}
+\]
+
+\subsection*{Schritt 2: Eintragsweiser Vergleich}
+
+Die Matrizen sind $2 \times 2$, also haben wir 4 Eintr\"age. F\"ur jeden Eintrag bekommen wir eine Gleichung:
+\begin{itemize}[nosep]
+    \item Eintrag oben-links: \; $0a + 3b + 3c = 6$
+    \item Eintrag oben-rechts: \; $1a + 2b + 6c = 7$
+    \item Eintrag unten-links: \; $1a - 1b + 3c = 1$
+    \item Eintrag unten-rechts: \; $2a + 0b + 8c = 6$
+\end{itemize}
+
+\textbf{Wichtig:} Das sind 4 Gleichungen in 3 Unbekannten ($a, b, c$). Das ist v\"ollig normal. Wir haben halt mehr Gleichungen als Unbekannte, und das System kann trotzdem konsistent sein (wenn die Gleichungen sich nicht widersprechen).
+
+\subsection*{Schritt 3: Gau\ss-Elimination}
+
+Sieh dir das L\"osungsdokument f\"ur die detaillierten Zeilenoperationen an. Das Ergebnis:
+\[
+\left(\begin{array}{ccc|c}
+1 & 2 & 6 & 7 \\
+0 & 3 & 3 & 6 \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0
+\end{array}\right)
+\]
+
+\textbf{Zwei Nullzeilen} sind entstanden -- das bedeutet, zwei der urspr\"unglichen Gleichungen waren Linearkombinationen der anderen. Effektiv haben wir nur \textbf{2 echte Gleichungen} f\"ur 3 Unbekannte. Das sind zu wenige $\Rightarrow$ unendlich viele L\"osungen.
+
+\subsection*{Schritt 4: Allgemeine L\"osung}
+
+Freie Variable ist $c$ (die Spalte ohne Pivot). Wir setzen $c = t$ und ersetzen die freie Variable durch einen Parameter. Dann r\"uckw\"arts einsetzen:
+\begin{align*}
+\text{Aus Zeile 2:} \; 3b + 3t = 6 \; &\Rightarrow \; b = 2 - t \\
+\text{Aus Zeile 1:} \; a + 2(2-t) + 6t = 7 \; &\Rightarrow \; a = 3 - 4t
+\end{align*}
+
+F\"ur \textbf{jedes} $t \in \mathbb{R}$ liefert $(a,b,c) = (3-4t,\; 2-t,\; t)$ eine g\"ultige Linearkombination von $M$. Das sind unendlich viele.
+
+\subsection*{Schritt 5: Drei konkrete Beispiele}
+
+Wir w\"ahlen einfach drei verschiedene $t$-Werte:
+\begin{itemize}
+    \item $t = 0$: \; $M = 3A + 2B$ \quad (einfachste Wahl -- $C$ wird gar nicht gebraucht)
+    \item $t = 1$: \; $M = -A + B + C$
+    \item $t = -1$: \; $M = 7A + 3B - C$
+\end{itemize}
+
+Im L\"osungsdokument rechnen wir alle drei per Hand nach, um zu zeigen, dass sie wirklich $M$ ergeben.
+
+\begin{merkbox}[title={Was bedeutet das geometrisch?}]
+Da es unendlich viele Linearkombinationen gibt, sind die Matrizen $A, B, C$ \textbf{linear abh\"angig}: eine der drei ist schon durch die anderen ausdr\"uckbar. Konkret: Wenn man zwei verschiedene L\"osungen voneinander abzieht, bekommt man $0 = 4A + B - C$ (probier's aus -- z.\,B.\ $(3,2,0) - (-1,1,1) = (4, 1, -1)$).
+
+Das hei\ss t: $C = 4A + B$. Das ist der ``\"uberfl\"ussige'' Zusammenhang.
+\end{merkbox}
+
+\newpage
+
+%=============================================================================
+%  TEIL 3: AUFGABE 15
+%=============================================================================
+\part*{Teil 3: Aufgabe 15 -- Lineare Unabh\"angigkeit}
+
+%-----------------------------------------------------------------------------
+\section*{15(a): Polynome in $\mathbb{R}_2[x]$}
+
+\textbf{Gegeben:} $\{(x+1)(x-2),\; (x+1)(x-3),\; (x+1)(x-4)\}$.
+
+\subsection*{Schritt 1: Ausmultiplizieren}
+
+Wir brauchen die Polynome in ``ausmultiplizierter'' Form, damit wir Koeffizientenvergleich machen k\"onnen:
+\begin{align*}
+p_1 &= (x+1)(x-2) = x^2 - x - 2 \\
+p_2 &= (x+1)(x-3) = x^2 - 2x - 3 \\
+p_3 &= (x+1)(x-4) = x^2 - 3x - 4
+\end{align*}
+
+\begin{merkbox}[title={Trick: Der gemeinsame Faktor}]
+Alle drei Polynome haben den gemeinsamen Faktor $(x+1)$. Das ist ein starker Hinweis, dass sie \textbf{linear abh\"angig} sein k\"onnten: Wenn man geschickt kombiniert, k\"onnte der Faktor $(x+1)$ nur mit einer Linearkombination der $(x-k)$-Teile \"ubrig bleiben, und das sind nur 3 verschiedene lineare Polynome in einem 2-dimensionalen Raum.
+\end{merkbox}
+
+\subsection*{Schritt 2: Ansatz}
+
+$\alpha p_1 + \beta p_2 + \gamma p_3 = 0$ (als Polynom gleich dem Nullpolynom).
+
+Koeffizientenvergleich in der Basis $\{1, x, x^2\}$:
+\begin{itemize}[nosep]
+    \item $x^2$-Koeffizient: $\alpha + \beta + \gamma = 0$
+    \item $x^1$-Koeffizient: $-\alpha - 2\beta - 3\gamma = 0$
+    \item $x^0$-Koeffizient: $-2\alpha - 3\beta - 4\gamma = 0$
+\end{itemize}
+
+\subsection*{Schritt 3: Gau\ss{}}
+
+Nach der Elimination bleibt eine Nullzeile \"ubrig. Also 2 Pivots bei 3 Unbekannten $\Rightarrow$ nichttriviale L\"osung $\Rightarrow$ \textbf{linear abh\"angig}.
+
+\subsection*{Schritt 4: Nichttriviale Kombination finden}
+
+Freie Variable $\gamma = 1$ setzen, dann r\"uckw\"arts einsetzen $\Rightarrow$ $(\alpha, \beta, \gamma) = (1, -2, 1)$.
+
+\[
+\boxed{1 \cdot p_1 - 2 \cdot p_2 + 1 \cdot p_3 = 0}
+\]
+
+\begin{merkbox}[title={Sanity-Check}]
+Auspotenzieren und aufeinanderaddieren. Alle Koeffizienten heben sich weg. Details im L\"osungsdokument.
+\end{merkbox}
+
+\bigskip
+
+%-----------------------------------------------------------------------------
+\section*{15(b): Funktionen $\{1, 2^x, 3^x\}$}
+
+\textbf{Gegeben:} $\{1,\; 2^x,\; 3^x\}$ in $\text{FUNC}(\mathbb{R})$.
+
+\subsection*{Die Schwierigkeit}
+
+Bei Funktionen muss die Gleichung $\alpha \cdot 1 + \beta \cdot 2^x + \gamma \cdot 3^x = 0$ f\"ur \textbf{jedes} $x \in \mathbb{R}$ gelten. Das sind unendlich viele Gleichungen! Wie sollen wir die l\"osen?
+
+\begin{merkbox}[title={Der Trick: An Punkten auswerten}]
+Wenn die Gleichung f\"ur \textbf{alle} $x$ gelten muss, dann insbesondere f\"ur drei konkrete, von uns gew\"ahlte Punkte. Daraus werden drei ``echte'' lineare Gleichungen, die wir mit Gau\ss{} l\"osen k\"onnen.
+
+\medskip
+\textbf{Wenn} schon diese drei Gleichungen nur die triviale L\"osung haben, dann erst recht die volle Gleichung f\"ur alle $x$. Also: linear unabh\"angig.
+\end{merkbox}
+
+\subsection*{Schritt 1: Drei Punkte w\"ahlen}
+
+Wir nehmen $x = 0, 1, 2$ (einfachste Wahl):
+\begin{align*}
+x = 0: &\quad \alpha + \beta \cdot 1 + \gamma \cdot 1 = 0 \quad\Rightarrow\quad \alpha + \beta + \gamma = 0 \\
+x = 1: &\quad \alpha + \beta \cdot 2 + \gamma \cdot 3 = 0 \quad\Rightarrow\quad \alpha + 2\beta + 3\gamma = 0 \\
+x = 2: &\quad \alpha + \beta \cdot 4 + \gamma \cdot 9 = 0 \quad\Rightarrow\quad \alpha + 4\beta + 9\gamma = 0
+\end{align*}
+
+\subsection*{Schritt 2: Gau\ss{}}
+
+Siehe L\"osungsdokument f\"ur die Details. Das Ergebnis: 3 Pivots bei 3 Unbekannten $\Rightarrow$ nur triviale L\"osung $\Rightarrow$ die Funktionen sind \textbf{linear unabh\"angig}.
+
+\begin{merkbox}[title={Warum reicht das?}]
+Angenommen, es g\"abe eine nichttriviale Linearkombination $\alpha \cdot 1 + \beta \cdot 2^x + \gamma \cdot 3^x = 0$ f\"ur alle $x$. Dann m\"usste diese Gleichung insbesondere bei $x = 0, 1, 2$ gelten. Aber dort haben wir gerade gezeigt, dass nur $\alpha = \beta = \gamma = 0$ passt. Widerspruch.
+\end{merkbox}
+
+\newpage
+
+%=============================================================================
+%  TEIL 4: AUFGABE 16
+%=============================================================================
+\part*{Teil 4: Aufgabe 16 -- Parameter $k$}
+
+\textbf{Gegeben:} $\{v_1, v_2, v_3\}$ mit
+\[
+v_1 = (1,4,3,2),\quad v_2 = (1,2,3,4),\quad v_3 = (2, k+2, k-2, 2)
+\]
+
+\textbf{Frage:} F\"ur welche $k$ ist die Menge linear unabh\"angig? \textbf{Beide Methoden} werden verlangt.
+
+%-----------------------------------------------------------------------------
+\section*{Methode 1: Homogene Gleichung}
+
+Wir setzen $\alpha v_1 + \beta v_2 + \gamma v_3 = 0$ (der Null-Vektor in $\mathbb{R}^4$, also vier Nullen). Jede Komponente gibt eine Gleichung:
+\begin{align*}
+\text{Komp.\ 1:} &\quad \alpha + \beta + 2\gamma = 0 \\
+\text{Komp.\ 2:} &\quad 4\alpha + 2\beta + (k+2)\gamma = 0 \\
+\text{Komp.\ 3:} &\quad 3\alpha + 3\beta + (k-2)\gamma = 0 \\
+\text{Komp.\ 4:} &\quad 2\alpha + 4\beta + 2\gamma = 0
+\end{align*}
+
+Das sind 4 Gleichungen in 3 Unbekannten ($\alpha, \beta, \gamma$). Wir l\"osen sie mit Gau\ss -- mit dem Haken, dass $k$ als Parameter drinbleibt.
+
+Nach der Elimination (siehe L\"osungsdokument) landen wir bei der Stufenform:
+\[
+\left(\begin{array}{ccc|c}
+1 & 1 & 2 & 0 \\
+0 & -2 & k-6 & 0 \\
+0 & 0 & k-8 & 0 \\
+0 & 0 & 0 & 0
+\end{array}\right)
+\]
+
+\textbf{Entscheidungsfrage:} Wann gibt es nur die triviale L\"osung?
+
+Antwort: Wenn \textbf{alle drei Pivots echt da sind}. Die ersten zwei sind es automatisch ($1$ und $-2$). Das dritte ist $k-8$ -- das ist nur dann $\neq 0$, wenn $k \neq 8$.
+
+\[
+\boxed{\text{linear unabh\"angig} \iff k \neq 8}
+\]
+
+%-----------------------------------------------------------------------------
+\section*{Methode 2: Vektoren als Zeilen}
+
+Wir schreiben die drei Vektoren \textbf{als Zeilen} in eine Matrix:
+\[
+\left(\begin{array}{cccc}
+1 & 4 & 3 & 2 \\
+1 & 2 & 3 & 4 \\
+2 & k+2 & k-2 & 2
+\end{array}\right)
+\]
+
+Jetzt Gau\ss-Elimination. Nach den Schritten (siehe L\"osungsdokument):
+\[
+\left(\begin{array}{cccc}
+1 & 4 & 3 & 2 \\
+0 & -2 & 0 & 2 \\
+0 & 0 & 2(k-8) & 2(k-8)
+\end{array}\right)
+\]
+
+\textbf{Entscheidungsfrage:} Wann bleibt keine Nullzeile \"ubrig?
+
+Antwort: Wenn Zeile 3 nicht komplett null wird. Sie wird null, wenn $2(k-8) = 0$, also $k = 8$.
+
+\[
+\boxed{\text{linear unabh\"angig} \iff k \neq 8}
+\]
+
+\begin{merkbox}[title={Gleiches Ergebnis -- kein Zufall}]
+Beide Methoden m\"ussen logisch dasselbe liefern. Der Grund: Methode 2 ist im Grunde Methode 1, nur von der anderen Seite betrachtet. Statt $\alpha v_1 + \beta v_2 + \gamma v_3 = 0$ als Spaltenkombination zu untersuchen, schaut man direkt, ob die Zeilen $v_1, v_2, v_3$ redundant sind.
+\end{merkbox}
+
+\subsection*{Was passiert bei $k = 8$?}
+
+Setze $k = 8$ ein: $v_3 = (2, 10, 6, 2)$. Tats\"achlich: $-3 v_1 + v_2 + v_3 = 0$.
+\[
+-3(1,4,3,2) + (1,2,3,4) + (2,10,6,2) = (-3+1+2,\; -12+2+10,\; -9+3+6,\; -6+4+2) = (0,0,0,0) \;\checkmark
+\]
+
+Also ist $v_3$ bei $k=8$ gleich $3v_1 - v_2$, d.\,h.\ eine Linearkombination der anderen beiden. Deshalb linear abh\"angig.
+
+\newpage
+
+%=============================================================================
+%  TEIL 5: AUFGABE 17
+%=============================================================================
+\part*{Teil 5: Aufgabe 17 -- Theoriefragen}
+
+Diese Aufgabe ist anders: es gibt keine konkreten Zahlen. Wir wissen nur, dass $\{v_1, v_2, v_3\}$ linear unabh\"angig ist (in (a)) bzw.\ nichts \"uber $v_1, v_2, v_3$ (in (b)). Die Aufgabe ist trotzdem ein ``Gau\ss''-\"ahnliches Problem, nur abstrakter.
+
+%-----------------------------------------------------------------------------
+\section*{17(a): Neue Menge $\{v_1+v_2,\; v_2+v_3,\; v_2+2v_3\}$ -- linear unabh\"angig?}
+
+\textbf{Strategie:} Schreibe die definierende Gleichung hin:
+\[
+\alpha(v_1+v_2) + \beta(v_2+v_3) + \gamma(v_2+2v_3) = 0
+\]
+
+\subsection*{Umsortieren nach $v_1, v_2, v_3$}
+
+Jetzt multiplizieren wir aus und sammeln die Terme nach $v_1, v_2, v_3$ ein:
+\begin{align*}
+\alpha v_1 + \alpha v_2 + \beta v_2 + \beta v_3 + \gamma v_2 + 2\gamma v_3 &= 0 \\
+\alpha v_1 + (\alpha + \beta + \gamma) v_2 + (\beta + 2\gamma) v_3 &= 0
+\end{align*}
+
+\subsection*{Die lineare Unabh\"angigkeit von $\{v_1, v_2, v_3\}$ nutzen}
+
+Weil $\{v_1, v_2, v_3\}$ linear unabh\"angig ist, muss jeder Koeffizient einzeln null sein:
+\[
+\alpha = 0, \quad \alpha + \beta + \gamma = 0, \quad \beta + 2\gamma = 0
+\]
+
+\begin{merkbox}[title={Der Schl\"usselschritt}]
+Hier schalten wir um: aus der \textbf{abstrakten} Vektor-Gleichung wird ein \textbf{konkretes} lineares Gleichungssystem in $\alpha, \beta, \gamma$. Das k\"onnen wir l\"osen wie gewohnt.
+\end{merkbox}
+
+Das System ist einfach genug, um per Kopf zu l\"osen:
+\begin{itemize}[nosep]
+    \item Gleichung 1: $\alpha = 0$.
+    \item In Gleichung 2 einsetzen: $\beta + \gamma = 0 \Rightarrow \beta = -\gamma$.
+    \item In Gleichung 3 einsetzen: $-\gamma + 2\gamma = \gamma = 0$, also $\gamma = 0$, dann $\beta = 0$.
+\end{itemize}
+
+Alle drei sind null $\Rightarrow$ nur die triviale L\"osung $\Rightarrow$ die neue Menge ist \textbf{linear unabh\"angig}.
+
+\[
+\boxed{\text{Aussage (a) ist WAHR}}
+\]
+
+%-----------------------------------------------------------------------------
+\section*{17(b): $\{7v_1 - 11v_2,\; 11v_2 - 13v_3,\; 7v_1 - 13v_3\}$ -- notwendig linear abh\"angig?}
+
+\textbf{Strategie:} Hier gibt es einen viel schnelleren Weg als die volle Rechnung. Schau dir die drei Vektoren an und sieh, ob sich einer direkt als Summe der anderen ausdr\"ucken l\"asst.
+
+\subsection*{Die Beobachtung}
+
+Rechne die Summe der ersten beiden:
+\[
+(7v_1 - 11v_2) + (11v_2 - 13v_3) = 7v_1 \underbrace{-11v_2 + 11v_2}_{= 0} - 13v_3 = 7v_1 - 13v_3
+\]
+
+\textbf{Das ist genau der dritte Vektor!}
+
+\subsection*{Schlussfolgerung}
+
+Wir haben also:
+\[
+\underbrace{(7v_1 - 11v_2)}_{u_1} + \underbrace{(11v_2 - 13v_3)}_{u_2} - \underbrace{(7v_1 - 13v_3)}_{u_3} = 0
+\]
+
+Das ist eine Linearkombination der Null mit den Koeffizienten $(1, 1, -1)$ -- alle ungleich null. Also \textbf{nichttrivial}. Das beweist lineare Abh\"angigkeit.
+
+\begin{merkbox}[title={Das Wichtigste}]
+Dieses Ergebnis h\"angt \textbf{gar nicht} davon ab, was $v_1, v_2, v_3$ konkret sind. Die Linearkombination $(1, 1, -1)$ ergibt immer $0$, egal wie man $v_1, v_2, v_3$ w\"ahlt. Deshalb ist die Menge \emph{notwendigerweise} (d.\,h.\ f\"ur jede Wahl von $v_1, v_2, v_3$) linear abh\"angig.
+\end{merkbox}
+
+\[
+\boxed{\text{Aussage (b) ist WAHR}}
+\]
+
+\end{document}
