@@ -70,7 +70,7 @@ a - b + 3c = 1 & \text{(unten-links)} \\
 1 & -1 & 3 & 1 \\
 2 & 0 & 8 & 6
 \end{array}\right)
-\xrightarrow[Z_4 - 2Z_1]{Z_3 - Z_1}
+\xrightarrow[Z_4 \to Z_4 - 2Z_1]{Z_3 \to Z_3 - Z_1}
 \left(\begin{array}{ccc|c}
 1 & 2 & 6 & 7 \\
 0 & 3 & 3 & 6 \\
@@ -80,7 +80,7 @@ a - b + 3c = 1 & \text{(unten-links)} \\
 \]
 
 \[
-\xrightarrow[3Z_4 + 4Z_2]{Z_3 + Z_2}
+\xrightarrow[Z_4 \to 3Z_4 + 4Z_2]{Z_3 \to Z_3 + Z_2}
 \left(\begin{array}{ccc|c}
 1 & 2 & 6 & 7 \\
 0 & 3 & 3 & 6 \\
@@ -181,13 +181,13 @@ In der Basis $\{1, x, x^2\}$:
 -1 & -2 & -3 & 0 \\
 -2 & -3 & -4 & 0
 \end{array}\right)
-\xrightarrow[Z_3 + 2Z_1]{Z_2 + Z_1}
+\xrightarrow[Z_3 \to Z_3 + 2Z_1]{Z_2 \to Z_2 + Z_1}
 \left(\begin{array}{ccc|c}
 1 & 1 & 1 & 0 \\
 0 & -1 & -2 & 0 \\
 0 & -1 & -2 & 0
 \end{array}\right)
-\xrightarrow{Z_3 - Z_2}
+\xrightarrow{Z_3 \to Z_3 - Z_2}
 \left(\begin{array}{ccc|c}
 1 & 1 & 1 & 0 \\
 0 & -1 & -2 & 0 \\
@@ -259,13 +259,13 @@ x = 2: &\quad \alpha + 4\beta + 9\gamma = 0
 1 & 2 & 3 & 0 \\
 1 & 4 & 9 & 0
 \end{array}\right)
-\xrightarrow[Z_3 - Z_1]{Z_2 - Z_1}
+\xrightarrow[Z_3 \to Z_3 - Z_1]{Z_2 \to Z_2 - Z_1}
 \left(\begin{array}{ccc|c}
 1 & 1 & 1 & 0 \\
 0 & 1 & 2 & 0 \\
 0 & 3 & 8 & 0
 \end{array}\right)
-\xrightarrow{Z_3 - 3Z_2}
+\xrightarrow{Z_3 \to Z_3 - 3Z_2}
 \left(\begin{array}{ccc|c}
 1 & 1 & 1 & 0 \\
 0 & 1 & 2 & 0 \\
@@ -338,7 +338,7 @@ in $\mathbb{R}^4$ linear unabh\"angig? Beide Methoden aus der Vorlesung zeigen.
 3 & 3 & k-2 & 0 \\
 2 & 4 & 2 & 0
 \end{array}\right)
-\xrightarrow[\substack{Z_3 - 3Z_1 \\ Z_4 - 2Z_1}]{Z_2 - 4Z_1}
+\xrightarrow[\substack{Z_3 \to Z_3 - 3Z_1 \\ Z_4 \to Z_4 - 2Z_1}]{Z_2 \to Z_2 - 4Z_1}
 \left(\begin{array}{ccc|c}
 1 & 1 & 2 & 0 \\
 0 & -2 & k-6 & 0 \\
@@ -348,14 +348,14 @@ in $\mathbb{R}^4$ linear unabh\"angig? Beide Methoden aus der Vorlesung zeigen.
 \]
 
 \[
-\xrightarrow{Z_4 + Z_2}
+\xrightarrow{Z_4 \to Z_4 + Z_2}
 \left(\begin{array}{ccc|c}
 1 & 1 & 2 & 0 \\
 0 & -2 & k-6 & 0 \\
 0 & 0 & k-8 & 0 \\
 0 & 0 & k-8 & 0
 \end{array}\right)
-\xrightarrow{Z_4 - Z_3}
+\xrightarrow{Z_4 \to Z_4 - Z_3}
 \left(\begin{array}{ccc|c}
 1 & 1 & 2 & 0 \\
 0 & -2 & k-6 & 0 \\
@@ -398,13 +398,13 @@ Probe: $-3(1,4,3,2) + (1,2,3,4) + (2,10,6,2) = (0,0,0,0) \;\checkmark$
 \textbf{Schritt 2: Gau\ss-Elimination.}
 
 \[
-\xrightarrow[Z_3 - 2Z_1]{Z_2 - Z_1}
+\xrightarrow[Z_3 \to Z_3 - 2Z_1]{Z_2 \to Z_2 - Z_1}
 \left(\begin{array}{cccc}
 1 & 4 & 3 & 2 \\
 0 & -2 & 0 & 2 \\
 0 & k-6 & k-8 & -2
 \end{array}\right)
-\xrightarrow{2Z_3 + (k-6)Z_2}
+\xrightarrow{Z_3 \to 2Z_3 + (k-6)Z_2}
 \left(\begin{array}{cccc}
 1 & 4 & 3 & 2 \\
 0 & -2 & 0 & 2 \\
