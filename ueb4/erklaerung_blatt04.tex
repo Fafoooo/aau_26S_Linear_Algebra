@@ -11,6 +11,7 @@
 \newtcolorbox{merkbox}[1][]{colback=blue!5, colframe=blue!40, fonttitle=\bfseries, title={Merke}, breakable, #1}
 \newtcolorbox{analogie}[1][]{colback=green!5, colframe=green!40, fonttitle=\bfseries, title={Analogie}, breakable, #1}
 \newtcolorbox{rezept}[1][]{colback=orange!5, colframe=orange!60, fonttitle=\bfseries, title={Kochrezept}, breakable, #1}
+\newtcolorbox{begriffe}[1][]{colback=yellow!10, colframe=yellow!60!black, fonttitle=\bfseries, title={Was bedeuten die Begriffe?}, breakable, #1}
 
 \title{Erkl\"arung -- HW04: Linearkombinationen \& lineare (Un)Abh\"angigkeit}
 \author{}
@@ -157,6 +158,17 @@ M = \begin{pmatrix} 6 & 7 \\ 1 & 6 \end{pmatrix}
 
 \textbf{Frage:} Geh\"ort $M$ zum Span? Und falls ja: eindeutig oder auf mehrere Arten?
 
+\begin{begriffe}
+\begin{itemize}[leftmargin=*, nosep]
+    \item $\mathbb{R}^{2 \times 2}$ -- die Menge aller $2 \times 2$-Matrizen mit reellen Eintr\"agen. Das ist unser \textbf{Vektorraum} (Matrizen kann man addieren und mit Zahlen multiplizieren -- sie benehmen sich wie Vektoren).
+    \item \textbf{span($A, B, C$)} -- die Menge \textbf{aller} Matrizen, die man als $a A + b B + c C$ mit $a,b,c \in \mathbb{R}$ schreiben kann. Anders gesagt: alle ``Rezepte'' mit $A, B, C$ als Zutaten.
+    \item ``$M \in \text{span}(A,B,C)$'' hei\ss t: Gibt es Zahlen $a, b, c$, sodass $aA + bB + cC = M$?
+    \item \textbf{Linearkombination} von $A, B, C$ mit Koeffizienten $a, b, c$: $aA + bB + cC$.
+    \item \textbf{Eindeutige Darstellung} = es gibt genau ein Tripel $(a,b,c)$.\\
+    \textbf{Unendlich viele Darstellungen} = es gibt einen Parameter, mit dem man verschiedene Tripel bekommt.
+\end{itemize}
+\end{begriffe}
+
 \subsection*{Schritt 1: Den Ansatz hinschreiben}
 
 Wir wollen Zahlen $a, b, c \in \mathbb{R}$ finden, sodass:
@@ -237,6 +249,16 @@ Das hei\ss t: $C = 4A + B$. Das ist der ``\"uberfl\"ussige'' Zusammenhang.
 
 \textbf{Gegeben:} $\{(x+1)(x-2),\; (x+1)(x-3),\; (x+1)(x-4)\}$.
 
+\begin{begriffe}
+\begin{itemize}[leftmargin=*, nosep]
+    \item $\mathbb{R}_2[x]$ -- die Menge aller Polynome vom Grad \textbf{h\"ochstens 2} mit reellen Koeffizienten. Beispiel: $3x^2 - x + 5$ oder $7$ oder $x$. Das ist unser Vektorraum -- Polynome kann man addieren und mit Zahlen multiplizieren.
+    \item \textbf{Linear unabh\"angig} = keine der drei ``Zutaten'' ist \"uberfl\"ussig, d.\,h.\ keine l\"asst sich durch die anderen zusammenbauen.
+    \item \textbf{Linear abh\"angig} = das Gegenteil: mindestens eine der drei ist durch die anderen ausdr\"uckbar.
+    \item Der \textbf{Nullvektor} ist hier das Nullpolynom $0$ (das Polynom, das f\"ur jedes $x$ den Wert $0$ liefert). Beim Testen stellt man die Gleichung ``Linearkombination $= 0$'' auf -- wobei $0$ hier das Nullpolynom bedeutet.
+    \item \textbf{Nichttriviale Linearkombination der Null} = eine Kombination $\alpha p_1 + \beta p_2 + \gamma p_3 = 0$, bei der nicht \textbf{alle} Koeffizienten null sind. Sie zeigt direkt lineare Abh\"angigkeit.
+\end{itemize}
+\end{begriffe}
+
 \subsection*{Schritt 1: Ausmultiplizieren}
 
 Wir brauchen die Polynome in ``ausmultiplizierter'' Form, damit wir Koeffizientenvergleich machen k\"onnen:
@@ -284,6 +306,16 @@ Auspotenzieren und aufeinanderaddieren. Alle Koeffizienten heben sich weg. Detai
 
 \textbf{Gegeben:} $\{1,\; 2^x,\; 3^x\}$ in $\text{FUNC}(\mathbb{R})$.
 
+\begin{begriffe}
+\begin{itemize}[leftmargin=*, nosep]
+    \item $\text{FUNC}(\mathbb{R})$ -- die Menge \textbf{aller} Funktionen $f : \mathbb{R} \to \mathbb{R}$. Jede einzelne Funktion ist hier ein ``Vektor''.
+    \item $1$ steht f\"ur die \textbf{konstante Funktion} $f(x) = 1$ (liefert f\"ur jedes $x$ den Wert 1).
+    \item $2^x$ und $3^x$ sind die Exponentialfunktionen $f(x) = 2^x$ bzw.\ $f(x) = 3^x$.
+    \item Der \textbf{Nullvektor} in $\text{FUNC}(\mathbb{R})$ ist die \textbf{Nullfunktion} -- die Funktion, die f\"ur jedes $x$ den Wert 0 liefert. Zu zeigen, dass $\alpha \cdot 1 + \beta \cdot 2^x + \gamma \cdot 3^x = 0$ nur trivial l\"osbar ist, bedeutet: die linke Seite ist die Nullfunktion $\Leftrightarrow \alpha = \beta = \gamma = 0$.
+    \item \textbf{,,F\"ur alle $x$''} ist der Knackpunkt: die Gleichung muss \textbf{gleichzeitig} an jedem Punkt gelten, nicht nur an einer Stelle.
+\end{itemize}
+\end{begriffe}
+
 \subsection*{Die Schwierigkeit}
 
 Bei Funktionen muss die Gleichung $\alpha \cdot 1 + \beta \cdot 2^x + \gamma \cdot 3^x = 0$ f\"ur \textbf{jedes} $x \in \mathbb{R}$ gelten. Das sind unendlich viele Gleichungen! Wie sollen wir die l\"osen?
@@ -325,6 +357,16 @@ v_1 = (1,4,3,2),\quad v_2 = (1,2,3,4),\quad v_3 = (2, k+2, k-2, 2)
 \]
 
 \textbf{Frage:} F\"ur welche $k$ ist die Menge linear unabh\"angig? \textbf{Beide Methoden} werden verlangt.
+
+\begin{begriffe}
+\begin{itemize}[leftmargin=*, nosep]
+    \item $\mathbb{R}^4$ -- die Menge aller 4-Tupel reeller Zahlen, also Vektoren mit genau 4 Eintr\"agen wie $(1,4,3,2)$.
+    \item \textbf{Parameter $k$} -- eine reelle Zahl, die noch nicht feststeht. Je nachdem, welchen Wert $k$ annimmt, \"andert sich der dritte Vektor. Die Aufgabe ist: F\"ur welche $k$ sind die drei Vektoren linear unabh\"angig?
+    \item \textbf{Beide Methoden aus der Vorlesung}: (1) Homogene Gleichung $\alpha v_1 + \beta v_2 + \gamma v_3 = 0$ aufstellen und l\"osen. (2) Vektoren als Zeilen in eine Matrix schreiben und mit Gau\ss{} auf Stufenform bringen.
+    \item \textbf{Pivot} = f\"uhrendes Element $\neq 0$ einer Zeile in der Stufenform. Anzahl der Pivots $=$ Rang. Linear unabh\"angig $\iff$ Rang $=$ Anzahl der Vektoren.
+    \item \textbf{Nullzeile} = eine Zeile in der Stufenform, die nur aus Nullen besteht. Jede Nullzeile bedeutet: ein Vektor war eine Linearkombination der anderen $\Rightarrow$ linear abh\"angig.
+\end{itemize}
+\end{begriffe}
 
 %-----------------------------------------------------------------------------
 \section*{Methode 1: Homogene Gleichung}
@@ -407,6 +449,16 @@ Also ist $v_3$ bei $k=8$ gleich $3v_1 - v_2$, d.\,h.\ eine Linearkombination der
 \part*{Teil 5: Aufgabe 17 -- Theoriefragen}
 
 Diese Aufgabe ist anders: es gibt keine konkreten Zahlen. Wir wissen nur, dass $\{v_1, v_2, v_3\}$ linear unabh\"angig ist (in (a)) bzw.\ nichts \"uber $v_1, v_2, v_3$ (in (b)). Die Aufgabe ist trotzdem ein ``Gau\ss''-\"ahnliches Problem, nur abstrakter.
+
+\begin{begriffe}
+\begin{itemize}[leftmargin=*, nosep]
+    \item $V$ -- irgendein (nicht n\"aher spezifizierter) Vektorraum. Kann $\mathbb{R}^n$ sein, Matrizen, Polynome, Funktionen -- egal.
+    \item $v_1, v_2, v_3 \in V$ -- drei beliebige Vektoren in diesem Raum. Wir wissen nur das, was die Angabe sagt.
+    \item ``\textbf{notwendigerweise} linear abh\"angig'' -- es ist linear abh\"angig, \textbf{egal} wie $v_1, v_2, v_3$ gew\"ahlt werden. Nicht nur f\"ur ein konkretes Beispiel, sondern universell.
+    \item ``\textbf{wahr oder falsch}'' -- du musst entweder beweisen, dass die Aussage \textbf{immer} gilt (wahr), oder ein konkretes Gegenbeispiel finden, bei dem sie scheitert (falsch).
+    \item \textbf{Umsortieren nach $v_1, v_2, v_3$} -- Standardtrick bei solchen Aufgaben: die Gleichung so umformen, dass $v_1, v_2, v_3$ einzeln mit ihren Koeffizienten dastehen. Dann kann man die Voraussetzung ``$\{v_1, v_2, v_3\}$ linear unabh\"angig'' einsetzen.
+\end{itemize}
+\end{begriffe}
 
 %-----------------------------------------------------------------------------
 \section*{17(a): Neue Menge $\{v_1+v_2,\; v_2+v_3,\; v_2+2v_3\}$ -- linear unabh\"angig?}
