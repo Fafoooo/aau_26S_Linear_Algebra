@@ -142,6 +142,11 @@ $(a,b,c) = (3-4t,\; 2-t,\; t),\quad t \in \mathbb{R}.$
 
 \textbf{Schritt 5: Drei konkrete Linearkombinationen.}
 
+Die Angabe verlangt drei konkrete Wege, $M$ als Linearkombination zu schreiben.
+Vorgehen: Ich w\"ahle drei beliebige Werte f\"ur $t$, setze diese in die Formel
+$(a,b,c) = (3-4t,\; 2-t,\; t)$ ein und berechne $aA + bB + cC$.
+Als Kontrolle muss dabei jedes Mal $M$ herauskommen.
+
 \begin{itemize}[leftmargin=*]
 \item $t = 0 \Rightarrow (a,b,c) = (3, 2, 0)$:
 \[
@@ -188,6 +193,9 @@ in $\mathbb{R}_2[x]$ linear unabh\"angig?
 \medskip
 
 \textbf{Schritt 1: Polynome ausmultiplizieren.}
+
+Damit ich Koeffizientenvergleich machen kann, brauche ich die Polynome in
+Standardform (sortiert nach Potenzen von $x$):
 \begin{align*}
 p_1 &= (x+1)(x-2) = x^2 - x - 2 \\
 p_2 &= (x+1)(x-3) = x^2 - 2x - 3 \\
@@ -196,16 +204,17 @@ p_3 &= (x+1)(x-4) = x^2 - 3x - 4
 
 \textbf{Schritt 2: Ansatz $\alpha p_1 + \beta p_2 + \gamma p_3 = 0$ und Koeffizientenvergleich.}
 
-In der Basis $\{1, x, x^2\}$:
+Zwei Polynome sind gleich $\iff$ alle Koeffizienten zur gleichen Potenz \"ubereinstimmen.
+Da die rechte Seite das Nullpolynom ist, muss jeder Koeffizient einzeln $0$ ergeben:
 \[
 \begin{cases}
-\alpha + \beta + \gamma = 0 & (x^2) \\
--\alpha - 2\beta - 3\gamma = 0 & (x) \\
--2\alpha - 3\beta - 4\gamma = 0 & (1)
+\alpha + \beta + \gamma = 0 & \text{(Koeffizient von $x^2$)} \\
+-\alpha - 2\beta - 3\gamma = 0 & \text{(Koeffizient von $x$)} \\
+-2\alpha - 3\beta - 4\gamma = 0 & \text{(konstanter Term)}
 \end{cases}
 \]
 
-\textbf{Schritt 3: Gau\ss-Elimination.}
+\textbf{Schritt 3: Erweiterte Koeffizientenmatrix und Gau\ss-Elimination.}
 
 \[
 \left(\begin{array}{ccc|c}
@@ -221,18 +230,33 @@ In der Basis $\{1, x, x^2\}$:
 \end{array}\right)
 \xrightarrow{Z_3 \to Z_3 - Z_2}
 \left(\begin{array}{ccc|c}
-\piv{1} & 1 & 1 & 0 \\
-0 & \piv{-1} & -2 & 0 \\
+1 & 1 & 1 & 0 \\
+0 & -1 & -2 & 0 \\
 0 & 0 & 0 & 0
 \end{array}\right)
 \]
 
-Pivot-Spalten: $\alpha, \beta$. Spalte ohne Pivot: $\gamma$ $\Rightarrow$ $\gamma$ frei.
-2 Pivots bei 3 Unbekannten $\Rightarrow$ nichttriviale L\"osung existiert.
+\textbf{Schritt 4: Pivots identifizieren und auswerten.}
+
+\[
+\left(\begin{array}{ccc|c}
+\piv{1} & 1 & 1 & 0 \\
+0 & \piv{-1} & -2 & 0 \\
+0 & 0 & 0 & 0
+\end{array}\right)
+\qquad
+\begin{array}{l}
+\text{Pivot-Spalten:}\; \alpha, \beta \\
+\text{Spalte ohne Pivot:}\; \gamma \\
+\Rightarrow \gamma \;\text{frei}
+\end{array}
+\]
+
+2 Pivots bei 3 Unbekannten $\Rightarrow$ es gibt eine freie Variable $\Rightarrow$ nichttriviale L\"osung existiert $\Rightarrow$ Menge ist \textbf{linear abh\"angig}.
 
 \medskip
 
-\textbf{Schritt 4: Nichttriviale Linearkombination bestimmen.}
+\textbf{Schritt 5: Konkrete nichttriviale Linearkombination bestimmen.}
 
 Die Zeilen der Stufenform \"ubersetzen sich in:
 \begin{align*}
@@ -241,7 +265,8 @@ Die Zeilen der Stufenform \"ubersetzen sich in:
 \text{Zeile 3:} &\quad 0 = 0 \quad \text{(keine Information)}
 \end{align*}
 
-Freie Variable setzen: $\gamma = 1$.
+Die freie Variable darf ich frei w\"ahlen. Ich nehme den einfachsten Wert $\gamma = 1$
+(damit ich nichttrivial bleibe):
 
 R\"uckw\"artseinsetzen:
 \begin{align*}
@@ -256,7 +281,7 @@ $1 \cdot p_1 - 2 \cdot p_2 + 1 \cdot p_3 = 0.$
 }}
 \]
 
-\textbf{Probe:}
+\textbf{Schritt 6: Probe durch direktes Nachrechnen.}
 \[
 (x^2 - x - 2) - 2(x^2 - 2x - 3) + (x^2 - 3x - 4)
 = (1-2+1)x^2 + (-1+4-3)x + (-2+6-4) = 0 \;\checkmark
@@ -283,17 +308,24 @@ $1 \cdot p_1 - 2 \cdot p_2 + 1 \cdot p_3 = 0.$
 
 \medskip
 
-\textbf{Schritt 1: Ansatz und Auswertung an drei Punkten.}
+\textbf{Schritt 1: Ansatz und Umwandlung in ein l\"osbares System.}
 
-$\alpha \cdot 1 + \beta \cdot 2^x + \gamma \cdot 3^x = 0$ soll f\"ur \textbf{alle} $x \in \mathbb{R}$ gelten, also insbesondere f\"ur $x = 0, 1, 2$:
+Die Bedingung lautet:
+\[
+\alpha \cdot 1 + \beta \cdot 2^x + \gamma \cdot 3^x = 0 \quad \text{f\"ur \textbf{alle} } x \in \mathbb{R}.
+\]
+
+Eine Gleichung, die f\"ur alle $x$ gelten muss, gilt insbesondere f\"ur jede einzelne Wahl von $x$.
+Ich setze also drei einfache Werte ein ($x = 0, 1, 2$) und erhalte drei
+``normale'' lineare Gleichungen:
 
 \begin{align*}
-x = 0: &\quad \alpha + \beta + \gamma = 0 \\
-x = 1: &\quad \alpha + 2\beta + 3\gamma = 0 \\
-x = 2: &\quad \alpha + 4\beta + 9\gamma = 0
+x = 0: &\quad \alpha \cdot 1 + \beta \cdot 2^0 + \gamma \cdot 3^0 = 0 \;\Rightarrow\; \alpha + \beta + \gamma = 0 \\
+x = 1: &\quad \alpha \cdot 1 + \beta \cdot 2^1 + \gamma \cdot 3^1 = 0 \;\Rightarrow\; \alpha + 2\beta + 3\gamma = 0 \\
+x = 2: &\quad \alpha \cdot 1 + \beta \cdot 2^2 + \gamma \cdot 3^2 = 0 \;\Rightarrow\; \alpha + 4\beta + 9\gamma = 0
 \end{align*}
 
-\textbf{Schritt 2: Gau\ss-Elimination.}
+\textbf{Schritt 2: Erweiterte Koeffizientenmatrix und Gau\ss-Elimination.}
 
 \[
 \left(\begin{array}{ccc|c}
@@ -309,20 +341,37 @@ x = 2: &\quad \alpha + 4\beta + 9\gamma = 0
 \end{array}\right)
 \xrightarrow{Z_3 \to Z_3 - 3Z_2}
 \left(\begin{array}{ccc|c}
+1 & 1 & 1 & 0 \\
+0 & 1 & 2 & 0 \\
+0 & 0 & 2 & 0
+\end{array}\right)
+\]
+
+\textbf{Schritt 3: Pivots identifizieren und auswerten.}
+
+\[
+\left(\begin{array}{ccc|c}
 \piv{1} & 1 & 1 & 0 \\
 0 & \piv{1} & 2 & 0 \\
 0 & 0 & \piv{2} & 0
 \end{array}\right)
+\qquad
+\begin{array}{l}
+\text{Pivot-Spalten:}\; \alpha, \beta, \gamma \\
+\text{Keine Spalte ohne Pivot} \\
+\Rightarrow \text{keine freie Variable}
+\end{array}
 \]
 
-Alle drei Spalten ($\alpha, \beta, \gamma$) haben ein Pivot, keine freie Variable.
-3 Pivots bei 3 Unbekannten $\Rightarrow$ nur die triviale L\"osung $\alpha = \beta = \gamma = 0$.
+3 Pivots bei 3 Unbekannten $\Rightarrow$ das System hat nur die triviale L\"osung $\alpha = \beta = \gamma = 0$.
 
 \medskip
 
-\textbf{Schritt 3: Folgerung.}
+\textbf{Schritt 4: Folgerung f\"ur die urspr\"ungliche Bedingung.}
 
-Wenn schon f\"ur drei konkrete Punkte nur die triviale L\"osung m\"oglich ist, dann auch f\"ur alle $x \in \mathbb{R}$ gleichzeitig.
+Ich habe gezeigt: Wenn die Gleichung bei $x = 0, 1, 2$ gilt, dann bleibt nur $\alpha = \beta = \gamma = 0$ \"ubrig.
+Da die urspr\"ungliche Bedingung ``f\"ur alle $x$'' st\"arker ist (die drei Punkte sind nur ein Spezialfall davon),
+kann erst recht keine nichttriviale L\"osung existieren.
 
 \[
 \fbox{\parbox{0.93\textwidth}{\centering
@@ -363,16 +412,21 @@ in $\mathbb{R}^4$ linear unabh\"angig? Beide Methoden aus der Vorlesung zeigen.
 
 \textbf{Schritt 1: Eintragsweise Bedingungen aufstellen.}
 
+Die Gleichung $\alpha v_1 + \beta v_2 + \gamma v_3 = \vec 0$ bedeutet, dass jede der 4
+Komponenten einzeln null ergibt. Durch Einsetzen der Vektoren erhalte ich:
 \[
 \begin{cases}
-\alpha + \beta + 2\gamma = 0 & (\text{Komp.\ 1}) \\
-4\alpha + 2\beta + (k+2)\gamma = 0 & (\text{Komp.\ 2}) \\
-3\alpha + 3\beta + (k-2)\gamma = 0 & (\text{Komp.\ 3}) \\
-2\alpha + 4\beta + 2\gamma = 0 & (\text{Komp.\ 4})
+1\alpha + 1\beta + 2\gamma = 0 & (\text{Komponente 1: } 1, 1, 2) \\
+4\alpha + 2\beta + (k+2)\gamma = 0 & (\text{Komponente 2: } 4, 2, k+2) \\
+3\alpha + 3\beta + (k-2)\gamma = 0 & (\text{Komponente 3: } 3, 3, k-2) \\
+2\alpha + 4\beta + 2\gamma = 0 & (\text{Komponente 4: } 2, 4, 2)
 \end{cases}
 \]
 
 \textbf{Schritt 2: Gau\ss-Elimination mit Parameter $k$.}
+
+Der Parameter $k$ bleibt stehen und wird mitgeschleppt -- nichts anderes macht diese Rechnung
+schwieriger als ``normal''.
 
 \[
 \left(\begin{array}{ccc|c}
@@ -407,13 +461,22 @@ in $\mathbb{R}^4$ linear unabh\"angig? Beide Methoden aus der Vorlesung zeigen.
 \end{array}\right)
 \]
 
-\textbf{Schritt 3: Pivots ablesen und Fallunterscheidung.}
+\textbf{Schritt 3: Pivots identifizieren und Fallunterscheidung.}
 
-Die Kandidaten f\"ur Pivots sind die drei markierten Eintr\"age. Die ersten beiden ($1$ und $-2$) sind immer $\neq 0$. Der dritte, $k-8$, ist nur dann ein \emph{echtes} Pivot, wenn $k-8 \neq 0$.
+Ich schaue in jeder Zeile auf den ersten Eintrag $\neq 0$ -- das sind die Pivot-Kandidaten:
 
 \begin{itemize}[leftmargin=*, nosep]
-\item $k \neq 8$: alle drei Pivots vorhanden $\Rightarrow$ Rang $= 3 =$ Anzahl der Vektoren $\Rightarrow$ linear unabh\"angig.
-\item $k = 8$: das dritte Pivot wird $0$, Zeile 3 wird zur Nullzeile $\Rightarrow$ Rang $= 2 < 3 \Rightarrow$ linear abh\"angig.
+\item Zeile 1: Pivot $= 1$ (immer $\neq 0$). \checkmark
+\item Zeile 2: Pivot $= -2$ (immer $\neq 0$). \checkmark
+\item Zeile 3: Pivot $= k-8$ -- dieser h\"angt von $k$ ab! Nur $\neq 0$, wenn $k \neq 8$.
+\item Zeile 4: Nullzeile -- kein Pivot.
+\end{itemize}
+
+Fallunterscheidung nach dem Wert von $k$:
+
+\begin{itemize}[leftmargin=*, nosep]
+\item $k \neq 8$: drei Pivots, keine Spalte ohne Pivot $\Rightarrow$ nur triviale L\"osung $\Rightarrow$ linear \textbf{unabh\"angig}.
+\item $k = 8$: nur zwei Pivots, Spalte $\gamma$ ohne Pivot $\Rightarrow$ eine freie Variable $\Rightarrow$ nichttriviale L\"osung existiert $\Rightarrow$ linear \textbf{abh\"angig}.
 \end{itemize}
 
 \[
@@ -444,6 +507,10 @@ Probe: $-3(1,4,3,2) + (1,2,3,4) + (2,10,6,2) = (0,0,0,0) \;\checkmark$
 \subsubsection*{Methode 2: Vektoren als Zeilen, Rang per Gau\ss{}}
 
 \textbf{Schritt 1: Vektoren als Zeilen anordnen.}
+
+Ich schreibe die drei Vektoren einfach untereinander. Die Idee: Wenn beim Gau\ss-Verfahren
+eine der Zeilen zur Nullzeile wird, war der entsprechende Vektor eine Linearkombination
+der anderen (also \"uberfl\"ussig) $\Rightarrow$ linear abh\"angig.
 
 \[
 \left(\begin{array}{cccc}
@@ -477,13 +544,20 @@ Rechnung zu Zeile 3 (Schritt 2):
 \item Spalte 4: $2 \cdot (-2) + (k-6) \cdot 2 = -4 + 2k - 12 = 2(k-8)$
 \end{itemize}
 
-\textbf{Schritt 3: Pivots ablesen und auswerten.}
+\textbf{Schritt 3: Pivots identifizieren und auswerten.}
 
-Die ersten beiden Pivots ($1$ und $-2$) sind immer $\neq 0$. Das dritte ist $2(k-8)$, und das wird $0$ genau dann, wenn $k = 8$.
+In jeder Zeile den ersten Eintrag $\neq 0$ suchen:
+\begin{itemize}[leftmargin=*, nosep]
+\item Zeile 1: Pivot $= 1$ (immer $\neq 0$). \checkmark
+\item Zeile 2: Pivot $= -2$ (immer $\neq 0$). \checkmark
+\item Zeile 3: Pivot $= 2(k-8)$ -- h\"angt von $k$ ab, wird $0$ genau bei $k = 8$.
+\end{itemize}
+
+Fallunterscheidung:
 
 \begin{itemize}[leftmargin=*, nosep]
-\item $k \neq 8$: drei Pivots, keine Nullzeile $\Rightarrow$ linear unabh\"angig.
-\item $k = 8$: Zeile 3 wird komplett zur Nullzeile $\Rightarrow$ linear abh\"angig.
+\item $k \neq 8$: drei Pivots, keine Nullzeile $\Rightarrow$ Rang $= 3 \Rightarrow$ linear \textbf{unabh\"angig}.
+\item $k = 8$: Zeile 3 wird komplett zur Nullzeile $\Rightarrow$ Rang $= 2 < 3 \Rightarrow$ linear \textbf{abh\"angig}.
 \end{itemize}
 
 \bigskip
@@ -518,33 +592,44 @@ Bei $k = 8$: $-3 v_1 + v_2 + v_3 = 0$ zeigt die Abh\"angigkeit.
 
 \textbf{Schritt 1: Ansatz.}
 
-$\alpha(v_1+v_2) + \beta(v_2+v_3) + \gamma(v_2+2v_3) = 0$.
+Um lineare Unabh\"angigkeit der neuen Menge zu zeigen, setze ich
+eine beliebige Linearkombination der drei neuen Vektoren gleich null:
+\[
+\alpha(v_1+v_2) + \beta(v_2+v_3) + \gamma(v_2+2v_3) = 0.
+\]
+Ziel: Zeigen, dass hieraus zwingend $\alpha = \beta = \gamma = 0$ folgt.
 
 \textbf{Schritt 2: Nach $v_1, v_2, v_3$ umsortieren.}
 
+Ich multipliziere aus und sammle die Terme nach $v_1, v_2, v_3$. So steht vor jedem
+``Basisvektor'' genau ein Ausdruck in $\alpha, \beta, \gamma$:
 \[
 \alpha v_1 + (\alpha + \beta + \gamma) v_2 + (\beta + 2\gamma) v_3 = 0
 \]
 
-\textbf{Schritt 3: Lineare Unabh\"angigkeit von $\{v_1, v_2, v_3\}$ ausnutzen.}
+\textbf{Schritt 3: Voraussetzung ausnutzen.}
 
-Da $\{v_1, v_2, v_3\}$ linear unabh\"angig ist, m\"ussen alle drei Koeffizienten null sein:
+Die Voraussetzung sagt: $\{v_1, v_2, v_3\}$ ist linear unabh\"angig. Das bedeutet:
+eine Linearkombination dieser drei Vektoren ist nur dann null, wenn \textbf{jeder} Koeffizient
+null ist. Damit erhalte ich ein konkretes Gleichungssystem in den Unbekannten $\alpha, \beta, \gamma$:
 \[
 \begin{cases}
-\alpha = 0 \\
-\alpha + \beta + \gamma = 0 \\
-\beta + 2\gamma = 0
+\alpha = 0 & \text{(Koeffizient vor $v_1$)} \\
+\alpha + \beta + \gamma = 0 & \text{(Koeffizient vor $v_2$)} \\
+\beta + 2\gamma = 0 & \text{(Koeffizient vor $v_3$)}
 \end{cases}
 \]
 
 \textbf{Schritt 4: System l\"osen.}
+
+Das System ist einfach genug f\"ur Einsetzen von oben nach unten:
 \begin{align*}
-\alpha &= 0 \\
-\beta + \gamma &= 0 \;\Rightarrow\; \beta = -\gamma \\
--\gamma + 2\gamma = \gamma &= 0 \;\Rightarrow\; \beta = 0
+\text{Gleichung 1:} \quad \alpha &= 0 \\
+\text{Gleichung 2 mit $\alpha = 0$:} \quad \beta + \gamma &= 0 \;\Rightarrow\; \beta = -\gamma \\
+\text{Gleichung 3 mit $\beta = -\gamma$:} \quad -\gamma + 2\gamma = \gamma &= 0 \;\Rightarrow\; \beta = 0
 \end{align*}
 
-Nur triviale L\"osung.
+$\Rightarrow \alpha = \beta = \gamma = 0$. Nur triviale L\"osung.
 
 \[
 \fbox{\parbox{0.93\textwidth}{\centering
@@ -572,29 +657,35 @@ Aussage (a) ist \textbf{wahr}: $\{v_1+v_2,\; v_2+v_3,\; v_2+2v_3\}$ ist linear u
 
 \medskip
 
-\textbf{Schritt 1: Summe der ersten beiden Vektoren bilden.}
+\textbf{Schritt 1: Nach einem Zusammenhang zwischen den drei Vektoren suchen.}
 
+Um ``notwendigerweise linear abh\"angig'' zu zeigen, reicht es, eine feste
+Linearkombination der Null anzugeben, die f\"ur \textbf{jede} Wahl von $v_1, v_2, v_3$ gilt.
+Ich probiere die einfachste: die Summe der ersten beiden Vektoren:
 \[
-(7v_1 - 11v_2) + (11v_2 - 13v_3) = 7v_1 \underbrace{-11v_2 + 11v_2}_{=0} - 13v_3 = 7v_1 - 13v_3
+(7v_1 - 11v_2) + (11v_2 - 13v_3) = 7v_1 \underbrace{-11v_2 + 11v_2}_{=0} - 13v_3 = 7v_1 - 13v_3.
 \]
 
-Das ist genau der dritte Vektor.
+Die $v_2$-Terme haben sich aufgehoben. Das Ergebnis $7v_1 - 13v_3$ ist genau der dritte Vektor.
 
 \medskip
 
-\textbf{Schritt 2: Nichttriviale Linearkombination der Null.}
+\textbf{Schritt 2: Diese Beobachtung als Linearkombination der Null hinschreiben.}
 
+``Vektor 1 $+$ Vektor 2 $=$ Vektor 3'' l\"asst sich umstellen zu
+``Vektor 1 $+$ Vektor 2 $-$ Vektor 3 $= 0$'':
 \[
-(7v_1 - 11v_2) + (11v_2 - 13v_3) - (7v_1 - 13v_3) = 0
+1 \cdot (7v_1 - 11v_2) + 1 \cdot (11v_2 - 13v_3) + (-1) \cdot (7v_1 - 13v_3) = 0
 \]
 
-Koeffizienten $(1, 1, -1)$ -- alle ungleich null $\Rightarrow$ nichttrivial.
+Koeffizienten $(1, 1, -1)$ -- alle ungleich null $\Rightarrow$ nichttriviale Kombination.
 
 \medskip
 
 \textbf{Schritt 3: Folgerung.}
 
-Dies gilt unabh\"angig von der konkreten Wahl von $v_1, v_2, v_3$.
+Die Koeffizienten $(1, 1, -1)$ h\"angen \textbf{nicht} von den konkreten Werten von $v_1, v_2, v_3$ ab.
+Die Gleichung ist f\"ur jede Wahl der drei Vektoren im gleichen Vektorraum erf\"ullt.
 
 \[
 \fbox{\parbox{0.93\textwidth}{\centering
