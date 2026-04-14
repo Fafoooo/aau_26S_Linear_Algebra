@@ -10,6 +10,8 @@
 \usepackage{tcolorbox}
 \tcbuselibrary{breakable}
 \newtcolorbox{begriffe}[1][]{colback=yellow!10, colframe=yellow!60!black, fonttitle=\bfseries, title={Was bedeuten die Begriffe?}, breakable, #1}
+\usepackage{xcolor}
+\newcommand{\piv}[1]{{\color{red}\boxed{#1}}}
 
 \title{\"Ubungsblatt 4 -- L\"osungen \\ \large Linear Algebra}
 \author{}
@@ -89,11 +91,31 @@ a - b + 3c = 1 & \text{(unten-links)} \\
 \end{array}\right)
 \]
 
-2 Pivots, keine Widerspruchszeile $\Rightarrow$ konsistent mit einer freien Variable.
+\textbf{Schritt 3: Pivots identifizieren und auswerten.}
+
+In jeder Zeile der Stufenform ist der erste Eintrag $\neq 0$ ein \textbf{Pivot}. Nullzeilen liefern kein Pivot.
+
+\[
+\left(\begin{array}{ccc|c}
+\piv{1} & 2 & 6 & 7 \\
+0 & \piv{3} & 3 & 6 \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0
+\end{array}\right)
+\qquad
+\begin{array}{l}
+\text{Pivot-Spalten:}\; a, b \\
+\text{Spalte ohne Pivot:}\; c \\
+\Rightarrow c \;\text{frei, insgesamt 1 freie Variable}
+\end{array}
+\]
+
+Keine Widerspruchszeile der Form $(0,\dots,0 \mid \neq 0)$ $\Rightarrow$ das System ist konsistent.
+Mit einer freien Variable gibt es \textbf{unendlich viele L\"osungen}.
 
 \medskip
 
-\textbf{Schritt 3: Allgemeine L\"osung.}
+\textbf{Schritt 4: Allgemeine L\"osung.}
 
 Freie Variable $c = t$.
 \begin{align*}
@@ -108,7 +130,7 @@ $(a,b,c) = (3-4t,\; 2-t,\; t),\quad t \in \mathbb{R}.$
 }}
 \]
 
-\textbf{Schritt 4: Drei konkrete Linearkombinationen.}
+\textbf{Schritt 5: Drei konkrete Linearkombinationen.}
 
 \begin{itemize}[leftmargin=*]
 \item $t = 0 \Rightarrow (a,b,c) = (3, 2, 0)$:
@@ -189,12 +211,13 @@ In der Basis $\{1, x, x^2\}$:
 \end{array}\right)
 \xrightarrow{Z_3 \to Z_3 - Z_2}
 \left(\begin{array}{ccc|c}
-1 & 1 & 1 & 0 \\
-0 & -1 & -2 & 0 \\
+\piv{1} & 1 & 1 & 0 \\
+0 & \piv{-1} & -2 & 0 \\
 0 & 0 & 0 & 0
 \end{array}\right)
 \]
 
+Pivot-Spalten: $\alpha, \beta$. Spalte ohne Pivot: $\gamma$ $\Rightarrow$ $\gamma$ frei.
 2 Pivots bei 3 Unbekannten $\Rightarrow$ nichttriviale L\"osung existiert.
 
 \medskip
@@ -267,12 +290,13 @@ x = 2: &\quad \alpha + 4\beta + 9\gamma = 0
 \end{array}\right)
 \xrightarrow{Z_3 \to Z_3 - 3Z_2}
 \left(\begin{array}{ccc|c}
-1 & 1 & 1 & 0 \\
-0 & 1 & 2 & 0 \\
-0 & 0 & 2 & 0
+\piv{1} & 1 & 1 & 0 \\
+0 & \piv{1} & 2 & 0 \\
+0 & 0 & \piv{2} & 0
 \end{array}\right)
 \]
 
+Alle drei Spalten ($\alpha, \beta, \gamma$) haben ein Pivot, keine freie Variable.
 3 Pivots bei 3 Unbekannten $\Rightarrow$ nur die triviale L\"osung $\alpha = \beta = \gamma = 0$.
 
 \medskip
@@ -357,16 +381,21 @@ in $\mathbb{R}^4$ linear unabh\"angig? Beide Methoden aus der Vorlesung zeigen.
 \end{array}\right)
 \xrightarrow{Z_4 \to Z_4 - Z_3}
 \left(\begin{array}{ccc|c}
-1 & 1 & 2 & 0 \\
-0 & -2 & k-6 & 0 \\
-0 & 0 & k-8 & 0 \\
+\piv{1} & 1 & 2 & 0 \\
+0 & \piv{-2} & k-6 & 0 \\
+0 & 0 & \piv{k-8} & 0 \\
 0 & 0 & 0 & 0
 \end{array}\right)
 \]
 
-\textbf{Schritt 3: Fallunterscheidung.}
+\textbf{Schritt 3: Pivots ablesen und Fallunterscheidung.}
 
-F\"ur lineare Unabh\"angigkeit m\"ussen alle drei Pivots $\neq 0$ sein. Die ersten beiden ($1$ und $-2$) sind es immer, das dritte ist $k-8$.
+Die Kandidaten f\"ur Pivots sind die drei markierten Eintr\"age. Die ersten beiden ($1$ und $-2$) sind immer $\neq 0$. Der dritte, $k-8$, ist nur dann ein \emph{echtes} Pivot, wenn $k-8 \neq 0$.
+
+\begin{itemize}[leftmargin=*, nosep]
+\item $k \neq 8$: alle drei Pivots vorhanden $\Rightarrow$ Rang $= 3 =$ Anzahl der Vektoren $\Rightarrow$ linear unabh\"angig.
+\item $k = 8$: das dritte Pivot wird $0$, Zeile 3 wird zur Nullzeile $\Rightarrow$ Rang $= 2 < 3 \Rightarrow$ linear abh\"angig.
+\end{itemize}
 
 \[
 \text{Linear unabh\"angig} \iff k - 8 \neq 0 \iff k \neq 8.
@@ -406,9 +435,9 @@ Probe: $-3(1,4,3,2) + (1,2,3,4) + (2,10,6,2) = (0,0,0,0) \;\checkmark$
 \end{array}\right)
 \xrightarrow{Z_3 \to 2Z_3 + (k-6)Z_2}
 \left(\begin{array}{cccc}
-1 & 4 & 3 & 2 \\
-0 & -2 & 0 & 2 \\
-0 & 0 & 2(k-8) & 2(k-8)
+\piv{1} & 4 & 3 & 2 \\
+0 & \piv{-2} & 0 & 2 \\
+0 & 0 & \piv{2(k-8)} & 2(k-8)
 \end{array}\right)
 \]
 
@@ -419,9 +448,14 @@ Rechnung zu Zeile 3 (Schritt 2):
 \item Spalte 4: $2 \cdot (-2) + (k-6) \cdot 2 = -4 + 2k - 12 = 2(k-8)$
 \end{itemize}
 
-\textbf{Schritt 3: Auswertung.}
+\textbf{Schritt 3: Pivots ablesen und auswerten.}
 
-Linear unabh\"angig $\iff$ keine Nullzeile $\iff 2(k-8) \neq 0 \iff k \neq 8$.
+Die ersten beiden Pivots ($1$ und $-2$) sind immer $\neq 0$. Das dritte ist $2(k-8)$, und das wird $0$ genau dann, wenn $k = 8$.
+
+\begin{itemize}[leftmargin=*, nosep]
+\item $k \neq 8$: drei Pivots, keine Nullzeile $\Rightarrow$ linear unabh\"angig.
+\item $k = 8$: Zeile 3 wird komplett zur Nullzeile $\Rightarrow$ linear abh\"angig.
+\end{itemize}
 
 \bigskip
 
