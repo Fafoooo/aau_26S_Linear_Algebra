@@ -117,10 +117,20 @@ Mit einer freien Variable gibt es \textbf{unendlich viele L\"osungen}.
 
 \textbf{Schritt 4: Allgemeine L\"osung.}
 
-Freie Variable $c = t$.
+Die Zeilen der Stufenform \"ubersetzen sich in folgende Gleichungen:
 \begin{align*}
-3b + 3t = 6 &\;\Rightarrow\; b = 2 - t \\
-a + 2(2-t) + 6t = 7 &\;\Rightarrow\; a = 3 - 4t
+\text{Zeile 1:} &\quad 1 \cdot a + 2 \cdot b + 6 \cdot c = 7 \\
+\text{Zeile 2:} &\quad 0 \cdot a + 3 \cdot b + 3 \cdot c = 6 \\
+\text{Zeile 3:} &\quad 0 = 0 \quad \text{(keine Information)} \\
+\text{Zeile 4:} &\quad 0 = 0 \quad \text{(keine Information)}
+\end{align*}
+
+Freie Variable setzen: $c = t$ mit $t \in \mathbb{R}$.
+
+R\"uckw\"artseinsetzen von unten nach oben:
+\begin{align*}
+\text{Aus Zeile 2:} \quad 3b + 3t = 6 &\;\Rightarrow\; b = 2 - t \\
+\text{Aus Zeile 1:} \quad a + 2(2-t) + 6t = 7 &\;\Rightarrow\; a + 4 + 4t = 7 \;\Rightarrow\; a = 3 - 4t
 \end{align*}
 
 \[
@@ -224,10 +234,19 @@ Pivot-Spalten: $\alpha, \beta$. Spalte ohne Pivot: $\gamma$ $\Rightarrow$ $\gamm
 
 \textbf{Schritt 4: Nichttriviale Linearkombination bestimmen.}
 
-Freie Variable $\gamma = 1$:
+Die Zeilen der Stufenform \"ubersetzen sich in:
 \begin{align*}
--\beta - 2\gamma = 0 &\;\Rightarrow\; \beta = -2 \\
-\alpha + \beta + \gamma = 0 &\;\Rightarrow\; \alpha = 1
+\text{Zeile 1:} &\quad 1 \cdot \alpha + 1 \cdot \beta + 1 \cdot \gamma = 0 \\
+\text{Zeile 2:} &\quad 0 \cdot \alpha + (-1) \cdot \beta + (-2) \cdot \gamma = 0 \\
+\text{Zeile 3:} &\quad 0 = 0 \quad \text{(keine Information)}
+\end{align*}
+
+Freie Variable setzen: $\gamma = 1$.
+
+R\"uckw\"artseinsetzen:
+\begin{align*}
+\text{Aus Zeile 2:} \quad -\beta - 2 \cdot 1 = 0 &\;\Rightarrow\; \beta = -2 \\
+\text{Aus Zeile 1:} \quad \alpha + (-2) + 1 = 0 &\;\Rightarrow\; \alpha = 1
 \end{align*}
 
 \[
@@ -403,10 +422,20 @@ Die Kandidaten f\"ur Pivots sind die drei markierten Eintr\"age. Die ersten beid
 
 \textbf{Schritt 4: Nichttriviale Kombination bei $k = 8$.}
 
-Freie Variable $\gamma = 1$:
+F\"ur $k = 8$ ist $k - 8 = 0$ und $k - 6 = 2$. Die Zeilen der Stufenform ergeben:
 \begin{align*}
--2\beta + (k-6)\gamma = -2\beta + 2 = 0 &\;\Rightarrow\; \beta = 1 \\
-\alpha + \beta + 2\gamma = 0 &\;\Rightarrow\; \alpha = -3
+\text{Zeile 1:} &\quad 1 \cdot \alpha + 1 \cdot \beta + 2 \cdot \gamma = 0 \\
+\text{Zeile 2:} &\quad 0 \cdot \alpha + (-2) \cdot \beta + 2 \cdot \gamma = 0 \\
+\text{Zeile 3:} &\quad 0 = 0 \quad \text{(keine Information, da $k-8 = 0$)} \\
+\text{Zeile 4:} &\quad 0 = 0
+\end{align*}
+
+Freie Variable setzen: $\gamma = 1$.
+
+R\"uckw\"artseinsetzen:
+\begin{align*}
+\text{Aus Zeile 2:} \quad -2\beta + 2 = 0 &\;\Rightarrow\; \beta = 1 \\
+\text{Aus Zeile 1:} \quad \alpha + 1 + 2 = 0 &\;\Rightarrow\; \alpha = -3
 \end{align*}
 Probe: $-3(1,4,3,2) + (1,2,3,4) + (2,10,6,2) = (0,0,0,0) \;\checkmark$
 
