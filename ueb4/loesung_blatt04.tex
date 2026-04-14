@@ -7,6 +7,9 @@
 \usepackage{booktabs}
 \usepackage{tikz}
 \usepackage{pgfplots}\pgfplotsset{compat=1.18}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable}
+\newtcolorbox{begriffe}[1][]{colback=yellow!10, colframe=yellow!60!black, fonttitle=\bfseries, title={Was bedeuten die Begriffe?}, breakable, #1}
 
 \title{\"Ubungsblatt 4 -- L\"osungen \\ \large Linear Algebra}
 \author{}
@@ -27,6 +30,15 @@ C = \begin{pmatrix} 3 & 6 \\ 3 & 8 \end{pmatrix},\quad
 M = \begin{pmatrix} 6 & 7 \\ 1 & 6 \end{pmatrix}.
 \]
 Ist $M \in \text{span}(A,B,C)$? Falls ja: eindeutig oder auf unendlich viele Arten?
+
+\begin{begriffe}
+\begin{itemize}[leftmargin=*, nosep]
+    \item $\mathbb{R}^{2 \times 2}$ -- Menge aller $2 \times 2$-Matrizen mit reellen Eintr\"agen; bildet einen Vektorraum.
+    \item $\text{span}(A,B,C)$ -- Menge aller Matrizen der Form $aA + bB + cC$ mit $a,b,c \in \mathbb{R}$.
+    \item $M \in \text{span}(A,B,C)$ -- es existieren $a,b,c \in \mathbb{R}$ mit $aA + bB + cC = M$.
+    \item \textbf{Eindeutige} Darstellung $=$ genau ein Tripel $(a,b,c)$; \textbf{unendlich viele} $=$ parametrische L\"osungsmenge.
+\end{itemize}
+\end{begriffe}
 
 \medskip
 
@@ -132,6 +144,15 @@ $(a,b,c) = (3-4t,\; 2-t,\; t),\quad t \in \mathbb{R}.$
 \]
 in $\mathbb{R}_2[x]$ linear unabh\"angig?
 
+\begin{begriffe}
+\begin{itemize}[leftmargin=*, nosep]
+    \item $\mathbb{R}_2[x]$ -- Menge aller Polynome vom Grad $\leq 2$ mit reellen Koeffizienten.
+    \item \textbf{Linear unabh\"angig} $\iff$ die Gleichung $\alpha p_1 + \beta p_2 + \gamma p_3 = 0$ (Nullpolynom) hat nur die triviale L\"osung $\alpha = \beta = \gamma = 0$.
+    \item \textbf{Linear abh\"angig} $\iff$ es existiert eine \textbf{nichttriviale} Kombination (mindestens ein Koeffizient $\neq 0$), die das Nullpolynom ergibt.
+    \item Gleichheit von Polynomen: zwei Polynome sind gleich $\iff$ alle Koeffizienten in der Basis $\{1, x, x^2\}$ \"ubereinstimmen (Koeffizientenvergleich).
+\end{itemize}
+\end{begriffe}
+
 \medskip
 
 \textbf{Schritt 1: Polynome ausmultiplizieren.}
@@ -209,6 +230,15 @@ $1 \cdot p_1 - 2 \cdot p_2 + 1 \cdot p_3 = 0.$
 
 \textbf{Angabe.} Ist die Menge $\{1,\; 2^x,\; 3^x\}$ in $\text{FUNC}(\mathbb{R})$ linear unabh\"angig?
 
+\begin{begriffe}
+\begin{itemize}[leftmargin=*, nosep]
+    \item $\text{FUNC}(\mathbb{R})$ -- Vektorraum aller Funktionen $f : \mathbb{R} \to \mathbb{R}$.
+    \item $1$ bezeichnet die konstante Funktion $f(x) = 1$; $2^x$ und $3^x$ die Exponentialfunktionen.
+    \item \textbf{Nullvektor} in $\text{FUNC}(\mathbb{R})$ $=$ Nullfunktion ($f(x) = 0$ f\"ur alle $x$).
+    \item Gleichung $\alpha \cdot 1 + \beta \cdot 2^x + \gamma \cdot 3^x = 0$ muss f\"ur \textbf{alle} $x \in \mathbb{R}$ gleichzeitig gelten.
+\end{itemize}
+\end{begriffe}
+
 \medskip
 
 \textbf{Schritt 1: Ansatz und Auswertung an drei Punkten.}
@@ -270,6 +300,19 @@ Menge ist \textbf{linear unabh\"angig}.
 \{v_1, v_2, v_3\} = \{(1,4,3,2),\; (1,2,3,4),\; (2, k+2, k-2, 2)\}
 \]
 in $\mathbb{R}^4$ linear unabh\"angig? Beide Methoden aus der Vorlesung zeigen.
+
+\begin{begriffe}
+\begin{itemize}[leftmargin=*, nosep]
+    \item $\mathbb{R}^4$ -- Vektorraum aller 4-Tupel reeller Zahlen.
+    \item \textbf{Parameter $k \in \mathbb{R}$} -- unbestimmte reelle Zahl; die Untersuchung erfolgt in Abh\"angigkeit von $k$ (Fallunterscheidung).
+    \item \textbf{Beide Methoden aus der Vorlesung}:
+    \begin{itemize}[nosep]
+        \item Methode 1 -- Ansatz $\alpha v_1 + \beta v_2 + \gamma v_3 = 0$; L\"osen des homogenen Systems in $\alpha, \beta, \gamma$.
+        \item Methode 2 -- Vektoren als Zeilen in eine Matrix schreiben; per Gau\ss{} auf Stufenform bringen und Rang ablesen.
+    \end{itemize}
+    \item \textbf{Pivot} -- f\"uhrender $\neq 0$-Eintrag einer Zeile in Stufenform. Linear unabh\"angig $\iff$ Anzahl der Pivots $=$ Anzahl der Vektoren.
+\end{itemize}
+\end{begriffe}
 
 \bigskip
 
@@ -399,6 +442,15 @@ Bei $k = 8$: $-3 v_1 + v_2 + v_3 = 0$ zeigt die Abh\"angigkeit.
 
 \textbf{Angabe.} Sei $\{v_1, v_2, v_3\}$ linear unabh\"angig. Ist dann auch $\{v_1+v_2,\; v_2+v_3,\; v_2+2v_3\}$ linear unabh\"angig?
 
+\begin{begriffe}
+\begin{itemize}[leftmargin=*, nosep]
+    \item $V$ -- beliebiger Vektorraum; $v_1, v_2, v_3 \in V$ beliebige Vektoren mit der angegebenen Voraussetzung.
+    \item \textbf{Voraussetzung} ``$\{v_1, v_2, v_3\}$ linear unabh\"angig'' $\Rightarrow$ aus $a_1 v_1 + a_2 v_2 + a_3 v_3 = 0$ folgt $a_1 = a_2 = a_3 = 0$.
+    \item \textbf{Zu zeigen:} gleiche Eigenschaft f\"ur die neuen Vektoren $v_1+v_2,\; v_2+v_3,\; v_2+2v_3$.
+    \item \textbf{Strategie:} Linearkombination der neuen Vektoren nach $v_1, v_2, v_3$ umsortieren, dann Voraussetzung anwenden.
+\end{itemize}
+\end{begriffe}
+
 \medskip
 
 \textbf{Schritt 1: Ansatz.}
@@ -446,6 +498,14 @@ Aussage (a) ist \textbf{wahr}: $\{v_1+v_2,\; v_2+v_3,\; v_2+2v_3\}$ ist linear u
 %% ============================================================
 
 \textbf{Angabe.} Ist $\{7v_1 - 11v_2,\; 11v_2 - 13v_3,\; 7v_1 - 13v_3\}$ notwendig linear abh\"angig?
+
+\begin{begriffe}
+\begin{itemize}[leftmargin=*, nosep]
+    \item $V$ -- beliebiger Vektorraum; $v_1, v_2, v_3 \in V$ beliebig (keine Voraussetzung \"uber Abh\"angigkeit).
+    \item \textbf{Notwendigerweise} linear abh\"angig $\iff$ die Menge ist linear abh\"angig \textbf{f\"ur jede} Wahl von $v_1, v_2, v_3$ (nicht nur f\"ur ein Beispiel).
+    \item \textbf{Nachweis} durch Angabe einer konkreten, nichttrivialen Linearkombination der Null, deren Koeffizienten nicht von den $v_i$ abh\"angen.
+\end{itemize}
+\end{begriffe}
 
 \medskip
 
