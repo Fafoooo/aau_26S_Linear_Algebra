@@ -220,13 +220,27 @@ p_3 &= (x+1)(x-4) = x^2 - 3x - 4
 
 \textbf{Schritt 2: Ansatz $\alpha p_1 + \beta p_2 + \gamma p_3 = 0$ und Koeffizientenvergleich.}
 
-Zwei Polynome sind gleich $\iff$ alle Koeffizienten zur gleichen Potenz \"ubereinstimmen.
-Da die rechte Seite das Nullpolynom ist, muss jeder Koeffizient einzeln $0$ ergeben:
+Ich setze die ausmultiplizierten Polynome aus Schritt 1 in den Ansatz ein:
+\begin{align*}
+\alpha \cdot \underbrace{(x^2 - x - 2)}_{p_1}
++ \beta \cdot \underbrace{(x^2 - 2x - 3)}_{p_2}
++ \gamma \cdot \underbrace{(x^2 - 3x - 4)}_{p_3} &= 0
+\end{align*}
+
+Ausmultiplizieren und nach Potenzen von $x$ sortieren:
+\begin{align*}
+&\alpha x^2 - \alpha x - 2\alpha + \beta x^2 - 2\beta x - 3\beta + \gamma x^2 - 3\gamma x - 4\gamma = 0 \\
+\iff\;& \underbrace{(\alpha + \beta + \gamma)}_{\text{Koeff.\ von } x^2} x^2
++ \underbrace{(-\alpha - 2\beta - 3\gamma)}_{\text{Koeff.\ von } x} x
++ \underbrace{(-2\alpha - 3\beta - 4\gamma)}_{\text{konstanter Term}} = 0
+\end{align*}
+
+Die rechte Seite ist das Nullpolynom -- also muss jeder Koeffizient einzeln $0$ sein:
 \[
 \begin{cases}
-\alpha + \beta + \gamma = 0 & \text{(Koeffizient von $x^2$)} \\
--\alpha - 2\beta - 3\gamma = 0 & \text{(Koeffizient von $x$)} \\
--2\alpha - 3\beta - 4\gamma = 0 & \text{(konstanter Term)}
+\alpha + \beta + \gamma = 0 & \text{(Koeffizient von $x^2$: aus jedem $p_i$ kommt ein $x^2$)} \\
+-\alpha - 2\beta - 3\gamma = 0 & \text{(Koeffizient von $x$: aus $p_1, p_2, p_3$ kommen $-1, -2, -3$)} \\
+-2\alpha - 3\beta - 4\gamma = 0 & \text{(konstanter Term: aus $p_1, p_2, p_3$ kommen $-2, -3, -4$)}
 \end{cases}
 \]
 
