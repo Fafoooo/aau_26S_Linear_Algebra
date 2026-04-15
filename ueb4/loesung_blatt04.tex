@@ -286,23 +286,23 @@ Die rechte Seite ist das Nullpolynom -- also muss jeder Koeffizient einzeln $0$ 
 
 \medskip
 
-\textbf{Schritt 5: Konkrete nichttriviale Linearkombination bestimmen.}
+\textbf{Schritt 5: Konkrete Koeffizienten $\alpha, \beta, \gamma$ ausrechnen.}
 
-Die Zeilen der Stufenform \"ubersetzen sich in:
-\begin{align*}
-\text{Zeile 1:} &\quad 1 \cdot \alpha + 1 \cdot \beta + 1 \cdot \gamma = 0 \\
-\text{Zeile 2:} &\quad 0 \cdot \alpha + (-1) \cdot \beta + (-2) \cdot \gamma = 0 \\
-\text{Zeile 3:} &\quad 0 = 0 \quad \text{(keine Information)}
-\end{align*}
+Ich brauche jetzt konkrete Zahlen f\"ur $\alpha, \beta, \gamma$, die nicht alle null sind und das Gleichungssystem erf\"ullen.
 
-Die freie Variable darf ich frei w\"ahlen. Ich nehme den einfachsten Wert $\gamma = 1$
-(damit ich nichttrivial bleibe):
+\textbf{(a) Freie Variable w\"ahlen.} $\gamma$ ist frei $\Rightarrow$ ich darf irgendeine Zahl reinsetzen. Ich nehme $\gamma = 1$ (einfachster Wert $\neq 0$).
 
-R\"uckw\"artseinsetzen:
-\begin{align*}
-\text{Aus Zeile 2:} \quad -\beta - 2 \cdot 1 = 0 &\;\Rightarrow\; \beta = -2 \\
-\text{Aus Zeile 1:} \quad \alpha + (-2) + 1 = 0 &\;\Rightarrow\; \alpha = 1
-\end{align*}
+\textbf{(b) $\beta$ aus Zeile 2 ausrechnen.} Zeile 2 lautet $-\beta - 2\gamma = 0$. Mit $\gamma = 1$:
+\[
+-\beta - 2 = 0 \;\Rightarrow\; \beta = -2.
+\]
+
+\textbf{(c) $\alpha$ aus Zeile 1 ausrechnen.} Zeile 1 lautet $\alpha + \beta + \gamma = 0$. Mit $\beta = -2$ und $\gamma = 1$:
+\[
+\alpha - 2 + 1 = 0 \;\Rightarrow\; \alpha = 1.
+\]
+
+\textbf{Ergebnis:} $(\alpha, \beta, \gamma) = (1, -2, 1)$ -- nicht alle null, also nichttrivial.
 
 \[
 \fbox{\parbox{0.93\textwidth}{\centering
