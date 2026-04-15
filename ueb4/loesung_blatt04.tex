@@ -12,6 +12,7 @@
 \newtcolorbox{begriffe}[1][]{colback=yellow!10, colframe=yellow!60!black, fonttitle=\bfseries, title={Was bedeuten die Begriffe?}, breakable, #1}
 \usepackage{xcolor}
 \newcommand{\piv}[1]{{\color{red}\boxed{#1}}}
+\newtcolorbox{wastun}[1][]{colback=orange!5, colframe=orange!60!black, fonttitle=\bfseries, title={Was ist zu tun?}, breakable, #1}
 
 \title{\"Ubungsblatt 4 -- L\"osungen \\ \large Linear Algebra}
 \author{}
@@ -190,6 +191,21 @@ in $\mathbb{R}_2[x]$ linear unabh\"angig?
 \end{itemize}
 \end{begriffe}
 
+\begin{wastun}
+\begin{enumerate}[leftmargin=*, nosep]
+    \item Polynome ausmultiplizieren, sodass sie in der Form $ax^2 + bx + c$ dastehen.
+    \item Ansatz $\alpha p_1 + \beta p_2 + \gamma p_3 = 0$ aufstellen und ausmultiplizieren.
+    \item \textbf{Koeffizientenvergleich}: f\"ur jede Potenz von $x$ (also $x^2$, $x$, $1$) eine eigene Gleichung aufstellen. So wird aus dem Polynom-Problem ein ganz normales lineares Gleichungssystem.
+    \item Gleichungssystem mit Gau\ss-Elimination l\"osen (wie gewohnt).
+    \item Pivots ablesen und entscheiden:
+    \begin{itemize}[nosep]
+        \item Nur triviale L\"osung $\Rightarrow$ linear unabh\"angig (Ende).
+        \item Nichttriviale L\"osung $\Rightarrow$ linear abh\"angig. Dann noch eine konkrete Kombination $\alpha p_1 + \beta p_2 + \gamma p_3 = 0$ mit nicht allen Koeffizienten null angeben.
+    \end{itemize}
+    \item Probe: Kombination einsetzen, ausmultiplizieren, muss das Nullpolynom ergeben.
+\end{enumerate}
+\end{wastun}
+
 \medskip
 
 \textbf{Schritt 1: Polynome ausmultiplizieren.}
@@ -306,6 +322,20 @@ $1 \cdot p_1 - 2 \cdot p_2 + 1 \cdot p_3 = 0.$
 \end{itemize}
 \end{begriffe}
 
+\begin{wastun}
+\begin{enumerate}[leftmargin=*, nosep]
+    \item Ansatz $\alpha \cdot 1 + \beta \cdot 2^x + \gamma \cdot 3^x = 0$ hinschreiben (soll f\"ur alle $x$ gelten).
+    \item \textbf{Drei ``einfache'' $x$-Werte einsetzen} (z.\,B.\ $x = 0, 1, 2$). Jede Einsetzung liefert eine gew\"ohnliche Zahlengleichung $\Rightarrow$ drei Gleichungen in drei Unbekannten $\alpha, \beta, \gamma$.
+    \item Gau\ss-Elimination durchf\"uhren.
+    \item Pivots ablesen und entscheiden:
+    \begin{itemize}[nosep]
+        \item Drei Pivots $\Rightarrow$ nur die triviale L\"osung $\Rightarrow$ linear \textbf{unabh\"angig}.
+        \item Weniger als drei Pivots $\Rightarrow$ nichttriviale L\"osung $\Rightarrow$ linear \textbf{abh\"angig}.
+    \end{itemize}
+    \item Folgerung: Das Ergebnis an drei Punkten gilt erst recht, wenn man es f\"ur \textbf{alle} $x$ fordert (die Bedingung ``alle $x$'' ist st\"arker).
+\end{enumerate}
+\end{wastun}
+
 \medskip
 
 \textbf{Schritt 1: Ansatz und Umwandlung in ein l\"osbares System.}
@@ -405,6 +435,30 @@ in $\mathbb{R}^4$ linear unabh\"angig? Beide Methoden aus der Vorlesung zeigen.
     \item \textbf{Pivot} -- f\"uhrender $\neq 0$-Eintrag einer Zeile in Stufenform. Linear unabh\"angig $\iff$ Anzahl der Pivots $=$ Anzahl der Vektoren.
 \end{itemize}
 \end{begriffe}
+
+\begin{wastun}
+Die Aufgabe verlangt \textbf{beide Methoden aus der Vorlesung}. Also zweimal das Ergebnis zeigen -- einmal mit Methode 1, einmal mit Methode 2. Beide m\"ussen dasselbe herauskommen.
+
+\medskip
+
+\textbf{Methode 1} (Homogene Gleichung):
+\begin{enumerate}[leftmargin=*, nosep]
+    \item Ansatz $\alpha v_1 + \beta v_2 + \gamma v_3 = 0$; eintragsweise in 4 Gleichungen zerlegen (je eine pro Komponente von $\mathbb{R}^4$).
+    \item Gau\ss-Elimination, mit $k$ als Parameter mitgeschleppt.
+    \item Pivots ablesen. Wo taucht $k$ auf? $\Rightarrow$ dort entsteht die Bedingung f\"ur ``echtes'' Pivot.
+    \item Fallunterscheidung: F\"ur welche $k$-Werte werden alle Pivots $\neq 0$?
+\end{enumerate}
+
+\textbf{Methode 2} (Vektoren als Zeilen):
+\begin{enumerate}[leftmargin=*, nosep]
+    \item Die drei Vektoren als Zeilen untereinander schreiben ($3 \times 4$-Matrix).
+    \item Gau\ss-Elimination durchf\"uhren.
+    \item Pivots bzw.\ Nullzeilen ablesen: Wenn eine Zeile komplett $0$ wird, waren die Vektoren linear abh\"angig.
+    \item Gleiche Fallunterscheidung nach $k$.
+\end{enumerate}
+
+\textbf{Zusatz:} Im Fall $k = 8$ eine konkrete nichttriviale Linearkombination angeben, die $\vec 0$ ergibt (zur Probe).
+\end{wastun}
 
 \bigskip
 
@@ -588,6 +642,23 @@ Bei $k = 8$: $-3 v_1 + v_2 + v_3 = 0$ zeigt die Abh\"angigkeit.
 \end{itemize}
 \end{begriffe}
 
+\begin{wastun}
+Die Aussage ist eine Behauptung. Zwei M\"oglichkeiten:
+\begin{itemize}[leftmargin=*, nosep]
+    \item \textbf{Wahr beweisen:} zeigen, dass aus $\alpha(v_1+v_2) + \beta(v_2+v_3) + \gamma(v_2+2v_3) = 0$ zwingend $\alpha = \beta = \gamma = 0$ folgt.
+    \item \textbf{Falsch zeigen:} ein konkretes Gegenbeispiel (z.\,B.\ $v_1, v_2, v_3$ im $\mathbb{R}^3$), bei dem die neue Menge linear abh\"angig wird.
+\end{itemize}
+
+\medskip
+\textbf{Konkrete Schritte zum Beweis:}
+\begin{enumerate}[leftmargin=*, nosep]
+    \item Ansatz $\alpha(v_1+v_2) + \beta(v_2+v_3) + \gamma(v_2+2v_3) = 0$ hinschreiben.
+    \item Ausmultiplizieren und \textbf{nach $v_1, v_2, v_3$ sortieren}. So steht vor jedem Basisvektor genau ein Ausdruck in $\alpha, \beta, \gamma$.
+    \item Voraussetzung anwenden: Da $\{v_1, v_2, v_3\}$ linear unabh\"angig ist, muss jeder dieser drei Ausdr\"ucke einzeln $0$ ergeben $\Rightarrow$ ein normales Gleichungssystem in $\alpha, \beta, \gamma$.
+    \item System l\"osen. Kommt nur $\alpha = \beta = \gamma = 0$ heraus $\Rightarrow$ Aussage wahr.
+\end{enumerate}
+\end{wastun}
+
 \medskip
 
 \textbf{Schritt 1: Ansatz.}
@@ -654,6 +725,20 @@ Aussage (a) ist \textbf{wahr}: $\{v_1+v_2,\; v_2+v_3,\; v_2+2v_3\}$ ist linear u
     \item \textbf{Nachweis} durch Angabe einer konkreten, nichttrivialen Linearkombination der Null, deren Koeffizienten nicht von den $v_i$ abh\"angen.
 \end{itemize}
 \end{begriffe}
+
+\begin{wastun}
+``Notwendigerweise linear abh\"angig'' hei\ss t: linear abh\"angig f\"ur \emph{jede} Wahl von $v_1, v_2, v_3$. Wenn das wahr ist, muss es eine feste, universelle nichttriviale Linearkombination der drei Vektoren geben, die \textbf{ohne Voraussetzungen \"uber $v_1, v_2, v_3$} schon $\vec 0$ ergibt.
+
+\medskip
+\textbf{Konkrete Schritte:}
+\begin{enumerate}[leftmargin=*, nosep]
+    \item Die drei gegebenen Vektoren anschauen: $u_1 = 7v_1 - 11v_2$, $u_2 = 11v_2 - 13v_3$, $u_3 = 7v_1 - 13v_3$.
+    \item Einfache Kombinationen ausprobieren, z.\,B.\ $u_1 + u_2$. Ziel: Terme sollen sich wegheben, sodass ein anderer $u_i$ entsteht.
+    \item Die gefundene Gleichung ``$u_1 + u_2 = u_3$'' umstellen zu einer Linearkombination der Null: $u_1 + u_2 - u_3 = 0$.
+    \item Koeffizienten pr\"ufen: nicht alle null $\Rightarrow$ nichttrivial $\Rightarrow$ linear abh\"angig.
+    \item Hinweis darauf, dass die gefundenen Koeffizienten $(1, 1, -1)$ nicht von $v_1, v_2, v_3$ abh\"angen $\Rightarrow$ gilt universell.
+\end{enumerate}
+\end{wastun}
 
 \medskip
 
