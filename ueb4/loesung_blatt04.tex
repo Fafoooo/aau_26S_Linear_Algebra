@@ -354,20 +354,27 @@ $1 \cdot p_1 - 2 \cdot p_2 + 1 \cdot p_3 = 0.$
 
 \textbf{Schritt 1: Ansatz und Umwandlung in ein l\"osbares System.}
 
-Die Bedingung lautet:
+\textbf{(a) Ansatz hinschreiben.} Die Bedingung lautet:
 \[
 \alpha \cdot 1 + \beta \cdot 2^x + \gamma \cdot 3^x = 0 \quad \text{f\"ur \textbf{alle} } x \in \mathbb{R}.
 \]
 
-Eine Gleichung, die f\"ur alle $x$ gelten muss, gilt insbesondere f\"ur jede einzelne Wahl von $x$.
-Ich setze also drei einfache Werte ein ($x = 0, 1, 2$) und erhalte drei
-``normale'' lineare Gleichungen:
+\textbf{(b) Trick: drei konkrete $x$-Werte einsetzen.} Wenn die Gleichung f\"ur jedes $x$ gelten muss, dann auch f\"ur drei konkrete. Ich w\"ahle die einfachsten: $x = 0, 1, 2$.
 
-\begin{align*}
-x = 0: &\quad \alpha \cdot 1 + \beta \cdot 2^0 + \gamma \cdot 3^0 = 0 \;\Rightarrow\; \alpha + \beta + \gamma = 0 \\
-x = 1: &\quad \alpha \cdot 1 + \beta \cdot 2^1 + \gamma \cdot 3^1 = 0 \;\Rightarrow\; \alpha + 2\beta + 3\gamma = 0 \\
-x = 2: &\quad \alpha \cdot 1 + \beta \cdot 2^2 + \gamma \cdot 3^2 = 0 \;\Rightarrow\; \alpha + 4\beta + 9\gamma = 0
-\end{align*}
+\textbf{(c) $x = 0$ einsetzen.} Mit $2^0 = 1$ und $3^0 = 1$:
+\[
+\alpha \cdot 1 + \beta \cdot 1 + \gamma \cdot 1 = 0 \;\Rightarrow\; \alpha + \beta + \gamma = 0.
+\]
+
+\textbf{(d) $x = 1$ einsetzen.} Mit $2^1 = 2$ und $3^1 = 3$:
+\[
+\alpha \cdot 1 + \beta \cdot 2 + \gamma \cdot 3 = 0 \;\Rightarrow\; \alpha + 2\beta + 3\gamma = 0.
+\]
+
+\textbf{(e) $x = 2$ einsetzen.} Mit $2^2 = 4$ und $3^2 = 9$:
+\[
+\alpha \cdot 1 + \beta \cdot 4 + \gamma \cdot 9 = 0 \;\Rightarrow\; \alpha + 4\beta + 9\gamma = 0.
+\]
 
 \textbf{Schritt 2: Erweiterte Koeffizientenmatrix und Gau\ss-Elimination.}
 
@@ -551,9 +558,9 @@ Fallunterscheidung nach dem Wert von $k$:
 \text{Linear unabh\"angig} \iff k - 8 \neq 0 \iff k \neq 8.
 \]
 
-\textbf{Schritt 4: Nichttriviale Kombination bei $k = 8$.}
+\textbf{Schritt 4: Konkrete Koeffizienten bei $k = 8$ ausrechnen.}
 
-F\"ur $k = 8$ ist $k - 8 = 0$ und $k - 6 = 2$. Die Zeilen der Stufenform ergeben:
+\textbf{(a) $k = 8$ in die Stufenform einsetzen.} Mit $k - 8 = 0$ und $k - 6 = 2$ werden die Zeilen zu:
 \begin{align*}
 \text{Zeile 1:} &\quad 1 \cdot \alpha + 1 \cdot \beta + 2 \cdot \gamma = 0 \\
 \text{Zeile 2:} &\quad 0 \cdot \alpha + (-2) \cdot \beta + 2 \cdot \gamma = 0 \\
@@ -561,14 +568,22 @@ F\"ur $k = 8$ ist $k - 8 = 0$ und $k - 6 = 2$. Die Zeilen der Stufenform ergeben
 \text{Zeile 4:} &\quad 0 = 0
 \end{align*}
 
-Freie Variable setzen: $\gamma = 1$.
+\textbf{(b) Freie Variable w\"ahlen.} $\gamma$ ist frei $\Rightarrow$ ich nehme $\gamma = 1$.
 
-R\"uckw\"artseinsetzen:
-\begin{align*}
-\text{Aus Zeile 2:} \quad -2\beta + 2 = 0 &\;\Rightarrow\; \beta = 1 \\
-\text{Aus Zeile 1:} \quad \alpha + 1 + 2 = 0 &\;\Rightarrow\; \alpha = -3
-\end{align*}
-Probe: $-3(1,4,3,2) + (1,2,3,4) + (2,10,6,2) = (0,0,0,0) \;\checkmark$
+\textbf{(c) $\beta$ aus Zeile 2 ausrechnen.} Zeile 2 mit $\gamma = 1$:
+\[
+-2\beta + 2 \cdot 1 = 0 \;\Rightarrow\; -2\beta = -2 \;\Rightarrow\; \beta = 1.
+\]
+
+\textbf{(d) $\alpha$ aus Zeile 1 ausrechnen.} Zeile 1 mit $\beta = 1$ und $\gamma = 1$:
+\[
+\alpha + 1 + 2 \cdot 1 = 0 \;\Rightarrow\; \alpha + 3 = 0 \;\Rightarrow\; \alpha = -3.
+\]
+
+\textbf{(e) Probe.} Einsetzen von $(\alpha, \beta, \gamma) = (-3, 1, 1)$ in die urspr\"ungliche Gleichung:
+\[
+-3(1,4,3,2) + 1 \cdot (1,2,3,4) + 1 \cdot (2,10,6,2) = (0,0,0,0) \;\checkmark
+\]
 
 \bigskip
 
@@ -684,18 +699,28 @@ eine beliebige Linearkombination der drei neuen Vektoren gleich null:
 \]
 Ziel: Zeigen, dass hieraus zwingend $\alpha = \beta = \gamma = 0$ folgt.
 
-\textbf{Schritt 2: Nach $v_1, v_2, v_3$ umsortieren.}
+\textbf{Schritt 2: Ausmultiplizieren und nach $v_1, v_2, v_3$ sortieren.}
 
-Ich multipliziere aus und sammle die Terme nach $v_1, v_2, v_3$. So steht vor jedem
-``Basisvektor'' genau ein Ausdruck in $\alpha, \beta, \gamma$:
+\textbf{(a) Ausmultiplizieren.} Klammern aufl\"osen:
 \[
-\alpha v_1 + (\alpha + \beta + \gamma) v_2 + (\beta + 2\gamma) v_3 = 0
+\alpha v_1 + \alpha v_2 + \beta v_2 + \beta v_3 + \gamma v_2 + 2\gamma v_3 = 0.
+\]
+
+\textbf{(b) Sammeln pro Vektor.} Terme mit $v_1$, $v_2$, $v_3$ jeweils zusammenfassen:
+\begin{itemize}[leftmargin=*, nosep]
+    \item Vor $v_1$: nur $\alpha$.
+    \item Vor $v_2$: $\alpha + \beta + \gamma$.
+    \item Vor $v_3$: $\beta + 2\gamma$.
+\end{itemize}
+Das ergibt:
+\[
+\alpha \cdot v_1 + (\alpha + \beta + \gamma) \cdot v_2 + (\beta + 2\gamma) \cdot v_3 = 0.
 \]
 
 \textbf{Schritt 3: Voraussetzung ausnutzen.}
 
 Die Voraussetzung sagt: $\{v_1, v_2, v_3\}$ ist linear unabh\"angig. Das bedeutet:
-eine Linearkombination dieser drei Vektoren ist nur dann null, wenn \textbf{jeder} Koeffizient
+eine Linearkombination dieser drei Vektoren ist nur dann null, wenn \textbf{jeder} Koeffizient einzeln
 null ist. Damit erhalte ich ein konkretes Gleichungssystem in den Unbekannten $\alpha, \beta, \gamma$:
 \[
 \begin{cases}
@@ -705,14 +730,24 @@ null ist. Damit erhalte ich ein konkretes Gleichungssystem in den Unbekannten $\
 \end{cases}
 \]
 
-\textbf{Schritt 4: System l\"osen.}
+\textbf{Schritt 4: Konkrete Koeffizienten ausrechnen.}
 
-Das System ist einfach genug f\"ur Einsetzen von oben nach unten:
-\begin{align*}
-\text{Gleichung 1:} \quad \alpha &= 0 \\
-\text{Gleichung 2 mit $\alpha = 0$:} \quad \beta + \gamma &= 0 \;\Rightarrow\; \beta = -\gamma \\
-\text{Gleichung 3 mit $\beta = -\gamma$:} \quad -\gamma + 2\gamma = \gamma &= 0 \;\Rightarrow\; \beta = 0
-\end{align*}
+\textbf{(a) $\alpha$ aus Gleichung 1.} Direkt ablesbar:
+\[
+\alpha = 0.
+\]
+
+\textbf{(b) $\beta$ in Abh\"angigkeit von $\gamma$ aus Gleichung 2.} Mit $\alpha = 0$:
+\[
+0 + \beta + \gamma = 0 \;\Rightarrow\; \beta = -\gamma.
+\]
+
+\textbf{(c) $\gamma$ aus Gleichung 3.} Mit $\beta = -\gamma$:
+\[
+(-\gamma) + 2\gamma = 0 \;\Rightarrow\; \gamma = 0.
+\]
+
+\textbf{(d) Zur\"ucksubstituieren.} Wegen $\beta = -\gamma = 0$ folgt auch $\beta = 0$.
 
 $\Rightarrow \alpha = \beta = \gamma = 0$. Nur triviale L\"osung.
 
@@ -760,24 +795,42 @@ Aussage (a) ist \textbf{wahr}: $\{v_1+v_2,\; v_2+v_3,\; v_2+2v_3\}$ ist linear u
 
 Um ``notwendigerweise linear abh\"angig'' zu zeigen, reicht es, eine feste
 Linearkombination der Null anzugeben, die f\"ur \textbf{jede} Wahl von $v_1, v_2, v_3$ gilt.
-Ich probiere die einfachste: die Summe der ersten beiden Vektoren:
+
+\textbf{(a) Einfache Kombination ausprobieren: Summe der ersten beiden.}
 \[
-(7v_1 - 11v_2) + (11v_2 - 13v_3) = 7v_1 \underbrace{-11v_2 + 11v_2}_{=0} - 13v_3 = 7v_1 - 13v_3.
+(7v_1 - 11v_2) + (11v_2 - 13v_3)
 \]
 
-Die $v_2$-Terme haben sich aufgehoben. Das Ergebnis $7v_1 - 13v_3$ ist genau der dritte Vektor.
+\textbf{(b) Klammern aufl\"osen und sortieren.}
+\[
+= 7v_1 - 11v_2 + 11v_2 - 13v_3.
+\]
+
+\textbf{(c) Gleiche Terme zusammenfassen.} Die $v_2$-Terme heben sich auf ($-11v_2 + 11v_2 = 0$):
+\[
+= 7v_1 + 0 - 13v_3 = 7v_1 - 13v_3.
+\]
+
+\textbf{(d) Ergebnis vergleichen.} Das ist genau der dritte Vektor der Menge:
+\[
+(7v_1 - 11v_2) + (11v_2 - 13v_3) = 7v_1 - 13v_3.
+\]
 
 \medskip
 
 \textbf{Schritt 2: Diese Beobachtung als Linearkombination der Null hinschreiben.}
 
-``Vektor 1 $+$ Vektor 2 $=$ Vektor 3'' l\"asst sich umstellen zu
-``Vektor 1 $+$ Vektor 2 $-$ Vektor 3 $= 0$'':
+\textbf{(a) Gleichung umstellen.} Von der Form ``Vektor 1 $+$ Vektor 2 $=$ Vektor 3'' subtrahiere ich Vektor 3 auf beiden Seiten:
 \[
-1 \cdot (7v_1 - 11v_2) + 1 \cdot (11v_2 - 13v_3) + (-1) \cdot (7v_1 - 13v_3) = 0
+(7v_1 - 11v_2) + (11v_2 - 13v_3) - (7v_1 - 13v_3) = 0.
 \]
 
-Koeffizienten $(1, 1, -1)$ -- alle ungleich null $\Rightarrow$ nichttriviale Kombination.
+\textbf{(b) Koeffizienten ablesen.} Vor den drei Vektoren steht jeweils:
+\[
+1 \cdot (7v_1 - 11v_2) + 1 \cdot (11v_2 - 13v_3) + (-1) \cdot (7v_1 - 13v_3) = 0.
+\]
+
+Koeffizienten $(\alpha, \beta, \gamma) = (1, 1, -1)$ -- alle ungleich null $\Rightarrow$ \textbf{nichttriviale} Kombination.
 
 \medskip
 
