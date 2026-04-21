@@ -1,0 +1,267 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{geometry}\geometry{margin=2.5cm}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable}
+\usepackage{xcolor}
+
+\newtcolorbox{merkbox}[1][]{colback=blue!5, colframe=blue!40, fonttitle=\bfseries, title={Merke}, breakable, #1}
+\newtcolorbox{analogie}[1][]{colback=green!5, colframe=green!40, fonttitle=\bfseries, title={Analogie}, breakable, #1}
+\newtcolorbox{begriffe}[1][]{colback=yellow!10, colframe=yellow!60!black, fonttitle=\bfseries, title={Was bedeuten die Begriffe?}, breakable, #1}
+\newtcolorbox{wastun}[1][]{colback=orange!5, colframe=orange!60!black, fonttitle=\bfseries, title={Was ist zu tun?}, breakable, #1}
+
+\title{Erkl\"arung -- HW05: Basis, Dimension, Unterr\"aume}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+%=============================================================================
+\part*{Teil 1: Grundlagen -- Was du wissen musst}
+
+%-----------------------------------------------------------------------------
+\section*{1. Was ist eine Basis?}
+
+Eine \textbf{Basis} eines Vektorraums $V$ ist eine Menge $\{b_1, b_2, \dots, b_k\}$ von Vektoren, sodass:
+\begin{enumerate}[nosep]
+    \item Die Vektoren sind \textbf{linear unabh\"angig} (niemand ist \"uberfl\"ussig).
+    \item Sie \textbf{spannen} $V$ auf (jede Vektor in $V$ ist eine Linearkombination der $b_i$).
+\end{enumerate}
+
+\begin{analogie}
+Eine Basis ist wie ein \textbf{Baukasten}: mit den Bausteinen kann ich jedes Objekt in $V$ zusammensetzen (aufspannen), und kein Baustein ist \"uberfl\"ussig (linear unabh\"angig). Ein Baukasten mit \emph{zwei identischen} Hammern ist eine Verschwendung -- einer reicht. Ein Baukasten ohne Schraubenzieher kann nicht alles zusammensetzen.
+\end{analogie}
+
+\begin{merkbox}[title={Dimension}]
+Die \textbf{Dimension} von $V$ ist die Anzahl der Elemente in einer Basis. Jede Basis hat gleich viele Elemente -- das ist ein Satz.
+
+$\dim \mathbb{R}^n = n$, $\dim \mathbb{R}^{n \times n} = n^2$, $\dim \mathbb{R}_k[x] = k+1$.
+\end{merkbox}
+
+%-----------------------------------------------------------------------------
+\section*{2. Die zwei Hauptfragen bei Aufgabe 18}
+
+Bei Vektoren $v_1, \dots, v_m$ und $W = \text{span}(v_1, \dots, v_m)$ stellen sich zwei typische Fragen:
+
+\begin{merkbox}[title={Frage 1: Basis von $W$ finden}]
+Es gibt \textbf{zwei Standardmethoden}:
+
+\medskip
+\textbf{Zeilenmethode (liefert eine ``sch\"one'' Basis, aber nicht aus den $v_i$)}:
+\begin{itemize}[nosep]
+    \item Die $v_i$ als Zeilen in eine Matrix schreiben.
+    \item Gau\ss/RREF durchf\"uhren.
+    \item Die Nichtnull-Zeilen der RREF sind eine Basis von $W$.
+    \item \textbf{Achtung:} Diese Basisvektoren sind neu entstanden, sie sind i.\,A.\ nicht mehr die urspr\"unglichen $v_i$.
+\end{itemize}
+
+\medskip
+\textbf{Spaltenmethode (liefert eine Basis \textbf{aus} den $v_i$)}:
+\begin{itemize}[nosep]
+    \item Die $v_i$ als Spalten in eine Matrix schreiben.
+    \item Gau\ss-Elimination durchf\"uhren.
+    \item \textbf{Jede Spalte mit Pivot} entspricht einem der urspr\"unglichen $v_i$, und diese $v_i$ bilden eine Basis.
+\end{itemize}
+\end{merkbox}
+
+\begin{merkbox}[title={Frage 2: Basis auf $\mathbb{R}^n$ erweitern}]
+\begin{itemize}[nosep]
+    \item Basisvektoren als Zeilen in Matrix, Stufenform bilden.
+    \item Spalten ohne Pivot identifizieren.
+    \item F\"ur jede solche Spalte $j$ den Einheitsvektor $e_j$ erg\"anzen.
+    \item Die Matrix mit den erweiterten Vektoren muss dann $n$ Pivots haben $\Rightarrow$ Basis von $\mathbb{R}^n$.
+\end{itemize}
+\end{merkbox}
+
+\begin{analogie}
+Stell dir einen Raum mit Regalen vor. Deine Basis aus (a) sind die \emph{Regale, die schon stehen}. Die Spalten ohne Pivot sind die \emph{leeren Wandfl\"achen}. F\"ur jede leere Wand h\"angst du ein zus\"atzliches Standard-Regal (Einheitsvektor) auf, bis der ganze Raum bedeckt ist.
+\end{analogie}
+
+%-----------------------------------------------------------------------------
+\section*{3. Wiederkehrendes Muster bei den Dimensions-Aufgaben (19, 20, 21)}
+
+Aufgaben 19, 20, 21 folgen alle demselben Schema:
+
+\begin{merkbox}[title={Vorgehen bei ``finde Dimension eines Unterraums''}]
+\begin{enumerate}[nosep]
+    \item \textbf{Allgemeine Form} eines Elements aufschreiben, mit \textbf{freien Parametern} $\alpha, \beta, \gamma, \dots$
+    \item Zeigen, dass sich jeder Eintrag/jedes Glied durch diese Parameter ausdr\"ucken l\"asst.
+    \item Die allgemeine Form \textbf{nach den Parametern zerlegen}: pro Parameter einen Basisvektor (Parameter $= 1$, Rest $= 0$).
+    \item Lineare Unabh\"angigkeit dieser Basisvektoren zeigen.
+    \item Dimension $=$ Anzahl der freien Parameter.
+\end{enumerate}
+\end{merkbox}
+
+\begin{analogie}
+Stell dir eine Maschine mit mehreren Reglern (den freien Parametern) vor. Jedes g\"ultige Produkt entspricht einer Reglerstellung. Die Dimension ist die \textbf{Anzahl der Regler}. Ein Basisvektor entspricht dem Zustand ``nur ein Regler steht auf 1, alle anderen auf 0''.
+\end{analogie}
+
+\newpage
+
+%=============================================================================
+\part*{Teil 2: Aufgabe 18}
+
+\textbf{Gegeben:} $v_1 = (1,1,1,2)$, $v_2 = (1,2,3,6)$, $v_3 = (-1,0,1,2)$, $v_4 = (1,2,0,0)$, $W = \text{span}(v_1, v_2, v_3, v_4) \subseteq \mathbb{R}^4$.
+
+\medskip
+
+\textbf{Die vier Teilaufgaben im \"Uberblick:}
+\begin{itemize}[leftmargin=*, nosep]
+\item (a) Basis von $W$ als \textbf{kanonische Matrix} (= RREF) $\to$ Zeilenmethode.
+\item (b) Diese Basis aus (a) auf $\mathbb{R}^4$ erweitern.
+\item (c) Basis von $W$ \textbf{aus den gegebenen $v_i$} $\to$ Spaltenmethode.
+\item (d) Diese Basis aus (c) auf $\mathbb{R}^4$ erweitern.
+\end{itemize}
+
+\begin{merkbox}[title={Der Unterschied zwischen (a) und (c)}]
+\textbf{(a) Zeilenmethode:} Basis ist in kanonischer Form (RREF-Zeilen). Die Basisvektoren sehen ``sch\"oner'' aus, aber sie sind neue Vektoren, nicht mehr die gegebenen $v_i$.
+
+\medskip
+\textbf{(c) Spaltenmethode:} Basis besteht aus drei der urspr\"unglichen $v_i$. Die Form ist ``unsch\"oner'', aber man wei\ss{} genau, welche der gegebenen Vektoren man beh\"alt.
+\end{merkbox}
+
+F\"ur die Details siehe L\"osungsdokument. Die Kernpunkte pro Teilaufgabe:
+
+\begin{itemize}[leftmargin=*]
+\item \textbf{(a)} RREF liefert Basis $\{(1,0,0,0), (0,1,0,0), (0,0,1,2)\}$. Spalte 4 hat kein Pivot $\Rightarrow$ $\dim W = 3$.
+\item \textbf{(b)} Spalte 4 hat kein Pivot $\Rightarrow$ erg\"anze $e_4 = (0,0,0,1)$.
+\item \textbf{(c)} Spaltenreduktion: Pivots in Spalten $1, 2, 4$ $\Rightarrow$ Basis $\{v_1, v_2, v_4\}$. $v_3$ ist linear abh\"angig (konkret: $v_3 = -2v_1 + v_2$).
+\item \textbf{(d)} $\{v_1, v_2, v_4\}$ als Zeilen: Pivots in Spalten $1, 2, 3$ $\Rightarrow$ erg\"anze $e_4$.
+\end{itemize}
+
+\newpage
+
+%=============================================================================
+\part*{Teil 3: Aufgabe 19 -- Tribonacci}
+
+\subsection*{Was ist eine Tribonacci-Folge?}
+
+Eine normale Fibonacci-Folge: $a_j = a_{j-1} + a_{j-2}$ (z.\,B.\ $1, 1, 2, 3, 5, 8, \dots$). Tribonacci: das gleiche, aber mit \textbf{drei} vorhergehenden Gliedern:
+\[
+a_j = a_{j-1} + a_{j-2} + a_{j-3} \quad \text{f\"ur } j > 3.
+\]
+
+\begin{analogie}
+Eine Tribonacci-Folge ist wie ein \textbf{Dominostein-Effekt mit Drei-Stein-Ged\"achtnis}: Ab dem 4.\ Stein ist jeder Stein zwangsl\"aufig durch die drei vorherigen bestimmt. Die ersten drei Steine kann ich frei platzieren -- dann l\"auft der Rest automatisch.
+\end{analogie}
+
+\begin{merkbox}[title={Wichtigste Einsicht}]
+Eine Tribonacci-$n$-Folge hat \textbf{genau 3 Freiheitsgrade}: die ersten drei Glieder $a_1, a_2, a_3$ sind frei. Alles andere ist Rekursion.
+
+\medskip
+$\Rightarrow$ $\dim T_n = 3$ f\"ur jedes $n > 3$.
+\end{merkbox}
+
+\subsection*{(a) Warum ist $T_n$ ein Unterraum?}
+
+Unterraumtest (wie in Blatt 3): Nullvektor, Addition, Skalarmultiplikation. Die Rekursionsgleichung $a_j - a_{j-1} - a_{j-2} - a_{j-3} = 0$ ist \textbf{linear homogen} -- und jede solche Bedingung definiert einen Unterraum. Details im L\"osungsdokument.
+
+\subsection*{(b) und (c): Allgemeine Form und Basis von $T_7$}
+
+Strategie: $a_1, a_2, a_3$ als Parameter $\alpha, \beta, \gamma$ setzen, Rekursion Glied f\"ur Glied ausrechnen. So entsteht die allgemeine Form
+\[
+(\alpha, \beta, \gamma, \alpha+\beta+\gamma, \alpha+2\beta+2\gamma, 2\alpha+3\beta+4\gamma, 4\alpha+6\beta+7\gamma).
+\]
+Aufspalten nach $\alpha, \beta, \gamma$ ergibt die drei Basisvektoren:
+\[
+\{(1,0,0,1,1,2,4),\; (0,1,0,1,2,3,6),\; (0,0,1,1,2,4,7)\}.
+\]
+Linear unabh\"angig sichtbar an den ersten drei Komponenten $e_1, e_2, e_3$.
+
+\subsection*{(d) $\dim T_n$ f\"ur allgemeines $n$}
+
+Dasselbe Argument: drei freie Parameter, alles andere determiniert $\Rightarrow$ $\dim T_n = 3$ f\"ur \emph{jedes} $n > 3$. Die L\"ange der Folge $n$ spielt keine Rolle.
+
+\newpage
+
+%=============================================================================
+\part*{Teil 4: Aufgabe 20 (nicht zur Abgabe)}
+
+\subsection*{Symmetrische und schiefsymmetrische Matrizen}
+
+\begin{merkbox}[title={Definitionen}]
+\begin{itemize}[nosep]
+    \item \textbf{Symmetrisch}: $A^\top = A$ \quad $\iff$ \quad $a_{ij} = a_{ji}$. \\
+    Beispiel: $\begin{pmatrix} 1 & 2 & 3 \\ 2 & 4 & 5 \\ 3 & 5 & 6 \end{pmatrix}$ (spiegelt sich an der Hauptdiagonalen).
+    \item \textbf{Schiefsymmetrisch}: $A^\top = -A$ \quad $\iff$ \quad $a_{ij} = -a_{ji}$. \\
+    Insbesondere $a_{ii} = -a_{ii}$ $\Rightarrow$ $a_{ii} = 0$: Diagonale ist immer $0$.
+\end{itemize}
+\end{merkbox}
+
+\subsection*{Wie z\"ahlt man die Dimension?}
+
+\begin{merkbox}[title={Z\"ahltrick}]
+Z\"ahle, wie viele Eintr\"age man \textbf{frei w\"ahlen} kann.
+
+\medskip
+\textbf{Symmetrisch} ($W_n$):
+\begin{itemize}[nosep]
+    \item Diagonale: $n$ Eintr\"age, frei.
+    \item Oberhalb der Diagonale: $\tfrac{n(n-1)}{2}$ Eintr\"age, frei.
+    \item Unterhalb der Diagonale: determiniert (durch die obere Seite).
+\end{itemize}
+$\dim W_n = n + \tfrac{n(n-1)}{2} = \tfrac{n(n+1)}{2}$.
+
+\medskip
+\textbf{Schiefsymmetrisch} ($U_n$):
+\begin{itemize}[nosep]
+    \item Diagonale: $0$, nicht frei.
+    \item Oberhalb der Diagonale: $\tfrac{n(n-1)}{2}$, frei.
+    \item Unterhalb: determiniert.
+\end{itemize}
+$\dim U_n = \tfrac{n(n-1)}{2}$.
+\end{merkbox}
+
+F\"ur $n = 3$: $\dim W_3 = 6$, $\dim U_3 = 3$.
+
+\newpage
+
+%=============================================================================
+\part*{Teil 5: Aufgabe 21 -- Zeilen/Spalten-Summe Null}
+
+\subsection*{Was verlangt die Aufgabe?}
+
+$W_n$ = alle $n \times n$-Matrizen, bei denen jede Zeilensumme $= 0$ und jede Spaltensumme $= 0$ ist.
+
+\begin{analogie}
+Stell dir eine Finanzbuchung vor: jede Zeile ist ein Konto, jede Spalte eine Periode. ``Zeilensumme $= 0$'' hei\ss t: ein Konto saldiert sich \"uber alle Perioden zu null. ``Spaltensumme $= 0$'' hei\ss t: pro Periode heben sich alle Kontenbewegungen auf. Die Frage ist: \textbf{wie viele Freiheitsgrade} haben solche Buchungen?
+\end{analogie}
+
+\subsection*{(a) Allgemeine Form von $W_3$}
+
+Strategie: Die obere $2 \times 2$-Ecke ($a, b, c, d$) frei w\"ahlen, den Rest aus den Zeilen-/Spaltensummen-Bedingungen ausrechnen. Dabei kommt heraus:
+\[
+\begin{pmatrix} a & b & -a-b \\ c & d & -c-d \\ -a-c & -b-d & a+b+c+d \end{pmatrix}
+\]
+Der Eintrag unten rechts ist doppelt bestimmt (aus Zeile 3 und Spalte 3) -- beide Rechnungen liefern denselben Wert. Das ist kein Zufall: es ist der Beweis, dass eine der Bedingungen redundant ist.
+
+\subsection*{(b) Basis und Dimension von $W_3$}
+
+Aufspalten nach den 4 Parametern $a, b, c, d$ ergibt 4 Basismatrizen. Linear unabh\"angig, weil die Parameter direkt ablesbare Eintr\"age sind.
+
+\[
+\dim W_3 = 4.
+\]
+
+\subsection*{(c) $\dim W_n$ allgemein}
+
+\begin{merkbox}[title={Der Z\"ahltrick}]
+\begin{itemize}[nosep]
+    \item Gesamtanzahl Eintr\"age: $n^2$.
+    \item Bedingungen: $n$ Zeilensummen $+$ $n$ Spaltensummen $= 2n$.
+    \item \textbf{Aber}: Summe aller Zeilensummen $=$ Summe aller Eintr\"age $=$ Summe aller Spaltensummen. Daher ist \textbf{eine} der $2n$ Bedingungen redundant.
+    \item Unabh\"angige Bedingungen: $2n - 1$.
+\end{itemize}
+\[
+\dim W_n = n^2 - (2n - 1) = (n-1)^2.
+\]
+\end{merkbox}
+
+Probe: $n = 3 \Rightarrow 2^2 = 4$ \checkmark. \quad $n = 2 \Rightarrow 1^2 = 1$ (eine 1-parametrige Familie $\begin{pmatrix} a & -a \\ -a & a \end{pmatrix}$).
+
+\end{document}

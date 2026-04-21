@@ -1,0 +1,618 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{geometry}\geometry{margin=2.5cm}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usepackage{pgfplots}\pgfplotsset{compat=1.18}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable}
+\usepackage{xcolor}
+\newtcolorbox{begriffe}[1][]{colback=yellow!10, colframe=yellow!60!black, fonttitle=\bfseries, title={Was bedeuten die Begriffe?}, breakable, #1}
+\newtcolorbox{wastun}[1][]{colback=orange!5, colframe=orange!60!black, fonttitle=\bfseries, title={Was ist zu tun?}, breakable, #1}
+\newcommand{\piv}[1]{{\color{red}\boxed{#1}}}
+
+\title{\"Ubungsblatt 5 -- L\"osungen \\ \large Linear Algebra}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+%% ============================================================
+\subsection*{Aufgabe 18}
+%% ============================================================
+
+\textbf{Angabe.} Vektoren in $\mathbb{R}^4$:
+\[
+v_1 = (1,1,1,2),\; v_2 = (1,2,3,6),\; v_3 = (-1,0,1,2),\; v_4 = (1,2,0,0).
+\]
+$W = \text{span}(v_1, v_2, v_3, v_4)$.
+\begin{itemize}[nosep]
+\item[(a)] Basis von $W$ finden, die als Zeilen eine \textit{kanonische Matrix} bildet.
+\item[(b)] Diese Basis zu einer Basis von $\mathbb{R}^4$ erweitern.
+\item[(c)] Das Erzeugendensystem $\{v_1, v_2, v_3, v_4\}$ auf eine Basis von $W$ reduzieren.
+\item[(d)] Diese Basis zu einer Basis von $\mathbb{R}^4$ erweitern.
+\end{itemize}
+
+\begin{begriffe}
+\begin{itemize}[leftmargin=*, nosep]
+    \item $W = \text{span}(v_1, \dots, v_4)$ -- Menge aller Linearkombinationen der $v_i$, bildet Unterraum von $\mathbb{R}^4$.
+    \item \textbf{Basis} -- minimales Erzeugendensystem: linear unabh\"angig UND spannt $W$.
+    \item \textbf{Kanonische Matrix} (Reduzierte Zeilenstufenform / RREF) -- in jeder Nichtnull-Zeile ist das Pivot gleich $1$, und in der Pivot-Spalte sind alle anderen Eintr\"age $0$.
+    \item \textbf{Spannt $W$ als Zeilen} -- die Nichtnull-Zeilen einer RREF, die aus den $v_i$ durch Zeilenoperationen entsteht, bilden eine Basis von $W$ (Zeilenoperationen \"andern den Zeilenraum nicht).
+    \item \textbf{Reduzieren des Erzeugendensystems} -- manche der gegebenen $v_i$ auswerfen, sodass die \"ubrigen linear unabh\"angig sind und immer noch $W$ aufspannen. Daf\"ur: Vektoren als \textbf{Spalten} in eine Matrix schreiben und schauen, welche Spalten ein Pivot haben.
+    \item \textbf{Basis erweitern auf $\mathbb{R}^4$} -- zus\"atzliche Vektoren hinzuf\"ugen, bis man 4 linear unabh\"angige Vektoren hat. Kandidaten: Standard-Einheitsvektoren $e_1, e_2, e_3, e_4$.
+\end{itemize}
+\end{begriffe}
+
+\begin{wastun}
+\begin{enumerate}[leftmargin=*, nosep]
+    \item \textbf{(a)} Die 4 Vektoren als \textbf{Zeilen} in eine $4 \times 4$-Matrix schreiben und auf RREF bringen. Die Nichtnull-Zeilen sind die gesuchte Basis.
+    \item \textbf{(b)} Schauen, welche Spalten in der RREF \textbf{kein} Pivot haben. F\"ur jede solche Spalte den passenden Einheitsvektor $e_i$ erg\"anzen.
+    \item \textbf{(c)} Die 4 Vektoren als \textbf{Spalten} in eine $4 \times 4$-Matrix schreiben und auf Stufenform bringen. Die Spalten mit Pivot markieren jene $v_i$, die in die Basis geh\"oren.
+    \item \textbf{(d)} Die Basis aus (c) als Zeilen schreiben, Stufenform bilden, Spalten ohne Pivot identifizieren, passende $e_i$ erg\"anzen.
+\end{enumerate}
+\end{wastun}
+
+%% --- 18(a) ---
+\subsubsection*{(a) Basis als kanonische Matrix}
+
+\textbf{Schritt 1: Vektoren als Zeilen einer Matrix anordnen.}
+
+\[
+\left(\begin{array}{cccc}
+1 & 1 & 1 & 2 \\
+1 & 2 & 3 & 6 \\
+-1 & 0 & 1 & 2 \\
+1 & 2 & 0 & 0
+\end{array}\right)
+\]
+
+\textbf{Schritt 2: Gau\ss-Elimination zur Stufenform.}
+
+\[
+\xrightarrow[\substack{Z_3 \to Z_3 + Z_1 \\ Z_4 \to Z_4 - Z_1}]{Z_2 \to Z_2 - Z_1}
+\left(\begin{array}{cccc}
+1 & 1 & 1 & 2 \\
+0 & 1 & 2 & 4 \\
+0 & 1 & 2 & 4 \\
+0 & 1 & -1 & -2
+\end{array}\right)
+\xrightarrow[Z_4 \to Z_4 - Z_2]{Z_3 \to Z_3 - Z_2}
+\left(\begin{array}{cccc}
+1 & 1 & 1 & 2 \\
+0 & 1 & 2 & 4 \\
+0 & 0 & 0 & 0 \\
+0 & 0 & -3 & -6
+\end{array}\right)
+\]
+
+\[
+\xrightarrow{Z_3 \leftrightarrow Z_4}
+\left(\begin{array}{cccc}
+1 & 1 & 1 & 2 \\
+0 & 1 & 2 & 4 \\
+0 & 0 & -3 & -6 \\
+0 & 0 & 0 & 0
+\end{array}\right)
+\xrightarrow{Z_3 \to -\frac{1}{3} Z_3}
+\left(\begin{array}{cccc}
+1 & 1 & 1 & 2 \\
+0 & 1 & 2 & 4 \\
+0 & 0 & 1 & 2 \\
+0 & 0 & 0 & 0
+\end{array}\right)
+\]
+
+\textbf{Schritt 3: Gau\ss-Jordan (oberhalb der Pivots 0 machen).}
+
+\[
+\xrightarrow[Z_1 \to Z_1 - Z_3]{Z_2 \to Z_2 - 2Z_3}
+\left(\begin{array}{cccc}
+1 & 1 & 0 & 0 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & 1 & 2 \\
+0 & 0 & 0 & 0
+\end{array}\right)
+\xrightarrow{Z_1 \to Z_1 - Z_2}
+\left(\begin{array}{cccc}
+\piv{1} & 0 & 0 & 0 \\
+0 & \piv{1} & 0 & 0 \\
+0 & 0 & \piv{1} & 2 \\
+0 & 0 & 0 & 0
+\end{array}\right)
+\]
+
+Das ist die \textbf{kanonische Matrix} (RREF). Pivots in Spalten $1, 2, 3$.
+
+\textbf{Schritt 4: Basis ablesen.} Die Nichtnull-Zeilen sind die Basis:
+
+\[
+\fbox{\parbox{0.93\textwidth}{\centering
+Basis von $W$: $\{u_1, u_2, u_3\} = \{(1,0,0,0),\; (0,1,0,0),\; (0,0,1,2)\}.$\\[2pt]
+$\dim W = 3$.
+}}
+\]
+
+%% --- 18(b) ---
+\subsubsection*{(b) Basis aus (a) auf $\mathbb{R}^4$ erweitern}
+
+\textbf{Schritt 1: Spalten ohne Pivot in der RREF identifizieren.}
+
+In der kanonischen Matrix haben die Spalten $1, 2, 3$ Pivots. \textbf{Spalte 4 hat kein Pivot.}
+
+\textbf{Schritt 2: Passenden Einheitsvektor erg\"anzen.}
+
+Ich erg\"anze $e_4 = (0,0,0,1)$, der ``genau in der fehlenden Spalte wohnt''.
+
+\textbf{Schritt 3: Lineare Unabh\"angigkeit pr\"ufen.}
+
+Die vier Vektoren als Zeilen:
+\[
+\left(\begin{array}{cccc}
+\piv{1} & 0 & 0 & 0 \\
+0 & \piv{1} & 0 & 0 \\
+0 & 0 & \piv{1} & 2 \\
+0 & 0 & 0 & \piv{1}
+\end{array}\right)
+\]
+
+4 Pivots in 4 Spalten $\Rightarrow$ linear unabh\"angig, Rang $= 4 \Rightarrow$ Basis von $\mathbb{R}^4$.
+
+\[
+\fbox{\parbox{0.93\textwidth}{\centering
+Basis von $\mathbb{R}^4$: $\{(1,0,0,0),\; (0,1,0,0),\; (0,0,1,2),\; (0,0,0,1)\}.$
+}}
+\]
+
+%% --- 18(c) ---
+\subsubsection*{(c) Spanning Set auf eine Basis reduzieren}
+
+\textbf{Schritt 1: Vektoren als \textbf{Spalten} anordnen.}
+
+Anders als in (a): Jetzt muss ich herausfinden, welche der \textit{gegebenen} Vektoren $v_i$ in der Basis landen. Dazu schreibe ich sie als Spalten:
+\[
+M = (v_1 \mid v_2 \mid v_3 \mid v_4) =
+\left(\begin{array}{cccc}
+1 & 1 & -1 & 1 \\
+1 & 2 & 0 & 2 \\
+1 & 3 & 1 & 0 \\
+2 & 6 & 2 & 0
+\end{array}\right)
+\]
+
+\textbf{Schritt 2: Gau\ss-Elimination.}
+
+\[
+\xrightarrow[\substack{Z_3 \to Z_3 - Z_1 \\ Z_4 \to Z_4 - 2Z_1}]{Z_2 \to Z_2 - Z_1}
+\left(\begin{array}{cccc}
+1 & 1 & -1 & 1 \\
+0 & 1 & 1 & 1 \\
+0 & 2 & 2 & -1 \\
+0 & 4 & 4 & -2
+\end{array}\right)
+\xrightarrow[Z_4 \to Z_4 - 4Z_2]{Z_3 \to Z_3 - 2Z_2}
+\left(\begin{array}{cccc}
+1 & 1 & -1 & 1 \\
+0 & 1 & 1 & 1 \\
+0 & 0 & 0 & -3 \\
+0 & 0 & 0 & -6
+\end{array}\right)
+\]
+
+\[
+\xrightarrow{Z_4 \to Z_4 - 2Z_3}
+\left(\begin{array}{cccc}
+\piv{1} & 1 & -1 & 1 \\
+0 & \piv{1} & 1 & 1 \\
+0 & 0 & 0 & \piv{-3} \\
+0 & 0 & 0 & 0
+\end{array}\right)
+\]
+
+\textbf{Schritt 3: Pivot-Spalten identifizieren.}
+
+Pivots stehen in \textbf{Spalte 1, 2 und 4}. Spalte 3 hat kein Pivot. Also:
+\begin{itemize}[leftmargin=*, nosep]
+\item Spalte 1 $\to v_1$ ist in der Basis.
+\item Spalte 2 $\to v_2$ ist in der Basis.
+\item Spalte 3 $\to v_3$ \textbf{nicht} in der Basis (ist Linearkombination der anderen).
+\item Spalte 4 $\to v_4$ ist in der Basis.
+\end{itemize}
+
+\[
+\fbox{\parbox{0.93\textwidth}{\centering
+Reduzierte Basis von $W$: $\{v_1, v_2, v_4\} = \{(1,1,1,2),\; (1,2,3,6),\; (1,2,0,0)\}.$
+}}
+\]
+
+%% --- 18(d) ---
+\subsubsection*{(d) Basis aus (c) auf $\mathbb{R}^4$ erweitern}
+
+\textbf{Schritt 1: Die drei Vektoren $\{v_1, v_2, v_4\}$ als Zeilen und auf Stufenform bringen.}
+
+\[
+\left(\begin{array}{cccc}
+1 & 1 & 1 & 2 \\
+1 & 2 & 3 & 6 \\
+1 & 2 & 0 & 0
+\end{array}\right)
+\xrightarrow[Z_3 \to Z_3 - Z_1]{Z_2 \to Z_2 - Z_1}
+\left(\begin{array}{cccc}
+1 & 1 & 1 & 2 \\
+0 & 1 & 2 & 4 \\
+0 & 1 & -1 & -2
+\end{array}\right)
+\xrightarrow{Z_3 \to Z_3 - Z_2}
+\left(\begin{array}{cccc}
+\piv{1} & 1 & 1 & 2 \\
+0 & \piv{1} & 2 & 4 \\
+0 & 0 & \piv{-3} & -6
+\end{array}\right)
+\]
+
+\textbf{Schritt 2: Spalte ohne Pivot finden.}
+
+Pivots in Spalten $1, 2, 3$ $\Rightarrow$ \textbf{Spalte 4 hat kein Pivot}.
+
+\textbf{Schritt 3: Passenden Einheitsvektor erg\"anzen.}
+
+$e_4 = (0,0,0,1)$.
+
+\textbf{Schritt 4: Lineare Unabh\"angigkeit pr\"ufen.}
+
+Die 4 Vektoren als Zeilen, nach Stufenform:
+\[
+\left(\begin{array}{cccc}
+\piv{1} & 1 & 1 & 2 \\
+0 & \piv{1} & 2 & 4 \\
+0 & 0 & \piv{-3} & -6 \\
+0 & 0 & 0 & \piv{1}
+\end{array}\right)
+\]
+4 Pivots $\Rightarrow$ Basis von $\mathbb{R}^4$.
+
+\[
+\fbox{\parbox{0.93\textwidth}{\centering
+Basis von $\mathbb{R}^4$: $\{v_1,\; v_2,\; v_4,\; e_4\} = \{(1,1,1,2),\; (1,2,3,6),\; (1,2,0,0),\; (0,0,0,1)\}.$
+}}
+\]
+
+\bigskip
+\hrule
+\bigskip
+
+%% ============================================================
+\subsection*{Aufgabe 19 -- Tribonacci-Folgen}
+%% ============================================================
+
+\textbf{Angabe.} Sei $n > 3$. Eine \textit{Tribonacci-$n$-Folge} ist ein $(a_1, \dots, a_n) \in \mathbb{R}^n$ mit $a_j = a_{j-1} + a_{j-2} + a_{j-3}$ f\"ur alle $j > 3$. Sei $T_n$ die Menge aller Tribonacci-$n$-Folgen.
+\begin{itemize}[nosep]
+\item[(a)] Kurz begr\"unden, warum $T_n$ ein Unterraum von $\mathbb{R}^n$ ist.
+\item[(b)] Allgemeine Form eines Elements von $T_7$ angeben.
+\item[(c)] Basis und Dimension von $T_7$ bestimmen.
+\item[(d)] Dimension von $T_n$ f\"ur allgemeines $n > 3$.
+\end{itemize}
+
+\begin{begriffe}
+\begin{itemize}[leftmargin=*, nosep]
+    \item \textbf{Tribonacci-Folge} -- ab dem 4.\ Glied ist jedes Glied die Summe der drei vorhergehenden. Die ersten 3 Glieder $a_1, a_2, a_3$ sind \textbf{frei w\"ahlbar}, alles danach ist \textbf{determiniert}.
+    \item \textbf{Unterraum-Nachweis} -- drei Bedingungen: Nullvektor enthalten, abgeschlossen unter Addition, abgeschlossen unter Skalarmultiplikation.
+    \item \textbf{Allgemeine Form} -- Ausdruck der Folge in Abh\"angigkeit der freien Parameter $a_1, a_2, a_3$.
+    \item \textbf{Basis} -- linear unabh\"angige Folgen, deren Linearkombinationen genau $T_n$ ergeben.
+    \item \textbf{Dimension} -- Anzahl der freien Parameter $=$ Gr\"o\ss e einer Basis.
+\end{itemize}
+\end{begriffe}
+
+\begin{wastun}
+\begin{enumerate}[leftmargin=*, nosep]
+    \item \textbf{(a)} Unterraumtest: Nullfolge, Addition, Skalarmultiplikation pr\"ufen.
+    \item \textbf{(b)} $a_1, a_2, a_3$ als freie Parameter setzen. $a_4, a_5, \dots, a_7$ schrittweise mit der Rekursion ausrechnen.
+    \item \textbf{(c)} Die allgemeine Form aus (b) in drei Basisvektoren zerlegen (pro Parameter einen Vektor).
+    \item \textbf{(d)} \"Uberlegen, wie viele freie Parameter man bei beliebigem $n$ hat.
+\end{enumerate}
+\end{wastun}
+
+%% --- 19(a) ---
+\subsubsection*{(a) $T_n$ ist Unterraum von $\mathbb{R}^n$}
+
+\textbf{(U1) Nullfolge.} Setze $(0, 0, \dots, 0)$. Dann gilt f\"ur jedes $j > 3$: $a_j = 0 = 0 + 0 + 0 = a_{j-1} + a_{j-2} + a_{j-3}$. \checkmark
+
+\textbf{(U2) Addition.} Seien $a = (a_1, \dots, a_n)$ und $b = (b_1, \dots, b_n)$ in $T_n$. Dann:
+\[
+(a+b)_j = a_j + b_j = (a_{j-1} + a_{j-2} + a_{j-3}) + (b_{j-1} + b_{j-2} + b_{j-3}) = (a+b)_{j-1} + (a+b)_{j-2} + (a+b)_{j-3}.
+\]
+\checkmark
+
+\textbf{(U3) Skalarmultiplikation.} Sei $a \in T_n$, $\lambda \in \mathbb{R}$:
+\[
+(\lambda a)_j = \lambda a_j = \lambda(a_{j-1} + a_{j-2} + a_{j-3}) = (\lambda a)_{j-1} + (\lambda a)_{j-2} + (\lambda a)_{j-3}.
+\]
+\checkmark
+
+$\Rightarrow T_n$ ist Unterraum von $\mathbb{R}^n$. $\square$
+
+%% --- 19(b) ---
+\subsubsection*{(b) Allgemeine Form eines Elements von $T_7$}
+
+\textbf{Schritt 1: Freie Parameter festlegen.}
+
+$a_1, a_2, a_3$ sind frei. Ich setze $a_1 = \alpha,\; a_2 = \beta,\; a_3 = \gamma$ mit $\alpha, \beta, \gamma \in \mathbb{R}$.
+
+\textbf{Schritt 2: $a_4, a_5, a_6, a_7$ mit der Rekursion ausrechnen.}
+
+\textbf{(a) $a_4 = a_3 + a_2 + a_1$:}
+\[
+a_4 = \gamma + \beta + \alpha = \alpha + \beta + \gamma.
+\]
+
+\textbf{(b) $a_5 = a_4 + a_3 + a_2$:}
+\[
+a_5 = (\alpha + \beta + \gamma) + \gamma + \beta = \alpha + 2\beta + 2\gamma.
+\]
+
+\textbf{(c) $a_6 = a_5 + a_4 + a_3$:}
+\[
+a_6 = (\alpha + 2\beta + 2\gamma) + (\alpha + \beta + \gamma) + \gamma = 2\alpha + 3\beta + 4\gamma.
+\]
+
+\textbf{(d) $a_7 = a_6 + a_5 + a_4$:}
+\[
+a_7 = (2\alpha + 3\beta + 4\gamma) + (\alpha + 2\beta + 2\gamma) + (\alpha + \beta + \gamma) = 4\alpha + 6\beta + 7\gamma.
+\]
+
+\[
+\fbox{\parbox{0.93\textwidth}{\centering
+Allgemeine Form eines Elements von $T_7$:\\[2pt]
+$(\alpha,\; \beta,\; \gamma,\; \alpha+\beta+\gamma,\; \alpha+2\beta+2\gamma,\; 2\alpha+3\beta+4\gamma,\; 4\alpha+6\beta+7\gamma)$,\; $\alpha, \beta, \gamma \in \mathbb{R}$.
+}}
+\]
+
+%% --- 19(c) ---
+\subsubsection*{(c) Basis und Dimension von $T_7$}
+
+\textbf{Schritt 1: Allgemeine Form nach Parametern zerlegen.}
+
+Ich sortiere die allgemeine Form aus (b) in drei Summanden, je einen pro Parameter:
+\[
+\begin{pmatrix} \alpha \\ \beta \\ \gamma \\ \alpha+\beta+\gamma \\ \alpha+2\beta+2\gamma \\ 2\alpha+3\beta+4\gamma \\ 4\alpha+6\beta+7\gamma \end{pmatrix}
+= \alpha \begin{pmatrix} 1 \\ 0 \\ 0 \\ 1 \\ 1 \\ 2 \\ 4 \end{pmatrix}
++ \beta \begin{pmatrix} 0 \\ 1 \\ 0 \\ 1 \\ 2 \\ 3 \\ 6 \end{pmatrix}
++ \gamma \begin{pmatrix} 0 \\ 0 \\ 1 \\ 1 \\ 2 \\ 4 \\ 7 \end{pmatrix}.
+\]
+
+\textbf{Schritt 2: Basis ablesen und lineare Unabh\"angigkeit pr\"ufen.}
+
+Die drei Vektoren sind linear unabh\"angig, weil die ersten drei Komponenten $e_1, e_2, e_3$ bilden (also in den ersten drei Zeilen je ein Pivot auf der Diagonale $\neq 0$).
+
+\[
+\fbox{\parbox{0.93\textwidth}{\centering
+Basis von $T_7$: $\{(1,0,0,1,1,2,4),\; (0,1,0,1,2,3,6),\; (0,0,1,1,2,4,7)\}$.\\[2pt]
+$\dim T_7 = 3$.
+}}
+\]
+
+%% --- 19(d) ---
+\subsubsection*{(d) Dimension von $T_n$ f\"ur allgemeines $n > 3$}
+
+\textbf{Argument.} Eine Tribonacci-$n$-Folge ist \textbf{eindeutig festgelegt}, sobald $a_1, a_2, a_3$ bekannt sind -- alle weiteren Glieder ergeben sich zwingend aus der Rekursion. Jede Wahl von $(a_1, a_2, a_3) \in \mathbb{R}^3$ liefert genau eine Tribonacci-Folge.
+
+Die Abbildung $T_n \to \mathbb{R}^3$, $(a_1, \dots, a_n) \mapsto (a_1, a_2, a_3)$ ist linear und bijektiv $\Rightarrow$ $T_n \cong \mathbb{R}^3$.
+
+\[
+\fbox{\parbox{0.93\textwidth}{\centering
+$\dim T_n = 3$ f\"ur alle $n > 3$.
+}}
+\]
+
+\bigskip
+\hrule
+\bigskip
+
+%% ============================================================
+\subsection*{Aufgabe 20 -- (nicht zur Abgabe)}
+%% ============================================================
+
+\textbf{Angabe.} $W_n$ = Raum der symmetrischen Matrizen in $\mathbb{R}^{n \times n}$, $U_n$ = Raum der schiefsymmetrischen.
+
+\begin{begriffe}
+\begin{itemize}[leftmargin=*, nosep]
+    \item \textbf{Symmetrisch}: $A^\top = A$, d.\,h.\ $a_{ij} = a_{ji}$. Diagonale ist beliebig.
+    \item \textbf{Schiefsymmetrisch}: $A^\top = -A$, d.\,h.\ $a_{ij} = -a_{ji}$. Insbesondere $a_{ii} = 0$ auf der Diagonale.
+\end{itemize}
+\end{begriffe}
+
+%% --- 20(a) ---
+\subsubsection*{(a) Basis und Dimension von $W_3$}
+
+Eine symmetrische $3\times 3$-Matrix hat die Form
+\[
+A = \begin{pmatrix} a & b & c \\ b & d & e \\ c & e & f \end{pmatrix}, \quad a, b, c, d, e, f \in \mathbb{R}.
+\]
+6 freie Parameter. Basis:
+\[
+\left\{
+\begin{pmatrix} 1 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \end{pmatrix},
+\begin{pmatrix} 0 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 0 \end{pmatrix},
+\begin{pmatrix} 0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 1 \end{pmatrix},
+\begin{pmatrix} 0 & 1 & 0 \\ 1 & 0 & 0 \\ 0 & 0 & 0 \end{pmatrix},
+\begin{pmatrix} 0 & 0 & 1 \\ 0 & 0 & 0 \\ 1 & 0 & 0 \end{pmatrix},
+\begin{pmatrix} 0 & 0 & 0 \\ 0 & 0 & 1 \\ 0 & 1 & 0 \end{pmatrix}
+\right\}
+\]
+\[\dim W_3 = 6.\]
+
+%% --- 20(b) ---
+\subsubsection*{(b) $\dim W_n$ allgemein}
+
+Freie Parameter: $n$ Diagonaleintr\"age $+$ $\tfrac{n(n-1)}{2}$ Eintr\"age oberhalb der Diagonalen (die unter der Diagonalen sind dann determiniert).
+\[
+\dim W_n = n + \frac{n(n-1)}{2} = \frac{n(n+1)}{2}.
+\]
+
+%% --- 20(c) ---
+\subsubsection*{(c) Basis und Dimension von $U_3$}
+
+Eine schiefsymmetrische $3\times 3$-Matrix hat die Form
+\[
+A = \begin{pmatrix} 0 & a & b \\ -a & 0 & c \\ -b & -c & 0 \end{pmatrix}, \quad a, b, c \in \mathbb{R}.
+\]
+Basis:
+\[
+\left\{
+\begin{pmatrix} 0 & 1 & 0 \\ -1 & 0 & 0 \\ 0 & 0 & 0 \end{pmatrix},
+\begin{pmatrix} 0 & 0 & 1 \\ 0 & 0 & 0 \\ -1 & 0 & 0 \end{pmatrix},
+\begin{pmatrix} 0 & 0 & 0 \\ 0 & 0 & 1 \\ 0 & -1 & 0 \end{pmatrix}
+\right\}
+\]
+\[\dim U_3 = 3.\]
+
+%% --- 20(d) ---
+\subsubsection*{(d) $\dim U_n$ allgemein}
+
+Die Diagonale ist fest $0$, nur die $\tfrac{n(n-1)}{2}$ Eintr\"age oberhalb der Diagonalen sind frei.
+\[
+\dim U_n = \frac{n(n-1)}{2}.
+\]
+
+\bigskip
+\hrule
+\bigskip
+
+%% ============================================================
+\subsection*{Aufgabe 21}
+%% ============================================================
+
+\textbf{Angabe.} $W_n$ = Vektorraum aller Matrizen $A \in \mathbb{R}^{n\times n}$, bei denen jede \textbf{Zeilensumme} und jede \textbf{Spaltensumme} gleich $0$ ist.
+\begin{itemize}[nosep]
+\item[(a)] Allgemeine Form eines Elements von $W_3$.
+\item[(b)] Basis und Dimension von $W_3$.
+\item[(c)] Dimension von $W_n$ f\"ur allgemeines $n > 1$.
+\end{itemize}
+
+\begin{begriffe}
+\begin{itemize}[leftmargin=*, nosep]
+    \item \textbf{Zeilensumme $= 0$}: f\"ur jede Zeile $i$ gilt $\sum_j a_{ij} = 0$.
+    \item \textbf{Spaltensumme $= 0$}: f\"ur jede Spalte $j$ gilt $\sum_i a_{ij} = 0$.
+    \item \textbf{Abh\"angigkeit der Bedingungen}: Summe aller Zeilensummen $=$ Summe aller Eintr\"age $=$ Summe aller Spaltensummen. Wenn alle Zeilensummen und alle bis auf eine Spaltensumme null sind, ist auch die letzte Spaltensumme automatisch null.
+\end{itemize}
+\end{begriffe}
+
+\begin{wastun}
+\begin{enumerate}[leftmargin=*, nosep]
+    \item \textbf{(a)} Freie Eintr\"age festlegen (z.\,B.\ die $2\times 2$-Ecke oben-links). Restliche Eintr\"age aus den Zeilen-/Spaltensummen-Bedingungen ausrechnen.
+    \item \textbf{(b)} Pro freiem Parameter eine Basismatrix bauen (Parameter $= 1$, andere $= 0$). Dimension = Anzahl der freien Parameter.
+    \item \textbf{(c)} Z\"ahlen: $n^2$ Eintr\"age minus (Anzahl unabh\"angiger Bedingungen).
+\end{enumerate}
+\end{wastun}
+
+%% --- 21(a) ---
+\subsubsection*{(a) Allgemeine Form eines Elements von $W_3$}
+
+\textbf{Schritt 1: Freie Eintr\"age festlegen.}
+
+Ich w\"ahle die obere $2 \times 2$-Ecke frei:
+\[
+A = \begin{pmatrix} a & b & ? \\ c & d & ? \\ ? & ? & ? \end{pmatrix}
+\]
+mit $a, b, c, d \in \mathbb{R}$ frei.
+
+\textbf{Schritt 2: Restliche Eintr\"age aus Zeilen-/Spaltensummen ausrechnen.}
+
+\textbf{(a) $a_{13}$ aus Zeile 1:} $a + b + a_{13} = 0 \Rightarrow a_{13} = -a - b$.
+
+\textbf{(b) $a_{23}$ aus Zeile 2:} $c + d + a_{23} = 0 \Rightarrow a_{23} = -c - d$.
+
+\textbf{(c) $a_{31}$ aus Spalte 1:} $a + c + a_{31} = 0 \Rightarrow a_{31} = -a - c$.
+
+\textbf{(d) $a_{32}$ aus Spalte 2:} $b + d + a_{32} = 0 \Rightarrow a_{32} = -b - d$.
+
+\textbf{(e) $a_{33}$ aus Zeile 3 oder Spalte 3.}
+\begin{itemize}[leftmargin=*, nosep]
+\item Zeile 3: $a_{31} + a_{32} + a_{33} = 0 \Rightarrow a_{33} = -a_{31} - a_{32} = (a+c) + (b+d) = a+b+c+d$.
+\item Spalte 3: $a_{13} + a_{23} + a_{33} = 0 \Rightarrow a_{33} = -a_{13} - a_{23} = (a+b) + (c+d) = a+b+c+d$. \checkmark
+\end{itemize}
+Beide Bedingungen liefern denselben Wert $\Rightarrow$ konsistent.
+
+\[
+\fbox{\parbox{0.93\textwidth}{\centering
+Allgemeine Form eines Elements von $W_3$:\\[2pt]
+$A = \begin{pmatrix} a & b & -a-b \\ c & d & -c-d \\ -a-c & -b-d & a+b+c+d \end{pmatrix}, \quad a, b, c, d \in \mathbb{R}.$
+}}
+\]
+
+\textbf{Probe mit Beispiel aus Angabe:} $\begin{pmatrix} 1 & 2 & -3 \\ 3 & 4 & -7 \\ -4 & -6 & 10 \end{pmatrix}$ $\Rightarrow$ $a=1, b=2, c=3, d=4$:
+\begin{itemize}[nosep, leftmargin=*]
+\item $-a-b = -3$ \checkmark\; $-c-d = -7$ \checkmark\; $-a-c = -4$ \checkmark\; $-b-d = -6$ \checkmark\; $a+b+c+d = 10$ \checkmark.
+\end{itemize}
+
+%% --- 21(b) ---
+\subsubsection*{(b) Basis und Dimension von $W_3$}
+
+\textbf{Schritt 1: Allgemeine Form nach den 4 Parametern aufspalten.}
+
+\textbf{(a) $a = 1$, Rest $= 0$:}
+\[
+B_1 = \begin{pmatrix} 1 & 0 & -1 \\ 0 & 0 & 0 \\ -1 & 0 & 1 \end{pmatrix}
+\]
+
+\textbf{(b) $b = 1$, Rest $= 0$:}
+\[
+B_2 = \begin{pmatrix} 0 & 1 & -1 \\ 0 & 0 & 0 \\ 0 & -1 & 1 \end{pmatrix}
+\]
+
+\textbf{(c) $c = 1$, Rest $= 0$:}
+\[
+B_3 = \begin{pmatrix} 0 & 0 & 0 \\ 1 & 0 & -1 \\ -1 & 0 & 1 \end{pmatrix}
+\]
+
+\textbf{(d) $d = 1$, Rest $= 0$:}
+\[
+B_4 = \begin{pmatrix} 0 & 0 & 0 \\ 0 & 1 & -1 \\ 0 & -1 & 1 \end{pmatrix}
+\]
+
+\textbf{Schritt 2: Lineare Unabh\"angigkeit.}
+
+Wegen $a_{11} = a$, $a_{12} = b$, $a_{21} = c$, $a_{22} = d$ ist $A = 0 \iff a = b = c = d = 0$. Also sind $B_1, B_2, B_3, B_4$ linear unabh\"angig.
+
+\[
+\fbox{\parbox{0.93\textwidth}{\centering
+Basis von $W_3$: $\{B_1, B_2, B_3, B_4\}$ mit $\dim W_3 = 4$.
+}}
+\]
+
+%% --- 21(c) ---
+\subsubsection*{(c) $\dim W_n$ allgemein}
+
+\textbf{Schritt 1: Z\"ahlen der Bedingungen.}
+
+Eine $n \times n$-Matrix hat $n^2$ Eintr\"age. Die Bedingungen sind:
+\begin{itemize}[nosep, leftmargin=*]
+\item $n$ Zeilensummen gleich $0$,
+\item $n$ Spaltensummen gleich $0$.
+\end{itemize}
+Das sind insgesamt $2n$ Gleichungen.
+
+\textbf{Schritt 2: Abh\"angigkeit feststellen.}
+
+Summe aller Zeilensummen $=$ Summe aller Eintr\"age $=$ Summe aller Spaltensummen. Wenn die $n$ Zeilensummen alle $0$ sind und auch $n-1$ Spaltensummen $0$, dann muss die letzte Spaltensumme ebenfalls $0$ sein.
+
+$\Rightarrow$ nur $2n - 1$ der $2n$ Bedingungen sind unabh\"angig.
+
+\textbf{Schritt 3: Dimension ausrechnen.}
+\[
+\dim W_n = n^2 - (2n - 1) = n^2 - 2n + 1 = (n-1)^2.
+\]
+
+\textbf{Probe $n = 3$:} $(3-1)^2 = 4$ \checkmark (passt zu (b)).
+
+\[
+\fbox{\parbox{0.93\textwidth}{\centering
+$\dim W_n = (n-1)^2$ f\"ur alle $n > 1$.
+}}
+\]
+
+\end{document}
