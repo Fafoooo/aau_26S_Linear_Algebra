@@ -871,8 +871,27 @@ A=
 %% --- 24(a) ---
 \subsubsection*{24(a) Inverse berechnen}
 
+\begin{wastun}
+Wir wollen links aus $A$ die Einheitsmatrix $I$ machen.
+Dazu schreiben wir zuerst die erweiterte Matrix $(A\mid I)$ hin.
+Dann verwenden wir dieselben Zeilenumformungen immer auf der ganzen Zeile, also links \textbf{und} rechts vom Strich.
+Wenn links am Ende $I$ steht, steht rechts automatisch $A^{-1}$.
+\end{wastun}
+
 \textbf{Schritt 1: Erweiterte Matrix aufstellen.}
 
+Links steht die Matrix $A$.
+Rechts schreiben wir die $3\times 3$-Einheitsmatrix $I$ dazu:
+\[
+I=
+\begin{pmatrix}
+1 & 0 & 0\\
+0 & 1 & 0\\
+0 & 0 & 1
+\end{pmatrix}.
+\]
+
+Also starten wir mit
 \[
 \left(\begin{array}{ccc|ccc}
 6 & 1 & 3 & 1 & 0 & 0 \\
@@ -884,6 +903,8 @@ A=
 \textbf{Schritt 2: Eine $1$ als ersten Pivot nach oben holen.}
 
 Die dritte Zeile beginnt mit $1$. Das ist ein angenehmer Pivot.
+Ein Pivot ist der Eintrag, mit dem wir eine Spalte aufr\"aumen.
+Wenn der Pivot schon $1$ ist, m\"ussen wir nicht durch eine Zahl teilen.
 Wir tauschen daher $Z_1$ und $Z_3$:
 \[
 \xrightarrow{Z_1\leftrightarrow Z_3}
@@ -896,6 +917,29 @@ Wir tauschen daher $Z_1$ und $Z_3$:
 
 \textbf{Schritt 3: Unter dem ersten Pivot Nullen machen.}
 
+Der erste Pivot steht jetzt oben links in Spalte $1$.
+Unter diesem Pivot stehen noch die Zahlen $2$ und $6$.
+Diese sollen $0$ werden, damit links langsam die Einheitsmatrix entsteht.
+
+F\"ur die zweite Zeile rechnen wir:
+\[
+Z_2-2Z_1
+=
+(2,0,1\mid 0,1,0)-2(1,2,0\mid 0,0,1)
+=
+(0,-4,1\mid 0,1,-2).
+\]
+
+F\"ur die dritte Zeile rechnen wir:
+\[
+Z_3-6Z_1
+=
+(6,1,3\mid 1,0,0)-6(1,2,0\mid 0,0,1)
+=
+(0,-11,3\mid 1,0,-6).
+\]
+
+Damit bekommen wir:
 \[
 \xrightarrow[\substack{Z_3\to Z_3-6Z_1}]{Z_2\to Z_2-2Z_1}
 \left(\begin{array}{ccc|ccc}
@@ -906,6 +950,15 @@ Wir tauschen daher $Z_1$ und $Z_3$:
 \]
 
 \textbf{Schritt 4: Zweiten Pivot zu $1$ machen.}
+
+In der zweiten Zeile ist der n\"achste brauchbare Pivot $-4$.
+Wir wollen aber einen Pivot $1$ haben.
+Deshalb multiplizieren wir die ganze zweite Zeile mit $-\frac14$:
+\[
+-\frac14(0,-4,1\mid 0,1,-2)
+=
+\left(0,1,-\frac14 \mid 0,-\frac14,\frac12\right).
+\]
 
 \[
 \xrightarrow{Z_2\to -\frac14 Z_2}
@@ -918,6 +971,29 @@ Wir tauschen daher $Z_1$ und $Z_3$:
 
 \textbf{Schritt 5: In der zweiten Spalte oben und unten Nullen machen.}
 
+Der Pivot in Spalte $2$ steht jetzt in $Z_2$.
+In derselben Spalte stehen noch $2$ in $Z_1$ und $-11$ in $Z_3$.
+Beide sollen $0$ werden.
+
+Oben:
+\[
+Z_1-2Z_2
+=
+(1,2,0\mid 0,0,1)-2\left(0,1,-\frac14\mid 0,-\frac14,\frac12\right)
+=
+\left(1,0,\frac12\mid 0,\frac12,0\right).
+\]
+
+Unten:
+\[
+Z_3+11Z_2
+=
+(0,-11,3\mid 1,0,-6)
++11\left(0,1,-\frac14\mid 0,-\frac14,\frac12\right)
+=
+\left(0,0,\frac14\mid 1,-\frac{11}{4},-\frac12\right).
+\]
+
 \[
 \xrightarrow[\substack{Z_3\to Z_3+11Z_2}]{Z_1\to Z_1-2Z_2}
 \left(\begin{array}{ccc|ccc}
@@ -928,6 +1004,14 @@ Wir tauschen daher $Z_1$ und $Z_3$:
 \]
 
 \textbf{Schritt 6: Dritten Pivot zu $1$ machen.}
+
+Der dritte Pivot ist jetzt $\frac14$.
+Damit daraus $1$ wird, multiplizieren wir die dritte Zeile mit $4$:
+\[
+4\left(0,0,\frac14\mid 1,-\frac{11}{4},-\frac12\right)
+=
+(0,0,1\mid 4,-11,-2).
+\]
 
 \[
 \xrightarrow{Z_3\to 4Z_3}
@@ -940,6 +1024,30 @@ Wir tauschen daher $Z_1$ und $Z_3$:
 
 \textbf{Schritt 7: In der dritten Spalte oben Nullen machen.}
 
+Jetzt steht in der dritten Spalte unten der Pivot $1$.
+Dar\"uber stehen noch $\frac12$ in $Z_1$ und $-\frac14$ in $Z_2$.
+Auch diese beiden Eintr\"age sollen $0$ werden.
+
+F\"ur die erste Zeile:
+\[
+Z_1-\frac12 Z_3
+=
+\left(1,0,\frac12\mid 0,\frac12,0\right)
+-\frac12(0,0,1\mid 4,-11,-2)
+=
+(1,0,0\mid -2,6,1).
+\]
+
+F\"ur die zweite Zeile:
+\[
+Z_2+\frac14 Z_3
+=
+\left(0,1,-\frac14\mid 0,-\frac14,\frac12\right)
++\frac14(0,0,1\mid 4,-11,-2)
+=
+(0,1,0\mid 1,-3,0).
+\]
+
 \[
 \xrightarrow[\substack{Z_2\to Z_2+\frac14 Z_3}]{Z_1\to Z_1-\frac12 Z_3}
 \left(\begin{array}{ccc|ccc}
@@ -949,7 +1057,21 @@ Wir tauschen daher $Z_1$ und $Z_3$:
 \end{array}\right).
 \]
 
-Links steht jetzt $I$. Rechts steht also $A^{-1}$:
+\textbf{Warum ist rechts jetzt die Inverse?}
+
+Links steht jetzt die Einheitsmatrix
+\[
+I=
+\begin{pmatrix}
+1&0&0\\
+0&1&0\\
+0&0&1
+\end{pmatrix}.
+\]
+Wir haben also aus $(A\mid I)$ durch erlaubte Zeilenumformungen $(I\mid \text{rechte Seite})$ gemacht.
+Der Algorithmus sagt genau: Sobald links $I$ steht, ist die rechte Seite $A^{-1}$.
+
+Also:
 \[
 \fbox{\parbox{0.93\textwidth}{\centering
 \[
@@ -966,6 +1088,12 @@ A^{-1}=
 %% --- 24(b) ---
 \subsubsection*{24(b) Gleichungssystem mit $A^{-1}$ l\"osen}
 
+\begin{wastun}
+Jetzt verwenden wir die Inverse aus 24(a).
+Die Idee ist: Wenn $A\vec{x}=\vec{b}$ gilt, dann kann man links mit $A^{-1}$ multiplizieren.
+Dann wird aus $A^{-1}A$ die Einheitsmatrix $I$, und dadurch bleibt nur $\vec{x}$ \"ubrig.
+\end{wastun}
+
 Wir wollen
 \[
 A
@@ -978,6 +1106,27 @@ x\\y\\z
 \end{pmatrix}
 \]
 l\"osen.
+
+\textbf{Schritt 1: Gleichung in Kurzform schreiben.}
+
+Setze
+\[
+\vec{x}=
+\begin{pmatrix}
+x\\y\\z
+\end{pmatrix},
+\qquad
+\vec{b}=
+\begin{pmatrix}
+11\\4\\-1
+\end{pmatrix}.
+\]
+Dann lautet die Gleichung kurz:
+\[
+A\vec{x}=\vec{b}.
+\]
+
+\textbf{Schritt 2: Beide Seiten mit $A^{-1}$ multiplizieren.}
 
 Weil $A^{-1}$ die inverse Matrix ist, multiplizieren wir beide Seiten von links mit $A^{-1}$:
 \[
@@ -992,7 +1141,14 @@ A^{-1}
 \end{pmatrix}.
 \]
 
-Da $A^{-1}A=I$, bleibt links nur der gesuchte Vektor:
+Da $A^{-1}A=I$, wird links
+\[
+A^{-1}A\vec{x}=I\vec{x}=\vec{x}.
+\]
+Das ist der ganze Grund, warum die inverse Matrix hier hilft:
+Sie entfernt das $A$ vor dem gesuchten Vektor.
+
+Also bleibt links nur der gesuchte Vektor:
 \[
 \begin{pmatrix}
 x\\y\\z
@@ -1003,6 +1159,8 @@ A^{-1}
 11\\4\\-1
 \end{pmatrix}.
 \]
+
+\textbf{Schritt 3: $A^{-1}$ einsetzen.}
 
 Jetzt setzen wir $A^{-1}$ ein:
 \[
@@ -1020,6 +1178,18 @@ x\\y\\z
 \end{pmatrix}.
 \]
 
+\textbf{Schritt 4: Matrix mal Vektor ausrechnen.}
+
+Beim Multiplizieren nimmt man immer eine Zeile der Matrix und bildet das Skalarprodukt mit dem rechten Vektor.
+Also:
+\[
+\begin{pmatrix}
+\text{erste Zeile}\cdot \vec{b}\\
+\text{zweite Zeile}\cdot \vec{b}\\
+\text{dritte Zeile}\cdot \vec{b}
+\end{pmatrix}.
+\]
+
 Eintrag f\"ur Eintrag:
 \begin{align*}
 x &= -2\cdot 11+6\cdot 4+1\cdot(-1)
@@ -1032,6 +1202,8 @@ z &= 4\cdot 11+(-11)\cdot 4+(-2)\cdot(-1)
    = 44-44+2
    = 2.
 \end{align*}
+
+\textbf{Schritt 5: Ergebnis ablesen.}
 
 \[
 \fbox{\parbox{0.93\textwidth}{\centering
@@ -1049,6 +1221,8 @@ Also ist $x=1$, $y=-1$, $z=2$.
 \]
 
 \textbf{Probe.}
+Zum Schluss kontrollieren wir, ob das Ergebnis wirklich zur rechten Seite f\"uhrt.
+Daf\"ur setzen wir $(x,y,z)=(1,-1,2)$ wieder in $A(x,y,z)^T$ ein:
 \[
 A
 \begin{pmatrix}
