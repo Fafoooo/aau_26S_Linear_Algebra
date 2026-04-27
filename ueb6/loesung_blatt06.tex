@@ -1,0 +1,908 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{geometry}\geometry{margin=2.5cm}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable}
+\usepackage{xcolor}
+
+\newtcolorbox{begriffe}[1][]{colback=yellow!10, colframe=yellow!60!black, fonttitle=\bfseries, title={Was bedeuten die Begriffe?}, breakable, #1}
+\newtcolorbox{wastun}[1][]{colback=orange!5, colframe=orange!60!black, fonttitle=\bfseries, title={Was ist zu tun?}, breakable, #1}
+\newcommand{\piv}[1]{{\color{red}\boxed{#1}}}
+
+\title{\"Ubungsblatt 6 -- L\"osungen \\ \large Linear Algebra}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{center}
+\fbox{\parbox{0.9\textwidth}{
+Die Abschnitte mit $\square$ sind genau die einzelnen Beispiele zum Kreuzen:
+22(a), 22(b), 22(c), 23(a), 23(b) und 24.
+}}
+\end{center}
+
+%% ============================================================
+\subsection*{$\square$ Beispiel 22(a)}
+%% ============================================================
+
+\textbf{Angabe.}
+\[
+W = \{(a,b,c,d,e)\in \mathbb{R}^5 : a+b+c = a+2b-3d = a+3b-5e\}.
+\]
+Gesucht sind eine Basis von $W$ und die Dimension von $W$.
+
+\begin{begriffe}
+\begin{itemize}[leftmargin=*, nosep]
+    \item $W$ ist eine Menge von Vektoren in $\mathbb{R}^5$.
+    \item Eine \textbf{Basis} ist eine Liste von Vektoren, mit denen man alle Vektoren in $W$ bauen kann, ohne dass einer davon \"uberfl\"ussig ist.
+    \item Die \textbf{Dimension} ist die Anzahl der Vektoren in einer Basis.
+    \item Die Schreibweise $T_1=T_2=T_3$ bedeutet: alle drei Ausdr\"ucke sind gleich. Daf\"ur reicht es, $T_1=T_2$ und $T_2=T_3$ zu fordern.
+\end{itemize}
+\end{begriffe}
+
+\begin{wastun}
+\begin{enumerate}[leftmargin=*, nosep]
+    \item Aus der Kettengleichung zwei normale Gleichungen machen.
+    \item Diese Gleichungen nach einigen Variablen aufl\"osen.
+    \item Die freien Variablen als Parameter schreiben.
+    \item Aus der Parameterdarstellung die Basis ablesen.
+\end{enumerate}
+\end{wastun}
+
+\textbf{Schritt 1: Die Kettengleichung in zwei Gleichungen zerlegen.}
+
+Wir setzen
+\[
+T_1=a+b+c,\qquad T_2=a+2b-3d,\qquad T_3=a+3b-5e.
+\]
+Die Bedingung $T_1=T_2=T_3$ ist gleichbedeutend mit
+\[
+T_1=T_2
+\qquad\text{und}\qquad
+T_2=T_3.
+\]
+
+Erste Gleichung:
+\begin{align*}
+a+b+c &= a+2b-3d \\
+b+c &= 2b-3d && \text{auf beiden Seiten $a$ abziehen} \\
+c-b+3d &= 0 && \text{alles auf eine Seite bringen} \\
+c &= b-3d.
+\end{align*}
+
+Zweite Gleichung:
+\begin{align*}
+a+2b-3d &= a+3b-5e \\
+2b-3d &= 3b-5e && \text{auf beiden Seiten $a$ abziehen} \\
+-b-3d+5e &= 0 && \text{alles auf eine Seite bringen} \\
+5e &= b+3d \\
+e &= \frac{b+3d}{5}.
+\end{align*}
+
+\textbf{Schritt 2: Freie Variablen erkennen.}
+
+Die Variable $a$ kommt in den Endbedingungen gar nicht mehr vor. Also ist $a$ frei.
+Au\ss erdem d\"urfen wir $b$ und $d$ frei w\"ahlen. Danach sind $c$ und $e$ festgelegt:
+\[
+c=b-3d,
+\qquad
+e=\frac{b+3d}{5}.
+\]
+
+Damit sieht jeder Vektor aus $W$ so aus:
+\[
+(a,b,c,d,e)
+=
+\left(a,\; b,\; b-3d,\; d,\; \frac{b+3d}{5}\right).
+\]
+
+\textbf{Schritt 3: Parameter so w\"ahlen, dass keine Br\"uche in der Basis stehen.}
+
+Wir setzen
+\[
+a=r,\qquad b=5s,\qquad d=5t
+\quad (r,s,t\in\mathbb{R}).
+\]
+Das ist keine Einschr\"ankung: Weil $s$ und $t$ beliebige reelle Zahlen sind, k\"onnen $5s$ und $5t$ immer noch jeden reellen Wert annehmen.
+
+Dann ist
+\[
+c = 5s-15t,
+\qquad
+e = \frac{5s+15t}{5}=s+3t.
+\]
+Also
+\begin{align*}
+(a,b,c,d,e)
+&= (r,\;5s,\;5s-15t,\;5t,\;s+3t) \\
+&= r(1,0,0,0,0)
+ + s(0,5,5,0,1)
+ + t(0,0,-15,5,3).
+\end{align*}
+
+\textbf{Schritt 4: Basis und Dimension ablesen.}
+
+Die drei Parameter $r,s,t$ sind frei. Zu jedem freien Parameter geh\"ort ein Basisvektor.
+
+\[
+\fbox{\parbox{0.93\textwidth}{\centering
+Eine Basis von $W$ ist
+\[
+\{(1,0,0,0,0),\; (0,5,5,0,1),\; (0,0,-15,5,3)\}.
+\]
+Also ist $\dim(W)=3$.
+}}
+\]
+
+\textbf{Kurze Kontrolle.}
+Wenn man die drei Basisvektoren in die urspr\"ungliche Bedingung einsetzt, erf\"ullen sie jeweils
+$a+b+c=a+2b-3d=a+3b-5e$. Au\ss erdem kann jeder Vektor in $W$ mit den drei Parametern $r,s,t$ gebaut werden. Daher ist das wirklich eine Basis.
+
+\bigskip
+\hrule
+\bigskip
+
+%% ============================================================
+\subsection*{$\square$ Beispiel 22(b)}
+%% ============================================================
+
+\textbf{Angabe.}
+$W$ ist der Raum aller reellen Matrizen der Form
+\[
+A=
+\begin{pmatrix}
+a & b & c \\
+b & c & d \\
+c & d & e
+\end{pmatrix}
+\]
+mit
+\[
+A
+\begin{pmatrix}
+1\\-2\\3
+\end{pmatrix}
+=
+\begin{pmatrix}
+0\\0\\0
+\end{pmatrix}.
+\]
+Gesucht sind eine Basis von $W$ und die Dimension von $W$.
+
+\begin{begriffe}
+\begin{itemize}[leftmargin=*, nosep]
+    \item Die Matrix ist nicht beliebig: Sie ist durch die f\"unf Zahlen $a,b,c,d,e$ bestimmt.
+    \item Die Bedingung $A(1,-2,3)^T=0$ liefert drei Gleichungen.
+    \item Wieder suchen wir alle m\"oglichen Matrizen, die diese Gleichungen erf\"ullen.
+\end{itemize}
+\end{begriffe}
+
+\textbf{Schritt 1: Matrix-Vektor-Produkt ausrechnen.}
+
+\[
+\begin{pmatrix}
+a & b & c \\
+b & c & d \\
+c & d & e
+\end{pmatrix}
+\begin{pmatrix}
+1\\-2\\3
+\end{pmatrix}
+=
+\begin{pmatrix}
+a-2b+3c \\
+b-2c+3d \\
+c-2d+3e
+\end{pmatrix}.
+\]
+
+Dieser Vektor soll der Nullvektor sein. Also m\"ussen alle drei Eintr\"age gleich $0$ sein:
+\[
+\begin{cases}
+a-2b+3c=0,\\
+b-2c+3d=0,\\
+c-2d+3e=0.
+\end{cases}
+\]
+
+\textbf{Schritt 2: Von unten nach oben aufl\"osen.}
+
+Die letzte Gleichung enth\"alt $c,d,e$:
+\begin{align*}
+c-2d+3e &= 0 \\
+c &= 2d-3e.
+\end{align*}
+
+Jetzt setzen wir das in die zweite Gleichung ein:
+\begin{align*}
+b-2c+3d &= 0 \\
+b &= 2c-3d \\
+&= 2(2d-3e)-3d \\
+&= 4d-6e-3d \\
+&= d-6e.
+\end{align*}
+
+Jetzt setzen wir $b=d-6e$ und $c=2d-3e$ in die erste Gleichung ein:
+\begin{align*}
+a-2b+3c &= 0 \\
+a &= 2b-3c \\
+&= 2(d-6e)-3(2d-3e) \\
+&= 2d-12e-6d+9e \\
+&= -4d-3e.
+\end{align*}
+
+\textbf{Schritt 3: Freie Variablen setzen.}
+
+Die Variablen $d$ und $e$ sind frei. Setze
+\[
+d=s,\qquad e=t
+\quad (s,t\in\mathbb{R}).
+\]
+Dann gilt
+\[
+c=2s-3t,\qquad b=s-6t,\qquad a=-4s-3t.
+\]
+
+Damit ist
+\[
+A=
+\begin{pmatrix}
+-4s-3t & s-6t & 2s-3t \\
+s-6t & 2s-3t & s \\
+2s-3t & s & t
+\end{pmatrix}.
+\]
+
+Jetzt trennen wir die $s$-Anteile und die $t$-Anteile:
+\[
+A
+=
+s
+\begin{pmatrix}
+-4 & 1 & 2 \\
+1 & 2 & 1 \\
+2 & 1 & 0
+\end{pmatrix}
++
+t
+\begin{pmatrix}
+-3 & -6 & -3 \\
+-6 & -3 & 0 \\
+-3 & 0 & 1
+\end{pmatrix}.
+\]
+
+\textbf{Schritt 4: Basis und Dimension ablesen.}
+
+\[
+\fbox{\parbox{0.93\textwidth}{\centering
+Eine Basis von $W$ ist
+\[
+\left\{
+\begin{pmatrix}
+-4 & 1 & 2 \\
+1 & 2 & 1 \\
+2 & 1 & 0
+\end{pmatrix},
+\begin{pmatrix}
+-3 & -6 & -3 \\
+-6 & -3 & 0 \\
+-3 & 0 & 1
+\end{pmatrix}
+\right\}.
+\]
+Also ist $\dim(W)=2$.
+}}
+\]
+
+\textbf{Warum sind es genau zwei Basisvektoren?}
+Es gibt genau zwei freie Parameter, n\"amlich $s$ und $t$.
+Jede erlaubte Matrix entsteht aus diesen zwei Parametern.
+Die beiden Basisvektoren sind auch nicht Vielfache voneinander, zum Beispiel hat der erste unten rechts den Eintrag $0$, der zweite unten rechts den Eintrag $1$.
+
+\bigskip
+\hrule
+\bigskip
+
+%% ============================================================
+\subsection*{$\square$ Beispiel 22(c)}
+%% ============================================================
+
+\textbf{Angabe.}
+\[
+W=\{p(x)\in \mathbb{R}_4[x] : p(0)=p(1)=p(2)\}.
+\]
+Gesucht sind eine Basis von $W$ und die Dimension von $W$.
+
+\begin{begriffe}
+\begin{itemize}[leftmargin=*, nosep]
+    \item $\mathbb{R}_4[x]$ bedeutet: alle Polynome mit Grad h\"ochstens $4$.
+    \item Die Bedingung $p(0)=p(1)=p(2)$ sagt: Bei $x=0$, $x=1$ und $x=2$ hat das Polynom denselben Wert.
+    \item Wenn ein Polynom $q$ bei $x=r$ den Wert $0$ hat, dann ist $(x-r)$ ein Faktor von $q$.
+\end{itemize}
+\end{begriffe}
+
+\textbf{Schritt 1: Den gemeinsamen Wert abziehen.}
+
+Setze
+\[
+\lambda = p(0).
+\]
+Weil $p(0)=p(1)=p(2)$ gilt, ist auch
+\[
+p(0)=\lambda,\qquad p(1)=\lambda,\qquad p(2)=\lambda.
+\]
+
+Jetzt betrachten wir
+\[
+q(x)=p(x)-\lambda.
+\]
+Dann gilt:
+\[
+q(0)=p(0)-\lambda=0,
+\qquad
+q(1)=p(1)-\lambda=0,
+\qquad
+q(2)=p(2)-\lambda=0.
+\]
+Also hat $q$ die Nullstellen $0,1,2$.
+
+\textbf{Schritt 2: Nullstellen als Faktoren schreiben.}
+
+Wenn $q$ die Nullstellen $0,1,2$ hat, dann ist $q$ durch
+\[
+x(x-1)(x-2)
+\]
+teilbar.
+
+Da $p\in \mathbb{R}_4[x]$ gilt, hat $p$ Grad h\"ochstens $4$.
+Auch $q=p-\lambda$ hat Grad h\"ochstens $4$.
+Der Faktor $x(x-1)(x-2)$ hat Grad $3$.
+Also darf nach dem Herausziehen dieses Faktors nur noch ein Polynom vom Grad h\"ochstens $1$ \"ubrig bleiben:
+\[
+q(x)=(\alpha x+\beta)\,x(x-1)(x-2).
+\]
+
+Daher hat jedes $p\in W$ die Form
+\[
+p(x)=\lambda+\beta\,x(x-1)(x-2)+\alpha\,x^2(x-1)(x-2).
+\]
+
+\textbf{Schritt 3: Basis ablesen.}
+
+Die drei freien Zahlen sind $\lambda,\beta,\alpha$.
+Zu jeder freien Zahl geh\"ort ein Basis-Polynom:
+\[
+1,
+\qquad
+x(x-1)(x-2),
+\qquad
+x^2(x-1)(x-2).
+\]
+
+\[
+\fbox{\parbox{0.93\textwidth}{\centering
+Eine Basis von $W$ ist
+\[
+\{1,\; x(x-1)(x-2),\; x^2(x-1)(x-2)\}.
+\]
+Also ist $\dim(W)=3$.
+}}
+\]
+
+\textbf{Kurze Kontrolle.}
+Bei $x=0,1,2$ verschwinden die beiden Faktoren
+\[
+x(x-1)(x-2)
+\quad\text{und}\quad
+x^2(x-1)(x-2).
+\]
+Deshalb haben alle Polynome der Form
+\[
+\lambda+\beta x(x-1)(x-2)+\alpha x^2(x-1)(x-2)
+\]
+bei $0,1,2$ immer denselben Wert, n\"amlich $\lambda$.
+
+\textbf{Warum sind die drei Polynome linear unabh\"angig?}
+Ausmultipliziert sind
+\[
+x(x-1)(x-2)=x^3-3x^2+2x,
+\]
+\[
+x^2(x-1)(x-2)=x^4-3x^3+2x^2.
+\]
+In einer Kombination
+\[
+A\cdot 1+B\cdot x(x-1)(x-2)+C\cdot x^2(x-1)(x-2)=0
+\]
+kommt der Term $x^4$ nur vom dritten Polynom. Also muss $C=0$ sein.
+Dann kommt der Term $x^3$ nur noch vom zweiten Polynom. Also muss $B=0$ sein.
+Dann bleibt $A\cdot 1=0$, also $A=0$.
+Damit ist nur die triviale Kombination m\"oglich.
+
+\bigskip
+\hrule
+\bigskip
+
+%% ============================================================
+\subsection*{$\square$ Beispiel 23(a)}
+%% ============================================================
+
+\textbf{Angabe.}
+Gegeben ist das lineare Gleichungssystem in den Variablen $x,y,z,t,u$:
+\[
+\begin{cases}
+x+2y+z+2t-2u=0,\\
+3x+6y+z+2u=0,\\
+2x+4y+z+t=0.
+\end{cases}
+\]
+Gesucht sind eine Basis und die Dimension des L\"osungsraums.
+
+\begin{begriffe}
+\begin{itemize}[leftmargin=*, nosep]
+    \item Der \textbf{L\"osungsraum} besteht aus allen Vektoren $(x,y,z,t,u)\in\mathbb{R}^5$, die alle drei Gleichungen erf\"ullen.
+    \item Weil rechts immer $0$ steht, ist das System \textbf{homogen}. Deshalb ist die L\"osungsmenge automatisch ein Unterraum.
+    \item Freie Variablen liefern die Parameter. Die Parametervektoren bilden die Basis des L\"osungsraums.
+\end{itemize}
+\end{begriffe}
+
+\textbf{Schritt 1: Erweiterte Matrix aufstellen.}
+
+\[
+\left(\begin{array}{ccccc|c}
+1 & 2 & 1 & 2 & -2 & 0 \\
+3 & 6 & 1 & 0 & 2 & 0 \\
+2 & 4 & 1 & 1 & 0 & 0
+\end{array}\right)
+\]
+
+\textbf{Schritt 2: Gau\ss-Elimination.}
+
+Wir benutzen die erste Zeile als Pivot-Zeile und machen darunter in der ersten Spalte Nullen:
+\[
+\xrightarrow[\substack{Z_3\to Z_3-2Z_1}]{Z_2\to Z_2-3Z_1}
+\left(\begin{array}{ccccc|c}
+1 & 2 & 1 & 2 & -2 & 0 \\
+0 & 0 & -2 & -6 & 8 & 0 \\
+0 & 0 & -1 & -3 & 4 & 0
+\end{array}\right).
+\]
+
+Die zweite Zeile ist genau das Doppelte der dritten Zeile.
+Also bringt sie keine neue Information:
+\[
+\xrightarrow{Z_2\to Z_2-2Z_3}
+\left(\begin{array}{ccccc|c}
+1 & 2 & 1 & 2 & -2 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & -1 & -3 & 4 & 0
+\end{array}\right).
+\]
+
+Jetzt schieben wir die Nullzeile nach unten und machen aus dem Pivot $-1$ eine $1$:
+\[
+\xrightarrow{Z_2\leftrightarrow Z_3}
+\left(\begin{array}{ccccc|c}
+1 & 2 & 1 & 2 & -2 & 0 \\
+0 & 0 & -1 & -3 & 4 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0
+\end{array}\right)
+\xrightarrow{Z_2\to -Z_2}
+\left(\begin{array}{ccccc|c}
+1 & 2 & 1 & 2 & -2 & 0 \\
+0 & 0 & 1 & 3 & -4 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0
+\end{array}\right).
+\]
+
+Zum Schluss machen wir den Eintrag \"uber dem Pivot in Spalte $z$ zu $0$:
+\[
+\xrightarrow{Z_1\to Z_1-Z_2}
+\left(\begin{array}{ccccc|c}
+\piv{1} & 2 & 0 & -1 & 2 & 0 \\
+0 & 0 & \piv{1} & 3 & -4 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0
+\end{array}\right).
+\]
+
+\textbf{Schritt 3: Pivot- und freie Variablen ablesen.}
+
+Die Pivot-Spalten sind $x$ und $z$.
+Die freien Variablen sind also
+\[
+y,\qquad t,\qquad u.
+\]
+
+Die Matrix entspricht den Gleichungen
+\[
+x+2y-t+2u=0,
+\qquad
+z+3t-4u=0.
+\]
+Also
+\[
+x=-2y+t-2u,
+\qquad
+z=-3t+4u.
+\]
+
+\textbf{Schritt 4: Freie Variablen als Parameter setzen.}
+
+Setze
+\[
+y=s,\qquad t=r,\qquad u=q
+\quad (s,r,q\in\mathbb{R}).
+\]
+Dann ist
+\[
+x=-2s+r-2q,
+\qquad
+z=-3r+4q.
+\]
+
+Damit sieht jeder L\"osungsvektor so aus:
+\begin{align*}
+(x,y,z,t,u)
+&=(-2s+r-2q,\; s,\; -3r+4q,\; r,\; q) \\
+&= s(-2,1,0,0,0)
+ + r(1,0,-3,1,0)
+ + q(-2,0,4,0,1).
+\end{align*}
+
+\[
+\fbox{\parbox{0.93\textwidth}{\centering
+Eine Basis des L\"osungsraums ist
+\[
+\{(-2,1,0,0,0),\; (1,0,-3,1,0),\; (-2,0,4,0,1)\}.
+\]
+Die Dimension des L\"osungsraums ist $3$.
+}}
+\]
+
+\bigskip
+\hrule
+\bigskip
+
+%% ============================================================
+\subsection*{$\square$ Beispiel 23(b)}
+%% ============================================================
+
+\textbf{Angabe.}
+Mit dem Ergebnis aus 23(a) und dem passenden Satz sollen die Dimensionen von
+\[
+U=\operatorname{span}\big((1,2,1,2,-2),\; (3,6,1,0,2),\; (2,4,1,1,0)\big)
+\]
+und
+\[
+W=\operatorname{span}\big((1,3,2),\; (2,6,4),\; (1,1,1),\; (2,0,1),\; (-2,2,0)\big)
+\]
+bestimmt werden, ohne weitere Rechnungen.
+
+\textbf{Let}
+\[
+A=
+\begin{pmatrix}
+1 & 2 & 1 & 2 & -2 \\
+3 & 6 & 1 & 0 & 2 \\
+2 & 4 & 1 & 1 & 0
+\end{pmatrix}.
+\]
+
+\begin{begriffe}
+\begin{itemize}[leftmargin=*, nosep]
+    \item Die Zeilen von $A$ sind genau die drei Vektoren, die $U$ aufspannen.
+    \item Die Spalten von $A$ sind genau die f\"unf Vektoren, die $W$ aufspannen.
+    \item Der L\"osungsraum aus 23(a) ist der Kern von $A$, also $\ker(A)$.
+\end{itemize}
+\end{begriffe}
+
+\textbf{Satz.}
+F\"ur eine Matrix $A\in\mathbb{R}^{m\times n}$ gilt der Dimensionssatz
+\[
+\dim(\ker A)+\operatorname{rang}(A)=n.
+\]
+Dabei ist $n$ die Anzahl der Spalten von $A$.
+Au\ss erdem gilt:
+\[
+\operatorname{rang}(A)
+= \dim(\text{Spaltenraum von }A)
+= \dim(\text{Zeilenraum von }A).
+\]
+
+\textbf{Schritt 1: Ergebnis aus 23(a) einsetzen.}
+
+In 23(a) haben wir gefunden:
+\[
+\dim(\ker A)=3.
+\]
+Die Matrix $A$ hat $5$ Spalten. Also ist $n=5$.
+
+Mit dem Dimensionssatz:
+\[
+\dim(\ker A)+\operatorname{rang}(A)=5.
+\]
+Einsetzen:
+\[
+3+\operatorname{rang}(A)=5.
+\]
+Also:
+\[
+\operatorname{rang}(A)=2.
+\]
+
+\textbf{Schritt 2: Dimension von $U$.}
+
+$U$ ist der Zeilenraum von $A$, weil $U$ von den Zeilen von $A$ aufgespannt wird.
+Die Dimension des Zeilenraums ist der Rang:
+\[
+\dim(U)=\operatorname{rang}(A)=2.
+\]
+
+\textbf{Schritt 3: Dimension von $W$.}
+
+$W$ ist der Spaltenraum von $A$, weil $W$ von den Spalten von $A$ aufgespannt wird.
+Die Dimension des Spaltenraums ist ebenfalls der Rang:
+\[
+\dim(W)=\operatorname{rang}(A)=2.
+\]
+
+\[
+\fbox{\parbox{0.93\textwidth}{\centering
+\[
+\dim(U)=2,
+\qquad
+\dim(W)=2.
+\]
+}}
+\]
+
+\bigskip
+\hrule
+\bigskip
+
+%% ============================================================
+\subsection*{$\square$ Beispiel 24}
+%% ============================================================
+
+\textbf{Angabe.}
+\[
+A=
+\begin{pmatrix}
+6 & 1 & 3 \\
+2 & 0 & 1 \\
+1 & 2 & 0
+\end{pmatrix}
+\in \mathbb{R}^{3\times 3}.
+\]
+
+\begin{itemize}[leftmargin=*]
+    \item[(a)] Berechne $A^{-1}$ mit dem Algorithmus $(A\mid I)\to(I\mid A^{-1})$.
+    \item[(b)] Verwende das Ergebnis aus (a), um
+    \[
+    A
+    \begin{pmatrix}
+    x\\y\\z
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+    11\\4\\-1
+    \end{pmatrix}
+    \]
+    zu l\"osen.
+\end{itemize}
+
+\begin{begriffe}
+\begin{itemize}[leftmargin=*, nosep]
+    \item $A^{-1}$ ist die inverse Matrix. Sie macht die Wirkung von $A$ wieder r\"uckg\"angig.
+    \item Der Algorithmus $(A\mid I)\to(I\mid A^{-1})$ bedeutet: Wir schreiben rechts neben $A$ die Einheitsmatrix und machen links per Zeilenumformungen die Einheitsmatrix. Was rechts entsteht, ist $A^{-1}$.
+    \item Wenn $A\vec{x}=\vec{b}$ gilt, dann ist $\vec{x}=A^{-1}\vec{b}$.
+\end{itemize}
+\end{begriffe}
+
+%% --- 24(a) ---
+\subsubsection*{24(a) Inverse berechnen}
+
+\textbf{Schritt 1: Erweiterte Matrix aufstellen.}
+
+\[
+\left(\begin{array}{ccc|ccc}
+6 & 1 & 3 & 1 & 0 & 0 \\
+2 & 0 & 1 & 0 & 1 & 0 \\
+1 & 2 & 0 & 0 & 0 & 1
+\end{array}\right)
+\]
+
+\textbf{Schritt 2: Eine $1$ als ersten Pivot nach oben holen.}
+
+Die dritte Zeile beginnt mit $1$. Das ist ein angenehmer Pivot.
+Wir tauschen daher $Z_1$ und $Z_3$:
+\[
+\xrightarrow{Z_1\leftrightarrow Z_3}
+\left(\begin{array}{ccc|ccc}
+1 & 2 & 0 & 0 & 0 & 1 \\
+2 & 0 & 1 & 0 & 1 & 0 \\
+6 & 1 & 3 & 1 & 0 & 0
+\end{array}\right).
+\]
+
+\textbf{Schritt 3: Unter dem ersten Pivot Nullen machen.}
+
+\[
+\xrightarrow[\substack{Z_3\to Z_3-6Z_1}]{Z_2\to Z_2-2Z_1}
+\left(\begin{array}{ccc|ccc}
+1 & 2 & 0 & 0 & 0 & 1 \\
+0 & -4 & 1 & 0 & 1 & -2 \\
+0 & -11 & 3 & 1 & 0 & -6
+\end{array}\right).
+\]
+
+\textbf{Schritt 4: Zweiten Pivot zu $1$ machen.}
+
+\[
+\xrightarrow{Z_2\to -\frac14 Z_2}
+\left(\begin{array}{ccc|ccc}
+1 & 2 & 0 & 0 & 0 & 1 \\
+0 & 1 & -\frac14 & 0 & -\frac14 & \frac12 \\
+0 & -11 & 3 & 1 & 0 & -6
+\end{array}\right).
+\]
+
+\textbf{Schritt 5: In der zweiten Spalte oben und unten Nullen machen.}
+
+\[
+\xrightarrow[\substack{Z_3\to Z_3+11Z_2}]{Z_1\to Z_1-2Z_2}
+\left(\begin{array}{ccc|ccc}
+1 & 0 & \frac12 & 0 & \frac12 & 0 \\
+0 & 1 & -\frac14 & 0 & -\frac14 & \frac12 \\
+0 & 0 & \frac14 & 1 & -\frac{11}{4} & -\frac12
+\end{array}\right).
+\]
+
+\textbf{Schritt 6: Dritten Pivot zu $1$ machen.}
+
+\[
+\xrightarrow{Z_3\to 4Z_3}
+\left(\begin{array}{ccc|ccc}
+1 & 0 & \frac12 & 0 & \frac12 & 0 \\
+0 & 1 & -\frac14 & 0 & -\frac14 & \frac12 \\
+0 & 0 & 1 & 4 & -11 & -2
+\end{array}\right).
+\]
+
+\textbf{Schritt 7: In der dritten Spalte oben Nullen machen.}
+
+\[
+\xrightarrow[\substack{Z_2\to Z_2+\frac14 Z_3}]{Z_1\to Z_1-\frac12 Z_3}
+\left(\begin{array}{ccc|ccc}
+1 & 0 & 0 & -2 & 6 & 1 \\
+0 & 1 & 0 & 1 & -3 & 0 \\
+0 & 0 & 1 & 4 & -11 & -2
+\end{array}\right).
+\]
+
+Links steht jetzt $I$. Rechts steht also $A^{-1}$:
+\[
+\fbox{\parbox{0.93\textwidth}{\centering
+\[
+A^{-1}=
+\begin{pmatrix}
+-2 & 6 & 1 \\
+1 & -3 & 0 \\
+4 & -11 & -2
+\end{pmatrix}.
+\]
+}}
+\]
+
+%% --- 24(b) ---
+\subsubsection*{24(b) Gleichungssystem mit $A^{-1}$ l\"osen}
+
+Wir wollen
+\[
+A
+\begin{pmatrix}
+x\\y\\z
+\end{pmatrix}
+=
+\begin{pmatrix}
+11\\4\\-1
+\end{pmatrix}
+\]
+l\"osen.
+
+Weil $A^{-1}$ die inverse Matrix ist, multiplizieren wir beide Seiten von links mit $A^{-1}$:
+\[
+A^{-1}A
+\begin{pmatrix}
+x\\y\\z
+\end{pmatrix}
+=
+A^{-1}
+\begin{pmatrix}
+11\\4\\-1
+\end{pmatrix}.
+\]
+
+Da $A^{-1}A=I$, bleibt links nur der gesuchte Vektor:
+\[
+\begin{pmatrix}
+x\\y\\z
+\end{pmatrix}
+=
+A^{-1}
+\begin{pmatrix}
+11\\4\\-1
+\end{pmatrix}.
+\]
+
+Jetzt setzen wir $A^{-1}$ ein:
+\[
+\begin{pmatrix}
+x\\y\\z
+\end{pmatrix}
+=
+\begin{pmatrix}
+-2 & 6 & 1 \\
+1 & -3 & 0 \\
+4 & -11 & -2
+\end{pmatrix}
+\begin{pmatrix}
+11\\4\\-1
+\end{pmatrix}.
+\]
+
+Eintrag f\"ur Eintrag:
+\begin{align*}
+x &= -2\cdot 11+6\cdot 4+1\cdot(-1)
+   = -22+24-1
+   = 1, \\
+y &= 1\cdot 11+(-3)\cdot 4+0\cdot(-1)
+   = 11-12+0
+   = -1, \\
+z &= 4\cdot 11+(-11)\cdot 4+(-2)\cdot(-1)
+   = 44-44+2
+   = 2.
+\end{align*}
+
+\[
+\fbox{\parbox{0.93\textwidth}{\centering
+\[
+\begin{pmatrix}
+x\\y\\z
+\end{pmatrix}
+=
+\begin{pmatrix}
+1\\-1\\2
+\end{pmatrix}.
+\]
+Also ist $x=1$, $y=-1$, $z=2$.
+}}
+\]
+
+\textbf{Probe.}
+\[
+A
+\begin{pmatrix}
+1\\-1\\2
+\end{pmatrix}
+=
+\begin{pmatrix}
+6\cdot1+1\cdot(-1)+3\cdot2 \\
+2\cdot1+0\cdot(-1)+1\cdot2 \\
+1\cdot1+2\cdot(-1)+0\cdot2
+\end{pmatrix}
+=
+\begin{pmatrix}
+11\\4\\-1
+\end{pmatrix}.
+\]
+Die Probe passt.
+
+\end{document}
