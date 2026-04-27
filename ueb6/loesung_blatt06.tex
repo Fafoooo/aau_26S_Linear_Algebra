@@ -586,19 +586,69 @@ Die Pivot-Spalten sind sichtbar, und aus den zwei Nichtnull-Zeilen k\"onnen wir 
 
 \textbf{Schritt 3: Pivot- und freie Variablen ablesen.}
 
-Die Pivot-Spalten sind $x$ und $z$.
+Jetzt schauen wir nicht mehr auf die Rechenschritte, sondern nur auf die fertige Matrix.
+Wichtig ist: Die Spalten geh\"oren der Reihe nach zu den Variablen
+\[
+x,\quad y,\quad z,\quad t,\quad u.
+\]
+
+Mit Spaltennamen sieht die fertige Matrix so aus:
+\[
+\begin{array}{c|ccccc|c}
+ & x & y & z & t & u & 0 \\ \hline
+Z_1 & \piv{1} & 2 & 0 & -1 & 2 & 0 \\
+Z_2 & 0 & 0 & \piv{1} & 3 & -4 & 0 \\
+Z_3 & 0 & 0 & 0 & 0 & 0 & 0
+\end{array}
+\]
+
+Die Pivot-Spalten sind genau die Spalten, in denen ein markierter Pivot steht.
+Hier stehen Pivots in der $x$-Spalte und in der $z$-Spalte.
+Deshalb werden $x$ und $z$ sp\"ater ausgerechnet.
+
+In den Spalten $y$, $t$ und $u$ steht kein Pivot.
+Diese Variablen d\"urfen wir frei w\"ahlen.
 Die freien Variablen sind also
 \[
 y,\qquad t,\qquad u.
 \]
 
-Die Matrix entspricht den Gleichungen
+Jetzt ziehen wir die Gleichungen aus den Nichtnull-Zeilen der Matrix heraus.
+Jede Zeile bedeutet:
+\[
+\text{Eintrag in Spalte }x\cdot x
++\text{Eintrag in Spalte }y\cdot y
++\cdots
+=\text{rechte Seite}.
+\]
+
+\textbf{Zeile 1:}
+\[
+1x+2y+0z-1t+2u=0.
+\]
+Den Term $0z$ kann man weglassen:
+\[
+x+2y-t+2u=0.
+\]
+
+\textbf{Zeile 2:}
+\[
+0x+0y+1z+3t-4u=0.
+\]
+Die Nullterme kann man weglassen:
+\[
+z+3t-4u=0.
+\]
+
+Also liefert die Matrix insgesamt die zwei Gleichungen
 \[
 x+2y-t+2u=0,
 \qquad
 z+3t-4u=0.
 \]
-Also
+
+Jetzt l\"osen wir nach den Pivot-Variablen $x$ und $z$ auf.
+Alles ohne Pivot bleibt rechts als freie Variable stehen:
 \[
 x=-2y+t-2u,
 \qquad
