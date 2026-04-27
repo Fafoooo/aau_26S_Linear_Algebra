@@ -481,7 +481,27 @@ Gesucht sind eine Basis und die Dimension des L\"osungsraums.
 
 \textbf{Schritt 2: Gau\ss-Elimination.}
 
-Wir benutzen die erste Zeile als Pivot-Zeile und machen darunter in der ersten Spalte Nullen:
+Wir benutzen die erste Zeile als Pivot-Zeile. Der erste Eintrag von $Z_1$ ist schon $1$,
+also ist das ein guter erster Pivot.
+Jetzt machen wir darunter in der $x$-Spalte Nullen.
+
+\[
+\begin{array}{rcl}
+Z_2-3Z_1
+&=&
+(3,6,1,0,2,0)-3(1,2,1,2,-2,0) \\
+&=&
+(0,0,-2,-6,8,0),
+\\[4pt]
+Z_3-2Z_1
+&=&
+(2,4,1,1,0,0)-2(1,2,1,2,-2,0) \\
+&=&
+(0,0,-1,-3,4,0).
+\end{array}
+\]
+
+Damit bekommen wir:
 \[
 \xrightarrow[\substack{Z_3\to Z_3-2Z_1}]{Z_2\to Z_2-3Z_1}
 \left(\begin{array}{ccccc|c}
@@ -492,7 +512,17 @@ Wir benutzen die erste Zeile als Pivot-Zeile und machen darunter in der ersten S
 \]
 
 Die zweite Zeile ist genau das Doppelte der dritten Zeile.
-Also bringt sie keine neue Information:
+Das hei\ss t: Diese beiden Zeilen sagen inhaltlich dasselbe.
+Also bringt eine davon keine neue Information.
+Wir machen deshalb $Z_2$ zur Nullzeile:
+\[
+Z_2-2Z_3
+=
+(0,0,-2,-6,8,0)-2(0,0,-1,-3,4,0)
+=
+(0,0,0,0,0,0).
+\]
+
 \[
 \xrightarrow{Z_2\to Z_2-2Z_3}
 \left(\begin{array}{ccccc|c}
@@ -502,7 +532,8 @@ Also bringt sie keine neue Information:
 \end{array}\right).
 \]
 
-Jetzt schieben wir die Nullzeile nach unten und machen aus dem Pivot $-1$ eine $1$:
+Jetzt schieben wir die Nullzeile nach unten, weil Nullzeilen in der Stufenform immer unten stehen sollen.
+Danach machen wir aus dem Pivot $-1$ eine $1$, indem wir die ganze Zeile mit $-1$ multiplizieren:
 \[
 \xrightarrow{Z_2\leftrightarrow Z_3}
 \left(\begin{array}{ccccc|c}
@@ -518,7 +549,17 @@ Jetzt schieben wir die Nullzeile nach unten und machen aus dem Pivot $-1$ eine $
 \end{array}\right).
 \]
 
-Zum Schluss machen wir den Eintrag \"uber dem Pivot in Spalte $z$ zu $0$:
+Jetzt ist in der zweiten Zeile der Pivot in der $z$-Spalte.
+\"Uber diesem Pivot steht in $Z_1$ noch eine $1$.
+F\"ur die reduzierte Form soll dort eine $0$ stehen, also rechnen wir
+\[
+Z_1-Z_2
+=
+(1,2,1,2,-2,0)-(0,0,1,3,-4,0)
+=
+(1,2,0,-1,2,0).
+\]
+
 \[
 \xrightarrow{Z_1\to Z_1-Z_2}
 \left(\begin{array}{ccccc|c}
@@ -527,6 +568,21 @@ Zum Schluss machen wir den Eintrag \"uber dem Pivot in Spalte $z$ zu $0$:
 0 & 0 & 0 & 0 & 0 & 0
 \end{array}\right).
 \]
+
+\textbf{Fertige Version der Gau\ss-Elimination.}
+
+Wenn man nur die fertige Matrix anschauen will, ist das die wichtige Endform:
+\[
+\boxed{
+\left(\begin{array}{ccccc|c}
+\piv{1} & 2 & 0 & -1 & 2 & 0 \\
+0 & 0 & \piv{1} & 3 & -4 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0
+\end{array}\right)
+}
+\]
+Das ist die Form, bei der man mit der Gau\ss-Elimination fertig ist:
+Die Pivot-Spalten sind sichtbar, und aus den zwei Nichtnull-Zeilen k\"onnen wir direkt die Gleichungen f\"ur $x$ und $z$ ablesen.
 
 \textbf{Schritt 3: Pivot- und freie Variablen ablesen.}
 
