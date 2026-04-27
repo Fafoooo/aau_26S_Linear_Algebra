@@ -707,6 +707,15 @@ W=\operatorname{span}\big((1,3,2),\; (2,6,4),\; (1,1,1),\; (2,0,1),\; (-2,2,0)\b
 \]
 bestimmt werden, ohne weitere Rechnungen.
 
+\begin{wastun}
+\begin{enumerate}[leftmargin=*, nosep]
+    \item Die Aufgabe sagt: Wir sollen \textbf{nicht nochmal Gau\ss rechnen}.
+    \item Stattdessen sollen wir das Ergebnis aus 23(a) verwenden.
+    \item Daf\"ur bauen wir eine Matrix $A$, deren Zeilen und Spalten genau zu den Vektoren in $U$ und $W$ passen.
+    \item Dann benutzen wir den Dimensionssatz: Kern-Dimension plus Rang ergibt Anzahl der Spalten.
+\end{enumerate}
+\end{wastun}
+
 \textbf{Let}
 \[
 A=
@@ -719,9 +728,24 @@ A=
 
 \begin{begriffe}
 \begin{itemize}[leftmargin=*, nosep]
-    \item Die Zeilen von $A$ sind genau die drei Vektoren, die $U$ aufspannen.
-    \item Die Spalten von $A$ sind genau die f\"unf Vektoren, die $W$ aufspannen.
-    \item Der L\"osungsraum aus 23(a) ist der Kern von $A$, also $\ker(A)$.
+    \item \textbf{span} liest man ``Spann'' oder ``Span''. Das ist kein neues Rechenzeichen wie $+$ oder $\cdot$, sondern hei\ss t: \textbf{alle Linearkombinationen} der angegebenen Vektoren.
+    \item Wenn dort $\operatorname{span}(v_1,v_2,v_3)$ steht, meint das:
+    \[
+    \{\lambda_1v_1+\lambda_2v_2+\lambda_3v_3 : \lambda_1,\lambda_2,\lambda_3\in\mathbb{R}\}.
+    \]
+    Also: Wir d\"urfen die Vektoren beliebig mit Zahlen multiplizieren und addieren.
+    \item $U$ ist ein Unterraum von $\mathbb{R}^5$, weil die drei Vektoren in $U$ jeweils $5$ Eintr\"age haben:
+    \[
+    (1,2,1,2,-2),\quad (3,6,1,0,2),\quad (2,4,1,1,0).
+    \]
+    \item $W$ ist ein Unterraum von $\mathbb{R}^3$, weil die f\"unf Vektoren in $W$ jeweils $3$ Eintr\"age haben:
+    \[
+    (1,3,2),\quad (2,6,4),\quad (1,1,1),\quad (2,0,1),\quad (-2,2,0).
+    \]
+    \item Der Unterschied zwischen $U$ und $W$ ist also: $U$ wird von \textbf{3 langen Zeilenvektoren} in $\mathbb{R}^5$ aufgespannt, $W$ von \textbf{5 kurzen Spaltenvektoren} in $\mathbb{R}^3$.
+    \item Die Zeilen von $A$ sind genau die drei Vektoren, die $U$ aufspannen. Deshalb ist $U$ der \textbf{Zeilenraum} von $A$.
+    \item Die Spalten von $A$ sind genau die f\"unf Vektoren, die $W$ aufspannen. Deshalb ist $W$ der \textbf{Spaltenraum} von $A$.
+    \item Der L\"osungsraum aus 23(a) ist der Kern von $A$, also $\ker(A)$, denn in 23(a) haben wir genau $A\cdot(x,y,z,t,u)^T=0$ gel\"ost.
 \end{itemize}
 \end{begriffe}
 
@@ -737,6 +761,22 @@ Au\ss erdem gilt:
 = \dim(\text{Spaltenraum von }A)
 = \dim(\text{Zeilenraum von }A).
 \]
+
+\begin{begriffe}[title={Was bedeuten die Begriffe im Satz?}]
+\begin{itemize}[leftmargin=*, nosep]
+    \item $\dim$ ist die Abk\"urzung f\"ur \textbf{Dimension}. Die Dimension sagt: Wie viele Vektoren stehen in einer Basis? Beispiel: Wenn ein Raum eine Basis mit $3$ Vektoren hat, dann hat er Dimension $3$.
+    \item $\ker(A)$ hei\ss t \textbf{Kern} von $A$. Das ist die L\"osungsmenge von
+    \[
+    A\vec{x}=0.
+    \]
+    Genau diesen Kern haben wir in 23(a) berechnet.
+    \item $\dim(\ker A)$ hei\ss t also: Wie viele freie Parameter hat die L\"osungsmenge von $A\vec{x}=0$? In 23(a) waren das $3$ freie Parameter, also $\dim(\ker A)=3$.
+    \item $\operatorname{rang}(A)$ hei\ss t \textbf{Rang} von $A$. Praktisch bedeutet das: Wie viele Pivot-Spalten bzw. wie viele echte unabh\"angige Informationen hat die Matrix?
+    \item Der \textbf{Spaltenraum} von $A$ ist der Span der Spalten von $A$. Seine Dimension ist die Anzahl der unabh\"angigen Spalten.
+    \item Der \textbf{Zeilenraum} von $A$ ist der Span der Zeilen von $A$. Seine Dimension ist die Anzahl der unabh\"angigen Zeilen.
+    \item Der wichtige Satz sagt: Zeilenraum und Spaltenraum haben immer dieselbe Dimension. Diese gemeinsame Dimension nennt man den Rang.
+\end{itemize}
+\end{begriffe}
 
 \textbf{Schritt 1: Ergebnis aus 23(a) einsetzen.}
 
