@@ -295,18 +295,33 @@ $Ax = 0$ hat unendlich viele L\"osungen $\iff \det A = 0$:
 
 \textbf{Schritt 2: Faktorisieren.}
 
-Multipliziere mit $5$:
+\textbf{Warum \"uberhaupt faktorisieren?} Die Gleichung $5ab - 2a - 2b - 12 = 0$ steht in einer ``unsch\"onen'' Form -- man sieht $a$, $b$ und das Produkt $ab$ nebeneinander. Eine Form $(\dots)(\dots) = \text{Zahl}$ ist deutlich angenehmer: man hat dann zwei klare Faktoren, kann konkrete L\"osungspaare leichter bauen und sieht direkt, dass es \emph{unendlich} viele $(a, b)$ gibt.
+
+\textbf{Warum mit $5$ multiplizieren?} Wir wollen die Gleichung in die Form $(5a + p)(5b + q) = \text{Zahl}$ bringen, weil das den Faktor $5ab$ aus der Originalgleichung mit dem Faktor $25ab = (5a)(5b)$ aus dem Produkt verbindet. Genauer:
 \[
-25ab - 10a - 10b - 60 = 0.
+(5a + p)(5b + q) = 25ab + 5qa + 5pb + pq.
+\]
+Damit Koeffizientenvergleich m\"oglich wird, brauchen wir auf der linken Seite den Vorfaktor $25$ vor $ab$. Daher multiplizieren wir die ganze Gleichung mit $5$ -- das ist der Faktor, der $5ab$ zu $25ab$ macht, ohne neue Variablen einzuf\"uhren.
+
+\textbf{Schritt 2a: Mit $5$ multiplizieren.}
+\[
+5 \cdot (5ab - 2a - 2b - 12) = 0 \;\Longleftrightarrow\; 25ab - 10a - 10b - 60 = 0.
 \]
 
-Die ersten drei Terme erinnern an $(5a - 2)(5b - 2) = 25ab - 10a - 10b + 4$. Daher:
+\textbf{Schritt 2b: Form $(5a + p)(5b + q)$ raten.} Die Koeffizienten von $a$ und $b$ in $25ab - 10a - 10b - 60$ sind beide $-10$. Aus
 \[
-25ab - 10a - 10b = (5a-2)(5b-2) - 4,
+(5a + p)(5b + q) = 25ab + 5qa + 5pb + pq
 \]
-und die Gleichung wird zu
+folgt $5q = -10$ und $5p = -10$, also $p = q = -2$. Damit:
 \[
-(5a-2)(5b-2) - 4 - 60 = 0 \;\Rightarrow\; (5a-2)(5b-2) = 64.
+(5a - 2)(5b - 2) = 25ab - 10a - 10b + 4.
+\]
+
+\textbf{Schritt 2c: Konstanten ausgleichen.} In unserer Gleichung steht $-60$ statt $+4$. Differenz: $4 - (-60) = 64$. Genau diese $64$ landet auf der rechten Seite:
+\[
+25ab - 10a - 10b - 60 = 0
+\;\Longleftrightarrow\; \underbrace{(25ab - 10a - 10b + 4)}_{= (5a-2)(5b-2)} - 64 = 0
+\;\Longleftrightarrow\; (5a-2)(5b-2) = 64.
 \]
 
 \[
