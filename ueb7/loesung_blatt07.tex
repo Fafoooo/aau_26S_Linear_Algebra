@@ -209,33 +209,22 @@ A = \begin{pmatrix} a & 1 & 2 & 3 \\ 1 & 2 & 3 & 2 \\ 2 & 3 & 2 & 1 \\ 3 & 2 & 1
 
 \textbf{Schritt 1: Laplace-Entwicklung nach der ersten Zeile.}
 
-\textbf{Warum erste Zeile?} Die Matrix hat keine Nullen, also ist es egal, wo ich entwickle.
-Da der Parameter $a$ in Position $(1,1)$ steht, ist es bequem, nach der ersten Zeile zu entwickeln --
-so taucht $a$ direkt im Ergebnis auf, ohne erst durch andere Minoren zu wandern.
-
-\textbf{Erste Zeile ablesen.} Die Eintr\"age sind:
+Notation: $a_{ij}$ steht f\"ur den Eintrag in \textbf{Zeile $i$, Spalte $j$}. Hier:
 \[
-a_{11} = a, \quad a_{12} = 1, \quad a_{13} = 2, \quad a_{14} = 3.
+A = \begin{pmatrix}
+\underbrace{a}_{a_{11}} & \underbrace{1}_{a_{12}} & \underbrace{2}_{a_{13}} & \underbrace{3}_{a_{14}} \\
+1 & 2 & 3 & 2 \\
+2 & 3 & 2 & 1 \\
+3 & 2 & 1 & b
+\end{pmatrix}
 \]
+also $a_{11} = a$, $a_{12} = 1$, $a_{13} = 2$, $a_{14} = 3$.
 
-\textbf{Vorzeichen f\"ur die erste Zeile} (aus $(-1)^{1+j}$): $+, -, +, -$.
-
-\textbf{Allgemeine Laplace-Formel} f\"ur Entwicklung nach Zeile $1$:
-\[
-\det A = \sum_{j=1}^{4} (-1)^{1+j} \cdot a_{1j} \cdot M_{1j}
-= (+1)\,a_{11}\,M_{11} \;+\; (-1)\,a_{12}\,M_{12} \;+\; (+1)\,a_{13}\,M_{13} \;+\; (-1)\,a_{14}\,M_{14}.
-\]
-
-\textbf{Eintr\"age einsetzen.}
-\[
-\det A = (+1)\,a\,M_{11} \;+\; (-1)\,(1)\,M_{12} \;+\; (+1)\,(2)\,M_{13} \;+\; (-1)\,(3)\,M_{14},
-\]
-also kompakt:
+Vorzeichen f\"ur Zeile 1 (Schachbrett): $+\;-\;+\;-$. Damit:
 \[
 \det A = a \cdot M_{11} - 1 \cdot M_{12} + 2 \cdot M_{13} - 3 \cdot M_{14}.
 \]
-
-Die vier $3\times 3$-Minoren $M_{1j}$ entstehen, indem man jeweils \textbf{Zeile $1$ und Spalte $j$} wegstreicht.
+$M_{1j}$: Zeile 1 und Spalte $j$ wegstreichen.
 
 \textbf{Schritt 2: Vier Minoren ausrechnen.}
 
