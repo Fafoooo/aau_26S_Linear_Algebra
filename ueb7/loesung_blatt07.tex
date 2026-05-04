@@ -1,0 +1,501 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{geometry}\geometry{margin=2.5cm}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usepackage{pgfplots}\pgfplotsset{compat=1.18}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable}
+\usepackage{xcolor}
+\newtcolorbox{begriffe}[1][]{colback=yellow!10, colframe=yellow!60!black, fonttitle=\bfseries, title={Was bedeuten die Begriffe?}, breakable, #1}
+\newtcolorbox{wastun}[1][]{colback=orange!5, colframe=orange!60!black, fonttitle=\bfseries, title={Was ist zu tun?}, breakable, #1}
+\newcommand{\piv}[1]{{\color{red}\boxed{#1}}}
+
+\title{\"Ubungsblatt 7 -- L\"osungen \\ \large Linear Algebra}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+%% ============================================================
+\subsection*{Aufgabe 25 -- (nicht zur Abgabe)}
+%% ============================================================
+
+\"Ubungsaufgabe zum freien \"Uben mit zuf\"alligen $3\times 3$- und $4 \times 4$-Matrizen. Keine Abgabe.
+
+\bigskip
+\hrule
+\bigskip
+
+%% ============================================================
+\subsection*{Aufgabe 26}
+%% ============================================================
+
+\textbf{Angabe.} Berechne die Determinanten effizient (per Hand, ohne Rechner):
+\[
+A = \begin{pmatrix} 234 & 235 & 236 \\ 235 & 236 & 237 \\ 236 & 237 & 239 \end{pmatrix},\qquad
+B = \begin{pmatrix} 21 & 23 & 0 & 27 & 2 \\ 0 & 2 & 0 & 7 & 0 \\ 11 & 12 & 13 & 14 & 15 \\ 1 & 41 & 0 & 43 & 0 \\ 0 & 1 & 0 & 4 & 0 \end{pmatrix}.
+\]
+
+\begin{begriffe}
+\begin{itemize}[leftmargin=*, nosep]
+    \item \textbf{Determinante} -- eine Zahl, die einer quadratischen Matrix zugeordnet wird. $\det(A) = 0 \iff$ Zeilen (oder Spalten) sind linear abh\"angig.
+    \item \textbf{Eigenschaft 1: Zeilenumformungen.} $Z_i \to Z_i + \lambda Z_j$ \"andert die Determinante \textbf{nicht}.
+    \item \textbf{Eigenschaft 2: Zeilentausch.} \"Andert das Vorzeichen der Determinante.
+    \item \textbf{Eigenschaft 3: Spaltenumformungen.} Genau wie bei Zeilen.
+    \item \textbf{Laplace-Entwicklung} -- Entwicklung nach einer Zeile oder Spalte:\\ $\det(A) = \sum_{j} (-1)^{i+j} \, a_{ij} \, M_{ij}$, wobei $M_{ij}$ die Minor-Determinante ist (Matrix ohne Zeile $i$ und Spalte $j$).
+    \item \textbf{Trick}: Zeilen/Spalten mit vielen Nullen suchen $\Rightarrow$ Laplace-Entwicklung wird einfach.
+\end{itemize}
+\end{begriffe}
+
+\begin{wastun}
+\begin{enumerate}[leftmargin=*, nosep]
+    \item \textbf{Matrix $A$:} Zahlen sehen wie aufeinanderfolgende Werte aus. Mit Zeilenumformungen $Z_2 \to Z_2 - Z_1$, $Z_3 \to Z_3 - Z_1$ entstehen kleine Zahlen.
+    \item \textbf{Matrix $B$:} Die Spalte 3 hat fast nur Nullen (nur ein Eintrag $\neq 0$). Laplace-Entwicklung nach Spalte 3 reduziert auf eine $4 \times 4$-Matrix. Die wieder hat eine Spalte mit fast nur Nullen $\to$ weiter entwickeln, bis nur noch $2 \times 2$ \"ubrig.
+\end{enumerate}
+\end{wastun}
+
+%% --- 26 A ---
+\subsubsection*{Determinante von $A$}
+
+\textbf{Schritt 1: Zeilenumformungen, um die gro\ss en Zahlen loszuwerden.}
+
+\textbf{(a) $Z_2 \to Z_2 - Z_1$ und $Z_3 \to Z_3 - Z_1$} (Determinante \textbf{unver\"andert}):
+\[
+\det A = \det \begin{pmatrix} 234 & 235 & 236 \\ 1 & 1 & 1 \\ 2 & 2 & 3 \end{pmatrix}
+\]
+
+\textbf{(b) $Z_3 \to Z_3 - 2Z_2$} (Determinante \textbf{unver\"andert}):
+\[
+= \det \begin{pmatrix} 234 & 235 & 236 \\ 1 & 1 & 1 \\ 0 & 0 & 1 \end{pmatrix}
+\]
+
+\textbf{Schritt 2: Laplace-Entwicklung nach Zeile 3.}
+
+Zeile 3 hat zwei Nullen $\Rightarrow$ nur ein Term \"uberlebt:
+\[
+= 1 \cdot (-1)^{3+3} \cdot \det \begin{pmatrix} 234 & 235 \\ 1 & 1 \end{pmatrix}
+= 234 \cdot 1 - 235 \cdot 1 = -1.
+\]
+
+\[
+\fbox{\parbox{0.93\textwidth}{\centering
+$\det A = -1$.
+}}
+\]
+
+%% --- 26 B ---
+\subsubsection*{Determinante von $B$}
+
+\textbf{Schritt 1: Spalte 3 anschauen.} Spalte 3 lautet $(0, 0, 13, 0, 0)^\top$ -- nur ein Eintrag $\neq 0$ in Zeile 3.
+
+\textbf{Schritt 2: Laplace-Entwicklung nach Spalte 3.}
+
+\[
+\det B = (-1)^{3+3} \cdot 13 \cdot \det \underbrace{\begin{pmatrix} 21 & 23 & 27 & 2 \\ 0 & 2 & 7 & 0 \\ 1 & 41 & 43 & 0 \\ 0 & 1 & 4 & 0 \end{pmatrix}}_{=: M}
+= 13 \cdot \det M.
+\]
+
+\textbf{Schritt 3: Spalte 4 von $M$ anschauen.} Spalte 4 lautet $(2, 0, 0, 0)^\top$ -- nur Zeile 1 ist $\neq 0$.
+
+\textbf{Schritt 4: Laplace-Entwicklung von $M$ nach Spalte 4.}
+
+\[
+\det M = (-1)^{1+4} \cdot 2 \cdot \det \underbrace{\begin{pmatrix} 0 & 2 & 7 \\ 1 & 41 & 43 \\ 0 & 1 & 4 \end{pmatrix}}_{=: N}
+= -2 \cdot \det N.
+\]
+
+\textbf{Schritt 5: Spalte 1 von $N$ anschauen.} Spalte 1 lautet $(0, 1, 0)^\top$ -- nur Zeile 2 ist $\neq 0$.
+
+\textbf{Schritt 6: Laplace-Entwicklung von $N$ nach Spalte 1.}
+
+\[
+\det N = (-1)^{2+1} \cdot 1 \cdot \det \begin{pmatrix} 2 & 7 \\ 1 & 4 \end{pmatrix}
+= -1 \cdot (2\cdot 4 - 7 \cdot 1) = -1 \cdot 1 = -1.
+\]
+
+\textbf{Schritt 7: Zur\"uckrechnen.}
+
+\[
+\det M = -2 \cdot (-1) = 2, \qquad \det B = 13 \cdot 2 = 26.
+\]
+
+\[
+\fbox{\parbox{0.93\textwidth}{\centering
+$\det B = 26$.
+}}
+\]
+
+\bigskip
+\hrule
+\bigskip
+
+%% ============================================================
+\subsection*{Aufgabe 27}
+%% ============================================================
+
+\textbf{Angabe.}
+\[
+A = \begin{pmatrix} a & 1 & 2 & 3 \\ 1 & 2 & 3 & 2 \\ 2 & 3 & 2 & 1 \\ 3 & 2 & 1 & b \end{pmatrix} \in \mathbb{R}^{4\times 4},\quad a, b \in \mathbb{R}.
+\]
+(a) $\det A$ berechnen. \quad (b) Bedingung an $a, b$, sodass $Ax = 0$ unendlich viele L\"osungen hat.
+
+\begin{begriffe}
+\begin{itemize}[leftmargin=*, nosep]
+    \item \textbf{Parameter $a, b$} -- unbestimmte Zahlen, die im Ergebnis stehen bleiben d\"urfen. $\det A$ wird ein Ausdruck in $a$ und $b$.
+    \item \textbf{$Ax = 0$ hat unendlich viele L\"osungen} $\iff$ $A$ ist nicht invertierbar $\iff$ $\det A = 0$. (Das homogene System hat \emph{immer} die triviale L\"osung $x = 0$; weitere L\"osungen existieren genau dann, wenn $\det A = 0$.)
+\end{itemize}
+\end{begriffe}
+
+\begin{wastun}
+\begin{enumerate}[leftmargin=*, nosep]
+    \item \textbf{(a)} Determinante per Laplace-Entwicklung nach der ersten Zeile berechnen (4 Minoren, jeder $3\times 3$). Parameter $a, b$ bleiben mitgeschleppt.
+    \item \textbf{(b)} $\det A = 0$ setzen und nach $a, b$ aufl\"osen.
+\end{enumerate}
+\end{wastun}
+
+%% --- 27(a) ---
+\subsubsection*{(a) Determinante von $A$}
+
+\textbf{Schritt 1: Laplace-Entwicklung nach der ersten Zeile.}
+
+\[
+\det A = a \cdot M_{11} - 1 \cdot M_{12} + 2 \cdot M_{13} - 3 \cdot M_{14}
+\]
+
+mit den vier $3\times 3$-Minoren $M_{1j}$ (jeweils erste Zeile und Spalte $j$ wegstreichen).
+
+\textbf{Schritt 2: Vier Minoren ausrechnen.}
+
+\textbf{(a) $M_{11}$ (Spalte 1 weg):}
+\[
+M_{11} = \det \begin{pmatrix} 2 & 3 & 2 \\ 3 & 2 & 1 \\ 2 & 1 & b \end{pmatrix}
+= 2(2b - 1) - 3(3b - 2) + 2(3 - 4)
+= 4b - 2 - 9b + 6 - 2
+= -5b + 2.
+\]
+
+\textbf{(b) $M_{12}$ (Spalte 2 weg):}
+\[
+M_{12} = \det \begin{pmatrix} 1 & 3 & 2 \\ 2 & 2 & 1 \\ 3 & 1 & b \end{pmatrix}
+= 1(2b - 1) - 3(2b - 3) + 2(2 - 6)
+= 2b - 1 - 6b + 9 - 8
+= -4b.
+\]
+
+\textbf{(c) $M_{13}$ (Spalte 3 weg):}
+\[
+M_{13} = \det \begin{pmatrix} 1 & 2 & 2 \\ 2 & 3 & 1 \\ 3 & 2 & b \end{pmatrix}
+= 1(3b - 2) - 2(2b - 3) + 2(4 - 9)
+= 3b - 2 - 4b + 6 - 10
+= -b - 6.
+\]
+
+\textbf{(d) $M_{14}$ (Spalte 4 weg, kein Parameter darin):}
+\[
+M_{14} = \det \begin{pmatrix} 1 & 2 & 3 \\ 2 & 3 & 2 \\ 3 & 2 & 1 \end{pmatrix}
+= 1(3 - 4) - 2(2 - 6) + 3(4 - 9)
+= -1 + 8 - 15 = -8.
+\]
+
+\textbf{Schritt 3: Zusammensetzen.}
+
+\begin{align*}
+\det A &= a \cdot (-5b+2) - 1 \cdot (-4b) + 2 \cdot (-b - 6) - 3 \cdot (-8) \\
+&= -5ab + 2a + 4b - 2b - 12 + 24 \\
+&= -5ab + 2a + 2b + 12.
+\end{align*}
+
+\[
+\fbox{\parbox{0.93\textwidth}{\centering
+$\det A = -5ab + 2a + 2b + 12$.
+}}
+\]
+
+%% --- 27(b) ---
+\subsubsection*{(b) Bedingung f\"ur unendlich viele L\"osungen}
+
+\textbf{Schritt 1: $\det A = 0$ ansetzen.}
+
+$Ax = 0$ hat unendlich viele L\"osungen $\iff \det A = 0$:
+\[
+-5ab + 2a + 2b + 12 = 0 \quad\iff\quad 5ab - 2a - 2b - 12 = 0.
+\]
+
+\textbf{Schritt 2: Faktorisieren.}
+
+Multipliziere mit $5$:
+\[
+25ab - 10a - 10b - 60 = 0.
+\]
+
+Die ersten drei Terme erinnern an $(5a - 2)(5b - 2) = 25ab - 10a - 10b + 4$. Daher:
+\[
+25ab - 10a - 10b = (5a-2)(5b-2) - 4,
+\]
+und die Gleichung wird zu
+\[
+(5a-2)(5b-2) - 4 - 60 = 0 \;\Rightarrow\; (5a-2)(5b-2) = 64.
+\]
+
+\[
+\fbox{\parbox{0.93\textwidth}{\centering
+$Ax = 0$ hat unendlich viele L\"osungen $\iff$ $(5a-2)(5b-2) = 64$.\\[2pt]
+\"Aquivalent: $5ab - 2a - 2b = 12$.
+}}
+\]
+
+\bigskip
+\hrule
+\bigskip
+
+%% ============================================================
+\subsection*{Aufgabe 28}
+%% ============================================================
+
+\textbf{Angabe.} Sei $n \geq 3$ ungerade, $A \in \mathbb{R}^{n \times n}$ schiefsymmetrisch ($A^\top = -A$). Zeige: die Zeilen von $A$ sind linear abh\"angig.
+
+\begin{begriffe}
+\begin{itemize}[leftmargin=*, nosep]
+    \item \textbf{Schiefsymmetrisch}: $A^\top = -A$, d.\,h.\ $a_{ij} = -a_{ji}$.
+    \item Zeilen sind \textbf{linear abh\"angig} $\iff$ $\det A = 0$.
+    \item Es gen\"ugt also, $\det A = 0$ zu zeigen.
+\end{itemize}
+\end{begriffe}
+
+\begin{wastun}
+\begin{enumerate}[leftmargin=*, nosep]
+    \item Mit Determinanten-Eigenschaften zeigen, dass $\det A = -\det A$ folgt.
+    \item Daraus $\det A = 0$, daher Zeilen linear abh\"angig.
+\end{enumerate}
+\end{wastun}
+
+\textbf{Schritt 1: Zwei Determinanten-Identit\"aten.}
+
+\textbf{(a) Transponieren \"andert die Determinante nicht:}
+\[
+\det(A^\top) = \det(A).
+\]
+
+\textbf{(b) Multiplikation mit Skalar zieht $\lambda^n$ heraus:} F\"ur $\lambda \in \mathbb{R}$ gilt $\det(\lambda A) = \lambda^n \det(A)$. Insbesondere mit $\lambda = -1$:
+\[
+\det(-A) = (-1)^n \det(A).
+\]
+
+\textbf{Schritt 2: Beides verkn\"upfen.}
+
+Wegen $A^\top = -A$:
+\[
+\det(A) = \det(A^\top) = \det(-A) = (-1)^n \det(A).
+\]
+
+\textbf{Schritt 3: $n$ ungerade ausnutzen.}
+
+F\"ur ungerades $n$ ist $(-1)^n = -1$, also:
+\[
+\det(A) = -\det(A) \;\Rightarrow\; 2 \det(A) = 0 \;\Rightarrow\; \det(A) = 0.
+\]
+
+\textbf{Schritt 4: Folgerung.}
+
+$\det(A) = 0 \Rightarrow$ die Zeilen von $A$ sind linear abh\"angig. $\square$
+
+\bigskip
+\hrule
+\bigskip
+
+%% ============================================================
+\subsection*{Aufgabe 29}
+%% ============================================================
+
+\textbf{Angabe.} Sei $n \geq 3$, $A \in \mathbb{R}^{n \times n}$, jede Zeile von $A$ bildet eine arithmetische Folge. Zeige: $\det(A) = 0$.
+
+\begin{begriffe}
+\begin{itemize}[leftmargin=*, nosep]
+    \item \textbf{Arithmetische Folge}: aufeinanderfolgende Differenzen sind konstant. Zeile $i$ hat Form $(a_i,\; a_i + d_i,\; a_i + 2d_i,\; \dots,\; a_i + (n-1)d_i)$ mit Anfangswert $a_i$ und Differenz $d_i$.
+    \item \textbf{Charakterisierung}: Drei aufeinanderfolgende Glieder $x, y, z$ einer arithmetischen Folge erf\"ullen $z - 2y + x = 0$.
+\end{itemize}
+\end{begriffe}
+
+\subsubsection*{Argument 1: Linear abh\"angige Spalten}
+
+\textbf{Schritt 1: Spaltenrelation aufstellen.}
+
+Sei $S_j$ die $j$-te Spalte von $A$, also $S_j = (a_1 + (j-1)d_1, \, a_2 + (j-1)d_2, \, \dots, \, a_n + (j-1)d_n)^\top$.
+
+Mit $u = (a_1, \dots, a_n)^\top$ und $v = (d_1, \dots, d_n)^\top$ gilt:
+\[
+S_j = u + (j-1) v.
+\]
+
+Insbesondere: $S_1 = u$, $\quad S_2 = u + v$, $\quad S_3 = u + 2v$.
+
+\textbf{Schritt 2: Lineare Abh\"angigkeit von $S_1, S_2, S_3$.}
+
+\[
+S_3 - 2 S_2 + S_1 = (u+2v) - 2(u+v) + u = 0.
+\]
+
+Das ist eine \textbf{nichttriviale} Linearkombination der Null mit Koeffizienten $(1, -2, 1)$.
+
+\textbf{Schritt 3: Folgerung.}
+
+Drei Spalten sind linear abh\"angig $\Rightarrow$ alle Spalten zusammen sind linear abh\"angig $\Rightarrow$ $\det(A) = 0$. $\square$
+
+\subsubsection*{Argument 2: Spaltenumformung gibt Nullspalte}
+
+\textbf{Schritt 1: Spaltenumformung anwenden.}
+
+Determinante \"andert sich nicht durch $S_3 \to S_3 - 2 S_2 + S_1$. F\"ur den Eintrag in Zeile $i$ der neuen Spalte 3:
+\[
+(a_i + 2d_i) - 2(a_i + d_i) + (a_i) = a_i(1 - 2 + 1) + d_i(2 - 2 + 0) = 0.
+\]
+
+\textbf{Schritt 2: Folgerung.}
+
+Die neue Spalte 3 ist die Nullspalte. Eine Matrix mit einer Nullspalte hat Determinante $0$. $\square$
+
+\subsubsection*{Argument 3: $Ax = 0$ hat nichttriviale L\"osung}
+
+W\"ahle $x = (1, -2, 1, 0, \dots, 0)^\top \in \mathbb{R}^n$. F\"ur jede Zeile $i$:
+\[
+(Ax)_i = 1 \cdot a_i + (-2)(a_i + d_i) + 1 \cdot (a_i + 2d_i) = 0.
+\]
+
+Also $Ax = 0$ mit $x \neq 0$ $\Rightarrow$ Spalten linear abh\"angig $\Rightarrow$ $\det(A) = 0$. $\square$
+
+\subsubsection*{Argument 4: Dimension des Spaltenraums}
+
+Aus Schritt 1 von Argument 1: jede Spalte $S_j = u + (j-1) v$ liegt in $\text{span}(u, v)$. Also hat der Spaltenraum H\"ochstdimension $2$. F\"ur $n \geq 3$ ist $\text{rang}(A) \leq 2 < n$, daher $\det(A) = 0$. $\square$
+
+\bigskip
+\hrule
+\bigskip
+
+%% ============================================================
+\subsection*{Aufgabe 30}
+%% ============================================================
+
+\textbf{Angabe.}
+\[
+\begin{cases} 2x_1 + 5x_2 + 3x_3 = 5 \\ -x_1 - 4x_2 + x_3 = -3 \\ 2x_2 - 5x_3 = -1 \end{cases}
+\]
+auf zwei Wegen l\"osen: (a) \"uber die adjungierte Matrix, (b) Cramer'sche Regel.
+
+\[
+A = \begin{pmatrix} 2 & 5 & 3 \\ -1 & -4 & 1 \\ 0 & 2 & -5 \end{pmatrix},\quad
+b = \begin{pmatrix} 5 \\ -3 \\ -1 \end{pmatrix}.
+\]
+
+\begin{begriffe}
+\begin{itemize}[leftmargin=*, nosep]
+    \item \textbf{Kofaktor} $C_{ij} = (-1)^{i+j} M_{ij}$, wobei $M_{ij}$ die Minor-Determinante (Matrix ohne Zeile $i$ und Spalte $j$) ist.
+    \item \textbf{Kofaktormatrix} $\text{cof}(A) = (C_{ij})$ -- die Matrix aller Kofaktoren.
+    \item \textbf{Adjungierte} (Adjunkte) $\text{adj}(A) = \text{cof}(A)^\top$ -- transponierte Kofaktormatrix.
+    \item \textbf{Inverse \"uber Adjunkte}: $A^{-1} = \tfrac{1}{\det A} \cdot \text{adj}(A)$ (falls $\det A \neq 0$).
+    \item \textbf{Cramer'sche Regel}: $x_i = \dfrac{\det A_i}{\det A}$, wobei $A_i$ aus $A$ entsteht, indem man die $i$-te Spalte durch $b$ ersetzt.
+\end{itemize}
+\end{begriffe}
+
+\subsubsection*{Schritt 1: $\det A$ berechnen (f\"ur beide Methoden gebraucht)}
+
+Laplace-Entwicklung nach erster Spalte (oder direkt Sarrus):
+\begin{align*}
+\det A &= 2 \cdot \det \begin{pmatrix} -4 & 1 \\ 2 & -5 \end{pmatrix} - 5 \cdot \det \begin{pmatrix} -1 & 1 \\ 0 & -5 \end{pmatrix} + 3 \cdot \det \begin{pmatrix} -1 & -4 \\ 0 & 2 \end{pmatrix} \\
+&= 2 (20 - 2) - 5 (5 - 0) + 3 (-2 - 0) \\
+&= 36 - 25 - 6 = 5.
+\end{align*}
+
+$\det A = 5 \neq 0 \Rightarrow$ System eindeutig l\"osbar.
+
+%% --- 30(a) Adjugate ---
+\subsubsection*{(a) L\"osung \"uber die adjungierte Matrix}
+
+\textbf{Schritt 2: Alle 9 Kofaktoren $C_{ij} = (-1)^{i+j} M_{ij}$ berechnen.}
+
+\begin{itemize}[leftmargin=*, nosep]
+\item $C_{11} = +\det \begin{pmatrix} -4 & 1 \\ 2 & -5 \end{pmatrix} = 20 - 2 = 18$
+\item $C_{12} = -\det \begin{pmatrix} -1 & 1 \\ 0 & -5 \end{pmatrix} = -(5 - 0) = -5$
+\item $C_{13} = +\det \begin{pmatrix} -1 & -4 \\ 0 & 2 \end{pmatrix} = -2 - 0 = -2$
+\item $C_{21} = -\det \begin{pmatrix} 5 & 3 \\ 2 & -5 \end{pmatrix} = -(-25 - 6) = 31$
+\item $C_{22} = +\det \begin{pmatrix} 2 & 3 \\ 0 & -5 \end{pmatrix} = -10 - 0 = -10$
+\item $C_{23} = -\det \begin{pmatrix} 2 & 5 \\ 0 & 2 \end{pmatrix} = -(4 - 0) = -4$
+\item $C_{31} = +\det \begin{pmatrix} 5 & 3 \\ -4 & 1 \end{pmatrix} = 5 - (-12) = 17$
+\item $C_{32} = -\det \begin{pmatrix} 2 & 3 \\ -1 & 1 \end{pmatrix} = -(2 - (-3)) = -5$
+\item $C_{33} = +\det \begin{pmatrix} 2 & 5 \\ -1 & -4 \end{pmatrix} = -8 - (-5) = -3$
+\end{itemize}
+
+\textbf{Schritt 3: Kofaktormatrix und Adjunkte (transponieren).}
+
+\[
+\text{cof}(A) = \begin{pmatrix} 18 & -5 & -2 \\ 31 & -10 & -4 \\ 17 & -5 & -3 \end{pmatrix},\qquad
+\text{adj}(A) = \text{cof}(A)^\top = \begin{pmatrix} 18 & 31 & 17 \\ -5 & -10 & -5 \\ -2 & -4 & -3 \end{pmatrix}.
+\]
+
+\textbf{Schritt 4: $A^{-1} = \tfrac{1}{\det A} \cdot \text{adj}(A)$ und $x = A^{-1} b$.}
+
+\begin{align*}
+A^{-1} b &= \frac{1}{5} \begin{pmatrix} 18 & 31 & 17 \\ -5 & -10 & -5 \\ -2 & -4 & -3 \end{pmatrix} \begin{pmatrix} 5 \\ -3 \\ -1 \end{pmatrix} \\
+&= \frac{1}{5} \begin{pmatrix} 18 \cdot 5 + 31 \cdot (-3) + 17 \cdot (-1) \\ -5 \cdot 5 + (-10)(-3) + (-5)(-1) \\ -2 \cdot 5 + (-4)(-3) + (-3)(-1) \end{pmatrix}
+= \frac{1}{5} \begin{pmatrix} 90 - 93 - 17 \\ -25 + 30 + 5 \\ -10 + 12 + 3 \end{pmatrix} \\
+&= \frac{1}{5} \begin{pmatrix} -20 \\ 10 \\ 5 \end{pmatrix}
+= \begin{pmatrix} -4 \\ 2 \\ 1 \end{pmatrix}.
+\end{align*}
+
+\[
+\fbox{\parbox{0.93\textwidth}{\centering
+$x = (x_1, x_2, x_3) = (-4,\; 2,\; 1)$.
+}}
+\]
+
+%% --- 30(b) Cramer ---
+\subsubsection*{(b) L\"osung mit der Cramer'schen Regel}
+
+\textbf{Schritt 5: Drei Hilfsmatrizen $A_1, A_2, A_3$ aufstellen.}
+
+$A_i$ entsteht aus $A$, indem die $i$-te Spalte durch $b$ ersetzt wird.
+
+\textbf{(a) $A_1$ -- Spalte 1 wird $b$:}
+\[
+A_1 = \begin{pmatrix} 5 & 5 & 3 \\ -3 & -4 & 1 \\ -1 & 2 & -5 \end{pmatrix}, \quad
+\det A_1 = 5(20 - 2) - 5(15 + 1) + 3(-6 - 4) = 90 - 80 - 30 = -20.
+\]
+
+\textbf{(b) $A_2$ -- Spalte 2 wird $b$:}
+\[
+A_2 = \begin{pmatrix} 2 & 5 & 3 \\ -1 & -3 & 1 \\ 0 & -1 & -5 \end{pmatrix}, \quad
+\det A_2 = 2(15 + 1) - 5(5 - 0) + 3(1 - 0) = 32 - 25 + 3 = 10.
+\]
+
+\textbf{(c) $A_3$ -- Spalte 3 wird $b$:}
+\[
+A_3 = \begin{pmatrix} 2 & 5 & 5 \\ -1 & -4 & -3 \\ 0 & 2 & -1 \end{pmatrix}, \quad
+\det A_3 = 2(4 + 6) - 5(1 - 0) + 5(-2 - 0) = 20 - 5 - 10 = 5.
+\]
+
+\textbf{Schritt 6: $x_i = \det A_i / \det A$.}
+
+\[
+x_1 = \frac{\det A_1}{\det A} = \frac{-20}{5} = -4, \quad
+x_2 = \frac{\det A_2}{\det A} = \frac{10}{5} = 2, \quad
+x_3 = \frac{\det A_3}{\det A} = \frac{5}{5} = 1.
+\]
+
+\[
+\fbox{\parbox{0.93\textwidth}{\centering
+$x = (-4,\; 2,\; 1)$ -- gleich wie in (a). $\checkmark$
+}}
+\]
+
+\textbf{Probe:}
+\begin{align*}
+2(-4) + 5(2) + 3(1) &= -8 + 10 + 3 = 5 \;\checkmark \\
+-(-4) - 4(2) + 1 &= 4 - 8 + 1 = -3 \;\checkmark \\
+2(2) - 5(1) &= 4 - 5 = -1 \;\checkmark
+\end{align*}
+
+\end{document}

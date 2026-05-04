@@ -1,0 +1,261 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{geometry}\geometry{margin=2.5cm}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable}
+\usepackage{xcolor}
+
+\newtcolorbox{merkbox}[1][]{colback=blue!5, colframe=blue!40, fonttitle=\bfseries, title={Merke}, breakable, #1}
+\newtcolorbox{analogie}[1][]{colback=green!5, colframe=green!40, fonttitle=\bfseries, title={Analogie}, breakable, #1}
+\newtcolorbox{begriffe}[1][]{colback=yellow!10, colframe=yellow!60!black, fonttitle=\bfseries, title={Was bedeuten die Begriffe?}, breakable, #1}
+\newtcolorbox{wastun}[1][]{colback=orange!5, colframe=orange!60!black, fonttitle=\bfseries, title={Was ist zu tun?}, breakable, #1}
+
+\title{Erkl\"arung -- HW07: Determinanten}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+%=============================================================================
+\part*{Teil 1: Grundlagen -- Was du wissen musst}
+
+%-----------------------------------------------------------------------------
+\section*{1. Was ist die Determinante?}
+
+Die \textbf{Determinante} ist eine Zahl, die einer quadratischen Matrix zugeordnet wird. Sie sagt etwas Wichtiges aus:
+
+\begin{merkbox}[title={Kernaussage der Determinante}]
+\[
+\det A \neq 0 \iff A \text{ ist invertierbar} \iff \text{Zeilen (Spalten) sind linear unabh\"angig}.
+\]
+$\det A = 0$ ist also der ``schlechte'' Fall: Matrix ist singul\"ar, $Ax = 0$ hat unendlich viele L\"osungen, $Ax = b$ kann keine oder unendlich viele L\"osungen haben.
+\end{merkbox}
+
+\begin{analogie}
+Die Determinante ist wie der \textbf{Stempel auf einem Eintrittsticket}: Wenn $\det \neq 0$, dann ist das Ticket g\"ultig (System eindeutig l\"osbar). Wenn $\det = 0$, ist das Ticket entwertet (System problematisch).
+
+Geometrisch: F\"ur $2\times 2$-Matrizen ist $|\det A|$ der Fl\"acheninhalt des Parallelogramms, das von den beiden Spalten aufgespannt wird. F\"ur $3 \times 3$ das Volumen. Wenn $\det = 0$, ist das ``Parallelogramm'' entartet (zu einer Linie/Ebene zusammengefallen).
+\end{analogie}
+
+%-----------------------------------------------------------------------------
+\section*{2. Die wichtigsten Eigenschaften der Determinante}
+
+\begin{merkbox}[title={Eigenschaften (musst du im Schlaf k\"onnen)}]
+\begin{enumerate}[nosep]
+    \item \textbf{Zeilenumformung} $Z_i \to Z_i + \lambda Z_j$ (Vielfaches einer anderen Zeile addieren) \textbf{\"andert nichts}.
+    \item \textbf{Zeilentausch} $Z_i \leftrightarrow Z_j$ \textbf{negiert} die Determinante.
+    \item \textbf{Skalieren} einer Zeile $Z_i \to \lambda Z_i$ multipliziert die Determinante mit $\lambda$.
+    \item \textbf{Transponieren}: $\det(A^\top) = \det(A)$.
+    \item \textbf{Skalar mal Matrix}: $\det(\lambda A) = \lambda^n \det(A)$ f\"ur $A \in \mathbb{R}^{n\times n}$.
+    \item \textbf{Produkt}: $\det(AB) = \det(A) \det(B)$.
+    \item \textbf{Dreiecksmatrix}: $\det = $ Produkt der Diagonaleintr\"age.
+    \item \textbf{Spaltenumformungen} verhalten sich genauso wie Zeilenumformungen (Eigenschaft 4).
+    \item \textbf{Nullzeile/Nullspalte} $\Rightarrow \det = 0$.
+\end{enumerate}
+\end{merkbox}
+
+%-----------------------------------------------------------------------------
+\section*{3. Wie berechnet man eine Determinante effizient?}
+
+\begin{merkbox}[title={Strategie}]
+\begin{itemize}[nosep]
+    \item \textbf{$2\times 2$:} Direkte Formel $\det \begin{pmatrix} a & b \\ c & d \end{pmatrix} = ad - bc$.
+    \item \textbf{$3 \times 3$:} Sarrus-Regel oder Laplace-Entwicklung.
+    \item \textbf{$\geq 4 \times 4$:} Laplace-Entwicklung nach einer Zeile/Spalte mit \textbf{vielen Nullen}, oder vorher mit Zeilenumformungen Nullen erzeugen.
+    \item \textbf{Trick}: Vor der Entwicklung mit elementaren Operationen (Eigenschaft 1) gro\ss e Zahlen klein machen oder Nullen erzeugen.
+\end{itemize}
+\end{merkbox}
+
+\begin{analogie}
+Stell dir vor, du musst 100 B\"ucher z\"ahlen. Statt jedes einzeln, sortierst du sie zuerst in Stapel von 10 (Zeilenumformungen $\to$ einfachere Form), dann z\"ahlst du nur die Stapel. Determinanten effizient zu berechnen funktioniert genauso: erst aufr\"aumen, dann z\"ahlen.
+\end{analogie}
+
+%-----------------------------------------------------------------------------
+\section*{4. Laplace-Entwicklung -- die wichtigste Technik}
+
+\begin{merkbox}[title={Laplace-Entwicklung nach Zeile $i$}]
+\[
+\det A = \sum_{j=1}^n (-1)^{i+j} \cdot a_{ij} \cdot M_{ij}
+\]
+wobei $M_{ij}$ die Determinante der Matrix ist, die aus $A$ entsteht, wenn man Zeile $i$ \textbf{und} Spalte $j$ wegstreicht.
+
+\medskip
+Analog f\"ur Spalten. \textbf{Tipp:} W\"ahle die Zeile/Spalte mit den meisten Nullen!
+
+\medskip
+\textbf{Vorzeichenmuster:}
+\[
+\begin{pmatrix} + & - & + & - \\ - & + & - & + \\ + & - & + & - \\ - & + & - & + \end{pmatrix}
+\]
+\end{merkbox}
+
+%-----------------------------------------------------------------------------
+\section*{5. Adjungierte Matrix und Cramer'sche Regel (f\"ur Aufgabe 30)}
+
+\begin{merkbox}[title={Adjunkte und Inverse}]
+F\"ur $A \in \mathbb{R}^{n\times n}$ mit $\det A \neq 0$:
+\[
+A^{-1} = \frac{1}{\det A} \cdot \text{adj}(A), \qquad \text{adj}(A) = (\text{Kofaktormatrix})^\top.
+\]
+Die \textbf{Kofaktormatrix} hat als Eintrag in $(i,j)$ den Wert $C_{ij} = (-1)^{i+j} M_{ij}$.
+
+\medskip
+\textbf{Wichtig:} Adjunkte $=$ Kofaktormatrix \textbf{transponiert}. (Vergessen viele!)
+\end{merkbox}
+
+\begin{merkbox}[title={Cramer'sche Regel}]
+F\"ur $Ax = b$ mit $\det A \neq 0$:
+\[
+x_i = \frac{\det A_i}{\det A},
+\]
+wobei $A_i$ die Matrix ist, bei der man die $i$-te Spalte von $A$ durch $b$ ersetzt hat.
+\end{merkbox}
+
+\begin{analogie}
+Cramer'sche Regel ist wie eine \textbf{Mauterechnung}: F\"ur jede Variable $x_i$ ersetzt man eine Spalte von $A$ durch das ``Mautziel'' $b$ und rechnet die Determinante. Das Verh\"altnis $\det A_i / \det A$ liefert die Antwort. Sehr elegant -- aber f\"ur gro\ss e Systeme rechnerisch teurer als Gau\ss.
+\end{analogie}
+
+\newpage
+
+%=============================================================================
+\part*{Teil 2: Aufgabe 26 -- Geschickte Determinantenberechnung}
+
+\subsection*{Matrix $A$ -- aufeinanderfolgende Zahlen}
+
+\begin{merkbox}[title={Trick}]
+Wenn die Eintr\"age fast dieselben sind (wie hier $234, 235, 236, \dots$), \textbf{Differenzen bilden}: $Z_2 \to Z_2 - Z_1$, $Z_3 \to Z_3 - Z_1$. Pl\"otzlich stehen kleine Zahlen wie $1, 0, -1$ in den Zeilen.
+\end{merkbox}
+
+Nach den Umformungen entsteht eine Matrix mit vielen Nullen, und die Laplace-Entwicklung wird trivial.
+
+\subsection*{Matrix $B$ -- ausnutzen, was die Aufgabe schenkt}
+
+Schau dir $B$ an: Spalte 3 hat fast nur Nullen, nur ein einziger Eintrag $\neq 0$. \textbf{Das ist ein Geschenk}: Laplace-Entwicklung nach Spalte 3 hat nur \textbf{einen} Term statt f\"unf.
+
+\begin{analogie}
+In einem Sudoku ist es geschickt, mit der Reihe oder Spalte anzufangen, in der schon viele Zahlen stehen. Genauso bei der Laplace-Entwicklung: such die Zeile/Spalte mit den meisten Nullen, da sparst du dir die meiste Arbeit.
+\end{analogie}
+
+Die L\"osung schachtelt Laplace-Entwicklungen: $5\times 5 \to 4\times 4 \to 3\times 3 \to 2\times 2$, jedes Mal eine fast leere Spalte/Zeile ausnutzen.
+
+\newpage
+
+%=============================================================================
+\part*{Teil 3: Aufgabe 27 -- Determinante mit Parametern}
+
+\subsection*{(a) Determinante mit $a$ und $b$}
+
+Hier hilft kein cleverer Spalten-Nullen-Trick (Matrix ist ``zu voll''), also einfach Laplace-Entwicklung nach der ersten Zeile durchziehen. Die Parameter $a, b$ stehen am Ende noch im Ergebnis:
+\[
+\det A = -5ab + 2a + 2b + 12.
+\]
+
+\subsection*{(b) Wann ist $Ax = 0$ unendlich-l\"osbar?}
+
+\begin{merkbox}[title={Schl\"ussel}]
+Das homogene System $Ax = 0$ hat \textbf{immer} die triviale L\"osung $x = 0$. Weitere (also unendlich viele) L\"osungen gibt es genau dann, wenn die Matrix \textbf{singul\"ar} ist:
+\[
+\det A = 0.
+\]
+\end{merkbox}
+
+Also $\det A = 0$ ansetzen und nach $a, b$ aufl\"osen. Die Gleichung $5ab - 2a - 2b - 12 = 0$ l\"asst sich faktorisieren zu
+\[
+(5a - 2)(5b - 2) = 64.
+\]
+Das ist eine \textbf{Hyperbel} im $(a, b)$-Diagramm -- es gibt unendlich viele L\"osungspaare $(a, b)$, z.\,B.\ $(2, 2)$: $8 \cdot 8 = 64$ \checkmark.
+
+\newpage
+
+%=============================================================================
+\part*{Teil 4: Aufgabe 28 -- Schiefsymmetrisch + ungerade Dimension}
+
+\begin{merkbox}[title={Was zu zeigen ist}]
+Schiefsymmetrische Matrix ($A^\top = -A$) der Gr\"o\ss e $n \times n$ mit \textbf{ungeradem} $n$ hat $\det A = 0$ $\Rightarrow$ Zeilen linear abh\"angig.
+\end{merkbox}
+
+\textbf{Idee:} Zwei Eigenschaften der Determinante kombinieren:
+\begin{itemize}[nosep]
+    \item $\det(A^\top) = \det(A)$
+    \item $\det(-A) = (-1)^n \det(A)$
+\end{itemize}
+
+Wegen $A^\top = -A$ ist $\det(A) = \det(A^\top) = \det(-A) = (-1)^n \det(A)$.
+
+F\"ur ungerades $n$ wird $(-1)^n = -1$, also $\det A = -\det A$, woraus $\det A = 0$ folgt.
+
+\begin{analogie}
+Stell dir eine Waage vor: Auf der einen Seite steht $\det A$, auf der anderen $-\det A$. Im Gleichgewicht muss beides gleich sein. Das funktioniert nur, wenn beide Seiten $0$ sind.
+\end{analogie}
+
+\textbf{Warum nur ungerade $n$?} F\"ur gerade $n$ ist $(-1)^n = +1$, dann lautet die Gleichung $\det A = \det A$ -- keine neue Information, $\det A$ kann beliebig sein. Beispiel: $A = \begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix}$ ist schiefsymmetrisch ($n=2$, gerade) mit $\det A = 1 \neq 0$.
+
+\newpage
+
+%=============================================================================
+\part*{Teil 5: Aufgabe 29 -- Arithmetische Zeilen $\Rightarrow \det = 0$}
+
+\begin{merkbox}[title={Schl\"usseleigenschaft arithmetischer Folgen}]
+Drei aufeinanderfolgende Glieder $x, y, z$ einer arithmetischen Folge erf\"ullen
+\[
+z - 2y + x = 0
+\]
+(weil $y - x = z - y$, also $z - y = y - x$, also $z + x = 2y$).
+
+\medskip
+Das ist die ``konstante zweite Differenz'' -- charakteristisch f\"ur arithmetische Folgen.
+\end{merkbox}
+
+Wenn jede Zeile arithmetisch ist, gilt diese Beziehung in jeder Zeile gleichzeitig f\"ur die ersten drei Spalten. Das ist genau eine \textbf{Spaltenrelation}: $S_3 - 2 S_2 + S_1 = 0$ (Nullspalte).
+
+\begin{analogie}
+Stell dir drei Personen vor, die eine Treppe hochlaufen, jede mit ihrer eigenen, aber konstanten Schrittl\"ange. F\"ur jeden ist der dritte Schritt $=$ Schritt 1 + zweimal die Schrittl\"ange $=$ doppelter zweiter Schritt minus erster Schritt. Diese Beziehung ist f\"ur alle drei Personen die gleiche -- daher die ``saubere'' Spaltenkombination.
+\end{analogie}
+
+Aus dieser Spaltenrelation folgt $\det A = 0$ auf vier verschiedene Weisen (siehe L\"osungsdokument).
+
+\newpage
+
+%=============================================================================
+\part*{Teil 6: Aufgabe 30 -- $3 \times 3$-System auf zwei Wegen}
+
+System: $Ax = b$ mit $\det A = 5$.
+
+\subsection*{(a) Adjungierte Methode}
+
+\begin{merkbox}[title={Schritte}]
+\begin{enumerate}[nosep]
+    \item Alle 9 \textbf{Kofaktoren} $C_{ij} = (-1)^{i+j} M_{ij}$ ausrechnen.
+    \item Diese in eine $3\times 3$-Matrix $\text{cof}(A)$ schreiben.
+    \item Transponieren $\Rightarrow$ Adjunkte $\text{adj}(A)$.
+    \item $A^{-1} = \tfrac{1}{\det A} \text{adj}(A)$.
+    \item $x = A^{-1} b$ ausrechnen.
+\end{enumerate}
+\end{merkbox}
+
+\subsection*{(b) Cramer'sche Regel}
+
+\begin{merkbox}[title={Schritte}]
+\begin{enumerate}[nosep]
+    \item $\det A$ einmal ausrechnen.
+    \item Drei neue Matrizen $A_1, A_2, A_3$: jeweils Spalte $i$ durch $b$ ersetzt.
+    \item $\det A_1, \det A_2, \det A_3$ ausrechnen.
+    \item $x_i = \det A_i / \det A$.
+\end{enumerate}
+\end{merkbox}
+
+\subsection*{Welche Methode ist besser?}
+
+Beide funktionieren, beide liefern $x = (-4, 2, 1)$.
+\begin{itemize}[nosep, leftmargin=*]
+\item \textbf{Cramer} ist schneller, wenn man nur \emph{wenige} der $x_i$ braucht.
+\item \textbf{Adjunkte} liefert nebenbei die ganze Inverse $A^{-1}$, was n\"utzlich ist, wenn man dasselbe $A$ mit mehreren rechten Seiten l\"osen muss.
+\item F\"ur gr\"o\ss ere Systeme ($n \geq 4$) sind beide Methoden umst\"andlicher als Gau\ss-Elimination.
+\end{itemize}
+
+\end{document}
