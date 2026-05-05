@@ -574,30 +574,112 @@ $\det A = 5 \neq 0 \Rightarrow$ System eindeutig l\"osbar.
 
 \textbf{Schritt 2: Alle 9 Kofaktoren ausrechnen.}
 
-Pro Kofaktor: Vorzeichen aus dem Schachbrettmuster $\bigl(\begin{smallmatrix} + & - & + \\ - & + & - \\ + & - & + \end{smallmatrix}\bigr)$ und Streichen von Zeile $i$ \& Spalte $j$, dann $2 \times 2$-Determinante des Rests.
+Pro Kofaktor $C_{ij}$: in der Original-Matrix Zeile $i$ und Spalte $j$ grau wegstreichen $\Rightarrow$ verbleibende $2\times 2$-Matrix. Vorzeichen aus dem Schachbrettmuster $\bigl(\begin{smallmatrix} + & - & + \\ - & + & - \\ + & - & + \end{smallmatrix}\bigr)$.
 
-\textbf{Beispiel ausf\"uhrlich: $C_{11}$.} Vorzeichen $+$. Streiche Zeile 1 und Spalte 1:
+\textbf{Zeile 1 der Kofaktormatrix:}
+
 \[
+C_{11}: \;
 \begin{pmatrix}
 \color{gray}2 & \color{gray}5 & \color{gray}3 \\
 \color{gray}{-1} & -4 & 1 \\
 \color{gray}0 & 2 & -5
 \end{pmatrix}
 \;\longrightarrow\;
-C_{11} = +\det \begin{pmatrix} -4 & 1 \\ 2 & -5 \end{pmatrix} = 20 - 2 = 18.
++\det \begin{pmatrix} -4 & 1 \\ 2 & -5 \end{pmatrix} = 20 - 2 = 18.
 \]
 
-\textbf{Die anderen 8 Kofaktoren analog} (Streichen kurz beschrieben):
-\begin{itemize}[leftmargin=*, nosep]
-\item $C_{12}$ (Zeile 1, Spalte 2 weg, Vorzeichen $-$): $\;-\det \begin{pmatrix} -1 & 1 \\ 0 & -5 \end{pmatrix} = -(5 - 0) = -5$.
-\item $C_{13}$ (Zeile 1, Spalte 3 weg, $+$): $\;+\det \begin{pmatrix} -1 & -4 \\ 0 & 2 \end{pmatrix} = -2 - 0 = -2$.
-\item $C_{21}$ (Zeile 2, Spalte 1 weg, $-$): $\;-\det \begin{pmatrix} 5 & 3 \\ 2 & -5 \end{pmatrix} = -(-25 - 6) = 31$.
-\item $C_{22}$ (Zeile 2, Spalte 2 weg, $+$): $\;+\det \begin{pmatrix} 2 & 3 \\ 0 & -5 \end{pmatrix} = -10 - 0 = -10$.
-\item $C_{23}$ (Zeile 2, Spalte 3 weg, $-$): $\;-\det \begin{pmatrix} 2 & 5 \\ 0 & 2 \end{pmatrix} = -(4 - 0) = -4$.
-\item $C_{31}$ (Zeile 3, Spalte 1 weg, $+$): $\;+\det \begin{pmatrix} 5 & 3 \\ -4 & 1 \end{pmatrix} = 5 + 12 = 17$.
-\item $C_{32}$ (Zeile 3, Spalte 2 weg, $-$): $\;-\det \begin{pmatrix} 2 & 3 \\ -1 & 1 \end{pmatrix} = -(2 + 3) = -5$.
-\item $C_{33}$ (Zeile 3, Spalte 3 weg, $+$): $\;+\det \begin{pmatrix} 2 & 5 \\ -1 & -4 \end{pmatrix} = -8 + 5 = -3$.
-\end{itemize}
+\[
+C_{12}: \;
+\begin{pmatrix}
+\color{gray}2 & \color{gray}5 & \color{gray}3 \\
+-1 & \color{gray}{-4} & 1 \\
+0 & \color{gray}2 & -5
+\end{pmatrix}
+\;\longrightarrow\;
+-\det \begin{pmatrix} -1 & 1 \\ 0 & -5 \end{pmatrix} = -(5 - 0) = -5.
+\]
+
+\[
+C_{13}: \;
+\begin{pmatrix}
+\color{gray}2 & \color{gray}5 & \color{gray}3 \\
+-1 & -4 & \color{gray}1 \\
+0 & 2 & \color{gray}{-5}
+\end{pmatrix}
+\;\longrightarrow\;
++\det \begin{pmatrix} -1 & -4 \\ 0 & 2 \end{pmatrix} = -2 - 0 = -2.
+\]
+
+\textbf{Zeile 2 der Kofaktormatrix:}
+
+\[
+C_{21}: \;
+\begin{pmatrix}
+\color{gray}2 & 5 & 3 \\
+\color{gray}{-1} & \color{gray}{-4} & \color{gray}1 \\
+\color{gray}0 & 2 & -5
+\end{pmatrix}
+\;\longrightarrow\;
+-\det \begin{pmatrix} 5 & 3 \\ 2 & -5 \end{pmatrix} = -(-25 - 6) = 31.
+\]
+
+\[
+C_{22}: \;
+\begin{pmatrix}
+2 & \color{gray}5 & 3 \\
+\color{gray}{-1} & \color{gray}{-4} & \color{gray}1 \\
+0 & \color{gray}2 & -5
+\end{pmatrix}
+\;\longrightarrow\;
++\det \begin{pmatrix} 2 & 3 \\ 0 & -5 \end{pmatrix} = -10 - 0 = -10.
+\]
+
+\[
+C_{23}: \;
+\begin{pmatrix}
+2 & 5 & \color{gray}3 \\
+\color{gray}{-1} & \color{gray}{-4} & \color{gray}1 \\
+0 & 2 & \color{gray}{-5}
+\end{pmatrix}
+\;\longrightarrow\;
+-\det \begin{pmatrix} 2 & 5 \\ 0 & 2 \end{pmatrix} = -(4 - 0) = -4.
+\]
+
+\textbf{Zeile 3 der Kofaktormatrix:}
+
+\[
+C_{31}: \;
+\begin{pmatrix}
+\color{gray}2 & 5 & 3 \\
+\color{gray}{-1} & -4 & 1 \\
+\color{gray}0 & \color{gray}2 & \color{gray}{-5}
+\end{pmatrix}
+\;\longrightarrow\;
++\det \begin{pmatrix} 5 & 3 \\ -4 & 1 \end{pmatrix} = 5 + 12 = 17.
+\]
+
+\[
+C_{32}: \;
+\begin{pmatrix}
+2 & \color{gray}5 & 3 \\
+-1 & \color{gray}{-4} & 1 \\
+\color{gray}0 & \color{gray}2 & \color{gray}{-5}
+\end{pmatrix}
+\;\longrightarrow\;
+-\det \begin{pmatrix} 2 & 3 \\ -1 & 1 \end{pmatrix} = -(2 + 3) = -5.
+\]
+
+\[
+C_{33}: \;
+\begin{pmatrix}
+2 & 5 & \color{gray}3 \\
+-1 & -4 & \color{gray}1 \\
+\color{gray}0 & \color{gray}2 & \color{gray}{-5}
+\end{pmatrix}
+\;\longrightarrow\;
++\det \begin{pmatrix} 2 & 5 \\ -1 & -4 \end{pmatrix} = -8 + 5 = -3.
+\]
 
 \textbf{Schritt 3: Kofaktormatrix bauen und transponieren.}
 
