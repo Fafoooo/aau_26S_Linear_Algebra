@@ -471,61 +471,56 @@ $\det(A) = 0 \Rightarrow$ die Zeilen von $A$ sind linear abh\"angig. $\square$
 
 \begin{begriffe}
 \begin{itemize}[leftmargin=*, nosep]
-    \item \textbf{Arithmetische Folge}: aufeinanderfolgende Differenzen sind konstant. Zeile $i$ hat Form $(a_i,\; a_i + d_i,\; a_i + 2d_i,\; \dots,\; a_i + (n-1)d_i)$ mit Anfangswert $a_i$ und Differenz $d_i$.
-    \item \textbf{Charakterisierung}: Drei aufeinanderfolgende Glieder $x, y, z$ einer arithmetischen Folge erf\"ullen $z - 2y + x = 0$.
+    \item \textbf{Arithmetische Folge}: Jeder Schritt hat den gleichen Abstand. Z.\,B.\ $(2, 5, 8, 11, \dots)$ -- Differenz immer $+3$.
+    \item Allgemein: $(a,\; a + d,\; a + 2d,\; a + 3d,\; \dots)$ mit Startwert $a$ und Schrittweite $d$.
+    \item \textbf{Schl\"ussel}: F\"ur drei aufeinanderfolgende Glieder $x, y, z$ einer arithmetischen Folge gilt
+    \[
+    z - 2y + x = 0
+    \]
+    (denn $y - x = d = z - y$, also $z + x = 2y$). Diese ``$+1, -2, +1$''-Kombination ergibt immer Null.
 \end{itemize}
 \end{begriffe}
 
-\subsubsection*{Argument 1: Linear abh\"angige Spalten}
+\subsubsection*{Hauptargument: Spaltenoperation gibt Nullspalte}
 
-\textbf{Schritt 1: Spaltenrelation aufstellen.}
+\textbf{Idee.} Wenn jede Zeile arithmetisch ist, gilt die Beziehung ``Spalte $1$ minus $2 \cdot$ Spalte $2$ plus Spalte $3$ $= 0$'' \textbf{Zeile f\"ur Zeile} -- jede Zeile hat ja drei aufeinanderfolgende Glieder einer arithmetischen Folge in den Spalten $1, 2, 3$.
 
-Sei $S_j$ die $j$-te Spalte von $A$, also $S_j = (a_1 + (j-1)d_1, \, a_2 + (j-1)d_2, \, \dots, \, a_n + (j-1)d_n)^\top$.
-
-Mit $u = (a_1, \dots, a_n)^\top$ und $v = (d_1, \dots, d_n)^\top$ gilt:
+\textbf{Konkretes Beispiel.} Schauen wir uns eine $3 \times 3$-Matrix an, deren Zeilen jeweils arithmetisch sind:
 \[
-S_j = u + (j-1) v.
+A = \begin{pmatrix}
+\color{red}2 & \color{red}5 & \color{red}8 \\
+\color{blue}1 & \color{blue}3 & \color{blue}5 \\
+\color{teal}10 & \color{teal}7 & \color{teal}4
+\end{pmatrix}
+\]
+(Zeile 1: Schritt $+3$. Zeile 2: Schritt $+2$. Zeile 3: Schritt $-3$.)
+
+Bilde $S_3 - 2 S_2 + S_1$ (Spalte 3 minus doppelte Spalte 2 plus Spalte 1) eintragsweise:
+\begin{itemize}[leftmargin=*, nosep]
+    \item Zeile 1: $\color{red}8 - 2\cdot \color{red}5 + \color{red}2 = 8 - 10 + 2 = 0$
+    \item Zeile 2: $\color{blue}5 - 2\cdot \color{blue}3 + \color{blue}1 = 5 - 6 + 1 = 0$
+    \item Zeile 3: $\color{teal}4 - 2\cdot \color{teal}7 + \color{teal}10 = 4 - 14 + 10 = 0$
+\end{itemize}
+Ergebnis: \textbf{Nullspalte}.
+
+\textbf{Allgemein.} Zeile $i$ ist arithmetisch mit Startwert $a_i$ und Schrittweite $d_i$, also Spalten $(a_i,\; a_i + d_i,\; a_i + 2d_i,\; \dots)$. Eintrag von $S_3 - 2 S_2 + S_1$ in Zeile $i$:
+\[
+(a_i + 2d_i) - 2(a_i + d_i) + a_i = a_i(1 - 2 + 1) + d_i(2 - 2 + 0) = 0.
+\]
+Funktioniert f\"ur \emph{jede} Zeile $\Rightarrow$ neue Spalte 3 ist die Nullspalte.
+
+\textbf{Folgerung.} Determinante \"andert sich bei Spaltenoperationen $S_j \to S_j + \lambda S_k$ nicht. Eine Matrix mit einer Nullspalte hat Determinante $0$. Daher:
+\[
+\fbox{$\det(A) = 0$.} \qquad \square
 \]
 
-Insbesondere: $S_1 = u$, $\quad S_2 = u + v$, $\quad S_3 = u + 2v$.
+\subsubsection*{Alternative Argumente (kurz)}
 
-\textbf{Schritt 2: Lineare Abh\"angigkeit von $S_1, S_2, S_3$.}
-
-\[
-S_3 - 2 S_2 + S_1 = (u+2v) - 2(u+v) + u = 0.
-\]
-
-Das ist eine \textbf{nichttriviale} Linearkombination der Null mit Koeffizienten $(1, -2, 1)$.
-
-\textbf{Schritt 3: Folgerung.}
-
-Drei Spalten sind linear abh\"angig $\Rightarrow$ alle Spalten zusammen sind linear abh\"angig $\Rightarrow$ $\det(A) = 0$. $\square$
-
-\subsubsection*{Argument 2: Spaltenumformung gibt Nullspalte}
-
-\textbf{Schritt 1: Spaltenumformung anwenden.}
-
-Determinante \"andert sich nicht durch $S_3 \to S_3 - 2 S_2 + S_1$. F\"ur den Eintrag in Zeile $i$ der neuen Spalte 3:
-\[
-(a_i + 2d_i) - 2(a_i + d_i) + (a_i) = a_i(1 - 2 + 1) + d_i(2 - 2 + 0) = 0.
-\]
-
-\textbf{Schritt 2: Folgerung.}
-
-Die neue Spalte 3 ist die Nullspalte. Eine Matrix mit einer Nullspalte hat Determinante $0$. $\square$
-
-\subsubsection*{Argument 3: $Ax = 0$ hat nichttriviale L\"osung}
-
-W\"ahle $x = (1, -2, 1, 0, \dots, 0)^\top \in \mathbb{R}^n$. F\"ur jede Zeile $i$:
-\[
-(Ax)_i = 1 \cdot a_i + (-2)(a_i + d_i) + 1 \cdot (a_i + 2d_i) = 0.
-\]
-
-Also $Ax = 0$ mit $x \neq 0$ $\Rightarrow$ Spalten linear abh\"angig $\Rightarrow$ $\det(A) = 0$. $\square$
-
-\subsubsection*{Argument 4: Dimension des Spaltenraums}
-
-Aus Schritt 1 von Argument 1: jede Spalte $S_j = u + (j-1) v$ liegt in $\text{span}(u, v)$. Also hat der Spaltenraum H\"ochstdimension $2$. F\"ur $n \geq 3$ ist $\text{rang}(A) \leq 2 < n$, daher $\det(A) = 0$. $\square$
+\begin{itemize}[leftmargin=*, nosep]
+    \item \textbf{Lineare Abh\"angigkeit der Spalten}: $S_3 - 2S_2 + S_1 = 0$ ist eine nichttriviale Spaltenrelation $\Rightarrow$ Spalten linear abh\"angig $\Rightarrow \det A = 0$.
+    \item \textbf{Nichttriviale L\"osung von $Ax = 0$}: W\"ahle $x = (1, -2, 1, 0, \dots, 0)^\top$. Dann ist $Ax = 0$ mit $x \neq 0$ $\Rightarrow \det A = 0$.
+    \item \textbf{Spaltenraum-Dimension}: Jede Spalte $S_j$ ist von der Form $u + (j-1) v$ mit $u = (a_1, \dots, a_n)^\top$ und $v = (d_1, \dots, d_n)^\top$. Spaltenraum liegt in $\text{span}(u, v)$, hat also H\"ochstdimension $2$. F\"ur $n \geq 3$ folgt $\text{rang}(A) < n$, also $\det A = 0$.
+\end{itemize}
 
 \bigskip
 \hrule
