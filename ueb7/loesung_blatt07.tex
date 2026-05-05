@@ -385,35 +385,79 @@ $Ax = 0$ hat unendlich viele L\"osungen $\iff$ $(5a-2)(5b-2) = 64$.\\[2pt]
 \end{enumerate}
 \end{wastun}
 
-\textbf{Schritt 1: Zwei Determinanten-Identit\"aten.}
+\textbf{Strategie.} Wir wollen ``Zeilen linear abh\"angig'' zeigen. Wir wissen:
+$$\text{Zeilen linear abh\"angig} \iff \det(A) = 0.$$
+Es reicht also zu zeigen, dass $\det(A) = 0$. Daf\"ur basteln wir aus zwei Determinanten-Eigenschaften die Gleichung $\det(A) = -\det(A)$ -- daraus folgt sofort $\det(A) = 0$.
 
-\textbf{(a) Transponieren \"andert die Determinante nicht:}
+\medskip
+
+\textbf{Schritt 1: Zwei Determinanten-Eigenschaften aus der Vorlesung sammeln.}
+
+\textbf{(a) Transponieren \"andert die Determinante nicht.} F\"ur jede quadratische Matrix gilt:
 \[
 \det(A^\top) = \det(A).
 \]
 
-\textbf{(b) Multiplikation mit Skalar zieht $\lambda^n$ heraus:} F\"ur $\lambda \in \mathbb{R}$ gilt $\det(\lambda A) = \lambda^n \det(A)$. Insbesondere mit $\lambda = -1$:
+\textbf{(b) Skalar mal Matrix.} F\"ur $\lambda \in \mathbb{R}$ und $A \in \mathbb{R}^{n \times n}$:
+\[
+\det(\lambda A) = \lambda^n \det(A).
+\]
+\emph{Warum $\lambda^n$?} Bei $\lambda A$ wird jede der $n$ Zeilen mit $\lambda$ multipliziert. Pro skalierter Zeile zieht ein $\lambda$ aus der Determinante heraus -- bei $n$ Zeilen also $\lambda^n$ insgesamt.
+
+Speziell f\"ur $\lambda = -1$:
 \[
 \det(-A) = (-1)^n \det(A).
 \]
 
-\textbf{Schritt 2: Beides verkn\"upfen.}
+\medskip
 
-Wegen $A^\top = -A$:
+\textbf{Schritt 2: Schiefsymmetrie ausnutzen.}
+
+Die Voraussetzung $A^\top = -A$ bedeutet: die Matrizen $A^\top$ und $-A$ sind \textbf{dieselbe Matrix}. Also haben sie auch \textbf{dieselbe Determinante}:
 \[
-\det(A) = \det(A^\top) = \det(-A) = (-1)^n \det(A).
+\det(A^\top) = \det(-A).
 \]
 
-\textbf{Schritt 3: $n$ ungerade ausnutzen.}
+\textbf{Schritt 3: Beide Eigenschaften einsetzen.}
 
-F\"ur ungerades $n$ ist $(-1)^n = -1$, also:
+\textbf{(a) Linke Seite umschreiben} mit Eigenschaft (a):
 \[
-\det(A) = -\det(A) \;\Rightarrow\; 2 \det(A) = 0 \;\Rightarrow\; \det(A) = 0.
+\det(A^\top) = \det(A).
 \]
 
-\textbf{Schritt 4: Folgerung.}
+\textbf{(b) Rechte Seite umschreiben} mit Eigenschaft (b):
+\[
+\det(-A) = (-1)^n \det(A).
+\]
+
+\textbf{(c) Gleichsetzen.} Aus Schritt 2 wissen wir, dass die linke und rechte Seite gleich sind, also:
+\[
+\det(A) = (-1)^n \det(A).
+\]
+
+\medskip
+
+\textbf{Schritt 4: $n$ ungerade ausnutzen.}
+
+F\"ur ungerades $n$ (z.\,B.\ $n = 3, 5, 7, \dots$) ist $(-1)^n = -1$. Damit wird:
+\[
+\det(A) = -\det(A).
+\]
+
+Beide $\det(A)$-Terme auf eine Seite bringen:
+\[
+\det(A) + \det(A) = 0 \;\Longleftrightarrow\; 2 \det(A) = 0 \;\Longleftrightarrow\; \det(A) = 0.
+\]
+
+\medskip
+
+\textbf{Schritt 5: Folgerung ziehen.}
 
 $\det(A) = 0 \Rightarrow$ die Zeilen von $A$ sind linear abh\"angig. $\square$
+
+\medskip
+
+\textbf{Zur Kontrolle: warum nur ungerades $n$?} F\"ur gerades $n$ ist $(-1)^n = +1$, dann lautet die Gleichung in Schritt 4 nur $\det(A) = \det(A)$ -- das ist keine neue Information, $\det A$ kann beliebig sein. Beispiel: $A = \begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix}$ ist schiefsymmetrisch ($n=2$, gerade) mit $\det A = 1 \neq 0$. Das Argument funktioniert also wirklich nur f\"ur ungerades $n$.
 
 \bigskip
 \hrule
