@@ -321,13 +321,29 @@ Damit Koeffizientenvergleich m\"oglich wird, brauchen wir auf der linken Seite d
 5 \cdot (5ab - 2a - 2b - 12) = 0 \;\Longleftrightarrow\; 25ab - 10a - 10b - 60 = 0.
 \]
 
-\textbf{Schritt 2b: Form $(5a + p)(5b + q)$ raten.} Die Koeffizienten von $a$ und $b$ in $25ab - 10a - 10b - 60$ sind beide $-10$. Aus
+\textbf{Schritt 2b: Form $(5a + p)(5b + q)$ raten.}
+
+Wir wollen die linke Seite als Produkt schreiben. Versuchsansatz: \emph{irgendwas mit $5a$} mal \emph{irgendwas mit $5b$}, also
 \[
-(5a + p)(5b + q) = 25ab + 5qa + 5pb + pq
+(5a + p)(5b + q),
 \]
-folgt $5q = -10$ und $5p = -10$, also $p = q = -2$. Damit:
+wobei $p$ und $q$ \textbf{noch unbekannte Zahlen} sind, die wir suchen ($p, q$ sind nur Platzhalter -- wie $x$ und $y$ in einer Gleichung).
+
+\textbf{Schritt 2b.1: Klammern ausmultiplizieren} (FOIL):
 \[
-(5a - 2)(5b - 2) = 25ab - 10a - 10b + 4.
+(5a + p)(5b + q) = \underbrace{5a \cdot 5b}_{= 25ab} + \underbrace{5a \cdot q}_{= 5qa} + \underbrace{p \cdot 5b}_{= 5pb} + \underbrace{p \cdot q}_{= pq}
+= 25ab + 5q\, a + 5p\, b + pq.
+\]
+
+\textbf{Schritt 2b.2: Mit unserer Gleichung vergleichen.} Wir m\"ochten, dass das gleich $25ab - 10a - 10b + (\text{Zahl})$ wird. Koeffizientenvergleich:
+\begin{itemize}[leftmargin=*, nosep]
+    \item Koeffizient von $a$: $5q$ soll gleich $-10$ sein $\Rightarrow q = -2$.
+    \item Koeffizient von $b$: $5p$ soll gleich $-10$ sein $\Rightarrow p = -2$.
+\end{itemize}
+
+\textbf{Schritt 2b.3: $p = q = -2$ einsetzen.}
+\[
+(5a - 2)(5b - 2) = 25ab - 10a - 10b + \underbrace{(-2)(-2)}_{= 4} = 25ab - 10a - 10b + 4.
 \]
 
 \textbf{Schritt 2c: Konstanten ausgleichen.} In unserer Gleichung steht $-60$ statt $+4$. Differenz: $4 - (-60) = 64$. Genau diese $64$ landet auf der rechten Seite:
