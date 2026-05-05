@@ -64,12 +64,21 @@ B = \begin{pmatrix} 21 & 23 & 0 & 27 & 2 \\ 0 & 2 & 0 & 7 & 0 \\ 11 & 12 & 13 & 
 
 \textbf{Schritt 1: Zeilenumformungen, um die gro\ss en Zahlen loszuwerden.}
 
-\textbf{(a) $Z_2 \to Z_2 - Z_1$ und $Z_3 \to Z_3 - Z_1$} (Determinante \textbf{unver\"andert}):
+Beobachtung: Die Zeilen unterscheiden sich nur um wenig. $Z_2 - Z_1$ und $Z_3 - Z_1$ heben die ``$234$er-Werte'' weg, weil aufeinanderfolgende Zahlen sich nur um $1$ unterscheiden.
+
+\textbf{(a) $Z_2 \to Z_2 - Z_1$ und $Z_3 \to Z_3 - Z_1$} (Determinante \"andert sich nicht bei dieser Umformung):
+\begin{itemize}[leftmargin=*, nosep]
+    \item neue $Z_2 = (235-234,\; 236-235,\; 237-236) = (1, 1, 1)$
+    \item neue $Z_3 = (236-234,\; 237-235,\; 239-236) = (2, 2, 3)$
+\end{itemize}
 \[
 \det A = \det \begin{pmatrix} 234 & 235 & 236 \\ 1 & 1 & 1 \\ 2 & 2 & 3 \end{pmatrix}
 \]
 
-\textbf{(b) $Z_3 \to Z_3 - 2Z_2$} (Determinante \textbf{unver\"andert}):
+\textbf{(b) Warum jetzt $Z_3 \to Z_3 - 2Z_2$?} Ich will Nullen in Zeile 3 erzeugen, damit die sp\"atere Laplace-Entwicklung trivial wird. $Z_3$ hat $(2, 2, 3)$ und $Z_2 = (1, 1, 1)$. $Z_3 - 2 \cdot Z_2$ macht aus den ersten zwei Eintr\"agen $0$:
+\begin{itemize}[leftmargin=*, nosep]
+    \item neue $Z_3 = (2 - 2 \cdot 1,\; 2 - 2 \cdot 1,\; 3 - 2 \cdot 1) = (0, 0, 1)$
+\end{itemize}
 \[
 = \det \begin{pmatrix} 234 & 235 & 236 \\ 1 & 1 & 1 \\ 0 & 0 & 1 \end{pmatrix}
 \]
@@ -100,9 +109,13 @@ $\det A = -1$.
 
 \textbf{Idee:} Spalten/Zeilen mit fast nur Nullen finden und wegklappen, bis nur noch $2 \times 2$ \"ubrig.
 
+\textbf{Warum Nullen suchen?} Bei der Laplace-Entwicklung wird jeder Eintrag der Zeile/Spalte mit seinem Minor multipliziert. Ist der Eintrag $0$, ist sein ganzer Term $0 \cdot \text{Minor} = 0$ -- der Minor muss gar nicht erst berechnet werden. Eine Spalte mit \textbf{einer einzigen} Zahl $\neq 0$ reduziert die Arbeit auf einen einzigen $(n-1)\times(n-1)$-Minor.
+
 \textbf{Schritt 1: $5\times 5 \to 4\times 4$. Entwicklung nach Spalte 3.}
 
-Spalte 3 ist $(0, 0, 13, 0, 0)$. Nur Eintrag $(3,3) = 13$ liefert Beitrag. Streiche Zeile 3 und Spalte 3:
+\textbf{Warum Spalte 3?} Schau dir die Spalten von $B$ an: Spalte 3 hat den Inhalt $(0, 0, 13, 0, 0)$ -- vier von f\"unf Eintr\"agen sind $0$. Keine andere Spalte (und keine Zeile) ist so leer. Deshalb entwickeln wir genau hier.
+
+\textbf{Was bleibt \"ubrig?} Nur Eintrag $(3,3) = 13$ liefert einen nichttrivialen Beitrag. Streiche Zeile 3 und Spalte 3:
 
 \[
 \begin{pmatrix}
@@ -118,7 +131,7 @@ Spalte 3 ist $(0, 0, 13, 0, 0)$. Nur Eintrag $(3,3) = 13$ liefert Beitrag. Strei
 
 \textbf{Schritt 2: $4\times 4 \to 3\times 3$. Entwicklung von $M$ nach Spalte 4.}
 
-Spalte 4 von $M$ ist $(2, 0, 0, 0)$. Nur Eintrag $(1,4) = 2$ liefert Beitrag. Streiche Zeile 1 und Spalte 4:
+\textbf{Warum Spalte 4 von $M$?} Wieder Spalten von $M$ pr\"ufen: Spalte 4 lautet $(2, 0, 0, 0)$ -- drei Nullen, nur ein Eintrag $\neq 0$. Wieder die ``leerste'' Spalte. Streiche Zeile 1 und Spalte 4:
 
 \[
 \begin{pmatrix}
@@ -134,7 +147,7 @@ Spalte 4 von $M$ ist $(2, 0, 0, 0)$. Nur Eintrag $(1,4) = 2$ liefert Beitrag. St
 
 \textbf{Schritt 3: $3\times 3 \to 2\times 2$. Entwicklung von $N$ nach Spalte 1.}
 
-Spalte 1 von $N$ ist $(0, 1, 0)$. Nur Eintrag $(2,1) = 1$ liefert Beitrag. Streiche Zeile 2 und Spalte 1:
+\textbf{Warum Spalte 1 von $N$?} Spalte 1 lautet $(0, 1, 0)$ -- zwei Nullen, nur ein Eintrag $\neq 0$. Streiche Zeile 2 und Spalte 1:
 
 \[
 \begin{pmatrix}
