@@ -47,7 +47,11 @@ B = \begin{pmatrix} 21 & 23 & 0 & 27 & 2 \\ 0 & 2 & 0 & 7 & 0 \\ 11 & 12 & 13 & 
     \item \textbf{Eigenschaft 1: Zeilenumformungen.} $Z_i \to Z_i + \lambda Z_j$ \"andert die Determinante \textbf{nicht}.
     \item \textbf{Eigenschaft 2: Zeilentausch.} \"Andert das Vorzeichen der Determinante.
     \item \textbf{Eigenschaft 3: Spaltenumformungen.} Genau wie bei Zeilen.
-    \item \textbf{Laplace-Entwicklung} -- Verfahren, um eine gro\ss e Determinante in mehrere kleinere zu zerlegen. Anschaulich: ich w\"ahle eine Zeile (oder Spalte), gehe jeden Eintrag dieser Zeile durch und reduziere damit die $n \times n$-Determinante auf $n$ kleinere $(n-1) \times (n-1)$-Determinanten. Genaue Anleitung weiter unten beim ersten Einsatz.
+    \item \textbf{Laplace-Entwicklung nach Zeile $i$} -- zerlegt eine $n\times n$-Determinante in $n$ kleinere $(n-1)\times(n-1)$-Determinanten:
+    \[
+    \boxed{\;\det A = \sum_{j=1}^{n} (-1)^{i+j} \cdot a_{ij} \cdot M_{ij}\;}
+    \]
+    mit $a_{ij}$ = Eintrag in Zeile $i$, Spalte $j$, und $M_{ij}$ = Determinante der $(n-1)\times(n-1)$-Matrix, die aus $A$ entsteht, wenn man Zeile $i$ \emph{und} Spalte $j$ wegstreicht. Das Vorzeichen $(-1)^{i+j}$ ergibt das Schachbrettmuster $\bigl(\begin{smallmatrix} + & - & + & \cdots \\ - & + & - & \\ + & - & + & \\ \vdots & & & \ddots \end{smallmatrix}\bigr)$. Analog f\"ur Spalten: bei Entwicklung nach Spalte $j$ wird $\sum_{i=1}^{n}$ verwendet.
     \item \textbf{Trick}: Zeilen/Spalten mit vielen Nullen suchen $\Rightarrow$ in der Summe werden viele Terme automatisch $0$, und die Rechnung wird viel k\"urzer.
 \end{itemize}
 \end{begriffe}
@@ -85,18 +89,38 @@ Beobachtung: Die Zeilen unterscheiden sich nur um wenig. $Z_2 - Z_1$ und $Z_3 - 
 
 \textbf{Schritt 2: Laplace-Entwicklung nach Zeile 3.}
 
-Zeile 3 ist $(0, 0, 1)$. Die zwei Nullen liefern Beitrag $0$, also bleibt nur Eintrag $(3,3) = 1$. Streiche \textbf{Zeile 3 und Spalte 3} weg (grau):
-
+\textbf{(a) Zeilenwahl.} Zeile 3 ist $(0, 0, 1)$ -- zwei Nullen, ideal f\"ur Laplace. Wir markieren sie blau:
 \[
 \begin{pmatrix}
-234 & 235 & \color{gray}236 \\
-1 & 1 & \color{gray}1 \\
-\color{gray}0 & \color{gray}0 & \color{gray}1
+234 & 235 & 236 \\
+1 & 1 & 1 \\
+\color{blue}0 & \color{blue}0 & \color{blue}1
+\end{pmatrix}
+\]
+
+\textbf{(b) Volle Laplace-Summe nach Zeile 3.} Vorzeichen $(-1)^{3+j}$ f\"ur $j = 1, 2, 3$: $+, -, +$.
+\[
+\det A
+\;=\; \underbrace{\textcolor{blue}{0} \cdot (+1) \cdot M_{31}}_{= 0}
+\;+\; \underbrace{\textcolor{blue}{0} \cdot (-1) \cdot M_{32}}_{= 0}
+\;+\; \textcolor{blue}{1} \cdot (+1) \cdot M_{33}
+\;=\; M_{33}.
+\]
+
+Nur der dritte Term \"uberlebt -- die zwei Nullen multiplizieren ihre Minoren weg.
+
+\textbf{(c) $M_{33}$ berechnen.} Zeile 3 und Spalte 3 streichen (grau), Pivot $\boxed{1}$ an Position $(3,3)$:
+\[
+\begin{pmatrix}
+234 & 235 & \color{gray}{236} \\
+1 & 1 & \color{gray}{1} \\
+\color{gray}0 & \color{gray}0 & \boxed{1}
 \end{pmatrix}
 \;\longrightarrow\;
-\det = 1 \cdot \underbrace{(-1)^{3+3}}_{+1} \cdot \det \begin{pmatrix} 234 & 235 \\ 1 & 1 \end{pmatrix}
-= 234 - 235 = -1.
+M_{33} = \det \begin{pmatrix} 234 & 235 \\ 1 & 1 \end{pmatrix} = 234 \cdot 1 - 235 \cdot 1 = -1.
 \]
+
+\textbf{Ergebnis:} $\det A = M_{33} = -1$.
 
 \[
 \fbox{\parbox{0.93\textwidth}{\centering
@@ -113,51 +137,117 @@ $\det A = -1$.
 
 \textbf{Schritt 1: $5\times 5 \to 4\times 4$. Entwicklung nach Spalte 3.}
 
-\textbf{Warum Spalte 3?} Schau dir die Spalten von $B$ an: Spalte 3 hat den Inhalt $(0, 0, 13, 0, 0)$ -- vier von f\"unf Eintr\"agen sind $0$. Keine andere Spalte (und keine Zeile) ist so leer. Deshalb entwickeln wir genau hier.
+\textbf{(a) Spaltenwahl.} Spalte 3 von $B$ ist $(0, 0, 13, 0, 0)$ -- vier von f\"unf Eintr\"agen sind $0$. Keine andere Spalte (und keine Zeile) ist so leer. Wir markieren sie blau:
+\[
+B = \begin{pmatrix}
+21 & 23 & \color{blue}0 & 27 & 2 \\
+0 & 2 & \color{blue}0 & 7 & 0 \\
+11 & 12 & \color{blue}{13} & 14 & 15 \\
+1 & 41 & \color{blue}0 & 43 & 0 \\
+0 & 1 & \color{blue}0 & 4 & 0
+\end{pmatrix}
+\]
 
-\textbf{Was bleibt \"ubrig?} Nur Eintrag $(3,3) = 13$ liefert einen nichttrivialen Beitrag. Streiche Zeile 3 und Spalte 3:
+\textbf{(b) Volle Laplace-Summe nach Spalte 3.} Vorzeichen $(-1)^{i+3}$ f\"ur $i = 1, \dots, 5$: $+, -, +, -, +$.
+\[
+\det B
+\;=\; \underbrace{\textcolor{blue}{0} \cdot (+1) \cdot M_{13}}_{= 0}
+\;+\; \underbrace{\textcolor{blue}{0} \cdot (-1) \cdot M_{23}}_{= 0}
+\;+\; \textcolor{blue}{13} \cdot (+1) \cdot M_{33}
+\]
+\[
+\;+\; \underbrace{\textcolor{blue}{0} \cdot (-1) \cdot M_{43}}_{= 0}
+\;+\; \underbrace{\textcolor{blue}{0} \cdot (+1) \cdot M_{53}}_{= 0}
+\;=\; 13 \cdot M_{33}.
+\]
 
+Nur ein Term \"uberlebt -- die vier Nullen multiplizieren ihre Minoren weg.
+
+\textbf{(c) $M_{33}$ berechnen.} Zeile 3 und Spalte 3 streichen, Pivot $\boxed{13}$ an Position $(3,3)$:
 \[
 \begin{pmatrix}
 21 & 23 & \color{gray}0 & 27 & 2 \\
 0 & 2 & \color{gray}0 & 7 & 0 \\
-\color{gray}11 & \color{gray}12 & \color{gray}13 & \color{gray}14 & \color{gray}15 \\
+\color{gray}{11} & \color{gray}{12} & \boxed{13} & \color{gray}{14} & \color{gray}{15} \\
 1 & 41 & \color{gray}0 & 43 & 0 \\
 0 & 1 & \color{gray}0 & 4 & 0
 \end{pmatrix}
 \;\longrightarrow\;
-\det B = 13 \cdot \underbrace{(-1)^{3+3}}_{+1} \cdot \det \underbrace{\begin{pmatrix} 21 & 23 & 27 & 2 \\ 0 & 2 & 7 & 0 \\ 1 & 41 & 43 & 0 \\ 0 & 1 & 4 & 0 \end{pmatrix}}_{=: M}
+M_{33} = \det \underbrace{\begin{pmatrix} 21 & 23 & 27 & 2 \\ 0 & 2 & 7 & 0 \\ 1 & 41 & 43 & 0 \\ 0 & 1 & 4 & 0 \end{pmatrix}}_{=: M}.
+\]
+\[
+\Rightarrow\; \det B = 13 \cdot \det M.
 \]
 
 \textbf{Schritt 2: $4\times 4 \to 3\times 3$. Entwicklung von $M$ nach Spalte 4.}
 
-\textbf{Warum Spalte 4 von $M$?} Wieder Spalten von $M$ pr\"ufen: Spalte 4 lautet $(2, 0, 0, 0)$ -- drei Nullen, nur ein Eintrag $\neq 0$. Wieder die ``leerste'' Spalte. Streiche Zeile 1 und Spalte 4:
+\textbf{(a) Spaltenwahl.} Spalte 4 von $M$ ist $(2, 0, 0, 0)$ -- drei Nullen, wieder die ``leerste'' Spalte. Wir markieren sie blau:
+\[
+M = \begin{pmatrix}
+21 & 23 & 27 & \color{blue}{2} \\
+0 & 2 & 7 & \color{blue}{0} \\
+1 & 41 & 43 & \color{blue}{0} \\
+0 & 1 & 4 & \color{blue}{0}
+\end{pmatrix}
+\]
 
+\textbf{(b) Volle Laplace-Summe nach Spalte 4.} Vorzeichen $(-1)^{i+4}$ f\"ur $i = 1, \dots, 4$: $-, +, -, +$.
+\[
+\det M
+\;=\; \textcolor{blue}{2} \cdot (-1) \cdot M_{14}
+\;+\; \underbrace{\textcolor{blue}{0} \cdot (+1) \cdot M_{24}}_{= 0}
+\;+\; \underbrace{\textcolor{blue}{0} \cdot (-1) \cdot M_{34}}_{= 0}
+\;+\; \underbrace{\textcolor{blue}{0} \cdot (+1) \cdot M_{44}}_{= 0}
+\;=\; -2 M_{14}.
+\]
+
+\textbf{(c) $M_{14}$ berechnen.} Zeile 1 und Spalte 4 streichen, Pivot $\boxed{2}$ an Position $(1,4)$:
 \[
 \begin{pmatrix}
-\color{gray}21 & \color{gray}23 & \color{gray}27 & \color{gray}2 \\
-0 & 2 & 7 & \color{gray}0 \\
-1 & 41 & 43 & \color{gray}0 \\
-0 & 1 & 4 & \color{gray}0
+\color{gray}{21} & \color{gray}{23} & \color{gray}{27} & \boxed{2} \\
+0 & 2 & 7 & \color{gray}{0} \\
+1 & 41 & 43 & \color{gray}{0} \\
+0 & 1 & 4 & \color{gray}{0}
 \end{pmatrix}
 \;\longrightarrow\;
-\det M = 2 \cdot \underbrace{(-1)^{1+4}}_{-1} \cdot \det \underbrace{\begin{pmatrix} 0 & 2 & 7 \\ 1 & 41 & 43 \\ 0 & 1 & 4 \end{pmatrix}}_{=: N}
-= -2 \cdot \det N.
+M_{14} = \det \underbrace{\begin{pmatrix} 0 & 2 & 7 \\ 1 & 41 & 43 \\ 0 & 1 & 4 \end{pmatrix}}_{=: N}.
+\]
+\[
+\Rightarrow\; \det M = -2 \cdot \det N.
 \]
 
 \textbf{Schritt 3: $3\times 3 \to 2\times 2$. Entwicklung von $N$ nach Spalte 1.}
 
-\textbf{Warum Spalte 1 von $N$?} Spalte 1 lautet $(0, 1, 0)$ -- zwei Nullen, nur ein Eintrag $\neq 0$. Streiche Zeile 2 und Spalte 1:
+\textbf{(a) Spaltenwahl.} Spalte 1 von $N$ ist $(0, 1, 0)$ -- zwei Nullen. Wir markieren sie blau:
+\[
+N = \begin{pmatrix}
+\color{blue}{0} & 2 & 7 \\
+\color{blue}{1} & 41 & 43 \\
+\color{blue}{0} & 1 & 4
+\end{pmatrix}
+\]
 
+\textbf{(b) Volle Laplace-Summe nach Spalte 1.} Vorzeichen $(-1)^{i+1}$ f\"ur $i = 1, 2, 3$: $+, -, +$.
+\[
+\det N
+\;=\; \underbrace{\textcolor{blue}{0} \cdot (+1) \cdot M_{11}}_{= 0}
+\;+\; \textcolor{blue}{1} \cdot (-1) \cdot M_{21}
+\;+\; \underbrace{\textcolor{blue}{0} \cdot (+1) \cdot M_{31}}_{= 0}
+\;=\; -M_{21}.
+\]
+
+\textbf{(c) $M_{21}$ berechnen.} Zeile 2 und Spalte 1 streichen, Pivot $\boxed{1}$ an Position $(2,1)$:
 \[
 \begin{pmatrix}
-\color{gray}0 & 2 & 7 \\
-\color{gray}1 & \color{gray}41 & \color{gray}43 \\
-\color{gray}0 & 1 & 4
+\color{gray}{0} & 2 & 7 \\
+\boxed{1} & \color{gray}{41} & \color{gray}{43} \\
+\color{gray}{0} & 1 & 4
 \end{pmatrix}
 \;\longrightarrow\;
-\det N = 1 \cdot \underbrace{(-1)^{2+1}}_{-1} \cdot \det \begin{pmatrix} 2 & 7 \\ 1 & 4 \end{pmatrix}
-= -1 \cdot (8 - 7) = -1.
+M_{21} = \det \begin{pmatrix} 2 & 7 \\ 1 & 4 \end{pmatrix} = 2 \cdot 4 - 7 \cdot 1 = 1.
+\]
+\[
+\Rightarrow\; \det N = -M_{21} = -1.
 \]
 
 \textbf{Schritt 4: Zur\"uckrechnen.}
@@ -225,6 +315,12 @@ $M_{1j}$: Zeile 1 und Spalte $j$ wegstreichen.
 \textbf{Schritt 2: Vier Minoren ausrechnen.}
 
 Pro Minor $M_{1j}$ wird in $A$ \textbf{Zeile 1 und Spalte $j$} weggestrichen (grau dargestellt) -- die schwarzen Eintr\"age bilden die $3\times 3$-Matrix.
+
+\textbf{Formel f\"ur eine $3\times 3$-Determinante} (Laplace-Entwicklung nach der ersten Zeile):
+\[
+\boxed{\;\det \begin{pmatrix} a & b & c \\ d & e & f \\ g & h & i \end{pmatrix} = a(ei - fh) - b(di - fg) + c(dh - eg)\;}
+\]
+Diese Formel wenden wir auf jeden der vier Minoren $M_{11}, M_{12}, M_{13}, M_{14}$ an.
 
 \textbf{(a) $M_{11}$ -- Zeile 1 und Spalte 1 weg.}
 \[
@@ -391,11 +487,25 @@ Es reicht also zu zeigen, dass $\det(A) = 0$. Daf\"ur basteln wir aus zwei Deter
 
 \medskip
 
+\textbf{Begleitendes Beispiel.} Damit jeder Schritt grafisch greifbar wird, fixieren wir eine konkrete schiefsymmetrische $3 \times 3$-Matrix:
+\[
+A = \begin{pmatrix} 0 & 2 & -3 \\ -2 & 0 & 5 \\ 3 & -5 & 0 \end{pmatrix}.
+\]
+\emph{Schiefsymmetrie pr\"ufen:} Diagonale $= 0$ \checkmark; \;$a_{12} = 2 = -a_{21}$, \;$a_{13} = -3 = -a_{31}$, \;$a_{23} = 5 = -a_{32}$ \checkmark.
+
+\medskip
+
 \textbf{Schritt 1: Zwei Determinanten-Eigenschaften aus der Vorlesung sammeln.}
 
 \textbf{(a) Transponieren \"andert die Determinante nicht.} F\"ur jede quadratische Matrix gilt:
 \[
 \det(A^\top) = \det(A).
+\]
+\emph{Anschaulich:} Beim Transponieren werden Zeilen und Spalten vertauscht (Spiegelung an der Hauptdiagonale). F\"ur unser Beispiel:
+\[
+A = \begin{pmatrix} 0 & 2 & -3 \\ -2 & 0 & 5 \\ 3 & -5 & 0 \end{pmatrix}
+\;\xrightarrow{\text{Zeilen}\,\leftrightarrow\,\text{Spalten}}\;
+A^\top = \begin{pmatrix} 0 & -2 & 3 \\ 2 & 0 & -5 \\ -3 & 5 & 0 \end{pmatrix}.
 \]
 
 \textbf{(b) Skalar mal Matrix.} F\"ur $\lambda \in \mathbb{R}$ und $A \in \mathbb{R}^{n \times n}$:
@@ -408,12 +518,24 @@ Speziell f\"ur $\lambda = -1$:
 \[
 \det(-A) = (-1)^n \det(A).
 \]
+\emph{Anschaulich:} $-A$ entsteht aus $A$, indem jeder Eintrag mit $-1$ multipliziert wird (Vorzeichenwechsel). F\"ur unser Beispiel:
+\[
+A = \begin{pmatrix} 0 & 2 & -3 \\ -2 & 0 & 5 \\ 3 & -5 & 0 \end{pmatrix}
+\;\xrightarrow{\text{jeden Eintrag}\,\cdot\,(-1)}\;
+-A = \begin{pmatrix} 0 & -2 & 3 \\ 2 & 0 & -5 \\ -3 & 5 & 0 \end{pmatrix}.
+\]
 
 \medskip
 
 \textbf{Schritt 2: Schiefsymmetrie ausnutzen.}
 
-Die Voraussetzung $A^\top = -A$ bedeutet: die Matrizen $A^\top$ und $-A$ sind \textbf{dieselbe Matrix}. Also haben sie auch \textbf{dieselbe Determinante}:
+\emph{Anschaulich:} Vergleiche $A^\top$ aus 1(a) mit $-A$ aus 1(b) -- f\"ur unser schiefsymmetrisches Beispiel sind die beiden Matrizen \textbf{eintragsweise identisch}:
+\[
+\underbrace{\begin{pmatrix} 0 & -2 & 3 \\ 2 & 0 & -5 \\ -3 & 5 & 0 \end{pmatrix}}_{A^\top \text{ aus 1(a)}}
+\;=\;
+\underbrace{\begin{pmatrix} 0 & -2 & 3 \\ 2 & 0 & -5 \\ -3 & 5 & 0 \end{pmatrix}}_{-A \text{ aus 1(b)}}.
+\]
+Genau das ist die Voraussetzung $A^\top = -A$. Die Matrizen $A^\top$ und $-A$ sind also \textbf{dieselbe Matrix}, und damit haben sie auch \textbf{dieselbe Determinante}:
 \[
 \det(A^\top) = \det(-A).
 \]
@@ -448,6 +570,13 @@ Beide $\det(A)$-Terme auf eine Seite bringen:
 \[
 \det(A) + \det(A) = 0 \;\Longleftrightarrow\; 2 \det(A) = 0 \;\Longleftrightarrow\; \det(A) = 0.
 \]
+
+\emph{Numerische Probe mit unserem Beispiel} ($n = 3$ ist ungerade, also muss $\det A = 0$ herauskommen). Per Sarrus / Laplace nach erster Zeile:
+\begin{align*}
+\det A &= 0 \cdot \bigl(0 \cdot 0 - 5 \cdot (-5)\bigr) - 2 \cdot \bigl((-2) \cdot 0 - 5 \cdot 3\bigr) + (-3) \cdot \bigl((-2)(-5) - 0 \cdot 3\bigr) \\
+&= 0 - 2 \cdot (-15) + (-3) \cdot 10 \\
+&= 0 + 30 - 30 \;=\; 0. \;\checkmark
+\end{align*}
 
 \medskip
 
