@@ -1,0 +1,229 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{geometry}\geometry{margin=2.5cm}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable}
+\usepackage{xcolor}
+
+\newtcolorbox{merkbox}[1][]{colback=blue!5, colframe=blue!40, fonttitle=\bfseries, title={Merke}, breakable, #1}
+\newtcolorbox{analogie}[1][]{colback=green!5, colframe=green!40, fonttitle=\bfseries, title={Analogie}, breakable, #1}
+\newtcolorbox{begriffe}[1][]{colback=yellow!10, colframe=yellow!60!black, fonttitle=\bfseries, title={Was bedeuten die Begriffe?}, breakable, #1}
+\newtcolorbox{wastun}[1][]{colback=orange!5, colframe=orange!60!black, fonttitle=\bfseries, title={Was ist zu tun?}, breakable, #1}
+
+\title{Erkl\"arung -- HW09: Lineare Abbildungen, Kern \& Bild}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+%=============================================================================
+\part*{Teil 1: Grundlagen -- Was du wissen musst}
+
+%-----------------------------------------------------------------------------
+\section*{1. Was ist eine lineare Abbildung?}
+
+Eine \textbf{lineare Abbildung} $T \colon V \to W$ ist eine Funktion zwischen Vektorr\"aumen, die zwei Eigenschaften erf\"ullt:
+\begin{enumerate}[nosep]
+    \item $T(u + v) = T(u) + T(v)$ (Addition wird respektiert).
+    \item $T(\lambda v) = \lambda \, T(v)$ (Skalarmultiplikation wird respektiert).
+\end{enumerate}
+
+\begin{analogie}
+Eine lineare Abbildung ist wie ein \textbf{strukturerhaltender \"Ubersetzer}: Wenn ich zwei Vektoren erst addiere und dann \"ubersetze, kommt dasselbe heraus, wie wenn ich sie erst einzeln \"ubersetze und dann addiere. Beispiel: ``mal 2 nehmen'' ist linear, ``$+5$'' ist es nicht (denn $u + v + 5 \neq (u+5) + (v+5)$).
+\end{analogie}
+
+\begin{merkbox}[title={Darstellungsmatrix}]
+Jede lineare Abbildung $T \colon \mathbb{R}^n \to \mathbb{R}^m$ l\"asst sich durch eine $m \times n$-Matrix $A$ darstellen: $T(v) = A v$.
+
+\medskip
+\textbf{Spalten von $A$} = Bilder der Einheitsvektoren: $A = (T(e_1) \mid T(e_2) \mid \dots \mid T(e_n))$.
+\end{merkbox}
+
+%-----------------------------------------------------------------------------
+\section*{2. Kern und Bild}
+
+\begin{merkbox}[title={Definitionen}]
+\begin{itemize}[nosep]
+    \item \textbf{Kern}: $\text{Ker}(T) = \{v \in V : T(v) = 0\}$. ``Was wird auf null abgebildet?''
+    \item \textbf{Bild}: $\text{Im}(T) = \{T(v) : v \in V\}$. ``Was kann \"uberhaupt herauskommen?''
+\end{itemize}
+Beides sind Unterr\"aume -- $\text{Ker}(T) \subseteq V$ (Definitionsbereich), $\text{Im}(T) \subseteq W$ (Zielraum).
+\end{merkbox}
+
+\begin{analogie}
+$T$ ist eine ``Maschine''. Der \textbf{Kern} ist die Menge der ``vergeudeten Eing\"ange'' (kommen als $0$ raus, also Information verloren). Das \textbf{Bild} ist die Menge aller m\"oglichen Ausg\"ange.
+\end{analogie}
+
+%-----------------------------------------------------------------------------
+\section*{3. Der Dimensionssatz (Rang-Nullit\"ats-Satz)}
+
+\begin{merkbox}[title={Der wichtigste Satz}]
+F\"ur jede lineare Abbildung $T \colon V \to W$ mit endlicher Definitionsdimension:
+\[
+\dim \text{Ker}(T) + \dim \text{Im}(T) = \dim V.
+\]
+\end{merkbox}
+
+\begin{analogie}
+Wenn die Maschine $n$ Eingangsregler hat ($\dim V = n$), dann gilt: ``vergeudete Regler'' (Kern) + ``wirksame Regler'' (Bild) $= n$. Jeder Regler ist entweder das eine oder das andere -- nichts wird doppelt gez\"ahlt.
+\end{analogie}
+
+%-----------------------------------------------------------------------------
+\section*{4. Injektiv, Surjektiv, Bijektiv -- Verbindung zu Kern \& Bild}
+
+\begin{merkbox}[title={Charakterisierungen}]
+F\"ur $T \colon V \to W$:
+\[
+\textbf{injektiv} \iff \text{Ker}(T) = \{0\} \iff \dim \text{Ker}(T) = 0.
+\]
+\[
+\textbf{surjektiv} \iff \text{Im}(T) = W \iff \dim \text{Im}(T) = \dim W.
+\]
+\[
+\textbf{bijektiv} \iff \text{injektiv und surjektiv} \iff T \text{ invertierbar}.
+\]
+\end{merkbox}
+
+\begin{merkbox}[title={Wichtige Konsequenz}]
+F\"ur $T \colon V \to W$ mit $\dim V = \dim W$ (also Quadratmatrix):
+\[
+\text{injektiv} \iff \text{surjektiv} \iff \text{bijektiv}.
+\]
+\textbf{Aber:} wenn $\dim V \neq \dim W$, dann kann $T$ \textbf{niemals bijektiv} sein.
+\begin{itemize}[nosep]
+    \item $\dim V > \dim W$ (z.\,B.\ $\mathbb{R}^5 \to \mathbb{R}^3$): $T$ kann nicht injektiv sein (Kern hat mindestens Dimension $\dim V - \dim W$).
+    \item $\dim V < \dim W$ (z.\,B.\ $\mathbb{R}^3 \to \mathbb{R}^5$): $T$ kann nicht surjektiv sein.
+\end{itemize}
+\end{merkbox}
+
+%-----------------------------------------------------------------------------
+\section*{5. Strategie -- wie l\"ose ich solche Aufgaben?}
+
+\begin{merkbox}[title={Kochrezept}]
+\begin{enumerate}[nosep]
+    \item \textbf{Darstellungsmatrix $A$ aufstellen} (Spalten = $T(e_i)$).
+    \item \textbf{Gau\ss-Elimination} auf $A$ anwenden.
+    \item \textbf{Kern}: L\"ose $Av = 0$. Freie Variablen $\to$ Basisvektoren des Kerns.
+    \item \textbf{Bild}: Pivot-Spalten der Stufenform $\to$ entsprechende \emph{Original-Spalten} sind die Basis. \\
+    \emph{Achtung}: Nicht die Spalten der Stufenform nehmen, sondern die der Original-Matrix!
+    \item \textbf{Pr\"ufe Dimensionssatz}: $\dim \text{Ker} + \dim \text{Im} \stackrel{?}{=} \dim V$.
+    \item \textbf{Inj./Surj./Bij.}: Aus den Dimensionen direkt ablesen.
+\end{enumerate}
+\end{merkbox}
+
+\newpage
+
+%=============================================================================
+\part*{Teil 2: Aufgabe 35}
+
+$T \colon \mathbb{R}^5 \to \mathbb{R}^3$. Schon wegen der Dimensionen kann $T$ niemals injektiv (also auch nie bijektiv/invertierbar) sein. Es bleibt nur die Frage, wie ``schlimm'' der Kern ist und ob $T$ wenigstens surjektiv ist.
+
+\medskip
+
+\textbf{Vorgehensweise:} Eine einzige Gau\ss-Elimination liefert die Antworten f\"ur (a), (b), (c). Pivots stehen bei den Variablen $a, b$ -- also sind $c, d, e$ freie Variablen im Kern, und die Spalten $1, 2$ von $A$ bilden die Basis des Bildes.
+
+\medskip
+
+\textbf{Konkret:} $\dim \text{Ker} = 3$, $\dim \text{Im} = 2$. Dimensionssatz: $3 + 2 = 5 = \dim \mathbb{R}^5$ \checkmark. \emph{Nicht injektiv} (Kern $\neq \{0\}$), \emph{nicht surjektiv} (Bild $\neq \mathbb{R}^3$), \emph{nicht invertierbar}.
+
+\medskip
+
+\textbf{(c) -- der Trick:} $T(v) = (1, 2, 5)$ l\"osen $=$ partikul\"are L\"osung $v_0$ finden, dann gesamten Kern dazu addieren. (Wie ``allgemeine L\"osung $=$ spezielle L\"osung $+$ homogene L\"osung'' beim Differentialgleichungen.)
+
+\newpage
+
+%=============================================================================
+\part*{Teil 3: Aufgabe 36}
+
+$T \colon \mathbb{R}^3 \to \mathbb{R}^3$. Jetzt Quadrat -- $T$ k\"onnte invertierbar sein.
+
+\subsection*{Strategie f\"ur (a)}
+
+Statt Matrix aufstellen und Determinante rechnen: direkt versuchen, $T^{-1}$ zu finden. Setze $(x, y, z) = T(a, b, c)$ und l\"ose nach $a, b, c$ auf. Wenn das eindeutig geht $\Rightarrow$ $T$ invertierbar; die L\"osung \emph{ist} dann $T^{-1}$.
+
+\textbf{Warum funktioniert das?} ``Eindeutige R\"uckaufl\"osung'' bedeutet genau: zu jedem Output gibt es genau einen Input. Das ist bijektiv.
+
+\subsection*{(b) und (c) folgen direkt aus (a)}
+
+\begin{merkbox}[title={Faustregel}]
+Wenn man wei\ss, dass $T$ invertierbar (also bijektiv) ist, dann braucht man \textbf{nichts mehr rechnen}:
+\[
+\text{Ker}(T) = \{0\}, \qquad \text{Im}(T) = W = \text{ganzer Zielraum}.
+\]
+Und $T$ ist automatisch injektiv, surjektiv, bijektiv.
+\end{merkbox}
+
+\newpage
+
+%=============================================================================
+\part*{Teil 4: Aufgabe 37}
+
+$T \colon \mathbb{R}^{2\times 2} \to \mathbb{R}^{2\times 2}$, definiert als ``links mit $M$ multiplizieren''. Beachte: $\dim \mathbb{R}^{2\times 2} = 4$.
+
+\subsection*{Schl\"usselbeobachtung}
+
+Die Matrix $M = \begin{pmatrix} 1 & 2 \\ 4 & 8 \end{pmatrix}$ ist \textbf{singul\"ar} (Rang $1$: Zeile 2 $= 4 \cdot$ Zeile 1, Spalte 2 $= 2 \cdot$ Spalte 1).
+
+\begin{merkbox}[title={Konsequenz}]
+F\"ur $T(X) = M X$ mit Rang-$1$-Matrix $M$:
+\begin{itemize}[nosep]
+    \item Das Ergebnis $M X$ hat in jeder Spalte ein Vielfaches von Spalte 1 von $M$ (also $(1, 4)^\top$).
+    \item Daher ist $\dim \text{Im}(T) = 2$ (je eine Dimension pro Spalte des Outputs).
+\end{itemize}
+\end{merkbox}
+
+\subsection*{Direkter Weg}
+
+$T(X)$ mit allgemeinem $X = \begin{pmatrix} a & b \\ c & d \end{pmatrix}$ ausrechnen, dann Bedingungen f\"ur Kern und Bild ablesen. Heraus kommt:
+\[
+T(X) = \begin{pmatrix} a + 2c & b + 2d \\ 4(a + 2c) & 4(b + 2d) \end{pmatrix}.
+\]
+
+Daraus direkt:
+\begin{itemize}[nosep]
+    \item Kern: $a + 2c = 0$ und $b + 2d = 0$. Zwei freie Variablen ($c, d$). $\dim \text{Ker} = 2$.
+    \item Bild: jede Matrix der Form ``erste Zeile beliebig, zweite Zeile $= 4 \cdot$ erste''. $\dim \text{Im} = 2$.
+\end{itemize}
+
+Dimensionssatz: $2 + 2 = 4$ \checkmark.
+
+\newpage
+
+%=============================================================================
+\part*{Teil 5: Aufgabe 38 -- Existenzfragen}
+
+\begin{merkbox}[title={Hauptwerkzeug f\"ur Existenzaufgaben}]
+\textbf{Schritt 1: Dimensionscheck.} Berechne $\dim \text{Ker}$ und $\dim \text{Im}$ \"uber den Dimensionssatz. Pr\"ufe, ob die Werte
+\begin{enumerate}[nosep]
+    \item \emph{ganze Zahlen} sind,
+    \item $\geq 0$ sind,
+    \item $\dim \text{Im} \leq \dim W$ (Zielraum) erf\"ullen.
+\end{enumerate}
+\textbf{Wenn ein Check fehlschl\"agt $\to$ Es existiert kein solches $T$.} \\
+\textbf{Wenn alle Checks bestehen $\to$ Konstruiere ein konkretes Beispiel.}
+\end{merkbox}
+
+\subsection*{(a) $\mathbb{R}^2 \to \mathbb{R}^2$, $\text{Ker} = \text{Im}$}
+
+$\text{Ker} = \text{Im}$ erzwingt gleiche Dimensionen. Dimensionssatz: $2 \dim \text{Ker} = 2 \Rightarrow \dim \text{Ker} = 1$. Ganzzahl, alles okay $\Rightarrow$ existiert.
+
+Beispiel: $T(a, b) = (b, 0)$ ``vergisst $a$, schiebt $b$ in die erste Komponente''. Kern $=$ Bild $=$ $x$-Achse.
+
+\subsection*{(b) $\mathbb{R}^3 \to \mathbb{R}^3$, $\text{Ker} = \text{Im}$}
+
+$2 \dim \text{Ker} = 3 \Rightarrow \dim \text{Ker} = \tfrac{3}{2}$. \textbf{Keine ganze Zahl} $\Rightarrow$ existiert nicht.
+
+\subsection*{(c) $\mathbb{R}^6 \to \mathbb{R}^3$, $\dim \text{Ker} = 2$}
+
+Dimensionssatz: $\dim \text{Im} = 6 - 2 = 4$. Aber $\text{Im} \subseteq \mathbb{R}^3$, also $\dim \text{Im} \leq 3$. \textbf{Widerspruch} $\Rightarrow$ existiert nicht.
+
+\begin{merkbox}[title={Muster erkennen}]
+Solche Aufgaben sind meistens reine Dimensionsrechnungen -- die linearen Abbildungen sind nur ``Verpackung''. Schreibe die drei Zahlen $\dim V$, $\dim W$, $\dim \text{Ker}$ hin, rechne $\dim \text{Im} = \dim V - \dim \text{Ker}$ aus, und pr\"ufe, ob das in den Zielraum passt.
+\end{merkbox}
+
+\end{document}

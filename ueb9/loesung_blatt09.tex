@@ -1,0 +1,448 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{geometry}\geometry{margin=2.5cm}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usepackage{pgfplots}\pgfplotsset{compat=1.18}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable}
+\usepackage{xcolor}
+\newtcolorbox{begriffe}[1][]{colback=yellow!10, colframe=yellow!60!black, fonttitle=\bfseries, title={Was bedeuten die Begriffe?}, breakable, #1}
+\newtcolorbox{wastun}[1][]{colback=orange!5, colframe=orange!60!black, fonttitle=\bfseries, title={Was ist zu tun?}, breakable, #1}
+\newcommand{\piv}[1]{{\color{red}\boxed{#1}}}
+
+\title{\"Ubungsblatt 9 -- L\"osungen \\ \large Linear Algebra}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+%% ============================================================
+\subsection*{Aufgabe 35}
+%% ============================================================
+
+\textbf{Angabe.} Lineare Abbildung $T \colon \mathbb{R}^5 \to \mathbb{R}^3$,
+\[
+T(a, b, c, d, e) = (b + c + 4d + 2e,\; a + c + 3d + e,\; 4a - 3b + c - 2e).
+\]
+\begin{itemize}[nosep]
+\item[(a)] Basis und Dimension von $\text{Ker}(T)$.
+\item[(b)] Basis und Dimension von $\text{Im}(T)$.
+\item[(c)] Allgemeine Form von $v \in \mathbb{R}^5$ mit $T(v) = (1, 2, 5)$.
+\item[(d)] Ist $T$ injektiv, surjektiv, bijektiv? (Soll \emph{aus (a),(b) folgen}, ohne neue Rechnung.)
+\item[(e)] Ist $T$ invertierbar? Wenn ja: explizite Formel f\"ur $T^{-1}$.
+\end{itemize}
+
+\begin{begriffe}
+\begin{itemize}[leftmargin=*, nosep]
+    \item \textbf{Lineare Abbildung} $T \colon V \to W$: Funktion, die Addition und Skalarmultiplikation respektiert.
+    \item \textbf{Kern} $\text{Ker}(T) = \{v \in V : T(v) = 0\}$. Alle Vektoren, die auf den Nullvektor abgebildet werden. Ist ein Unterraum von $V$.
+    \item \textbf{Bild} $\text{Im}(T) = \{T(v) : v \in V\} = $ alle erreichbaren Werte. Unterraum von $W$.
+    \item \textbf{Darstellungsmatrix} $A$ von $T$: Spalten sind die Bilder der Standard-Einheitsvektoren $T(e_1), T(e_2), \dots$. Dann ist $T(v) = Av$.
+    \item \textbf{Injektiv} $\iff \text{Ker}(T) = \{0\} \iff \dim \text{Ker}(T) = 0$.
+    \item \textbf{Surjektiv} $\iff \text{Im}(T) = W \iff \dim \text{Im}(T) = \dim W$.
+    \item \textbf{Bijektiv} $\iff$ injektiv \emph{und} surjektiv $\iff T$ invertierbar.
+    \item \textbf{Dimensionssatz (Rang-Nullit\"ats-Satz)}: $\dim \text{Ker}(T) + \dim \text{Im}(T) = \dim V$ (Definitionsbereich).
+\end{itemize}
+\end{begriffe}
+
+\begin{wastun}
+\begin{enumerate}[leftmargin=*, nosep]
+    \item Darstellungsmatrix $A$ aufstellen (Spalten = $T(e_i)$).
+    \item Gau\ss-Elimination einmal durchziehen -- damit lassen sich (a), (b), (c) alle direkt ablesen.
+    \item \textbf{(a)} Kern: L\"ose homogenes System $Av = 0$. Freie Variablen $\to$ Basisvektoren.
+    \item \textbf{(b)} Bild: Pivot-Spalten in der Stufenform markieren $\to$ entsprechende \emph{Original-Spalten} von $A$ sind die Basis.
+    \item \textbf{(c)} Partikul\"are L\"osung von $Av = (1,2,5)$ + allgemeine Kernl\"osung.
+    \item \textbf{(d)} Aus $\dim \text{Ker}$ und $\dim \text{Im}$ direkt schlie\ss en.
+    \item \textbf{(e)} Bijektivit\"at $\iff$ invertierbar.
+\end{enumerate}
+\end{wastun}
+
+%% --- 35 Darstellungsmatrix ---
+\subsubsection*{Schritt 1: Darstellungsmatrix aufstellen}
+
+Bilder der Einheitsvektoren:
+\begin{align*}
+T(e_1) = T(1,0,0,0,0) &= (0,\; 1,\; 4) \\
+T(e_2) = T(0,1,0,0,0) &= (1,\; 0,\; -3) \\
+T(e_3) = T(0,0,1,0,0) &= (1,\; 1,\; 1) \\
+T(e_4) = T(0,0,0,1,0) &= (4,\; 3,\; 0) \\
+T(e_5) = T(0,0,0,0,1) &= (2,\; 1,\; -2)
+\end{align*}
+
+Diese f\"unf Vektoren sind die \textbf{Spalten} von $A$:
+\[
+A = \begin{pmatrix} 0 & 1 & 1 & 4 & 2 \\ 1 & 0 & 1 & 3 & 1 \\ 4 & -3 & 1 & 0 & -2 \end{pmatrix}.
+\]
+
+%% --- 35 Stufenform ---
+\subsubsection*{Schritt 2: Stufenform von $A$ (einmal f\"ur alle Teilaufgaben)}
+
+\[
+\left(\begin{array}{ccccc}
+0 & 1 & 1 & 4 & 2 \\
+1 & 0 & 1 & 3 & 1 \\
+4 & -3 & 1 & 0 & -2
+\end{array}\right)
+\xrightarrow{Z_1 \leftrightarrow Z_2}
+\left(\begin{array}{ccccc}
+1 & 0 & 1 & 3 & 1 \\
+0 & 1 & 1 & 4 & 2 \\
+4 & -3 & 1 & 0 & -2
+\end{array}\right)
+\xrightarrow{Z_3 \to Z_3 - 4Z_1}
+\left(\begin{array}{ccccc}
+1 & 0 & 1 & 3 & 1 \\
+0 & 1 & 1 & 4 & 2 \\
+0 & -3 & -3 & -12 & -6
+\end{array}\right)
+\]
+\[
+\xrightarrow{Z_3 \to Z_3 + 3Z_2}
+\left(\begin{array}{ccccc}
+\piv{1} & 0 & 1 & 3 & 1 \\
+0 & \piv{1} & 1 & 4 & 2 \\
+0 & 0 & 0 & 0 & 0
+\end{array}\right)
+\]
+
+Pivots in \textbf{Spalte 1 und 2} (entspricht den Variablen $a, b$). Freie Variablen: $c, d, e$.
+
+%% --- 35 (a) ---
+\subsubsection*{(a) Kern von $T$}
+
+L\"ose $Av = 0$. Stufenform $\Rightarrow$ Gleichungen:
+\begin{align*}
+\text{Zeile 1:} &\quad a + c + 3d + e = 0 \;\Rightarrow\; a = -c - 3d - e \\
+\text{Zeile 2:} &\quad b + c + 4d + 2e = 0 \;\Rightarrow\; b = -c - 4d - 2e
+\end{align*}
+
+Freie Variablen umbenennen: $c = s$, $d = t$, $e = u$.
+
+\[
+(a, b, c, d, e) = (-s - 3t - u,\; -s - 4t - 2u,\; s,\; t,\; u).
+\]
+
+Nach $s, t, u$ aufspalten:
+\[
+\begin{pmatrix} a \\ b \\ c \\ d \\ e \end{pmatrix}
+= s \begin{pmatrix} -1 \\ -1 \\ 1 \\ 0 \\ 0 \end{pmatrix}
++ t \begin{pmatrix} -3 \\ -4 \\ 0 \\ 1 \\ 0 \end{pmatrix}
++ u \begin{pmatrix} -1 \\ -2 \\ 0 \\ 0 \\ 1 \end{pmatrix}.
+\]
+
+\[
+\fbox{\parbox{0.93\textwidth}{\centering
+Basis von $\text{Ker}(T)$: $\{(-1,-1,1,0,0),\;(-3,-4,0,1,0),\;(-1,-2,0,0,1)\}$. \\[2pt]
+$\dim \text{Ker}(T) = 3.$
+}}
+\]
+
+%% --- 35 (b) ---
+\subsubsection*{(b) Bild von $T$}
+
+$\text{Im}(T) = \text{span}\{T(e_1), T(e_2), T(e_3), T(e_4), T(e_5)\}$, also der Spaltenraum von $A$.
+
+\textbf{Pivot-Spalten der Stufenform markieren $\to$ entsprechende Original-Spalten bilden Basis.} Pivots in Spalten $1, 2 \Rightarrow$ Basis-Spalten sind die \emph{ersten beiden} Spalten der \emph{Original-Matrix} $A$:
+\[
+\text{Spalte 1 von } A = T(e_1) = (0, 1, 4),\qquad
+\text{Spalte 2 von } A = T(e_2) = (1, 0, -3).
+\]
+
+\[
+\fbox{\parbox{0.93\textwidth}{\centering
+Basis von $\text{Im}(T)$: $\{(0, 1, 4),\;(1, 0, -3)\}$. \\[2pt]
+$\dim \text{Im}(T) = 2.$
+}}
+\]
+
+\textbf{Check Dimensionssatz:} $3 + 2 = 5 = \dim \mathbb{R}^5$. \checkmark
+
+%% --- 35 (c) ---
+\subsubsection*{(c) Allgemeine $v$ mit $T(v) = (1, 2, 5)$}
+
+Erweiterte Matrix mit rechter Seite $(1, 2, 5)^\top$, dieselben Zeilenoperationen wie in Schritt 2:
+\[
+\left(\begin{array}{ccccc|c}
+0 & 1 & 1 & 4 & 2 & 1 \\
+1 & 0 & 1 & 3 & 1 & 2 \\
+4 & -3 & 1 & 0 & -2 & 5
+\end{array}\right)
+\;\longrightarrow\;
+\left(\begin{array}{ccccc|c}
+\piv{1} & 0 & 1 & 3 & 1 & 2 \\
+0 & \piv{1} & 1 & 4 & 2 & 1 \\
+0 & 0 & 0 & 0 & 0 & 0
+\end{array}\right)
+\]
+
+Keine Widerspruchszeile $\Rightarrow$ konsistent.
+
+\textbf{Partikul\"are L\"osung} (setze $c = d = e = 0$): $a = 2$, $b = 1$.
+\[
+v_0 = (2, 1, 0, 0, 0).
+\]
+\textbf{Probe:} $T(2,1,0,0,0) = (1 + 0 + 0 + 0,\; 2 + 0 + 0 + 0,\; 8 - 3 + 0 - 0) = (1, 2, 5).$ \checkmark
+
+\textbf{Allgemeine L\"osung} = partikul\"are L\"osung + Kern:
+\[
+\fbox{\parbox{0.93\textwidth}{\centering
+$v = (2, 1, 0, 0, 0)
++ s(-1,-1,1,0,0)
++ t(-3,-4,0,1,0)
++ u(-1,-2,0,0,1)$, \; $s, t, u \in \mathbb{R}.$
+}}
+\]
+
+%% --- 35 (d) ---
+\subsubsection*{(d) Injektiv / Surjektiv / Bijektiv}
+
+\textbf{Aus (a):} $\dim \text{Ker}(T) = 3 \neq 0$ $\Rightarrow$ $T$ ist \textbf{nicht injektiv}.
+
+\textbf{Aus (b):} $\dim \text{Im}(T) = 2 \neq 3 = \dim \mathbb{R}^3$ $\Rightarrow$ $T$ ist \textbf{nicht surjektiv}.
+
+Da bijektiv $= $ injektiv \emph{und} surjektiv, ist $T$ auch \textbf{nicht bijektiv}.
+
+%% --- 35 (e) ---
+\subsubsection*{(e) Invertierbar?}
+
+$T$ ist invertierbar $\iff$ $T$ bijektiv. Aus (d): nicht bijektiv $\Rightarrow$ \textbf{$T$ ist nicht invertierbar}.
+
+(Alternative Begr\"undung: F\"ur $T \colon \mathbb{R}^5 \to \mathbb{R}^3$ k\"onnen Definitions- und Wertebereich gar nicht gleichdimensional sein, also kann $T$ niemals bijektiv sein.)
+
+\bigskip
+\hrule
+\bigskip
+
+%% ============================================================
+\subsection*{Aufgabe 36}
+%% ============================================================
+
+\textbf{Angabe.} $T \colon \mathbb{R}^3 \to \mathbb{R}^3$ mit $T(a, b, c) = (3b + c,\; 2a + b,\; a)$.
+\begin{itemize}[nosep]
+\item[(a)] $T$ invertierbar? Wenn ja: explizite Formel f\"ur $T^{-1}$.
+\item[(b)] Aus (a): Kern und Bild bestimmen (einfachste Beschreibungen).
+\item[(c)] Aus (a): Injektiv / Surjektiv / Bijektiv?
+\end{itemize}
+
+\begin{begriffe}
+\begin{itemize}[leftmargin=*, nosep]
+    \item \textbf{Invers}: $T^{-1}$ macht $T$ ``r\"uckg\"angig''. F\"ur $(x, y, z) = T(a, b, c)$ findet $T^{-1}$ aus $(x, y, z)$ den Originalvektor $(a, b, c)$.
+    \item \textbf{Suchstrategie} f\"ur $T^{-1}$: Gleichungen $T(a, b, c) = (x, y, z)$ nach $a, b, c$ aufl\"osen.
+\end{itemize}
+\end{begriffe}
+
+%% --- 36 (a) ---
+\subsubsection*{(a) Invertierbarkeit und $T^{-1}$}
+
+\textbf{Schritt 1: Gleichungen aufstellen.} $(x, y, z) = T(a, b, c)$ bedeutet:
+\begin{align*}
+3b + c &= x \\
+2a + b &= y \\
+a &= z
+\end{align*}
+
+\textbf{Schritt 2: Von unten nach oben aufl\"osen.}
+
+\textbf{(a) $a$ aus Gleichung 3:} $a = z$.
+
+\textbf{(b) $b$ aus Gleichung 2:} $b = y - 2a = y - 2z$.
+
+\textbf{(c) $c$ aus Gleichung 1:} $c = x - 3b = x - 3(y - 2z) = x - 3y + 6z$.
+
+\textbf{Eindeutige L\"osung} f\"ur jedes $(x, y, z) \Rightarrow$ $T$ ist invertierbar.
+
+\[
+\fbox{\parbox{0.93\textwidth}{\centering
+$T^{-1}(x, y, z) = (z,\; y - 2z,\; x - 3y + 6z)$.
+}}
+\]
+
+\textbf{Probe:} $T(T^{-1}(x,y,z)) = T(z, y-2z, x-3y+6z)$:
+\begin{itemize}[nosep, leftmargin=*]
+\item 1.\ Komp.: $3(y - 2z) + (x - 3y + 6z) = 3y - 6z + x - 3y + 6z = x$ \checkmark
+\item 2.\ Komp.: $2z + (y - 2z) = y$ \checkmark
+\item 3.\ Komp.: $z$ \checkmark
+\end{itemize}
+
+%% --- 36 (b) ---
+\subsubsection*{(b) Kern und Bild}
+
+$T$ ist invertierbar $\Rightarrow$ $T$ ist bijektiv $\Rightarrow$:
+\[
+\fbox{\parbox{0.93\textwidth}{\centering
+$\text{Ker}(T) = \{(0, 0, 0)\}$ \quad (nur der Nullvektor) \\[2pt]
+$\text{Im}(T) = \mathbb{R}^3$ \quad (der ganze Zielraum)
+}}
+\]
+
+%% --- 36 (c) ---
+\subsubsection*{(c) Injektiv / Surjektiv / Bijektiv}
+
+$T$ invertierbar $\iff$ $T$ bijektiv $\iff$ $T$ injektiv \emph{und} surjektiv.
+
+\[
+\fbox{\parbox{0.93\textwidth}{\centering
+$T$ ist \textbf{injektiv, surjektiv, bijektiv}.
+}}
+\]
+
+\bigskip
+\hrule
+\bigskip
+
+%% ============================================================
+\subsection*{Aufgabe 37}
+%% ============================================================
+
+\textbf{Angabe.} $T \colon \mathbb{R}^{2 \times 2} \to \mathbb{R}^{2 \times 2}$ mit $T(X) = M \cdot X$, wobei $M = \begin{pmatrix} 1 & 2 \\ 4 & 8 \end{pmatrix}$.
+\begin{itemize}[nosep]
+\item[(a)] Basis und Dimension von $\text{Ker}(T)$.
+\item[(b)] Basis und Dimension von $\text{Im}(T)$.
+\end{itemize}
+
+\begin{begriffe}
+\begin{itemize}[leftmargin=*, nosep]
+    \item Der Vektorraum ist hier $\mathbb{R}^{2 \times 2}$ (alle $2\times 2$-Matrizen). $\dim \mathbb{R}^{2\times 2} = 4$.
+    \item \textbf{Beobachtung:} In $M = \begin{pmatrix} 1 & 2 \\ 4 & 8 \end{pmatrix}$ ist Zeile 2 $= 4 \cdot$ Zeile 1, ebenso Spalte 2 $= 2 \cdot$ Spalte 1. Also hat $M$ Rang $1$ und ist nicht invertierbar.
+\end{itemize}
+\end{begriffe}
+
+%% --- 37 Berechnung T(X) ---
+\subsubsection*{Schritt 1: $T(X)$ ausrechnen mit allgemeinem $X$}
+
+Sei $X = \begin{pmatrix} a & b \\ c & d \end{pmatrix}$. Dann:
+\[
+T(X) = \begin{pmatrix} 1 & 2 \\ 4 & 8 \end{pmatrix} \begin{pmatrix} a & b \\ c & d \end{pmatrix}
+= \begin{pmatrix} a + 2c & b + 2d \\ 4a + 8c & 4b + 8d \end{pmatrix}
+= \begin{pmatrix} a + 2c & b + 2d \\ 4(a + 2c) & 4(b + 2d) \end{pmatrix}.
+\]
+
+\textbf{Beobachtung:} Zeile 2 von $T(X)$ ist immer das $4$-fache von Zeile 1.
+
+%% --- 37 (a) ---
+\subsubsection*{(a) Kern von $T$}
+
+$T(X) = 0 \iff a + 2c = 0$ \emph{und} $b + 2d = 0$ (die Zeile-2-Gleichungen sind automatisch erf\"ullt).
+
+Aus den zwei Gleichungen: $a = -2c$, $b = -2d$. Freie Variablen: $c, d$.
+
+\[
+X = \begin{pmatrix} -2c & -2d \\ c & d \end{pmatrix}
+= c \underbrace{\begin{pmatrix} -2 & 0 \\ 1 & 0 \end{pmatrix}}_{B_1}
++ d \underbrace{\begin{pmatrix} 0 & -2 \\ 0 & 1 \end{pmatrix}}_{B_2}.
+\]
+
+\[
+\fbox{\parbox{0.93\textwidth}{\centering
+Basis von $\text{Ker}(T)$: $\left\{\begin{pmatrix} -2 & 0 \\ 1 & 0 \end{pmatrix},\; \begin{pmatrix} 0 & -2 \\ 0 & 1 \end{pmatrix}\right\}$. \quad $\dim \text{Ker}(T) = 2$.
+}}
+\]
+
+%% --- 37 (b) ---
+\subsubsection*{(b) Bild von $T$}
+
+Jede Matrix in $\text{Im}(T)$ hat die Form $\begin{pmatrix} \alpha & \beta \\ 4\alpha & 4\beta \end{pmatrix}$ mit $\alpha = a + 2c$, $\beta = b + 2d$. Da $a, c$ (bzw.\ $b, d$) beliebig sind, kann $\alpha$ (bzw.\ $\beta$) jede reelle Zahl annehmen.
+
+\[
+\begin{pmatrix} \alpha & \beta \\ 4\alpha & 4\beta \end{pmatrix}
+= \alpha \underbrace{\begin{pmatrix} 1 & 0 \\ 4 & 0 \end{pmatrix}}_{C_1}
++ \beta \underbrace{\begin{pmatrix} 0 & 1 \\ 0 & 4 \end{pmatrix}}_{C_2}.
+\]
+
+\[
+\fbox{\parbox{0.93\textwidth}{\centering
+Basis von $\text{Im}(T)$: $\left\{\begin{pmatrix} 1 & 0 \\ 4 & 0 \end{pmatrix},\; \begin{pmatrix} 0 & 1 \\ 0 & 4 \end{pmatrix}\right\}$. \quad $\dim \text{Im}(T) = 2$.
+}}
+\]
+
+\textbf{Check Dimensionssatz:} $2 + 2 = 4 = \dim \mathbb{R}^{2\times 2}$. \checkmark
+
+\bigskip
+\hrule
+\bigskip
+
+%% ============================================================
+\subsection*{Aufgabe 38}
+%% ============================================================
+
+\textbf{Angabe.} Gibt es eine lineare Abbildung mit den gegebenen Eigenschaften? Falls ja: Beispiel. Falls nein: Beweis.
+\begin{itemize}[nosep]
+\item[(a)] $T \colon \mathbb{R}^2 \to \mathbb{R}^2$ mit $\text{Ker}(T) = \text{Im}(T)$.
+\item[(b)] $T \colon \mathbb{R}^3 \to \mathbb{R}^3$ mit $\text{Ker}(T) = \text{Im}(T)$.
+\item[(c)] $T \colon \mathbb{R}^6 \to \mathbb{R}^3$ mit $\dim \text{Ker}(T) = 2$.
+\end{itemize}
+
+\begin{begriffe}
+\begin{itemize}[leftmargin=*, nosep]
+    \item \textbf{Schl\"usselformel}: Dimensionssatz $\dim \text{Ker}(T) + \dim \text{Im}(T) = \dim V$ (Definitionsbereich).
+    \item \textbf{Trick}: Wenn $\text{Ker}(T) = \text{Im}(T)$ gefordert ist, m\"ussen beide R\"aume insbesondere \textbf{dieselbe Dimension} haben.
+    \item \textbf{Trick}: $\dim \text{Im}(T)$ ist immer $\leq \dim W$ (Zielraum).
+\end{itemize}
+\end{begriffe}
+
+%% --- 38 (a) ---
+\subsubsection*{(a) $T \colon \mathbb{R}^2 \to \mathbb{R}^2$ mit $\text{Ker} = \text{Im}$}
+
+\textbf{Dimensionscheck.} Sei $d = \dim \text{Ker} = \dim \text{Im}$ (gleich, weil die R\"aume gleich sein sollen). Dimensionssatz:
+\[
+d + d = 2 \;\Rightarrow\; d = 1.
+\]
+Beide R\"aume sind also $1$-dimensional. Das ist konsistent -- es \emph{k\"onnte} ein solches $T$ geben.
+
+\textbf{Beispiel konstruieren.} Idee: $T$ soll alles in einen $1$-dim Unterraum $W$ abbilden ($\to$ $\text{Im} = W$), und $W$ soll genau der Kern sein.
+
+Versuch: $T(a, b) = (b, 0)$.
+\begin{itemize}[leftmargin=*, nosep]
+    \item $\text{Ker}(T)$: $T(a, b) = (0, 0) \iff b = 0$. Also $\text{Ker}(T) = \{(a, 0) : a \in \mathbb{R}\} = \text{span}\{(1, 0)\}$.
+    \item $\text{Im}(T)$: $\{(b, 0) : b \in \mathbb{R}\} = \text{span}\{(1, 0)\}$.
+    \item $\text{Ker}(T) = \text{Im}(T)$ \checkmark
+\end{itemize}
+
+\[
+\fbox{\parbox{0.93\textwidth}{\centering
+\textbf{Ja}, z.\,B.\ $T(a, b) = (b, 0)$ erf\"ullt $\text{Ker}(T) = \text{Im}(T) = \text{span}\{(1, 0)\}$.
+}}
+\]
+
+%% --- 38 (b) ---
+\subsubsection*{(b) $T \colon \mathbb{R}^3 \to \mathbb{R}^3$ mit $\text{Ker} = \text{Im}$}
+
+\textbf{Dimensionscheck.} Sei wieder $d = \dim \text{Ker} = \dim \text{Im}$. Dimensionssatz:
+\[
+d + d = 3 \;\Rightarrow\; 2d = 3 \;\Rightarrow\; d = \tfrac{3}{2}.
+\]
+
+$d$ ist die Dimension eines Vektorraums -- muss eine \textbf{ganze Zahl} sein. $\tfrac{3}{2}$ ist es nicht. \textbf{Widerspruch}.
+
+\[
+\fbox{\parbox{0.93\textwidth}{\centering
+\textbf{Nein}, ein solches $T$ existiert nicht. \\[2pt]
+Begr\"undung: aus $\text{Ker} = \text{Im}$ folgt $2 d = 3$, was f\"ur ganzzahliges $d$ unl\"osbar ist.
+}}
+\]
+
+\textbf{Bemerkung:} Das Argument zeigt allgemein: $\text{Ker}(T) = \text{Im}(T)$ ist nur f\"ur \emph{gerade} Dimensionen des Definitionsbereichs m\"oglich.
+
+%% --- 38 (c) ---
+\subsubsection*{(c) $T \colon \mathbb{R}^6 \to \mathbb{R}^3$ mit $\dim \text{Ker}(T) = 2$}
+
+\textbf{Dimensionscheck.} Aus dem Dimensionssatz:
+\[
+\dim \text{Ker}(T) + \dim \text{Im}(T) = \dim \mathbb{R}^6 = 6 \;\Rightarrow\; \dim \text{Im}(T) = 6 - 2 = 4.
+\]
+
+Aber $\text{Im}(T) \subseteq \mathbb{R}^3$, also muss $\dim \text{Im}(T) \leq 3$ sein. Wir h\"atten aber $\dim \text{Im}(T) = 4 > 3$. \textbf{Widerspruch}.
+
+\[
+\fbox{\parbox{0.93\textwidth}{\centering
+\textbf{Nein}, ein solches $T$ existiert nicht. \\[2pt]
+Begr\"undung: aus $\dim \text{Ker} = 2$ folgt $\dim \text{Im} = 4$, aber $\dim \text{Im} \leq \dim \mathbb{R}^3 = 3$.
+}}
+\]
+
+\end{document}
