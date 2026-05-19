@@ -311,22 +311,24 @@ $T$ ist \textbf{nicht invertierbar}.
 %% --- 36 (a) ---
 \subsubsection*{(a) Invertierbarkeit und $T^{-1}$}
 
-\textbf{Schritt 1: Gleichungen aufstellen.} $(x, y, z) = T(a, b, c)$ bedeutet:
+\textbf{Idee:} Wenn ich aus $(x, y, z) = T(a, b, c)$ die Werte $a, b, c$ eindeutig zur\"uckrechnen kann, dann existiert eine Umkehrabbildung $T^{-1}$ -- und ich habe sie direkt gefunden.
+
+\textbf{Schritt 1: Drei Gleichungen.} $(x, y, z) = T(a, b, c)$ bedeutet:
 \begin{align*}
 3b + c &= x \\
 2a + b &= y \\
 a &= z
 \end{align*}
 
-\textbf{Schritt 2: Von unten nach oben aufl\"osen.}
+\textbf{Schritt 2: Eine nach der anderen aufl\"osen} -- von unten nach oben, weil unten am einfachsten:
 
-\textbf{(a) $a$ aus Gleichung 3:} $a = z$.
+\textbf{(a) $a$ steht direkt da.} Aus Gleichung 3: $a = z$.
 
-\textbf{(b) $b$ aus Gleichung 2:} $b = y - 2a = y - 2z$.
+\textbf{(b) $b$ aus Gleichung 2.} $2a + b = y \Rightarrow b = y - 2a = y - 2z$.
 
-\textbf{(c) $c$ aus Gleichung 1:} $c = x - 3b = x - 3(y - 2z) = x - 3y + 6z$.
+\textbf{(c) $c$ aus Gleichung 1.} $3b + c = x \Rightarrow c = x - 3b = x - 3(y - 2z) = x - 3y + 6z$.
 
-\textbf{Eindeutige L\"osung} f\"ur jedes $(x, y, z) \Rightarrow$ $T$ ist invertierbar.
+Da das System eindeutig l\"osbar ist, gibt es eine Umkehrabbildung. Also: $T$ ist invertierbar.
 
 \[
 \fbox{\parbox{0.93\textwidth}{\centering
@@ -334,7 +336,7 @@ $T^{-1}(x, y, z) = (z,\; y - 2z,\; x - 3y + 6z)$.
 }}
 \]
 
-\textbf{Probe:} $T(T^{-1}(x,y,z)) = T(z, y-2z, x-3y+6z)$:
+\textbf{Probe:} Setze $T^{-1}(x,y,z)$ in $T$ ein -- muss wieder $(x,y,z)$ ergeben.
 \begin{itemize}[nosep, leftmargin=*]
 \item 1.\ Komp.: $3(y - 2z) + (x - 3y + 6z) = 3y - 6z + x - 3y + 6z = x$ \checkmark
 \item 2.\ Komp.: $2z + (y - 2z) = y$ \checkmark
@@ -344,7 +346,13 @@ $T^{-1}(x, y, z) = (z,\; y - 2z,\; x - 3y + 6z)$.
 %% --- 36 (b) ---
 \subsubsection*{(b) Kern und Bild}
 
-$T$ ist invertierbar $\Rightarrow$ $T$ ist bijektiv $\Rightarrow$:
+\textbf{Regel:} Invertierbar $=$ bijektiv. Bijektiv hei\ss t: \emph{jeder} Vektor wird genau einmal getroffen. Daraus folgt sofort:
+
+\begin{itemize}[leftmargin=*, nosep]
+    \item \textbf{Kern:} Nur der Nullvektor wird auf $0$ abgebildet -- denn jeder andere Vektor hat einen anderen Output.
+    \item \textbf{Bild:} Jeder Vektor in $\mathbb{R}^3$ wird getroffen -- denn die Umkehrabbildung $T^{-1}$ findet f\"ur jeden Output einen Input.
+\end{itemize}
+
 \[
 \fbox{\parbox{0.93\textwidth}{\centering
 $\text{Ker}(T) = \{(0, 0, 0)\}$ \quad (nur der Nullvektor) \\[2pt]
@@ -355,7 +363,9 @@ $\text{Im}(T) = \mathbb{R}^3$ \quad (der ganze Zielraum)
 %% --- 36 (c) ---
 \subsubsection*{(c) Injektiv / Surjektiv / Bijektiv}
 
-$T$ invertierbar $\iff$ $T$ bijektiv $\iff$ $T$ injektiv \emph{und} surjektiv.
+\textbf{Regel:} Invertierbar $=$ bijektiv $=$ injektiv \emph{und} surjektiv. Diese drei Eigenschaften gehen immer zusammen.
+
+Aus (a) wissen wir: $T$ ist invertierbar. Damit ist $T$ automatisch alles drei.
 
 \[
 \fbox{\parbox{0.93\textwidth}{\centering
@@ -385,29 +395,43 @@ $T$ ist \textbf{injektiv, surjektiv, bijektiv}.
 \end{begriffe}
 
 %% --- 37 Berechnung T(X) ---
-\subsubsection*{Schritt 1: $T(X)$ ausrechnen mit allgemeinem $X$}
+\subsubsection*{Schritt 1: $T(X)$ allgemein ausrechnen}
 
-Sei $X = \begin{pmatrix} a & b \\ c & d \end{pmatrix}$. Dann:
+Nehmen wir eine beliebige $2\times 2$-Matrix $X = \begin{pmatrix} a & b \\ c & d \end{pmatrix}$ und multiplizieren mit $M$ von links:
 \[
 T(X) = \begin{pmatrix} 1 & 2 \\ 4 & 8 \end{pmatrix} \begin{pmatrix} a & b \\ c & d \end{pmatrix}
 = \begin{pmatrix} a + 2c & b + 2d \\ 4a + 8c & 4b + 8d \end{pmatrix}
 = \begin{pmatrix} a + 2c & b + 2d \\ 4(a + 2c) & 4(b + 2d) \end{pmatrix}.
 \]
 
-\textbf{Beobachtung:} Zeile 2 von $T(X)$ ist immer das $4$-fache von Zeile 1.
+\textbf{Was f\"allt auf?} Zeile 2 von $T(X)$ ist immer genau das $4$-fache von Zeile 1. Das ist kein Zufall -- es liegt daran, dass auch Zeile 2 von $M$ das $4$-fache von Zeile 1 ist.
 
 %% --- 37 (a) ---
 \subsubsection*{(a) Kern von $T$}
 
-$T(X) = 0 \iff a + 2c = 0$ \emph{und} $b + 2d = 0$ (die Zeile-2-Gleichungen sind automatisch erf\"ullt).
+\textbf{Frage:} F\"ur welche $X$ wird $T(X) = 0$ (Nullmatrix)?
 
-Aus den zwei Gleichungen: $a = -2c$, $b = -2d$. Freie Variablen: $c, d$.
+Wir brauchen also Nullen in allen vier Eintr\"agen von $T(X)$. Das gibt vier Gleichungen:
+\begin{align*}
+a + 2c &= 0 \qquad b + 2d = 0 \\
+4(a+2c) &= 0 \qquad 4(b+2d) = 0
+\end{align*}
 
+Die unteren zwei sind aber das $4$-fache der oberen -- also automatisch erf\"ullt, sobald die oberen gelten. \textbf{Es bleiben nur zwei echte Gleichungen}:
+\[
+a + 2c = 0 \quad\text{und}\quad b + 2d = 0
+\quad\Longleftrightarrow\quad
+a = -2c \quad\text{und}\quad b = -2d.
+\]
+
+$c$ und $d$ sind frei w\"ahlbar. Setzt man sie ein:
 \[
 X = \begin{pmatrix} -2c & -2d \\ c & d \end{pmatrix}
 = c \underbrace{\begin{pmatrix} -2 & 0 \\ 1 & 0 \end{pmatrix}}_{B_1}
 + d \underbrace{\begin{pmatrix} 0 & -2 \\ 0 & 1 \end{pmatrix}}_{B_2}.
 \]
+
+Zwei freie Parameter $\Rightarrow$ zwei Basismatrizen.
 
 \[
 \fbox{\parbox{0.93\textwidth}{\centering
@@ -418,13 +442,22 @@ Basis von $\text{Ker}(T)$: $\left\{\begin{pmatrix} -2 & 0 \\ 1 & 0 \end{pmatrix}
 %% --- 37 (b) ---
 \subsubsection*{(b) Bild von $T$}
 
-Jede Matrix in $\text{Im}(T)$ hat die Form $\begin{pmatrix} \alpha & \beta \\ 4\alpha & 4\beta \end{pmatrix}$ mit $\alpha = a + 2c$, $\beta = b + 2d$. Da $a, c$ (bzw.\ $b, d$) beliebig sind, kann $\alpha$ (bzw.\ $\beta$) jede reelle Zahl annehmen.
+\textbf{Frage:} Welche Matrizen kommen als $T(X)$ \"uberhaupt vor?
 
+Aus Schritt 1 wissen wir: $T(X)$ hat immer die Form
+\[
+\begin{pmatrix} \alpha & \beta \\ 4\alpha & 4\beta \end{pmatrix}
+\quad\text{mit } \alpha = a + 2c,\; \beta = b + 2d.
+\]
+
+Da $a, c$ beliebig sind, kann $\alpha$ jede reelle Zahl annehmen -- genauso $\beta$. Also sind $\alpha, \beta \in \mathbb{R}$ frei. Aufspalten:
 \[
 \begin{pmatrix} \alpha & \beta \\ 4\alpha & 4\beta \end{pmatrix}
 = \alpha \underbrace{\begin{pmatrix} 1 & 0 \\ 4 & 0 \end{pmatrix}}_{C_1}
 + \beta \underbrace{\begin{pmatrix} 0 & 1 \\ 0 & 4 \end{pmatrix}}_{C_2}.
 \]
+
+Zwei freie Parameter $\Rightarrow$ zwei Basismatrizen.
 
 \[
 \fbox{\parbox{0.93\textwidth}{\centering
@@ -432,7 +465,7 @@ Basis von $\text{Im}(T)$: $\left\{\begin{pmatrix} 1 & 0 \\ 4 & 0 \end{pmatrix},\
 }}
 \]
 
-\textbf{Check Dimensionssatz:} $2 + 2 = 4 = \dim \mathbb{R}^{2\times 2}$. \checkmark
+\textbf{Kontrolle:} $\dim \text{Ker} + \dim \text{Im} = 2 + 2 = 4 = \dim \mathbb{R}^{2 \times 2}$. \checkmark
 
 \bigskip
 \hrule
@@ -460,19 +493,25 @@ Basis von $\text{Im}(T)$: $\left\{\begin{pmatrix} 1 & 0 \\ 4 & 0 \end{pmatrix},\
 %% --- 38 (a) ---
 \subsubsection*{(a) $T \colon \mathbb{R}^2 \to \mathbb{R}^2$ mit $\text{Ker} = \text{Im}$}
 
-\textbf{Dimensionscheck.} Sei $d = \dim \text{Ker} = \dim \text{Im}$ (gleich, weil die R\"aume gleich sein sollen). Dimensionssatz:
+\textbf{Schritt 1: Erstmal pr\"ufen, ob die Dimensionen \"uberhaupt zusammenpassen.}
+
+Wenn Kern $=$ Bild sein soll, haben beide die gleiche Dimension. Nennen wir sie $d$. Mit dem Dimensionssatz:
 \[
-d + d = 2 \;\Rightarrow\; d = 1.
+\underbrace{d}_{\dim \text{Ker}} + \underbrace{d}_{\dim \text{Im}} = \underbrace{2}_{\dim \mathbb{R}^2}
+\;\Rightarrow\; 2d = 2 \;\Rightarrow\; d = 1.
 \]
-Beide R\"aume sind also $1$-dimensional. Das ist konsistent -- es \emph{k\"onnte} ein solches $T$ geben.
 
-\textbf{Beispiel konstruieren.} Idee: $T$ soll alles in einen $1$-dim Unterraum $W$ abbilden ($\to$ $\text{Im} = W$), und $W$ soll genau der Kern sein.
+$d = 1$ ist eine sch\"one ganze Zahl $\Rightarrow$ kein Widerspruch, so ein $T$ k\"onnte existieren. Jetzt m\"ussen wir es noch finden.
 
-Versuch: $T(a, b) = (b, 0)$.
+\textbf{Schritt 2: Beispiel basteln.} Wir brauchen ein $T$, das alles in eine $1$-dim Gerade abbildet, und der Kern soll genau diese Gerade sein. Einfacher Versuch: \emph{nimm die zweite Koordinate, schieb sie in die erste, lass den Rest weg.}
+
+Konkret: $T(a, b) = (b, 0)$.
+
+\textbf{Schritt 3: Pr\"ufen.}
 \begin{itemize}[leftmargin=*, nosep]
-    \item $\text{Ker}(T)$: $T(a, b) = (0, 0) \iff b = 0$. Also $\text{Ker}(T) = \{(a, 0) : a \in \mathbb{R}\} = \text{span}\{(1, 0)\}$.
-    \item $\text{Im}(T)$: $\{(b, 0) : b \in \mathbb{R}\} = \text{span}\{(1, 0)\}$.
-    \item $\text{Ker}(T) = \text{Im}(T)$ \checkmark
+    \item \textbf{Kern:} $T(a, b) = (0, 0)$ hei\ss t $b = 0$. Also $\text{Ker}(T) = \{(a, 0) : a \in \mathbb{R}\}$ -- die $x$-Achse.
+    \item \textbf{Bild:} Outputs haben die Form $(b, 0)$ f\"ur beliebiges $b$. Also $\text{Im}(T) = \{(b, 0) : b \in \mathbb{R}\}$ -- ebenfalls die $x$-Achse.
+    \item Kern $=$ Bild \checkmark
 \end{itemize}
 
 \[
@@ -484,36 +523,40 @@ Versuch: $T(a, b) = (b, 0)$.
 %% --- 38 (b) ---
 \subsubsection*{(b) $T \colon \mathbb{R}^3 \to \mathbb{R}^3$ mit $\text{Ker} = \text{Im}$}
 
-\textbf{Dimensionscheck.} Sei wieder $d = \dim \text{Ker} = \dim \text{Im}$. Dimensionssatz:
+Gleiche Strategie wie in (a): erst Dimensionen pr\"ufen.
+
+Wieder $d := \dim \text{Ker} = \dim \text{Im}$. Mit dem Dimensionssatz:
 \[
 d + d = 3 \;\Rightarrow\; 2d = 3 \;\Rightarrow\; d = \tfrac{3}{2}.
 \]
 
-$d$ ist die Dimension eines Vektorraums -- muss eine \textbf{ganze Zahl} sein. $\tfrac{3}{2}$ ist es nicht. \textbf{Widerspruch}.
+Aber $d$ ist eine Dimension -- die muss eine \textbf{ganze Zahl} sein. $1{,}5$ geht nicht. \textbf{Damit ist es unm\"oglich.}
 
 \[
 \fbox{\parbox{0.93\textwidth}{\centering
-\textbf{Nein}, ein solches $T$ existiert nicht. \\[2pt]
-Begr\"undung: aus $\text{Ker} = \text{Im}$ folgt $2 d = 3$, was f\"ur ganzzahliges $d$ unl\"osbar ist.
+\textbf{Nein}, kein solches $T$. \\[2pt]
+Begr\"undung: aus Kern $=$ Bild folgt $2d = 3$ -- das hat keine ganzzahlige L\"osung.
 }}
 \]
 
-\textbf{Bemerkung:} Das Argument zeigt allgemein: $\text{Ker}(T) = \text{Im}(T)$ ist nur f\"ur \emph{gerade} Dimensionen des Definitionsbereichs m\"oglich.
+\textbf{Faustregel:} Kern $=$ Bild geht nur in \emph{gerader} Dimension (denn $2d = \dim V$ verlangt, dass $\dim V$ durch $2$ teilbar ist).
 
 %% --- 38 (c) ---
 \subsubsection*{(c) $T \colon \mathbb{R}^6 \to \mathbb{R}^3$ mit $\dim \text{Ker}(T) = 2$}
 
-\textbf{Dimensionscheck.} Aus dem Dimensionssatz:
+\textbf{Schritt 1: Daraus die Bild-Dimension ausrechnen.} Mit dem Dimensionssatz:
 \[
-\dim \text{Ker}(T) + \dim \text{Im}(T) = \dim \mathbb{R}^6 = 6 \;\Rightarrow\; \dim \text{Im}(T) = 6 - 2 = 4.
+\dim \text{Ker} + \dim \text{Im} = \dim \mathbb{R}^6
+\;\Rightarrow\; 2 + \dim \text{Im} = 6
+\;\Rightarrow\; \dim \text{Im} = 4.
 \]
 
-Aber $\text{Im}(T) \subseteq \mathbb{R}^3$, also muss $\dim \text{Im}(T) \leq 3$ sein. Wir h\"atten aber $\dim \text{Im}(T) = 4 > 3$. \textbf{Widerspruch}.
+\textbf{Schritt 2: Pr\"ufen, ob das in den Zielraum passt.} Das Bild ist ein Unterraum von $\mathbb{R}^3$, also kann es h\"ochstens Dimension $3$ haben. Aber wir h\"atten $\dim \text{Im} = 4$. \textbf{Das passt nicht}: ein $4$-dimensionaler Raum kann sich nicht in $\mathbb{R}^3$ ``hineinquetschen''.
 
 \[
 \fbox{\parbox{0.93\textwidth}{\centering
-\textbf{Nein}, ein solches $T$ existiert nicht. \\[2pt]
-Begr\"undung: aus $\dim \text{Ker} = 2$ folgt $\dim \text{Im} = 4$, aber $\dim \text{Im} \leq \dim \mathbb{R}^3 = 3$.
+\textbf{Nein}, kein solches $T$. \\[2pt]
+Begr\"undung: aus $\dim \text{Ker} = 2$ folgt $\dim \text{Im} = 4$, aber das Bild muss in $\mathbb{R}^3$ passen, also $\dim \text{Im} \leq 3$.
 }}
 \]
 
