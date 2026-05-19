@@ -1,0 +1,229 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{geometry}\geometry{margin=2.5cm}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable}
+\usepackage{xcolor}
+
+\newtcolorbox{merkbox}[1][]{colback=blue!5, colframe=blue!40, fonttitle=\bfseries, title={Remember}, breakable, #1}
+\newtcolorbox{analogie}[1][]{colback=green!5, colframe=green!40, fonttitle=\bfseries, title={Analogy}, breakable, #1}
+\newtcolorbox{begriffe}[1][]{colback=yellow!10, colframe=yellow!60!black, fonttitle=\bfseries, title={What do the terms mean?}, breakable, #1}
+\newtcolorbox{wastun}[1][]{colback=orange!5, colframe=orange!60!black, fonttitle=\bfseries, title={What needs to be done?}, breakable, #1}
+
+\title{Explanation -- HW09: Linear Transformations, Kernel \& Image}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+%=============================================================================
+\part*{Part 1: Foundations -- What you need to know}
+
+%-----------------------------------------------------------------------------
+\section*{1. What is a linear transformation?}
+
+A \textbf{linear transformation} $T \colon V \to W$ is a function between vector spaces that satisfies two properties:
+\begin{enumerate}[nosep]
+    \item $T(u + v) = T(u) + T(v)$ (addition is respected).
+    \item $T(\lambda v) = \lambda \, T(v)$ (scalar multiplication is respected).
+\end{enumerate}
+
+\begin{analogie}
+A linear transformation is like a \textbf{structure-preserving translator}: if I first add two vectors and then translate, the result is the same as if I first translate each individually and then add. Example: ``multiply by 2'' is linear, ``$+5$'' is not (because $u + v + 5 \neq (u+5) + (v+5)$).
+\end{analogie}
+
+\begin{merkbox}[title={Representation matrix}]
+Every linear transformation $T \colon \mathbb{R}^n \to \mathbb{R}^m$ can be represented by an $m \times n$ matrix $A$: $T(v) = A v$.
+
+\medskip
+\textbf{Columns of $A$} = images of the standard basis vectors: $A = (T(e_1) \mid T(e_2) \mid \dots \mid T(e_n))$.
+\end{merkbox}
+
+%-----------------------------------------------------------------------------
+\section*{2. Kernel and Image}
+
+\begin{merkbox}[title={Definitions}]
+\begin{itemize}[nosep]
+    \item \textbf{Kernel}: $\text{Ker}(T) = \{v \in V : T(v) = 0\}$. ``What gets mapped to zero?''
+    \item \textbf{Image}: $\text{Im}(T) = \{T(v) : v \in V\}$. ``What can possibly come out?''
+\end{itemize}
+Both are subspaces -- $\text{Ker}(T) \subseteq V$ (domain), $\text{Im}(T) \subseteq W$ (codomain).
+\end{merkbox}
+
+\begin{analogie}
+$T$ is a ``machine''. The \textbf{kernel} is the set of ``wasted inputs'' (come out as $0$, so information is lost). The \textbf{image} is the set of all possible outputs.
+\end{analogie}
+
+%-----------------------------------------------------------------------------
+\section*{3. The Rank-Nullity Theorem}
+
+\begin{merkbox}[title={The most important theorem}]
+For every linear transformation $T \colon V \to W$ with finite domain dimension:
+\[
+\dim \text{Ker}(T) + \dim \text{Im}(T) = \dim V.
+\]
+\end{merkbox}
+
+\begin{analogie}
+If the machine has $n$ input knobs ($\dim V = n$), then: ``wasted knobs'' (kernel) + ``effective knobs'' (image) $= n$. Each knob is either one or the other -- nothing is counted twice.
+\end{analogie}
+
+%-----------------------------------------------------------------------------
+\section*{4. Injective, Surjective, Bijective -- connection to Kernel \& Image}
+
+\begin{merkbox}[title={Characterizations}]
+For $T \colon V \to W$:
+\[
+\textbf{injective} \iff \text{Ker}(T) = \{0\} \iff \dim \text{Ker}(T) = 0.
+\]
+\[
+\textbf{surjective} \iff \text{Im}(T) = W \iff \dim \text{Im}(T) = \dim W.
+\]
+\[
+\textbf{bijective} \iff \text{injective and surjective} \iff T \text{ invertible}.
+\]
+\end{merkbox}
+
+\begin{merkbox}[title={Important consequence}]
+For $T \colon V \to W$ with $\dim V = \dim W$ (square matrix case):
+\[
+\text{injective} \iff \text{surjective} \iff \text{bijective}.
+\]
+\textbf{But:} if $\dim V \neq \dim W$, then $T$ can \textbf{never be bijective}.
+\begin{itemize}[nosep]
+    \item $\dim V > \dim W$ (e.g.\ $\mathbb{R}^5 \to \mathbb{R}^3$): $T$ cannot be injective (kernel has at least dimension $\dim V - \dim W$).
+    \item $\dim V < \dim W$ (e.g.\ $\mathbb{R}^3 \to \mathbb{R}^5$): $T$ cannot be surjective.
+\end{itemize}
+\end{merkbox}
+
+%-----------------------------------------------------------------------------
+\section*{5. Strategy -- how do I solve such problems?}
+
+\begin{merkbox}[title={Recipe}]
+\begin{enumerate}[nosep]
+    \item \textbf{Set up representation matrix $A$} (columns = $T(e_i)$).
+    \item Apply \textbf{Gaussian elimination} to $A$.
+    \item \textbf{Kernel}: solve $Av = 0$. Free variables $\to$ basis vectors of the kernel.
+    \item \textbf{Image}: pivot columns of the row echelon form $\to$ corresponding \emph{original columns} form the basis. \\
+    \emph{Warning}: Do not take the columns of the row echelon form, but those of the original matrix!
+    \item \textbf{Check Rank-Nullity Theorem}: $\dim \text{Ker} + \dim \text{Im} \stackrel{?}{=} \dim V$.
+    \item \textbf{Inj./Surj./Bij.}: read off directly from the dimensions.
+\end{enumerate}
+\end{merkbox}
+
+\newpage
+
+%=============================================================================
+\part*{Part 2: Exercise 35}
+
+$T \colon \mathbb{R}^5 \to \mathbb{R}^3$. Already from the dimensions, $T$ can never be injective (and therefore never bijective/invertible). The only remaining questions are how ``bad'' the kernel is and whether $T$ is at least surjective.
+
+\medskip
+
+\textbf{Approach:} A single Gaussian elimination delivers the answers for (a), (b), (c). Pivots are at variables $a, b$ -- so $c, d, e$ are free variables in the kernel, and columns $1, 2$ of $A$ form the basis of the image.
+
+\medskip
+
+\textbf{Concretely:} $\dim \text{Ker} = 3$, $\dim \text{Im} = 2$. Rank-Nullity: $3 + 2 = 5 = \dim \mathbb{R}^5$ \checkmark. \emph{Not injective} (kernel $\neq \{0\}$), \emph{not surjective} (image $\neq \mathbb{R}^3$), \emph{not invertible}.
+
+\medskip
+
+\textbf{(c) -- the trick:} Solving $T(v) = (1, 2, 5)$ = finding a particular solution $v_0$, then adding the entire kernel. (Like ``general solution = particular solution + homogeneous solution'' for differential equations.)
+
+\newpage
+
+%=============================================================================
+\part*{Part 3: Exercise 36}
+
+$T \colon \mathbb{R}^3 \to \mathbb{R}^3$. Now square -- $T$ could be invertible.
+
+\subsection*{Strategy for (a)}
+
+Instead of setting up a matrix and computing the determinant: try to find $T^{-1}$ directly. Set $(x, y, z) = T(a, b, c)$ and solve for $a, b, c$. If this works uniquely $\Rightarrow$ $T$ is invertible; the solution \emph{is} then $T^{-1}$.
+
+\textbf{Why does this work?} ``Unique back-resolution'' means precisely: for every output there is exactly one input. That is bijective.
+
+\subsection*{(b) and (c) follow directly from (a)}
+
+\begin{merkbox}[title={Rule of thumb}]
+If we know that $T$ is invertible (hence bijective), then \textbf{no further computation} is needed:
+\[
+\text{Ker}(T) = \{0\}, \qquad \text{Im}(T) = W = \text{the entire codomain}.
+\]
+And $T$ is automatically injective, surjective, bijective.
+\end{merkbox}
+
+\newpage
+
+%=============================================================================
+\part*{Part 4: Exercise 37}
+
+$T \colon \mathbb{R}^{2\times 2} \to \mathbb{R}^{2\times 2}$, defined as ``multiply on the left by $M$''. Note: $\dim \mathbb{R}^{2\times 2} = 4$.
+
+\subsection*{Key observation}
+
+The matrix $M = \begin{pmatrix} 1 & 2 \\ 4 & 8 \end{pmatrix}$ is \textbf{singular} (rank $1$: row 2 $= 4 \cdot$ row 1, column 2 $= 2 \cdot$ column 1).
+
+\begin{merkbox}[title={Consequence}]
+For $T(X) = M X$ with rank-$1$ matrix $M$:
+\begin{itemize}[nosep]
+    \item The product $M X$ has, in each column, a multiple of column 1 of $M$ (i.e.\ $(1, 4)^\top$).
+    \item Therefore $\dim \text{Im}(T) = 2$ (one dimension per output column).
+\end{itemize}
+\end{merkbox}
+
+\subsection*{Direct approach}
+
+Compute $T(X)$ with general $X = \begin{pmatrix} a & b \\ c & d \end{pmatrix}$, then read off the conditions for kernel and image. We get:
+\[
+T(X) = \begin{pmatrix} a + 2c & b + 2d \\ 4(a + 2c) & 4(b + 2d) \end{pmatrix}.
+\]
+
+From this directly:
+\begin{itemize}[nosep]
+    \item Kernel: $a + 2c = 0$ and $b + 2d = 0$. Two free variables ($c, d$). $\dim \text{Ker} = 2$.
+    \item Image: every matrix of the form ``first row arbitrary, second row $= 4 \cdot$ first''. $\dim \text{Im} = 2$.
+\end{itemize}
+
+Rank-Nullity Theorem: $2 + 2 = 4$ \checkmark.
+
+\newpage
+
+%=============================================================================
+\part*{Part 5: Exercise 38 -- Existence Questions}
+
+\begin{merkbox}[title={Main tool for existence problems}]
+\textbf{Step 1: Dimension check.} Compute $\dim \text{Ker}$ and $\dim \text{Im}$ using the Rank-Nullity Theorem. Check whether the values
+\begin{enumerate}[nosep]
+    \item are \emph{integers},
+    \item are $\geq 0$,
+    \item satisfy $\dim \text{Im} \leq \dim W$ (codomain).
+\end{enumerate}
+\textbf{If one check fails $\to$ no such $T$ exists.} \\
+\textbf{If all checks pass $\to$ construct a concrete example.}
+\end{merkbox}
+
+\subsection*{(a) $\mathbb{R}^2 \to \mathbb{R}^2$, $\text{Ker} = \text{Im}$}
+
+$\text{Ker} = \text{Im}$ forces equal dimensions. Rank-Nullity: $2 \dim \text{Ker} = 2 \Rightarrow \dim \text{Ker} = 1$. Integer, all good $\Rightarrow$ exists.
+
+Example: $T(a, b) = (b, 0)$ ``forgets $a$, pushes $b$ into the first component''. Kernel $=$ Image $=$ $x$-axis.
+
+\subsection*{(b) $\mathbb{R}^3 \to \mathbb{R}^3$, $\text{Ker} = \text{Im}$}
+
+$2 \dim \text{Ker} = 3 \Rightarrow \dim \text{Ker} = \tfrac{3}{2}$. \textbf{Not an integer} $\Rightarrow$ does not exist.
+
+\subsection*{(c) $\mathbb{R}^6 \to \mathbb{R}^3$, $\dim \text{Ker} = 2$}
+
+Rank-Nullity: $\dim \text{Im} = 6 - 2 = 4$. But $\text{Im} \subseteq \mathbb{R}^3$, so $\dim \text{Im} \leq 3$. \textbf{Contradiction} $\Rightarrow$ does not exist.
+
+\begin{merkbox}[title={Recognize the pattern}]
+Such problems are mostly pure dimension calculations -- the linear transformations are only ``wrapping''. Write down the three numbers $\dim V$, $\dim W$, $\dim \text{Ker}$, compute $\dim \text{Im} = \dim V - \dim \text{Ker}$, and check whether it fits into the codomain.
+\end{merkbox}
+
+\end{document}

@@ -1,0 +1,448 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{geometry}\geometry{margin=2.5cm}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usepackage{pgfplots}\pgfplotsset{compat=1.18}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable}
+\usepackage{xcolor}
+\newtcolorbox{begriffe}[1][]{colback=yellow!10, colframe=yellow!60!black, fonttitle=\bfseries, title={What do the terms mean?}, breakable, #1}
+\newtcolorbox{wastun}[1][]{colback=orange!5, colframe=orange!60!black, fonttitle=\bfseries, title={What needs to be done?}, breakable, #1}
+\newcommand{\piv}[1]{{\color{red}\boxed{#1}}}
+
+\title{Exercise Sheet 9 -- Solutions \\ \large Linear Algebra}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+%% ============================================================
+\subsection*{Exercise 35}
+%% ============================================================
+
+\textbf{Problem.} Linear transformation $T \colon \mathbb{R}^5 \to \mathbb{R}^3$,
+\[
+T(a, b, c, d, e) = (b + c + 4d + 2e,\; a + c + 3d + e,\; 4a - 3b + c - 2e).
+\]
+\begin{itemize}[nosep]
+\item[(a)] Basis and dimension of $\text{Ker}(T)$.
+\item[(b)] Basis and dimension of $\text{Im}(T)$.
+\item[(c)] General form of $v \in \mathbb{R}^5$ with $T(v) = (1, 2, 5)$.
+\item[(d)] Is $T$ injective, surjective, bijective? (Should follow \emph{from (a),(b)} without new computation.)
+\item[(e)] Is $T$ invertible? If yes: explicit formula for $T^{-1}$.
+\end{itemize}
+
+\begin{begriffe}
+\begin{itemize}[leftmargin=*, nosep]
+    \item \textbf{Linear transformation} $T \colon V \to W$: function that respects addition and scalar multiplication.
+    \item \textbf{Kernel} $\text{Ker}(T) = \{v \in V : T(v) = 0\}$. All vectors that are mapped to the zero vector. It is a subspace of $V$.
+    \item \textbf{Image} $\text{Im}(T) = \{T(v) : v \in V\} = $ all reachable values. Subspace of $W$.
+    \item \textbf{Representation matrix} $A$ of $T$: columns are the images of the standard basis vectors $T(e_1), T(e_2), \dots$. Then $T(v) = Av$.
+    \item \textbf{Injective} $\iff \text{Ker}(T) = \{0\} \iff \dim \text{Ker}(T) = 0$.
+    \item \textbf{Surjective} $\iff \text{Im}(T) = W \iff \dim \text{Im}(T) = \dim W$.
+    \item \textbf{Bijective} $\iff$ injective \emph{and} surjective $\iff T$ invertible.
+    \item \textbf{Rank-Nullity Theorem}: $\dim \text{Ker}(T) + \dim \text{Im}(T) = \dim V$ (domain).
+\end{itemize}
+\end{begriffe}
+
+\begin{wastun}
+\begin{enumerate}[leftmargin=*, nosep]
+    \item Set up representation matrix $A$ (columns $= T(e_i)$).
+    \item Do Gaussian elimination once -- with this we can read off (a), (b), (c) directly.
+    \item \textbf{(a)} Kernel: solve homogeneous system $Av = 0$. Free variables $\to$ basis vectors.
+    \item \textbf{(b)} Image: mark pivot columns in the row echelon form $\to$ corresponding \emph{original columns} of $A$ form the basis.
+    \item \textbf{(c)} Particular solution of $Av = (1,2,5)$ + general kernel solution.
+    \item \textbf{(d)} Conclude directly from $\dim \text{Ker}$ and $\dim \text{Im}$.
+    \item \textbf{(e)} Bijectivity $\iff$ invertible.
+\end{enumerate}
+\end{wastun}
+
+%% --- 35 Representation matrix ---
+\subsubsection*{Step 1: Set up representation matrix}
+
+Images of the standard basis vectors:
+\begin{align*}
+T(e_1) = T(1,0,0,0,0) &= (0,\; 1,\; 4) \\
+T(e_2) = T(0,1,0,0,0) &= (1,\; 0,\; -3) \\
+T(e_3) = T(0,0,1,0,0) &= (1,\; 1,\; 1) \\
+T(e_4) = T(0,0,0,1,0) &= (4,\; 3,\; 0) \\
+T(e_5) = T(0,0,0,0,1) &= (2,\; 1,\; -2)
+\end{align*}
+
+These five vectors are the \textbf{columns} of $A$:
+\[
+A = \begin{pmatrix} 0 & 1 & 1 & 4 & 2 \\ 1 & 0 & 1 & 3 & 1 \\ 4 & -3 & 1 & 0 & -2 \end{pmatrix}.
+\]
+
+%% --- 35 Stufenform ---
+\subsubsection*{Step 2: Row echelon form of $A$ (once for all subproblems)}
+
+\[
+\left(\begin{array}{ccccc}
+0 & 1 & 1 & 4 & 2 \\
+1 & 0 & 1 & 3 & 1 \\
+4 & -3 & 1 & 0 & -2
+\end{array}\right)
+\xrightarrow{R_1 \leftrightarrow R_2}
+\left(\begin{array}{ccccc}
+1 & 0 & 1 & 3 & 1 \\
+0 & 1 & 1 & 4 & 2 \\
+4 & -3 & 1 & 0 & -2
+\end{array}\right)
+\xrightarrow{R_3 \to R_3 - 4R_1}
+\left(\begin{array}{ccccc}
+1 & 0 & 1 & 3 & 1 \\
+0 & 1 & 1 & 4 & 2 \\
+0 & -3 & -3 & -12 & -6
+\end{array}\right)
+\]
+\[
+\xrightarrow{R_3 \to R_3 + 3R_2}
+\left(\begin{array}{ccccc}
+\piv{1} & 0 & 1 & 3 & 1 \\
+0 & \piv{1} & 1 & 4 & 2 \\
+0 & 0 & 0 & 0 & 0
+\end{array}\right)
+\]
+
+Pivots in \textbf{column 1 and 2} (corresponding to variables $a, b$). Free variables: $c, d, e$.
+
+%% --- 35 (a) ---
+\subsubsection*{(a) Kernel of $T$}
+
+Solve $Av = 0$. Row echelon form $\Rightarrow$ equations:
+\begin{align*}
+\text{Row 1:} &\quad a + c + 3d + e = 0 \;\Rightarrow\; a = -c - 3d - e \\
+\text{Row 2:} &\quad b + c + 4d + 2e = 0 \;\Rightarrow\; b = -c - 4d - 2e
+\end{align*}
+
+Rename free variables: $c = s$, $d = t$, $e = u$.
+
+\[
+(a, b, c, d, e) = (-s - 3t - u,\; -s - 4t - 2u,\; s,\; t,\; u).
+\]
+
+Split according to $s, t, u$:
+\[
+\begin{pmatrix} a \\ b \\ c \\ d \\ e \end{pmatrix}
+= s \begin{pmatrix} -1 \\ -1 \\ 1 \\ 0 \\ 0 \end{pmatrix}
++ t \begin{pmatrix} -3 \\ -4 \\ 0 \\ 1 \\ 0 \end{pmatrix}
++ u \begin{pmatrix} -1 \\ -2 \\ 0 \\ 0 \\ 1 \end{pmatrix}.
+\]
+
+\[
+\fbox{\parbox{0.93\textwidth}{\centering
+Basis of $\text{Ker}(T)$: $\{(-1,-1,1,0,0),\;(-3,-4,0,1,0),\;(-1,-2,0,0,1)\}$. \\[2pt]
+$\dim \text{Ker}(T) = 3.$
+}}
+\]
+
+%% --- 35 (b) ---
+\subsubsection*{(b) Image of $T$}
+
+$\text{Im}(T) = \text{span}\{T(e_1), T(e_2), T(e_3), T(e_4), T(e_5)\}$, i.e.\ the column space of $A$.
+
+\textbf{Mark pivot columns of the row echelon form $\to$ corresponding original columns form basis.} Pivots in columns $1, 2 \Rightarrow$ basis columns are the \emph{first two} columns of the \emph{original matrix} $A$:
+\[
+\text{Column 1 of } A = T(e_1) = (0, 1, 4),\qquad
+\text{Column 2 of } A = T(e_2) = (1, 0, -3).
+\]
+
+\[
+\fbox{\parbox{0.93\textwidth}{\centering
+Basis of $\text{Im}(T)$: $\{(0, 1, 4),\;(1, 0, -3)\}$. \\[2pt]
+$\dim \text{Im}(T) = 2.$
+}}
+\]
+
+\textbf{Check Rank-Nullity Theorem:} $3 + 2 = 5 = \dim \mathbb{R}^5$. \checkmark
+
+%% --- 35 (c) ---
+\subsubsection*{(c) General $v$ with $T(v) = (1, 2, 5)$}
+
+Augmented matrix with right-hand side $(1, 2, 5)^\top$, same row operations as in Step 2:
+\[
+\left(\begin{array}{ccccc|c}
+0 & 1 & 1 & 4 & 2 & 1 \\
+1 & 0 & 1 & 3 & 1 & 2 \\
+4 & -3 & 1 & 0 & -2 & 5
+\end{array}\right)
+\;\longrightarrow\;
+\left(\begin{array}{ccccc|c}
+\piv{1} & 0 & 1 & 3 & 1 & 2 \\
+0 & \piv{1} & 1 & 4 & 2 & 1 \\
+0 & 0 & 0 & 0 & 0 & 0
+\end{array}\right)
+\]
+
+No contradiction row $\Rightarrow$ consistent.
+
+\textbf{Particular solution} (set $c = d = e = 0$): $a = 2$, $b = 1$.
+\[
+v_0 = (2, 1, 0, 0, 0).
+\]
+\textbf{Verification:} $T(2,1,0,0,0) = (1 + 0 + 0 + 0,\; 2 + 0 + 0 + 0,\; 8 - 3 + 0 - 0) = (1, 2, 5).$ \checkmark
+
+\textbf{General solution} = particular solution + kernel:
+\[
+\fbox{\parbox{0.93\textwidth}{\centering
+$v = (2, 1, 0, 0, 0)
++ s(-1,-1,1,0,0)
++ t(-3,-4,0,1,0)
++ u(-1,-2,0,0,1)$, \; $s, t, u \in \mathbb{R}.$
+}}
+\]
+
+%% --- 35 (d) ---
+\subsubsection*{(d) Injective / Surjective / Bijective}
+
+\textbf{From (a):} $\dim \text{Ker}(T) = 3 \neq 0$ $\Rightarrow$ $T$ is \textbf{not injective}.
+
+\textbf{From (b):} $\dim \text{Im}(T) = 2 \neq 3 = \dim \mathbb{R}^3$ $\Rightarrow$ $T$ is \textbf{not surjective}.
+
+Since bijective $=$ injective \emph{and} surjective, $T$ is also \textbf{not bijective}.
+
+%% --- 35 (e) ---
+\subsubsection*{(e) Invertible?}
+
+$T$ is invertible $\iff$ $T$ is bijective. From (d): not bijective $\Rightarrow$ \textbf{$T$ is not invertible}.
+
+(Alternative justification: for $T \colon \mathbb{R}^5 \to \mathbb{R}^3$ the domain and codomain cannot have the same dimension, so $T$ can never be bijective.)
+
+\bigskip
+\hrule
+\bigskip
+
+%% ============================================================
+\subsection*{Exercise 36}
+%% ============================================================
+
+\textbf{Problem.} $T \colon \mathbb{R}^3 \to \mathbb{R}^3$ with $T(a, b, c) = (3b + c,\; 2a + b,\; a)$.
+\begin{itemize}[nosep]
+\item[(a)] Is $T$ invertible? If yes: explicit formula for $T^{-1}$.
+\item[(b)] From (a): determine kernel and image (simplest descriptions).
+\item[(c)] From (a): injective / surjective / bijective?
+\end{itemize}
+
+\begin{begriffe}
+\begin{itemize}[leftmargin=*, nosep]
+    \item \textbf{Inverse}: $T^{-1}$ ``undoes'' $T$. For $(x, y, z) = T(a, b, c)$, $T^{-1}$ recovers the original vector $(a, b, c)$ from $(x, y, z)$.
+    \item \textbf{Search strategy} for $T^{-1}$: solve the equations $T(a, b, c) = (x, y, z)$ for $a, b, c$.
+\end{itemize}
+\end{begriffe}
+
+%% --- 36 (a) ---
+\subsubsection*{(a) Invertibility and $T^{-1}$}
+
+\textbf{Step 1: Set up equations.} $(x, y, z) = T(a, b, c)$ means:
+\begin{align*}
+3b + c &= x \\
+2a + b &= y \\
+a &= z
+\end{align*}
+
+\textbf{Step 2: Solve from bottom to top.}
+
+\textbf{(a) $a$ from equation 3:} $a = z$.
+
+\textbf{(b) $b$ from equation 2:} $b = y - 2a = y - 2z$.
+
+\textbf{(c) $c$ from equation 1:} $c = x - 3b = x - 3(y - 2z) = x - 3y + 6z$.
+
+\textbf{Unique solution} for every $(x, y, z) \Rightarrow$ $T$ is invertible.
+
+\[
+\fbox{\parbox{0.93\textwidth}{\centering
+$T^{-1}(x, y, z) = (z,\; y - 2z,\; x - 3y + 6z)$.
+}}
+\]
+
+\textbf{Verification:} $T(T^{-1}(x,y,z)) = T(z, y-2z, x-3y+6z)$:
+\begin{itemize}[nosep, leftmargin=*]
+\item 1st comp.: $3(y - 2z) + (x - 3y + 6z) = 3y - 6z + x - 3y + 6z = x$ \checkmark
+\item 2nd comp.: $2z + (y - 2z) = y$ \checkmark
+\item 3rd comp.: $z$ \checkmark
+\end{itemize}
+
+%% --- 36 (b) ---
+\subsubsection*{(b) Kernel and Image}
+
+$T$ is invertible $\Rightarrow$ $T$ is bijective $\Rightarrow$:
+\[
+\fbox{\parbox{0.93\textwidth}{\centering
+$\text{Ker}(T) = \{(0, 0, 0)\}$ \quad (only the zero vector) \\[2pt]
+$\text{Im}(T) = \mathbb{R}^3$ \quad (the entire codomain)
+}}
+\]
+
+%% --- 36 (c) ---
+\subsubsection*{(c) Injective / Surjective / Bijective}
+
+$T$ invertible $\iff$ $T$ bijective $\iff$ $T$ injective \emph{and} surjective.
+
+\[
+\fbox{\parbox{0.93\textwidth}{\centering
+$T$ is \textbf{injective, surjective, bijective}.
+}}
+\]
+
+\bigskip
+\hrule
+\bigskip
+
+%% ============================================================
+\subsection*{Exercise 37}
+%% ============================================================
+
+\textbf{Problem.} $T \colon \mathbb{R}^{2 \times 2} \to \mathbb{R}^{2 \times 2}$ with $T(X) = M \cdot X$, where $M = \begin{pmatrix} 1 & 2 \\ 4 & 8 \end{pmatrix}$.
+\begin{itemize}[nosep]
+\item[(a)] Basis and dimension of $\text{Ker}(T)$.
+\item[(b)] Basis and dimension of $\text{Im}(T)$.
+\end{itemize}
+
+\begin{begriffe}
+\begin{itemize}[leftmargin=*, nosep]
+    \item The vector space here is $\mathbb{R}^{2 \times 2}$ (all $2\times 2$ matrices). $\dim \mathbb{R}^{2\times 2} = 4$.
+    \item \textbf{Observation:} In $M = \begin{pmatrix} 1 & 2 \\ 4 & 8 \end{pmatrix}$, row 2 $= 4 \cdot$ row 1, and column 2 $= 2 \cdot$ column 1. So $M$ has rank $1$ and is not invertible.
+\end{itemize}
+\end{begriffe}
+
+%% --- 37 Compute T(X) ---
+\subsubsection*{Step 1: Compute $T(X)$ with a general $X$}
+
+Let $X = \begin{pmatrix} a & b \\ c & d \end{pmatrix}$. Then:
+\[
+T(X) = \begin{pmatrix} 1 & 2 \\ 4 & 8 \end{pmatrix} \begin{pmatrix} a & b \\ c & d \end{pmatrix}
+= \begin{pmatrix} a + 2c & b + 2d \\ 4a + 8c & 4b + 8d \end{pmatrix}
+= \begin{pmatrix} a + 2c & b + 2d \\ 4(a + 2c) & 4(b + 2d) \end{pmatrix}.
+\]
+
+\textbf{Observation:} Row 2 of $T(X)$ is always $4$ times row 1.
+
+%% --- 37 (a) ---
+\subsubsection*{(a) Kernel of $T$}
+
+$T(X) = 0 \iff a + 2c = 0$ \emph{and} $b + 2d = 0$ (the row-2 equations are automatically satisfied).
+
+From the two equations: $a = -2c$, $b = -2d$. Free variables: $c, d$.
+
+\[
+X = \begin{pmatrix} -2c & -2d \\ c & d \end{pmatrix}
+= c \underbrace{\begin{pmatrix} -2 & 0 \\ 1 & 0 \end{pmatrix}}_{B_1}
++ d \underbrace{\begin{pmatrix} 0 & -2 \\ 0 & 1 \end{pmatrix}}_{B_2}.
+\]
+
+\[
+\fbox{\parbox{0.93\textwidth}{\centering
+Basis of $\text{Ker}(T)$: $\left\{\begin{pmatrix} -2 & 0 \\ 1 & 0 \end{pmatrix},\; \begin{pmatrix} 0 & -2 \\ 0 & 1 \end{pmatrix}\right\}$. \quad $\dim \text{Ker}(T) = 2$.
+}}
+\]
+
+%% --- 37 (b) ---
+\subsubsection*{(b) Image of $T$}
+
+Every matrix in $\text{Im}(T)$ has the form $\begin{pmatrix} \alpha & \beta \\ 4\alpha & 4\beta \end{pmatrix}$ with $\alpha = a + 2c$, $\beta = b + 2d$. Since $a, c$ (resp.\ $b, d$) are arbitrary, $\alpha$ (resp.\ $\beta$) can take any real value.
+
+\[
+\begin{pmatrix} \alpha & \beta \\ 4\alpha & 4\beta \end{pmatrix}
+= \alpha \underbrace{\begin{pmatrix} 1 & 0 \\ 4 & 0 \end{pmatrix}}_{C_1}
++ \beta \underbrace{\begin{pmatrix} 0 & 1 \\ 0 & 4 \end{pmatrix}}_{C_2}.
+\]
+
+\[
+\fbox{\parbox{0.93\textwidth}{\centering
+Basis of $\text{Im}(T)$: $\left\{\begin{pmatrix} 1 & 0 \\ 4 & 0 \end{pmatrix},\; \begin{pmatrix} 0 & 1 \\ 0 & 4 \end{pmatrix}\right\}$. \quad $\dim \text{Im}(T) = 2$.
+}}
+\]
+
+\textbf{Check Rank-Nullity Theorem:} $2 + 2 = 4 = \dim \mathbb{R}^{2\times 2}$. \checkmark
+
+\bigskip
+\hrule
+\bigskip
+
+%% ============================================================
+\subsection*{Exercise 38}
+%% ============================================================
+
+\textbf{Problem.} Does there exist a linear transformation with the given properties? If yes: example. If no: proof.
+\begin{itemize}[nosep]
+\item[(a)] $T \colon \mathbb{R}^2 \to \mathbb{R}^2$ with $\text{Ker}(T) = \text{Im}(T)$.
+\item[(b)] $T \colon \mathbb{R}^3 \to \mathbb{R}^3$ with $\text{Ker}(T) = \text{Im}(T)$.
+\item[(c)] $T \colon \mathbb{R}^6 \to \mathbb{R}^3$ with $\dim \text{Ker}(T) = 2$.
+\end{itemize}
+
+\begin{begriffe}
+\begin{itemize}[leftmargin=*, nosep]
+    \item \textbf{Key formula}: Rank-Nullity Theorem $\dim \text{Ker}(T) + \dim \text{Im}(T) = \dim V$ (domain).
+    \item \textbf{Trick}: If $\text{Ker}(T) = \text{Im}(T)$ is required, then both spaces must in particular have \textbf{the same dimension}.
+    \item \textbf{Trick}: $\dim \text{Im}(T)$ is always $\leq \dim W$ (codomain).
+\end{itemize}
+\end{begriffe}
+
+%% --- 38 (a) ---
+\subsubsection*{(a) $T \colon \mathbb{R}^2 \to \mathbb{R}^2$ with $\text{Ker} = \text{Im}$}
+
+\textbf{Dimension check.} Let $d = \dim \text{Ker} = \dim \text{Im}$ (equal because the spaces are supposed to be equal). Rank-Nullity Theorem:
+\[
+d + d = 2 \;\Rightarrow\; d = 1.
+\]
+Both spaces are $1$-dimensional. This is consistent -- such a $T$ \emph{could} exist.
+
+\textbf{Construct example.} Idea: $T$ should map everything to a $1$-dim subspace $W$ ($\to$ $\text{Im} = W$), and $W$ should be exactly the kernel.
+
+Attempt: $T(a, b) = (b, 0)$.
+\begin{itemize}[leftmargin=*, nosep]
+    \item $\text{Ker}(T)$: $T(a, b) = (0, 0) \iff b = 0$. So $\text{Ker}(T) = \{(a, 0) : a \in \mathbb{R}\} = \text{span}\{(1, 0)\}$.
+    \item $\text{Im}(T)$: $\{(b, 0) : b \in \mathbb{R}\} = \text{span}\{(1, 0)\}$.
+    \item $\text{Ker}(T) = \text{Im}(T)$ \checkmark
+\end{itemize}
+
+\[
+\fbox{\parbox{0.93\textwidth}{\centering
+\textbf{Yes}, e.g.\ $T(a, b) = (b, 0)$ satisfies $\text{Ker}(T) = \text{Im}(T) = \text{span}\{(1, 0)\}$.
+}}
+\]
+
+%% --- 38 (b) ---
+\subsubsection*{(b) $T \colon \mathbb{R}^3 \to \mathbb{R}^3$ with $\text{Ker} = \text{Im}$}
+
+\textbf{Dimension check.} Again let $d = \dim \text{Ker} = \dim \text{Im}$. Rank-Nullity Theorem:
+\[
+d + d = 3 \;\Rightarrow\; 2d = 3 \;\Rightarrow\; d = \tfrac{3}{2}.
+\]
+
+$d$ is the dimension of a vector space -- must be an \textbf{integer}. $\tfrac{3}{2}$ is not. \textbf{Contradiction}.
+
+\[
+\fbox{\parbox{0.93\textwidth}{\centering
+\textbf{No}, no such $T$ exists. \\[2pt]
+Reason: from $\text{Ker} = \text{Im}$ follows $2d = 3$, which is unsolvable for integer $d$.
+}}
+\]
+
+\textbf{Remark:} The argument shows in general: $\text{Ker}(T) = \text{Im}(T)$ is only possible for \emph{even} dimensions of the domain.
+
+%% --- 38 (c) ---
+\subsubsection*{(c) $T \colon \mathbb{R}^6 \to \mathbb{R}^3$ with $\dim \text{Ker}(T) = 2$}
+
+\textbf{Dimension check.} From the Rank-Nullity Theorem:
+\[
+\dim \text{Ker}(T) + \dim \text{Im}(T) = \dim \mathbb{R}^6 = 6 \;\Rightarrow\; \dim \text{Im}(T) = 6 - 2 = 4.
+\]
+
+But $\text{Im}(T) \subseteq \mathbb{R}^3$, so $\dim \text{Im}(T) \leq 3$. However, we'd have $\dim \text{Im}(T) = 4 > 3$. \textbf{Contradiction}.
+
+\[
+\fbox{\parbox{0.93\textwidth}{\centering
+\textbf{No}, no such $T$ exists. \\[2pt]
+Reason: from $\dim \text{Ker} = 2$ follows $\dim \text{Im} = 4$, but $\dim \text{Im} \leq \dim \mathbb{R}^3 = 3$.
+}}
+\]
+
+\end{document}
