@@ -243,25 +243,21 @@ $s, t, u \in \mathbb{R}.$
 %% --- 35 (d) ---
 \subsubsection*{(d) Injektiv / Surjektiv / Bijektiv}
 
-\textbf{Strategie:} Die Aufgabenstellung verlangt, ohne neue Rechnung allein aus (a) und (b) zu schlie\ss en. Wir verwenden die Charakterisierungen aus dem Begriffsblock.
+Die Aufgabe sagt: ohne neu zu rechnen, nur aus (a) und (b) ableiten. Daf\"ur brauchen wir drei einfache Regeln:
 
-\medskip
+\begin{itemize}[leftmargin=*, nosep]
+    \item \emph{Injektiv} hei\ss t: nur $v = 0$ wird auf $0$ abgebildet. Also: $\dim \text{Ker}(T) = 0$.
+    \item \emph{Surjektiv} hei\ss t: jeder Vektor im Zielraum kommt vor. Also: $\dim \text{Im}(T) = \dim W$.
+    \item \emph{Bijektiv} hei\ss t: injektiv \emph{und} surjektiv.
+\end{itemize}
 
-\textbf{Injektiv?} ``Injektiv'' bedeutet anschaulich: \emph{verschiedene Inputs liefern verschiedene Outputs}. Das ist genau dann der Fall, wenn $\text{Ker}(T) = \{0\}$, also nur der Nullvektor auf $0$ abgebildet wird.
+Jetzt einfach die Zahlen einsetzen:
 
-Aus (a): $\dim \text{Ker}(T) = 3 \neq 0 \;\Rightarrow\; \text{Ker}(T)$ enth\"alt von $0$ verschiedene Vektoren \\
-$\Rightarrow\;$ $T$ ist \textbf{nicht injektiv}.
+\textbf{Injektiv?} Aus (a): $\dim \text{Ker}(T) = 3$. Das ist nicht $0$ $\Rightarrow$ \textbf{nicht injektiv}.
 
-\medskip
+\textbf{Surjektiv?} Aus (b): $\dim \text{Im}(T) = 2$. Der Zielraum hat $\dim \mathbb{R}^3 = 3$. Das ist nicht gleich $\Rightarrow$ \textbf{nicht surjektiv}.
 
-\textbf{Surjektiv?} ``Surjektiv'' bedeutet anschaulich: \emph{jeder Vektor im Zielraum wird getroffen}. Das ist genau dann der Fall, wenn $\text{Im}(T)$ den ganzen Zielraum ausf\"ullt, also $\dim \text{Im}(T) = \dim W$.
-
-Aus (b): $\dim \text{Im}(T) = 2$, aber $\dim \mathbb{R}^3 = 3 \;\Rightarrow\; \text{Im}(T)$ ist ein echter Unterraum von $\mathbb{R}^3$ \\
-$\Rightarrow\;$ $T$ ist \textbf{nicht surjektiv}.
-
-\medskip
-
-\textbf{Bijektiv?} ``Bijektiv'' bedeutet \emph{injektiv und surjektiv zugleich}. Da bereits beides einzeln scheitert, ist $T$ erst recht \textbf{nicht bijektiv}.
+\textbf{Bijektiv?} Beides muss gelten -- schon das eine scheitert $\Rightarrow$ \textbf{nicht bijektiv}.
 
 \[
 \fbox{\parbox{0.93\textwidth}{\centering
@@ -272,23 +268,17 @@ $T$ ist \textbf{weder injektiv, noch surjektiv, noch bijektiv}.
 %% --- 35 (e) ---
 \subsubsection*{(e) Invertierbar?}
 
-\textbf{Definition.} $T$ hei\ss t \emph{invertierbar}, wenn es eine lineare Abbildung $T^{-1}$ gibt, die $T$ r\"uckg\"angig macht: $T^{-1}(T(v)) = v$ f\"ur jedes $v$.
+\textbf{Was hei\ss t ``invertierbar''?} $T$ ist invertierbar, wenn es eine Umkehrabbildung $T^{-1}$ gibt, also wenn man $T$ ``r\"uckw\"arts laufen'' lassen kann.
 
-\textbf{Charakterisierung:} $T$ ist invertierbar $\iff$ $T$ ist bijektiv.
+\textbf{Regel:} invertierbar $=$ bijektiv. Beides ist dasselbe.
 
-\medskip
-
-\textbf{Anwendung auf unseren Fall.} Aus (d): $T$ ist nicht bijektiv $\Rightarrow$ $T$ ist \textbf{nicht invertierbar}.
+Aus (d) wissen wir: $T$ ist nicht bijektiv $\Rightarrow$ $T$ ist \textbf{nicht invertierbar}.
 
 \medskip
 
-\textbf{Anschaulich: warum?} Es gibt zwei intuitive Gr\"unde:
-\begin{itemize}[leftmargin=*, nosep]
-    \item \emph{Informationsverlust (aus Nicht-Injektivit\"at):} Mehrere verschiedene $v$ werden auf denselben Output abgebildet. Aus dem Output l\"asst sich nicht eindeutig rekonstruieren, welches $v$ es war.
-    \item \emph{Nicht-erreichbare Outputs (aus Nicht-Surjektivit\"at):} Es gibt Vektoren in $\mathbb{R}^3$, die gar nicht im Bild liegen. F\"ur diese w\"are $T^{-1}$ nicht definiert.
-\end{itemize}
+\textbf{Warum geht das hier prinzipiell nicht?} Eine Umkehrabbildung m\"usste aus $\mathbb{R}^3$ zur\"uck nach $\mathbb{R}^5$ gehen -- aber wir haben nur 3 Zahlen Information und sollen daraus 5 Zahlen rekonstruieren. Das kann nicht eindeutig funktionieren.
 
-\textbf{Dimensionsargument (alternativer Beweis).} F\"ur jede invertierbare Abbildung $T \colon V \to W$ muss $\dim V = \dim W$ gelten. Hier ist $\dim \mathbb{R}^5 = 5 \neq 3 = \dim \mathbb{R}^3$ -- $T$ kann allein deshalb niemals invertierbar sein.
+\textbf{Kurz gesagt:} $\dim \mathbb{R}^5 = 5 \neq 3 = \dim \mathbb{R}^3$. Schon allein deshalb kann $T$ nicht invertierbar sein -- die Dimensionen passen nicht.
 
 \[
 \fbox{\parbox{0.93\textwidth}{\centering
