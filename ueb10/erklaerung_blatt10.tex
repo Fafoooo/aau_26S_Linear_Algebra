@@ -1,0 +1,138 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{geometry}\geometry{margin=2.5cm}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable}
+\usepackage{xcolor}
+
+\newtcolorbox{merkbox}[1][]{colback=blue!5, colframe=blue!40, fonttitle=\bfseries, title={Merke}, breakable, #1}
+\newtcolorbox{analogie}[1][]{colback=green!5, colframe=green!40, fonttitle=\bfseries, title={Analogie}, breakable, #1}
+\newtcolorbox{begriffe}[1][]{colback=yellow!10, colframe=yellow!60!black, fonttitle=\bfseries, title={Was bedeuten die Begriffe?}, breakable, #1}
+
+\title{Erkl\"arung -- HW10: Darstellungsmatrix \& Basiswechsel}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+%=============================================================================
+\part*{Teil 1: Grundlagen -- einfach erkl\"art}
+
+%-----------------------------------------------------------------------------
+\section*{1. Koordinatenvektor: ``Wie baue ich $v$ aus den Basisvektoren?''}
+
+Wenn ich eine Basis $B = \{b_1, b_2, \dots\}$ habe, dann l\"asst sich jeder Vektor $v$ als Mischung der Basisvektoren schreiben:
+\[
+v = \alpha b_1 + \beta b_2 + \dots
+\]
+Die Zahlen $\alpha, \beta, \dots$ sind die \textbf{Koordinaten von $v$ bez\"uglich $B$}. Man schreibt $[v]_B = (\alpha, \beta, \dots)$.
+
+\begin{analogie}
+Eine Basis ist wie ein \textbf{Rezept-Baukasten}. Die Basisvektoren sind die Zutaten. $[v]_B$ sagt, \emph{wie viel} von jeder Zutat ich nehmen muss, um $v$ zu kochen.
+
+In der Standardbasis ist das trivial: $(3, 5)$ hei\ss t einfach ``3 nach rechts, 5 nach oben''. In einer anderen Basis muss man erst ausrechnen, wie viel von jedem (schr\"agen) Basisvektor man braucht.
+\end{analogie}
+
+\begin{merkbox}[title={So rechnet man $[v]_B$ aus}]
+Setze $v = \alpha b_1 + \beta b_2 + \dots$ an, schreibe es komponentenweise hin, und l\"ose das kleine Gleichungssystem nach $\alpha, \beta, \dots$ auf.
+\end{merkbox}
+
+%-----------------------------------------------------------------------------
+\section*{2. Darstellungsmatrix $[T]_B$: ``Was macht $T$, in Basis-Sprache?''}
+
+Statt $T$ mit Formeln zu beschreiben, kann man $T$ durch eine Matrix darstellen -- aber die Matrix h\"angt davon ab, in welcher Basis man arbeitet.
+
+\begin{merkbox}[title={Bauanleitung f\"ur $[T]_B$}]
+\begin{enumerate}[nosep]
+    \item Wende $T$ auf jeden Basisvektor an: $T(b_1), T(b_2), \dots$
+    \item Schreibe jedes Ergebnis \textbf{in Basis-$B$-Koordinaten}: $[T(b_1)]_B, [T(b_2)]_B, \dots$
+    \item Diese Koordinatenvektoren sind die \textbf{Spalten} von $[T]_B$.
+\end{enumerate}
+\end{merkbox}
+
+\begin{analogie}
+$[T]_B$ ist wie ein \textbf{\"Ubersetzer-Handbuch}: ``Wenn du mir einen Vektor in $B$-Koordinaten gibst, sage ich dir, wo $T$ ihn hinschickt -- auch wieder in $B$-Koordinaten.'' Die Rechenregel ist dann ganz einfach: $[T(v)]_B = [T]_B \cdot [v]_B$.
+\end{analogie}
+
+%-----------------------------------------------------------------------------
+\section*{3. Basiswechsel: zwischen den ``Sprachen'' \"ubersetzen}
+
+Oft ist eine Basis bequemer als die andere. Der \textbf{Basiswechsel} \"ubersetzt zwischen ihnen.
+
+\begin{merkbox}[title={Die Basiswechselmatrix $P$}]
+$P$ hat als \textbf{Spalten die Basisvektoren von $B$, in Standard-Koordinaten}. Dann gilt:
+\[
+[v]_E = P \, [v]_B \qquad\text{(von $B$-Sprache nach Standard)}
+\]
+\[
+[v]_B = P^{-1} [v]_E \qquad\text{(von Standard nach $B$-Sprache)}
+\]
+\end{merkbox}
+
+\begin{merkbox}[title={Basiswechsel f\"ur Abbildungen}]
+\[
+[T]_E = P\,[T]_B\,P^{-1} \qquad\text{und umgekehrt}\qquad [T]_B = P^{-1} [T]_E\, P.
+\]
+\textbf{Merkhilfe:} $P$ baut Standard aus $B$, $P^{-1}$ macht es r\"uckg\"angig. Die Matrix wird ``von beiden Seiten umgerechnet''.
+\end{merkbox}
+
+\begin{analogie}
+Stell dir zwei Sprachen vor (Standard und $B$). $P$ ist das W\"orterbuch ``$B \to$ Standard'', $P^{-1}$ ist ``Standard $\to B$''. Um eine Abbildung in der anderen Sprache zu verstehen, \"ubersetzt man: erst ins Standard ($P$), dort die Abbildung anwenden, dann zur\"uck ($P^{-1}$) -- oder genau andersrum.
+\end{analogie}
+
+%-----------------------------------------------------------------------------
+\section*{4. Zwei Basen gleichzeitig (Aufgabe 41)}
+
+Wenn $T \colon V \to W$ verschiedene R\"aume verbindet, hat man eine Basis $B$ f\"ur die Quelle und eine Basis $C$ f\"ur das Ziel. Die Matrix hei\ss t $[T]_B^C$.
+
+\begin{merkbox}[title={Formel}]
+\[
+[T]_B^C = P_C^{-1} \, A \, P_B,
+\]
+wobei $A$ die Matrix von $T$ in den Standardbasen ist, $P_B$ baut Quelle-Standard aus $B$, $P_C$ baut Ziel-Standard aus $C$.
+\end{merkbox}
+
+\newpage
+
+%=============================================================================
+\part*{Teil 2: Die Aufgaben im \"Uberblick}
+
+\section*{Aufgabe 39 -- $[T]_B$ und $[T(v)]_B$ auf je zwei Wegen}
+
+Hier sieht man besonders sch\"on, dass beide Wege dasselbe liefern:
+\begin{itemize}[leftmargin=*, nosep]
+    \item \textbf{Weg 1 (direkt):} Bilder der Basisvektoren ausrechnen und in $B$-Koordinaten umschreiben. Etwas mehr ``Umrechnen'', aber kein $P^{-1}$ n\"otig.
+    \item \textbf{Weg 2 (Basiswechsel):} $[T]_E$ ist schnell hingeschrieben, dann mit $P^{-1} [T]_E P$ umrechnen.
+\end{itemize}
+Praktisch: Hier ist $\det P = 1$, also ist $P^{-1}$ sehr einfach.
+
+\section*{Aufgabe 40 -- von $[T]_B$ zur Formel}
+
+Umgekehrte Richtung: Man kennt $[T]_B$ und will die normale Formel $T(x,y)$. Trick: $[T]_E = P\,[T]_B\,P^{-1}$ ausrechnen, dann die Formel direkt aus $[T]_E$ ablesen ($[T]_E$ angewandt auf $(x,y)$).
+
+\section*{Aufgabe 41 -- zwei verschiedene Basen}
+
+Wie Aufgabe 39, aber Quelle und Ziel haben verschiedene Basen. Die Logik bleibt: Spalten von $[T]_B^C$ sind die Bilder der $B$-Vektoren, ausgedr\"uckt in $C$-Koordinaten. In (b) pr\"uft man die Grundgleichung $[T]_B^C [v]_B = [T(v)]_C$ -- sie muss f\"ur jedes $v$ stimmen.
+
+\section*{Aufgabe 42 -- Abbildung auf Matrizen}
+
+\begin{merkbox}[title={Trick}]
+Auch wenn $T$ auf $2\times 2$-Matrizen wirkt, ist alles wie gewohnt: Der Raum $\mathbb{R}^{2\times 2}$ ist $4$-dimensional, die Standardbasis sind die vier $E_{ij}$. Eine Matrix $\left(\begin{smallmatrix} a & b \\ c & d \end{smallmatrix}\right)$ hat einfach die Koordinaten $(a, b, c, d)$.
+\end{merkbox}
+
+Vorgehen:
+\begin{itemize}[leftmargin=*, nosep]
+    \item \textbf{(a)} $T$ auf jede der vier Basismatrizen anwenden, Ergebnis als 4er-Koordinatenvektor, das sind die Spalten von $[T]_E$ (eine $4\times 4$-Matrix).
+    \item \textbf{(b)} Mit $[T]_E$ rechnet man Kern und Bild genau wie bei normalen Vektoren (Gau\ss, Pivots, freie Variablen) -- am Ende die Koordinatenvektoren wieder als Matrizen zur\"uck\"ubersetzen.
+\end{itemize}
+
+\begin{analogie}
+$T(X) = AX - XA$ misst, ``wie weit $X$ davon entfernt ist, mit $A$ zu vertauschen''. Im Kern liegen genau die Matrizen, die mit $A$ vertauschen ($AX = XA$). Deshalb sind $A$ selbst und die Einheitsmatrix $I$ im Kern -- die vertauschen immer mit $A$.
+\end{analogie}
+
+\end{document}

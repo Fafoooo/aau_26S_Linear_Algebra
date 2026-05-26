@@ -1,0 +1,459 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{geometry}\geometry{margin=2.5cm}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usepackage{pgfplots}\pgfplotsset{compat=1.18}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable}
+\usepackage{xcolor}
+\newtcolorbox{begriffe}[1][]{colback=yellow!10, colframe=yellow!60!black, fonttitle=\bfseries, title={Was bedeuten die Begriffe?}, breakable, #1}
+\newtcolorbox{wastun}[1][]{colback=orange!5, colframe=orange!60!black, fonttitle=\bfseries, title={Was ist zu tun?}, breakable, #1}
+\newcommand{\piv}[1]{{\color{red}\boxed{#1}}}
+
+\title{\"Ubungsblatt 10 -- L\"osungen \\ \large Linear Algebra}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{begriffe}
+\begin{itemize}[leftmargin=*, nosep]
+    \item \textbf{Koordinatenvektor $[v]_B$}: ``Wie viel von jedem Basisvektor brauche ich, um $v$ zusammenzubauen?'' Wenn $v = \alpha b_1 + \beta b_2 + \dots$, dann ist $[v]_B = (\alpha, \beta, \dots)$.
+    \item \textbf{Darstellungsmatrix $[T]_B$}: Die Spalten sind die Bilder der Basisvektoren, ausgedr\"uckt \emph{in der Basis $B$}. Spalte $j$ $= [T(b_j)]_B$.
+    \item \textbf{Standardbasis $E$}: $e_1 = (1,0,\dots)$, $e_2 = (0,1,\dots)$, \dots In dieser Basis ist $[v]_E = v$ (man liest die Koordinaten direkt ab).
+    \item \textbf{Basiswechselmatrix $P$}: Spalten $=$ die Basisvektoren von $B$ in Standard-Koordinaten. Dann gilt $[v]_E = P\,[v]_B$ und umgekehrt $[v]_B = P^{-1} [v]_E$.
+    \item \textbf{Basiswechsel f\"ur Abbildungen}: $[T]_E = P\,[T]_B\,P^{-1}$ \quad bzw. \quad $[T]_B = P^{-1} [T]_E\, P$.
+\end{itemize}
+\end{begriffe}
+
+%% ============================================================
+\subsection*{Aufgabe 39}
+%% ============================================================
+
+\textbf{Angabe.} $T \colon \mathbb{R}^2 \to \mathbb{R}^2$, $T(x, y) = (x + 2y,\; -3x)$. Basis $B = \{(0,1),\; (-1,2)\}$, Vektor $v = (1, 2)$.
+
+Wir benennen die Basisvektoren: $b_1 = (0, 1)$, $b_2 = (-1, 2)$.
+
+\begin{wastun}
+\begin{itemize}[leftmargin=*, nosep]
+    \item \textbf{(a)} $[T]_B$ auf zwei Wegen: (1) direkt -- Bilder $T(b_1), T(b_2)$ in $B$-Koordinaten als Spalten; (2) erst $[T]_E$, dann Basiswechsel mit $P$.
+    \item \textbf{(b)} $[T(v)]_B$ auf zwei Wegen: (1) erst $[v]_B$, dann mit $[T]_B [v]_B$; (2) erst $T(v)$ in Standard, dann Basiswechsel.
+\end{itemize}
+\end{wastun}
+
+%% --- 39 (a) ---
+\subsubsection*{(a) $[T]_B$ berechnen}
+
+\textbf{Weg 1: Direkt aus der Definition.}
+
+\textbf{Schritt 1: Bilder der Basisvektoren ausrechnen.}
+\begin{align*}
+T(b_1) = T(0, 1) &= (0 + 2\cdot 1,\; -3 \cdot 0) = (2, 0) \\
+T(b_2) = T(-1, 2) &= (-1 + 2\cdot 2,\; -3 \cdot (-1)) = (3, 3)
+\end{align*}
+
+\textbf{Schritt 2: Jedes Bild in $B$-Koordinaten umrechnen.} Das hei\ss t: schreibe $(p,q) = \alpha b_1 + \beta b_2 = \alpha(0,1) + \beta(-1,2) = (-\beta,\; \alpha + 2\beta)$. Vergleich liefert allgemein $\beta = -p$ und $\alpha = q + 2p$ \dots wir rechnen es einfach pro Vektor:
+
+\textbf{(a) $T(b_1) = (2, 0)$:} $-\beta = 2 \Rightarrow \beta = -2$; \; $\alpha + 2\beta = 0 \Rightarrow \alpha = 4$.\\
+Probe: $4(0,1) + (-2)(-1,2) = (2, 0)$ \checkmark. \quad Also $[T(b_1)]_B = (4, -2)$.
+
+\textbf{(b) $T(b_2) = (3, 3)$:} $-\beta = 3 \Rightarrow \beta = -3$; \; $\alpha + 2\beta = 3 \Rightarrow \alpha = 9$.\\
+Probe: $9(0,1) + (-3)(-1,2) = (3, 3)$ \checkmark. \quad Also $[T(b_2)]_B = (9, -3)$.
+
+\textbf{Schritt 3: Spalten zusammensetzen.}
+\[
+[T]_B = \begin{pmatrix} 4 & 9 \\ -2 & -3 \end{pmatrix}.
+\]
+
+\bigskip
+
+\textbf{Weg 2: Erst $[T]_E$, dann Basiswechsel.}
+
+\textbf{Schritt 1: $[T]_E$ aufstellen} (Spalten $= T(e_1), T(e_2)$ in Standard):
+\[
+T(e_1) = T(1,0) = (1, -3), \quad T(e_2) = T(0,1) = (2, 0)
+\;\Rightarrow\;
+[T]_E = \begin{pmatrix} 1 & 2 \\ -3 & 0 \end{pmatrix}.
+\]
+
+\textbf{Schritt 2: Basiswechselmatrix $P$ und ihre Inverse.} Spalten von $P$ $=$ die $B$-Vektoren:
+\[
+P = \begin{pmatrix} 0 & -1 \\ 1 & 2 \end{pmatrix}, \quad
+\det P = 0\cdot 2 - (-1)\cdot 1 = 1, \quad
+P^{-1} = \begin{pmatrix} 2 & 1 \\ -1 & 0 \end{pmatrix}.
+\]
+
+\textbf{Schritt 3: $[T]_B = P^{-1} [T]_E\, P$ ausrechnen.} Erst $[T]_E P$:
+\[
+[T]_E P = \begin{pmatrix} 1 & 2 \\ -3 & 0 \end{pmatrix}\begin{pmatrix} 0 & -1 \\ 1 & 2 \end{pmatrix}
+= \begin{pmatrix} 2 & 3 \\ 0 & 3 \end{pmatrix}.
+\]
+Dann $P^{-1}$ davor:
+\[
+[T]_B = \begin{pmatrix} 2 & 1 \\ -1 & 0 \end{pmatrix}\begin{pmatrix} 2 & 3 \\ 0 & 3 \end{pmatrix}
+= \begin{pmatrix} 4 & 9 \\ -2 & -3 \end{pmatrix}.
+\]
+
+\[
+\fbox{\parbox{0.93\textwidth}{\centering
+Beide Wege: $[T]_B = \begin{pmatrix} 4 & 9 \\ -2 & -3 \end{pmatrix}$.
+}}
+\]
+
+%% --- 39 (b) ---
+\subsubsection*{(b) $[T(v)]_B$ berechnen, $v = (1, 2)$}
+
+\textbf{Weg 1: Erst $[v]_B$, dann $[T]_B [v]_B$.}
+
+\textbf{Schritt 1: $v$ in $B$-Koordinaten.} $(1, 2) = \alpha(0,1) + \beta(-1,2) = (-\beta, \alpha + 2\beta)$:
+\[
+-\beta = 1 \Rightarrow \beta = -1; \quad \alpha + 2\beta = 2 \Rightarrow \alpha = 4.
+\]
+Probe: $4(0,1) + (-1)(-1,2) = (1, 2)$ \checkmark. \quad Also $[v]_B = (4, -1)$.
+
+\textbf{Schritt 2: Mit dem Satz $[T(v)]_B = [T]_B [v]_B$.}
+\[
+[T(v)]_B = \begin{pmatrix} 4 & 9 \\ -2 & -3 \end{pmatrix}\begin{pmatrix} 4 \\ -1 \end{pmatrix}
+= \begin{pmatrix} 16 - 9 \\ -8 + 3 \end{pmatrix}
+= \begin{pmatrix} 7 \\ -5 \end{pmatrix}.
+\]
+
+\bigskip
+
+\textbf{Weg 2: Erst $T(v)$ in Standard, dann Basiswechsel.}
+
+\textbf{Schritt 1: $T(v)$ direkt.} $T(1,2) = (1 + 2\cdot 2,\; -3\cdot 1) = (5, -3)$, also $[T(v)]_E = (5, -3)$.
+
+\textbf{Schritt 2: In $B$-Koordinaten mit $P^{-1}$.}
+\[
+[T(v)]_B = P^{-1} [T(v)]_E = \begin{pmatrix} 2 & 1 \\ -1 & 0 \end{pmatrix}\begin{pmatrix} 5 \\ -3 \end{pmatrix}
+= \begin{pmatrix} 10 - 3 \\ -5 + 0 \end{pmatrix}
+= \begin{pmatrix} 7 \\ -5 \end{pmatrix}.
+\]
+
+\[
+\fbox{\parbox{0.93\textwidth}{\centering
+Beide Wege: $[T(v)]_B = (7, -5)$.
+}}
+\]
+
+\bigskip
+\hrule
+\bigskip
+
+%% ============================================================
+\subsection*{Aufgabe 40}
+%% ============================================================
+
+\textbf{Angabe.} $T \colon \mathbb{R}^2 \to \mathbb{R}^2$ mit $[T]_B = \begin{pmatrix} 1 & 2 \\ 0 & -1 \end{pmatrix}$, Basis $B = \{(1,2),\; (1,3)\}$. Gesucht: explizite Formel f\"ur $T(x, y)$.
+
+\begin{wastun}
+\begin{itemize}[leftmargin=*, nosep]
+    \item Wir kennen $[T]_B$, wollen aber $T$ in normalen Koordinaten. Plan: $[T]_E = P\,[T]_B\,P^{-1}$ ausrechnen ($P$ $=$ $B$-Vektoren als Spalten). Aus $[T]_E$ liest man die Formel direkt ab.
+\end{itemize}
+\end{wastun}
+
+\textbf{Schritt 1: Basiswechselmatrix $P$ und Inverse.}
+\[
+P = \begin{pmatrix} 1 & 1 \\ 2 & 3 \end{pmatrix}, \quad
+\det P = 3 - 2 = 1, \quad
+P^{-1} = \begin{pmatrix} 3 & -1 \\ -2 & 1 \end{pmatrix}.
+\]
+
+\textbf{Schritt 2: $[T]_E = P\,[T]_B\,P^{-1}$ ausrechnen.} Erst $[T]_B P^{-1}$:
+\[
+\begin{pmatrix} 1 & 2 \\ 0 & -1 \end{pmatrix}\begin{pmatrix} 3 & -1 \\ -2 & 1 \end{pmatrix}
+= \begin{pmatrix} 3 - 4 & -1 + 2 \\ 0 + 2 & 0 - 1 \end{pmatrix}
+= \begin{pmatrix} -1 & 1 \\ 2 & -1 \end{pmatrix}.
+\]
+Dann $P$ davor:
+\[
+[T]_E = \begin{pmatrix} 1 & 1 \\ 2 & 3 \end{pmatrix}\begin{pmatrix} -1 & 1 \\ 2 & -1 \end{pmatrix}
+= \begin{pmatrix} -1 + 2 & 1 - 1 \\ -2 + 6 & 2 - 3 \end{pmatrix}
+= \begin{pmatrix} 1 & 0 \\ 4 & -1 \end{pmatrix}.
+\]
+
+\textbf{Schritt 3: Formel ablesen.} Die Matrix $[T]_E$ angewandt auf $(x, y)$:
+\[
+\begin{pmatrix} 1 & 0 \\ 4 & -1 \end{pmatrix}\begin{pmatrix} x \\ y \end{pmatrix}
+= \begin{pmatrix} x \\ 4x - y \end{pmatrix}.
+\]
+
+\[
+\fbox{\parbox{0.93\textwidth}{\centering
+$T(x, y) = (x,\; 4x - y)$.
+}}
+\]
+
+\textbf{Probe:} $T(1,2) = (1, 4-2) = (1, 2) = b_1$ und $T(1,3) = (1, 4-3) = (1,1)$.
+In $B$-Koordinaten: $b_1 = (1,0)_B$ (1.\ Spalte von $[T]_B$ \checkmark) und $(1,1) = 2 b_1 - b_2$, also $(2,-1)_B$ (2.\ Spalte \checkmark).
+
+\bigskip
+\hrule
+\bigskip
+
+%% ============================================================
+\subsection*{Aufgabe 41}
+%% ============================================================
+
+\textbf{Angabe.} $T \colon \mathbb{R}^3 \to \mathbb{R}^2$, $T(x, y, z) = (x - 2z,\; y - 3z)$.
+Basen $B = \{(1,0,0),(1,1,0),(1,1,1)\}$ (im Definitionsbereich) und $C = \{(1,0),(1,1)\}$ (im Zielraum).
+
+Wir benennen: $b_1 = (1,0,0)$, $b_2 = (1,1,0)$, $b_3 = (1,1,1)$, \; $c_1 = (1,0)$, $c_2 = (1,1)$.
+
+\begin{begriffe}
+\begin{itemize}[leftmargin=*, nosep]
+    \item $[T]_B^C$: Abbildung von Basis $B$ (Quelle) nach Basis $C$ (Ziel). Spalte $j$ $= [T(b_j)]_C$.
+    \item Hier sind \textbf{zwei} verschiedene Basen im Spiel -- eine f\"ur die Quelle, eine f\"ur das Ziel.
+\end{itemize}
+\end{begriffe}
+
+%% --- 41 (a) ---
+\subsubsection*{(a) $[T]_B^C$ berechnen}
+
+\textbf{Weg 1: Direkt aus der Definition.}
+
+\textbf{Schritt 1: Bilder der $B$-Vektoren.}
+\begin{align*}
+T(b_1) = T(1,0,0) &= (1 - 0,\; 0 - 0) = (1, 0) \\
+T(b_2) = T(1,1,0) &= (1 - 0,\; 1 - 0) = (1, 1) \\
+T(b_3) = T(1,1,1) &= (1 - 2,\; 1 - 3) = (-1, -2)
+\end{align*}
+
+\textbf{Schritt 2: Jedes Bild in $C$-Koordinaten.} Schreibe $(p, q) = \alpha c_1 + \beta c_2 = \alpha(1,0) + \beta(1,1) = (\alpha + \beta,\; \beta)$. Daraus: $\beta = q$, $\alpha = p - q$.
+
+\begin{itemize}[leftmargin=*, nosep]
+    \item $T(b_1) = (1,0)$: $\beta = 0$, $\alpha = 1$ \; $\Rightarrow [T(b_1)]_C = (1, 0)$.
+    \item $T(b_2) = (1,1)$: $\beta = 1$, $\alpha = 0$ \; $\Rightarrow [T(b_2)]_C = (0, 1)$.
+    \item $T(b_3) = (-1,-2)$: $\beta = -2$, $\alpha = -1-(-2) = 1$ \; $\Rightarrow [T(b_3)]_C = (1, -2)$.
+\end{itemize}
+
+\textbf{Schritt 3: Spalten zusammensetzen.}
+\[
+[T]_B^C = \begin{pmatrix} 1 & 0 & 1 \\ 0 & 1 & -2 \end{pmatrix}.
+\]
+
+\bigskip
+
+\textbf{Weg 2: Erst Standardbasen, dann Basiswechsel.}
+
+\textbf{Schritt 1: Matrix $A$ von $T$ in Standardbasen} (Spalten $= T(e_1), T(e_2), T(e_3)$):
+\[
+T(e_1) = (1, 0),\; T(e_2) = (0, 1),\; T(e_3) = (-2, -3)
+\;\Rightarrow\;
+A = \begin{pmatrix} 1 & 0 & -2 \\ 0 & 1 & -3 \end{pmatrix}.
+\]
+
+\textbf{Schritt 2: Basiswechselmatrizen.}
+\[
+P_B = \begin{pmatrix} 1 & 1 & 1 \\ 0 & 1 & 1 \\ 0 & 0 & 1 \end{pmatrix} \;(\text{$B$-Vektoren als Spalten}), \quad
+P_C = \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}, \quad
+P_C^{-1} = \begin{pmatrix} 1 & -1 \\ 0 & 1 \end{pmatrix}.
+\]
+
+\textbf{Schritt 3: Formel $[T]_B^C = P_C^{-1}\, A\, P_B$.} Erst $A P_B$:
+\[
+A P_B = \begin{pmatrix} 1 & 0 & -2 \\ 0 & 1 & -3 \end{pmatrix}\begin{pmatrix} 1 & 1 & 1 \\ 0 & 1 & 1 \\ 0 & 0 & 1 \end{pmatrix}
+= \begin{pmatrix} 1 & 1 & -1 \\ 0 & 1 & -2 \end{pmatrix}.
+\]
+Dann $P_C^{-1}$ davor:
+\[
+[T]_B^C = \begin{pmatrix} 1 & -1 \\ 0 & 1 \end{pmatrix}\begin{pmatrix} 1 & 1 & -1 \\ 0 & 1 & -2 \end{pmatrix}
+= \begin{pmatrix} 1 & 0 & 1 \\ 0 & 1 & -2 \end{pmatrix}.
+\]
+
+\[
+\fbox{\parbox{0.93\textwidth}{\centering
+Beide Wege: $[T]_B^C = \begin{pmatrix} 1 & 0 & 1 \\ 0 & 1 & -2 \end{pmatrix}$.
+}}
+\]
+
+%% --- 41 (b) ---
+\subsubsection*{(b) $[v]_B$ und $[T(v)]_C$ f\"ur $v = (x, y, z)$ und Verifikation}
+
+\textbf{Schritt 1: $[v]_B$.} $(x,y,z) = \alpha b_1 + \beta b_2 + \gamma b_3 = (\alpha + \beta + \gamma,\; \beta + \gamma,\; \gamma)$:
+\[
+\gamma = z; \quad \beta + \gamma = y \Rightarrow \beta = y - z; \quad \alpha + \beta + \gamma = x \Rightarrow \alpha = x - y.
+\]
+\[
+[v]_B = (x - y,\; y - z,\; z).
+\]
+
+\textbf{Schritt 2: $[T(v)]_C$.} Zuerst $T(v) = (x - 2z,\; y - 3z)$. In $C$-Koordinaten ($\beta = q$, $\alpha = p - q$):
+\[
+\beta = y - 3z; \quad \alpha = (x - 2z) - (y - 3z) = x - y + z.
+\]
+\[
+[T(v)]_C = (x - y + z,\; y - 3z).
+\]
+
+\textbf{Schritt 3: Verifikation $[T]_B^C [v]_B = [T(v)]_C$.}
+\[
+\begin{pmatrix} 1 & 0 & 1 \\ 0 & 1 & -2 \end{pmatrix}\begin{pmatrix} x - y \\ y - z \\ z \end{pmatrix}
+= \begin{pmatrix} (x-y) + z \\ (y-z) - 2z \end{pmatrix}
+= \begin{pmatrix} x - y + z \\ y - 3z \end{pmatrix}. \;\checkmark
+\]
+
+\[
+\fbox{\parbox{0.93\textwidth}{\centering
+$[v]_B = (x-y,\; y-z,\; z)$, \quad $[T(v)]_C = (x-y+z,\; y-3z)$, \quad Satz best\"atigt. \checkmark
+}}
+\]
+
+\bigskip
+\hrule
+\bigskip
+
+%% ============================================================
+\subsection*{Aufgabe 42}
+%% ============================================================
+
+\textbf{Angabe.} $T \colon \mathbb{R}^{2\times 2} \to \mathbb{R}^{2\times 2}$ mit $T(X) = AX - XA$, wobei $A = \begin{pmatrix} 2 & -1 \\ 1 & 0 \end{pmatrix}$.
+Standardbasis $E = \{E_{11}, E_{12}, E_{21}, E_{22}\}$.
+\begin{itemize}[nosep]
+\item[(a)] $[T]_E$ berechnen.
+\item[(b)] Mit $[T]_E$: Basis und Dimension von $\text{Ker}(T)$ und $\text{Im}(T)$.
+\end{itemize}
+
+\begin{begriffe}
+\begin{itemize}[leftmargin=*, nosep]
+    \item $E_{ij}$ ist die Matrix mit einer $1$ an Position $(i,j)$ und sonst Nullen. $\dim \mathbb{R}^{2\times 2} = 4$.
+    \item \textbf{Koordinaten einer Matrix} $\begin{pmatrix} a & b \\ c & d \end{pmatrix}$ in $E$: einfach $(a, b, c, d)$ -- die vier Eintr\"age der Reihe nach.
+    \item Spalte $j$ von $[T]_E$ $=$ Koordinaten von $T(\text{$j$-ter Basismatrix})$.
+\end{itemize}
+\end{begriffe}
+
+%% --- 42 (a) ---
+\subsubsection*{(a) $[T]_E$ berechnen}
+
+\textbf{Schritt 1: $T$ auf jede Basismatrix anwenden.} Wir brauchen $T(E_{ij}) = A E_{ij} - E_{ij} A$.
+
+\textbf{(a) $T(E_{11})$:}
+\[
+A E_{11} = \begin{pmatrix} 2 & 0 \\ 1 & 0 \end{pmatrix},\quad
+E_{11} A = \begin{pmatrix} 2 & -1 \\ 0 & 0 \end{pmatrix}
+\;\Rightarrow\;
+T(E_{11}) = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}
+\;\widehat{=}\; (0, 1, 1, 0).
+\]
+
+\textbf{(b) $T(E_{12})$:}
+\[
+A E_{12} = \begin{pmatrix} 0 & 2 \\ 0 & 1 \end{pmatrix},\quad
+E_{12} A = \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}
+\;\Rightarrow\;
+T(E_{12}) = \begin{pmatrix} -1 & 2 \\ 0 & 1 \end{pmatrix}
+\;\widehat{=}\; (-1, 2, 0, 1).
+\]
+
+\textbf{(c) $T(E_{21})$:}
+\[
+A E_{21} = \begin{pmatrix} -1 & 0 \\ 0 & 0 \end{pmatrix},\quad
+E_{21} A = \begin{pmatrix} 0 & 0 \\ 2 & -1 \end{pmatrix}
+\;\Rightarrow\;
+T(E_{21}) = \begin{pmatrix} -1 & 0 \\ -2 & 1 \end{pmatrix}
+\;\widehat{=}\; (-1, 0, -2, 1).
+\]
+
+\textbf{(d) $T(E_{22})$:}
+\[
+A E_{22} = \begin{pmatrix} 0 & -1 \\ 0 & 0 \end{pmatrix},\quad
+E_{22} A = \begin{pmatrix} 0 & 0 \\ 1 & 0 \end{pmatrix}
+\;\Rightarrow\;
+T(E_{22}) = \begin{pmatrix} 0 & -1 \\ -1 & 0 \end{pmatrix}
+\;\widehat{=}\; (0, -1, -1, 0).
+\]
+
+\textbf{Schritt 2: Koordinatenvektoren als Spalten.}
+\[
+[T]_E = \begin{pmatrix}
+0 & -1 & -1 & 0 \\
+1 & 2 & 0 & -1 \\
+1 & 0 & -2 & -1 \\
+0 & 1 & 1 & 0
+\end{pmatrix}.
+\]
+
+%% --- 42 (b) ---
+\subsubsection*{(b) Kern und Bild aus $[T]_E$}
+
+\textbf{Schritt 1: $[T]_E$ in Stufenform bringen.}
+\[
+\begin{pmatrix}
+0 & -1 & -1 & 0 \\
+1 & 2 & 0 & -1 \\
+1 & 0 & -2 & -1 \\
+0 & 1 & 1 & 0
+\end{pmatrix}
+\xrightarrow{Z_1 \leftrightarrow Z_2}
+\begin{pmatrix}
+1 & 2 & 0 & -1 \\
+0 & -1 & -1 & 0 \\
+1 & 0 & -2 & -1 \\
+0 & 1 & 1 & 0
+\end{pmatrix}
+\xrightarrow{Z_3 \to Z_3 - Z_1}
+\begin{pmatrix}
+1 & 2 & 0 & -1 \\
+0 & -1 & -1 & 0 \\
+0 & -2 & -2 & 0 \\
+0 & 1 & 1 & 0
+\end{pmatrix}
+\]
+\[
+\xrightarrow[Z_4 \to Z_4 + Z_2]{Z_3 \to Z_3 - 2Z_2}
+\begin{pmatrix}
+\piv{1} & 2 & 0 & -1 \\
+0 & \piv{-1} & -1 & 0 \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0
+\end{pmatrix}
+\]
+
+Pivots in Spalte 1 und 2 $\Rightarrow$ Rang $= 2$.
+
+\textbf{Schritt 2: Dimensionen.}
+\[
+\dim \text{Im}(T) = \text{Rang} = 2, \qquad \dim \text{Ker}(T) = 4 - 2 = 2.
+\]
+
+\textbf{Schritt 3: Kern bestimmen.} Variablen $(w_1, w_2, w_3, w_4)$ stehen f\"ur $X = w_1 E_{11} + w_2 E_{12} + w_3 E_{21} + w_4 E_{22}$. Die Stufenform liefert:
+\begin{align*}
+\text{Zeile 2:} &\quad -w_2 - w_3 = 0 \;\Rightarrow\; w_2 = -w_3 \\
+\text{Zeile 1:} &\quad w_1 + 2w_2 - w_4 = 0 \;\Rightarrow\; w_1 = -2w_2 + w_4 = 2w_3 + w_4
+\end{align*}
+Freie Variablen: $w_3, w_4$.
+\[
+(w_1, w_2, w_3, w_4) = w_3(2, -1, 1, 0) + w_4(1, 0, 0, 1).
+\]
+
+Zur\"uck in Matrizen \"ubersetzt:
+\[
+w_3\text{-Anteil} \;\widehat{=}\; \begin{pmatrix} 2 & -1 \\ 1 & 0 \end{pmatrix} = A, \qquad
+w_4\text{-Anteil} \;\widehat{=}\; \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix} = I.
+\]
+
+\textbf{Das ist anschaulich logisch:} $T(A) = A^2 - A^2 = 0$ und $T(I) = AI - IA = A - A = 0$. Beide liegen wirklich im Kern.
+
+\[
+\fbox{\parbox{0.93\textwidth}{\centering
+Basis von $\text{Ker}(T)$: $\left\{\begin{pmatrix} 2 & -1 \\ 1 & 0 \end{pmatrix},\; \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}\right\}$. \quad $\dim \text{Ker}(T) = 2$.
+}}
+\]
+
+\textbf{Schritt 4: Bild bestimmen.} Pivots stehen in Spalte 1 und 2 $\Rightarrow$ die zugeh\"origen Original-Bilder $T(E_{11})$ und $T(E_{12})$ bilden eine Basis des Bildes.
+
+\[
+\fbox{\parbox{0.93\textwidth}{\centering
+Basis von $\text{Im}(T)$: $\left\{\begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix},\; \begin{pmatrix} -1 & 2 \\ 0 & 1 \end{pmatrix}\right\}$. \quad $\dim \text{Im}(T) = 2$.
+}}
+\]
+
+\textbf{Kontrolle:} $\dim \text{Ker} + \dim \text{Im} = 2 + 2 = 4 = \dim \mathbb{R}^{2\times 2}$. \checkmark
+
+\end{document}

@@ -1,0 +1,138 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{geometry}\geometry{margin=2.5cm}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable}
+\usepackage{xcolor}
+
+\newtcolorbox{merkbox}[1][]{colback=blue!5, colframe=blue!40, fonttitle=\bfseries, title={Remember}, breakable, #1}
+\newtcolorbox{analogie}[1][]{colback=green!5, colframe=green!40, fonttitle=\bfseries, title={Analogy}, breakable, #1}
+\newtcolorbox{begriffe}[1][]{colback=yellow!10, colframe=yellow!60!black, fonttitle=\bfseries, title={What do the terms mean?}, breakable, #1}
+
+\title{Explanation -- HW10: Representation Matrix \& Change of Basis}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+%=============================================================================
+\part*{Part 1: Foundations -- explained simply}
+
+%-----------------------------------------------------------------------------
+\section*{1. Coordinate vector: ``How do I build $v$ from the basis vectors?''}
+
+If I have a basis $B = \{b_1, b_2, \dots\}$, then every vector $v$ can be written as a mixture of the basis vectors:
+\[
+v = \alpha b_1 + \beta b_2 + \dots
+\]
+The numbers $\alpha, \beta, \dots$ are the \textbf{coordinates of $v$ with respect to $B$}. We write $[v]_B = (\alpha, \beta, \dots)$.
+
+\begin{analogie}
+A basis is like a \textbf{recipe kit}. The basis vectors are the ingredients. $[v]_B$ says \emph{how much} of each ingredient I need to cook $v$.
+
+In the standard basis this is trivial: $(3, 5)$ simply means ``3 to the right, 5 up''. In another basis you first have to figure out how much of each (slanted) basis vector you need.
+\end{analogie}
+
+\begin{merkbox}[title={How to compute $[v]_B$}]
+Set up $v = \alpha b_1 + \beta b_2 + \dots$, write it out componentwise, and solve the small system of equations for $\alpha, \beta, \dots$.
+\end{merkbox}
+
+%-----------------------------------------------------------------------------
+\section*{2. Representation matrix $[T]_B$: ``What does $T$ do, in basis language?''}
+
+Instead of describing $T$ with formulas, you can represent $T$ by a matrix -- but the matrix depends on which basis you work in.
+
+\begin{merkbox}[title={Construction of $[T]_B$}]
+\begin{enumerate}[nosep]
+    \item Apply $T$ to each basis vector: $T(b_1), T(b_2), \dots$
+    \item Write each result \textbf{in basis-$B$-coordinates}: $[T(b_1)]_B, [T(b_2)]_B, \dots$
+    \item These coordinate vectors are the \textbf{columns} of $[T]_B$.
+\end{enumerate}
+\end{merkbox}
+
+\begin{analogie}
+$[T]_B$ is like a \textbf{translator handbook}: ``If you give me a vector in $B$-coordinates, I'll tell you where $T$ sends it -- again in $B$-coordinates.'' The computation rule is then very simple: $[T(v)]_B = [T]_B \cdot [v]_B$.
+\end{analogie}
+
+%-----------------------------------------------------------------------------
+\section*{3. Change of basis: translating between the ``languages''}
+
+Often one basis is more convenient than another. The \textbf{change of basis} translates between them.
+
+\begin{merkbox}[title={The change-of-basis matrix $P$}]
+$P$ has as its \textbf{columns the basis vectors of $B$, in standard coordinates}. Then:
+\[
+[v]_E = P \, [v]_B \qquad\text{(from $B$-language to standard)}
+\]
+\[
+[v]_B = P^{-1} [v]_E \qquad\text{(from standard to $B$-language)}
+\]
+\end{merkbox}
+
+\begin{merkbox}[title={Change of basis for transformations}]
+\[
+[T]_E = P\,[T]_B\,P^{-1} \qquad\text{and conversely}\qquad [T]_B = P^{-1} [T]_E\, P.
+\]
+\textbf{Memory aid:} $P$ builds standard out of $B$, $P^{-1}$ undoes it. The matrix gets ``converted from both sides''.
+\end{merkbox}
+
+\begin{analogie}
+Imagine two languages (standard and $B$). $P$ is the dictionary ``$B \to$ standard'', $P^{-1}$ is ``standard $\to B$''. To understand a transformation in the other language, you translate: first into standard ($P$), apply the transformation there, then back ($P^{-1}$) -- or exactly the other way around.
+\end{analogie}
+
+%-----------------------------------------------------------------------------
+\section*{4. Two bases at once (Exercise 41)}
+
+If $T \colon V \to W$ connects different spaces, you have a basis $B$ for the source and a basis $C$ for the target. The matrix is called $[T]_B^C$.
+
+\begin{merkbox}[title={Formula}]
+\[
+[T]_B^C = P_C^{-1} \, A \, P_B,
+\]
+where $A$ is the matrix of $T$ in the standard bases, $P_B$ builds source-standard out of $B$, $P_C$ builds target-standard out of $C$.
+\end{merkbox}
+
+\newpage
+
+%=============================================================================
+\part*{Part 2: Overview of the exercises}
+
+\section*{Exercise 39 -- $[T]_B$ and $[T(v)]_B$ in two ways each}
+
+Here you see particularly nicely that both methods give the same result:
+\begin{itemize}[leftmargin=*, nosep]
+    \item \textbf{Method 1 (direct):} Compute the images of the basis vectors and rewrite them in $B$-coordinates. A bit more ``converting'', but no $P^{-1}$ needed.
+    \item \textbf{Method 2 (change of basis):} $[T]_E$ is quickly written down, then convert with $P^{-1} [T]_E P$.
+\end{itemize}
+Conveniently: here $\det P = 1$, so $P^{-1}$ is very easy.
+
+\section*{Exercise 40 -- from $[T]_B$ to the formula}
+
+The reverse direction: you know $[T]_B$ and want the normal formula $T(x,y)$. Trick: compute $[T]_E = P\,[T]_B\,P^{-1}$, then read off the formula directly from $[T]_E$ ($[T]_E$ applied to $(x,y)$).
+
+\section*{Exercise 41 -- two different bases}
+
+Like Exercise 39, but source and target have different bases. The logic stays: columns of $[T]_B^C$ are the images of the $B$-vectors, expressed in $C$-coordinates. In (b) you check the basic equation $[T]_B^C [v]_B = [T(v)]_C$ -- it must hold for every $v$.
+
+\section*{Exercise 42 -- transformation on matrices}
+
+\begin{merkbox}[title={Trick}]
+Even though $T$ acts on $2\times 2$ matrices, everything is as usual: the space $\mathbb{R}^{2\times 2}$ is $4$-dimensional, the standard basis consists of the four $E_{ij}$. A matrix $\left(\begin{smallmatrix} a & b \\ c & d \end{smallmatrix}\right)$ simply has the coordinates $(a, b, c, d)$.
+\end{merkbox}
+
+Procedure:
+\begin{itemize}[leftmargin=*, nosep]
+    \item \textbf{(a)} Apply $T$ to each of the four basis matrices, write the result as a 4-coordinate vector; these are the columns of $[T]_E$ (a $4\times 4$ matrix).
+    \item \textbf{(b)} With $[T]_E$ you compute kernel and image just like with normal vectors (Gauss, pivots, free variables) -- at the end translate the coordinate vectors back into matrices.
+\end{itemize}
+
+\begin{analogie}
+$T(X) = AX - XA$ measures ``how far $X$ is from commuting with $A$''. The kernel contains exactly those matrices that commute with $A$ ($AX = XA$). That is why $A$ itself and the identity matrix $I$ are in the kernel -- they always commute with $A$.
+\end{analogie}
+
+\end{document}
