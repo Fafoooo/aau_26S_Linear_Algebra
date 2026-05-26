@@ -16,6 +16,7 @@
 \newcommand{\piv}[1]{{\color{red}\boxed{#1}}}
 \newcommand{\grafik}{\textcolor{gray}{\small\textit{[Grafische Erkl\"arung -- nicht Teil der L\"osung]}}}
 \newcommand{\erglerk}{\textcolor{gray}{\small\textit{[Erkl\"arung erg\"anzt]}}}
+\newcommand{\orient}{\textcolor{gray}{\small\textit{[Orientierung im Viereck -- nicht Teil der L\"osung]}}}
 
 \title{\"Ubungsblatt 10 -- L\"osungen \\ \large Linear Algebra}
 \author{}
@@ -255,13 +256,52 @@ Beide Wege: $[T(v)]_B = (7, -5)$.
 \textcolor{gray}{\small\textit{$[T]_E$ (oben, gesucht) erh\"alt man als Umweg: erst mit $P^{-1}$ nach unten in die $B$-Welt, dort die bekannte Matrix $[T]_B$ anwenden, dann mit $P$ zur\"uck nach oben. Genau das ist $[T]_E = P\,[T]_B\,P^{-1}$ -- von rechts nach links gelesen wie die Pfeile.}}
 
 \textbf{Schritt 1: Basiswechselmatrix $P$ und Inverse.}
+
+\orient
+\begin{center}
+\begin{tikzpicture}[scale=0.7, >={Stealth[scale=0.9]}, every node/.style={font=\scriptsize}]
+\node (vE) at (0,1.6)   {Std $v$};
+\node (wE) at (4.5,1.6) {Std $T(v)$};
+\node (vB) at (0,0)     {$[v]_B$};
+\node (wB) at (4.5,0)   {$[T(v)]_B$};
+% Viereck blass im Hintergrund
+\draw[->, black!12] (vE) -- (wE);
+\draw[->, black!12] (vB) -- (wB);
+\draw[->, black!12] (vE) -- (vB);
+\draw[->, black!12] (wB) -- (wE);
+% aktiv: die zwei senkrechten Pfeile, die wir jetzt bauen
+\draw[->, orange!85!black, line width=1pt] (vE) -- (vB) node[midway, left]{$P^{-1}$};
+\draw[->, orange!85!black, line width=1pt] (wB) -- (wE) node[midway, right]{$P$};
+\end{tikzpicture}
+\end{center}
+{\small\itshape\color{gray} Wir sind hier: Wir bauen nur die beiden \emph{senkrechten} Pfeile $P$ und $P^{-1}$ -- die ``\"Ubersetzer'' zwischen Standard- und $B$-Welt. Die waagrechten Pfeile fassen wir noch nicht an.}
+
 \[
 P = \begin{pmatrix} 1 & 1 \\ 2 & 3 \end{pmatrix}, \quad
 \det P = 3 - 2 = 1, \quad
 P^{-1} = \begin{pmatrix} 3 & -1 \\ -2 & 1 \end{pmatrix}.
 \]
 
-\textbf{Schritt 2: $[T]_E = P\,[T]_B\,P^{-1}$ ausrechnen.} Erst $[T]_B P^{-1}$:
+\textbf{Schritt 2: $[T]_E = P\,[T]_B\,P^{-1}$ ausrechnen.}
+
+\orient
+\begin{center}
+\begin{tikzpicture}[scale=0.7, >={Stealth[scale=0.9]}, every node/.style={font=\scriptsize}]
+\node (vE) at (0,1.6)   {Std $v$};
+\node (wE) at (4.5,1.6) {Std $T(v)$};
+\node (vB) at (0,0)     {$[v]_B$};
+\node (wB) at (4.5,0)   {$[T(v)]_B$};
+% Ziel (oberer Pfeil) blass gestrichelt
+\draw[->, blue!35, dashed] (vE) -- (wE) node[midway, above]{$[T]_E$ (Ziel)};
+% Umweg, in Rechenreihenfolge durchnummeriert
+\draw[->, orange!85!black, line width=1pt] (vE) -- (vB) node[midway, left]{$P^{-1}$} node[midway, fill=white, draw=orange!85!black, circle, inner sep=0.7pt, font=\tiny]{1};
+\draw[->, red!80, line width=1pt] (vB) -- (wB) node[midway, below]{$[T]_B$} node[midway, fill=white, draw=red!80, circle, inner sep=0.7pt, font=\tiny]{2};
+\draw[->, orange!85!black, line width=1pt] (wB) -- (wE) node[midway, right]{$P$} node[midway, fill=white, draw=orange!85!black, circle, inner sep=0.7pt, font=\tiny]{3};
+\end{tikzpicture}
+\end{center}
+{\small\itshape\color{gray} Wir sind hier: Jetzt laufen wir den Umweg im Viereck ab -- quasi im Kreis von links oben nach rechts oben. \textbf{(1)} mit $P^{-1}$ runter in die $B$-Welt, \textbf{(2)} unten die bekannte Matrix $[T]_B$ anwenden, \textbf{(3)} mit $P$ wieder rauf. Dieser ganze Weg ist der gesuchte obere Pfeil. In genau dieser Reihenfolge rechnen wir: erst $[T]_B P^{-1}$ (Pfeile 1+2), dann $P$ davor (Pfeil 3).}
+
+Erst $[T]_B P^{-1}$:
 \[
 \begin{pmatrix} 1 & 2 \\ 0 & -1 \end{pmatrix}\begin{pmatrix} 3 & -1 \\ -2 & 1 \end{pmatrix}
 = \begin{pmatrix} 3 - 4 & -1 + 2 \\ 0 + 2 & 0 - 1 \end{pmatrix}
@@ -274,7 +314,26 @@ Dann $P$ davor:
 = \begin{pmatrix} 1 & 0 \\ 4 & -1 \end{pmatrix}.
 \]
 
-\textbf{Schritt 3: Formel ablesen.} Die Matrix $[T]_E$ angewandt auf $(x, y)$:
+\textbf{Schritt 3: Formel ablesen.}
+
+\orient
+\begin{center}
+\begin{tikzpicture}[scale=0.7, >={Stealth[scale=0.9]}, every node/.style={font=\scriptsize}]
+\node (vE) at (0,1.6)   {Std $v$};
+\node (wE) at (4.5,1.6) {Std $T(v)$};
+\node (vB) at (0,0)     {$[v]_B$};
+\node (wB) at (4.5,0)   {$[T(v)]_B$};
+% Umweg jetzt blass -- haben wir hinter uns
+\draw[->, black!12] (vE) -- (vB);
+\draw[->, black!12] (vB) -- (wB);
+\draw[->, black!12] (wB) -- (wE);
+% der obere Pfeil ist jetzt fertig
+\draw[->, blue!70, line width=1.1pt] (vE) -- (wE) node[midway, above]{$[T]_E$ (jetzt bekannt)};
+\end{tikzpicture}
+\end{center}
+{\small\itshape\color{gray} Wir sind am Ziel: Der obere Pfeil ist fertig, $[T]_E = \left(\begin{smallmatrix}1&0\\4&-1\end{smallmatrix}\right)$. Weil in der Standardbasis $[v]_E = v$ ist, liest man die Formel direkt aus dieser Matrix ab.}
+
+Die Matrix $[T]_E$ angewandt auf $(x, y)$:
 \[
 \begin{pmatrix} 1 & 0 \\ 4 & -1 \end{pmatrix}\begin{pmatrix} x \\ y \end{pmatrix}
 = \begin{pmatrix} x \\ 4x - y \end{pmatrix}.
