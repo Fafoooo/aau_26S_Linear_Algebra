@@ -1,0 +1,222 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{geometry}\geometry{margin=2.5cm}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning, calc, decorations.pathreplacing}
+\usepackage{pgfplots}\pgfplotsset{compat=1.18}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable}
+\usepackage{xcolor}
+
+\newtcolorbox{merkbox}[1][]{colback=blue!5, colframe=blue!40, fonttitle=\bfseries, title={Merke}, breakable, #1}
+\newtcolorbox{analogie}[1][]{colback=green!5, colframe=green!40, fonttitle=\bfseries, title={Analogie}, breakable, #1}
+\newtcolorbox{begriffe}[1][]{colback=yellow!10, colframe=yellow!60!black, fonttitle=\bfseries, title={Was bedeuten die Begriffe?}, breakable, #1}
+
+\title{Erkl\"arung -- HW11: Eigenwerte, Eigenvektoren \& Eigenr\"aume}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+%=============================================================================
+\part*{Teil 1: Grundlagen -- einfach erkl\"art}
+
+%-----------------------------------------------------------------------------
+\section*{1. Was ist ein Eigenvektor? ``Die Richtung, die bleibt''}
+
+Eine Matrix $A$ ist eine \textbf{Verformung des Raums}: Sie nimmt einen Vektor und macht einen neuen daraus. Meistens wird der Vektor dabei \emph{gedreht und gestreckt}. Aber es gibt besondere Richtungen, die beim Verformen \textbf{nur gestreckt} werden -- sie zeigen nachher noch genau dorthin wie vorher. Diese Richtungen sind die \textbf{Eigenvektoren}, und der Streckfaktor ist der \textbf{Eigenwert} $\lambda$.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0, >={Stealth[scale=1.1]}]
+\draw[help lines, gray!25] (-0.3,-0.3) grid (4.2,3.2);
+\draw[->, gray] (-0.3,0) -- (4.4,0); \draw[->, gray] (0,-0.3) -- (0,3.4);
+\draw[->, red!80, very thick] (0,0) -- (1.4,0.8) node[below right, red!80]{$v$};
+\draw[->, red!50, very thick] (0,0) -- (2.8,1.6) node[above]{\,$Av = \lambda v$};
+\draw[red!40, dashed] (1.4,0.8) -- (2.8,1.6);
+\draw[->, blue!80, very thick] (0,0) -- (0.7,2.2) node[above left, blue!80]{$w$};
+\draw[->, blue!45, very thick] (0,0) -- (2.4,2.5) node[right, blue!70]{$Aw$};
+\draw[blue!35, dashed] (0.7,2.2) -- (2.4,2.5);
+\end{tikzpicture}
+\end{center}
+
+\begin{analogie}
+Stell dir einen \textbf{Teig} vor, den du auseinanderziehst. Ein aufgemaltes Pfeilchen, das schr\"ag liegt, dreht sich beim Ziehen meist mit. Aber ein Pfeil, der genau in Zugrichtung zeigt, bleibt in seiner Richtung -- er wird nur l\"anger. Genau das ist ein Eigenvektor, und ``wie viel l\"anger'' ist der Eigenwert.
+\end{analogie}
+
+\begin{merkbox}
+$v \neq 0$ ist \textbf{Eigenvektor} von $A$ zum \textbf{Eigenwert} $\lambda$, wenn
+\[
+A v = \lambda v.
+\]
+Der Nullvektor z\"ahlt nie als Eigenvektor (sonst w\"are alles trivial).
+\end{merkbox}
+
+%-----------------------------------------------------------------------------
+\section*{2. Wie findet man die Eigenwerte? Das charakteristische Polynom}
+
+Wir schreiben $Av = \lambda v$ um: $Av - \lambda v = 0$, also $(A - \lambda I)v = 0$. Wir suchen ein $v \neq 0$, das diese Gleichung l\"ost. Ein homogenes LGS hat aber \emph{nur dann} eine L\"osung $\neq 0$, wenn die Matrix $A - \lambda I$ \textbf{nicht invertierbar} ist -- und das hei\ss t $\det(A - \lambda I) = 0$.
+
+\begin{merkbox}[title={Der Schl\"ussel}]
+\[
+\lambda \text{ ist Eigenwert} \;\Longleftrightarrow\; \det(A - \lambda I) = 0.
+\]
+Man rechnet $\chi_A(t) = \det(A - tI)$ aus (das \textbf{charakteristische Polynom}) und sucht seine Nullstellen.
+\end{merkbox}
+
+\begin{analogie}
+$\det$ misst, ob eine Matrix Richtungen ``platt dr\"uckt''. $\det(A - \lambda I) = 0$ bedeutet: $A - \lambda I$ dr\"uckt mindestens eine Richtung auf $0$ zusammen. Genau diese Richtung $v$ \"uberlebt als Eigenvektor, denn $(A - \lambda I)v = 0$ hei\ss t ja $Av = \lambda v$.
+\end{analogie}
+
+%-----------------------------------------------------------------------------
+\section*{3. Werkzeug A: Die Sarrus-Regel (Determinante einer $3\times3$)}
+
+F\"ur eine $3\times3$-Matrix berechnet man die Determinante mit Sarrus: Man schreibt die ersten zwei Spalten nochmal rechts daneben, multipliziert die drei Diagonalen \emph{nach unten} ($+$) und zieht die drei Diagonalen \emph{nach oben} ($-$) ab.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.85, every node/.style={font=\small}]
+\foreach \x/\lab in {0/a,1/b,2/c,3/a,4/b} { \node at (\x,2) {$\lab$}; }
+\foreach \x/\lab in {0/d,1/e,2/f,3/d,4/e} { \node at (\x,1) {$\lab$}; }
+\foreach \x/\lab in {0/g,1/h,2/i,3/g,4/h} { \node at (\x,0) {$\lab$}; }
+\draw[gray!40] (2.5,-0.5) -- (2.5,2.5);
+\foreach \sx in {0,1,2} { \draw[->, blue!70, thick] (\sx-0.25,2.25) -- (\sx+1.75,-0.25); }
+\foreach \sx in {0,1,2} { \draw[->, red!75, thick] (\sx-0.25,-0.25) -- (\sx+1.75,2.25); }
+\node[blue!70] at (1.0,-0.8) {$+$}; \node[red!75] at (3.6,-0.8) {$-$};
+\end{tikzpicture}
+\end{center}
+
+\begin{merkbox}[title={Sarrus-Formel}]
+\[
+\det = \underbrace{aei + bfg + cdh}_{\text{nach unten }(+)} - \underbrace{(ceg + afh + bdi)}_{\text{nach oben }(-)}.
+\]
+\end{merkbox}
+
+%-----------------------------------------------------------------------------
+\section*{4. Werkzeug B: Ganzzahlige Nullstellen raten}
+
+Hat man das Polynom ausmultipliziert (z.\,B. $t^3 - 11t^2 + 39t - 45$), muss man es faktorisieren. Trick: \textbf{Ganzzahlige Nullstellen sind immer Teiler des konstanten Glieds.} Bei $-45$ also $\pm1, \pm3, \pm5, \pm9, \pm15, \pm45$. Man setzt sie der Reihe nach ein, bis $0$ herauskommt.
+
+\begin{merkbox}[title={Zwei kostenlose Kontrollen}]
+\begin{itemize}[leftmargin=*, nosep]
+    \item Summe aller Eigenwerte $= \operatorname{Spur}(A)$ (Summe der Diagonale).
+    \item Produkt aller Eigenwerte $= \det(A)$.
+\end{itemize}
+Damit findet man oft die letzte Nullstelle ohne Rechnen.
+\end{merkbox}
+
+%-----------------------------------------------------------------------------
+\section*{5. Werkzeug C: Faktor fr\"uh herausziehen (der elegante Weg)}
+
+Statt erst alles auszumultiplizieren, kann man $\det(A - tI)$ oft \emph{vereinfachen}, bevor man rechnet. Wenn z.\,B. \textbf{jede Spalte von $A$ dieselbe Summe $s$ hat}, dann summiert in $A - tI$ jede Spalte zu $s - t$. Addiert man alle Zeilen in die erste ($Z_1 \to Z_1 + Z_2 + \dots$), wird die erste Zeile zu lauter $(s-t)$ -- und $(s-t)$ kann man als Faktor herausziehen. Das liefert sofort einen Eigenwert $\lambda = s$ und macht den Rest klein.
+
+\begin{analogie}
+Das ist wie K\"urzen \emph{vor} dem Ausmultiplizieren: $\frac{6\cdot 7}{6}$ rechnet man auch nicht aus, sondern k\"urzt erst die $6$ weg. Genauso zieht man den Faktor $(s-t)$ raus, bevor die Rechnung gro\ss{} wird.
+\end{analogie}
+
+%-----------------------------------------------------------------------------
+\section*{6. Eigenraum, AM und GM}
+
+Hat man einen Eigenwert $\lambda$, l\"ost man $(A - \lambda I)v = 0$ mit Gau\ss. Alle L\"osungen zusammen bilden den \textbf{Eigenraum} $E_\lambda$.
+
+\begin{merkbox}[title={Zwei Vielfachheiten -- nicht verwechseln!}]
+\begin{itemize}[leftmargin=*, nosep]
+    \item \textbf{AM($\lambda$)} (algebraisch): Wie oft $(t - \lambda)$ im char. Polynom steckt. \emph{(Aus dem Polynom.)}
+    \item \textbf{GM($\lambda$)} (geometrisch): $\dim E_\lambda$ $=$ Anzahl freier Variablen beim L\"osen von $(A - \lambda I)v = 0$. \emph{(Aus dem Gau\ss.)}
+    \item Es gilt immer $\;1 \le \text{GM}(\lambda) \le \text{AM}(\lambda)$.
+\end{itemize}
+\end{merkbox}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0, every node/.style={font=\small}, >={Stealth[scale=1.0]}]
+% AM as slots, GM as filled vectors
+\node[draw, blue!50, rounded corners, minimum width=2.4cm, minimum height=0.8cm] (am) at (0,0) {AM $=2$};
+\node[align=center] at (0,1.1) {\footnotesize wie oft Nullstelle};
+\node[draw, green!50!black, rounded corners, minimum width=1.1cm, minimum height=0.8cm] (gm) at (4.5,0) {GM};
+\node[align=center] at (4.5,1.1) {\footnotesize $\dim$ Eigenraum};
+\draw[->, gray, thick] (1.4,0) -- (3.7,0) node[midway, above]{$\le$};
+\node[gray, align=center] at (8.4,0) {\footnotesize Sind \emph{alle} GM $=$ AM,\\[-2pt] \footnotesize ist $A$ diagonalisierbar.};
+\end{tikzpicture}
+\end{center}
+
+\begin{analogie}
+AM ist, \textbf{wie viele Pl\"atze} ein Eigenwert ``reserviert'' hat; GM ist, \textbf{wie viele er wirklich mit eigenen Richtungen f\"ullt}. Mehr f\"ullen als reserviert geht nie ($\text{GM} \le \text{AM}$). Nur wenn jeder Eigenwert alle seine Pl\"atze f\"ullt, hat man genug Eigenvektoren f\"ur eine ganze Basis -- dann ist $A$ \textbf{diagonalisierbar}.
+\end{analogie}
+
+%-----------------------------------------------------------------------------
+\section*{7. Werkzeug D: Eigenwerte ohne Polynom (f\"ur Aufgabe 44)}
+
+Manchmal sieht man Eigenwerte direkt an, ohne zu rechnen:
+
+\begin{merkbox}[title={N\"utzliche S\"atze}]
+\begin{itemize}[leftmargin=*, nosep]
+    \item $A$ \textbf{nicht invertierbar} ($\det A = 0$) $\Leftrightarrow$ $0$ ist Eigenwert. (GM$(0) = \dim\ker A$.)
+    \item Steht eine Spalte $j$ als $\lambda \cdot e_j$ da (nur ein Eintrag $\lambda$ in der Diagonale, Rest $0$), ist $e_j$ Eigenvektor zu $\lambda$.
+    \item \textbf{Rang-$1$-Matrix} (alle Zeilen Vielfache derselben Zeile): Eigenwerte sind $\operatorname{Spur}$ (einmal) und $0$ (sonst).
+    \item Summe der Eigenwerte $= \operatorname{Spur}$, Produkt $= \det$ -- damit f\"ullt man L\"ucken.
+\end{itemize}
+\end{merkbox}
+
+\newpage
+
+%=============================================================================
+\part*{Teil 2: Die Aufgaben im \"Uberblick}
+
+\section*{Aufgabe 43 -- char. Polynom auf zwei Wegen}
+
+Zwei $3\times3$-Matrizen, jeweils volles Programm. Die Aufgabe verlangt ausdr\"ucklich \textbf{beide Wege}:
+\begin{itemize}[leftmargin=*, nosep]
+    \item \textbf{Weg 1:} Sarrus $\to$ ausmultipliziertes Polynom $\to$ ganzzahlige Nullstellen raten (Teiler des konstanten Glieds) $\to$ faktorisieren.
+    \item \textbf{Weg 2:} Spaltensummen sind konstant ($5$ bei $A$, $4$ bei $B$) $\Rightarrow$ Faktor $(s-t)$ fr\"uh herausziehen, Rest mit Spaltenoperationen zu Dreiecksform.
+\end{itemize}
+Dann pro Eigenwert $(A - \lambda I)v = 0$ l\"osen. \textbf{Pointe:} $A$ ist diagonalisierbar (alle GM $=$ AM), $B$ \emph{nicht} -- bei $B$ hat $\lambda = 2$ die AM $2$, aber nur GM $1$.
+
+\section*{Aufgabe 44 -- Eigenwerte ohne Polynom}
+
+Hier ist das char. Polynom \textbf{verboten}; man argumentiert mit Eigenschaften.
+\begin{itemize}[leftmargin=*, nosep]
+    \item \textbf{$A$:} Zeile $1 =$ Zeile $3$ $\Rightarrow$ singul\"ar $\Rightarrow$ $\lambda = 0$. Mittlere Spalte $(0,6,0) \Rightarrow e_2$ ist Eigenvektor zu $6$. Rang von $A - 6I$ ist $1$, also GM$(6) = 2$; die Spur $12$ best\"atigt $0 + 6 + 6$.
+    \item \textbf{$B$:} Alle Zeilen Vielfache von $(1,1,1,1)$ $\Rightarrow$ Rang $1$ $\Rightarrow$ GM$(0) = 3$. Spur $= 5+7+11-23 = 0 \Rightarrow$ es gibt keinen weiteren Eigenwert $\Rightarrow$ $\lambda = 0$ mit AM $4$. Wegen GM $3 <$ AM $4$ \emph{nicht} diagonalisierbar.
+\end{itemize}
+
+\section*{Aufgabe 45 -- vier kurze Beweise}
+
+Immer dasselbe Muster: Nimm $v \neq 0$ mit $Av = \lambda v$ und rechne nach, dass $v$ auch Eigenvektor der neuen Matrix ist.
+\begin{itemize}[leftmargin=*, nosep]
+    \item \textbf{(a)} $(A + cI)v = \lambda v + cv = (\lambda + c)v$.
+    \item \textbf{(b)} $A^2 v = A(\lambda v) = \lambda^2 v$.
+    \item \textbf{(c)} Bei invertierbarem $A$ ist $\lambda \neq 0$; aus $Av = \lambda v$ folgt $A^{-1}v = \tfrac1\lambda v$.
+    \item \textbf{(d)} $(AB)v = A(\mu v) = \lambda\mu\, v$ (wenn $Av = \lambda v$, $Bv = \mu v$).
+\end{itemize}
+
+%=============================================================================
+\section*{Zusammenfassung}
+
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\toprule
+Matrix & Eigenwerte (AM, GM) & diagonalisierbar? \\
+\midrule
+$43\,A$ & $3\,(2,2)$, \; $5\,(1,1)$ & ja \\
+$43\,B$ & $2\,(2,1)$, \; $4\,(1,1)$ & nein \\
+$44\,A$ & $0\,(1,1)$, \; $6\,(2,2)$ & ja \\
+$44\,B$ & $0\,(4,3)$ & nein \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{merkbox}[title={Goldene Regeln}]
+\begin{enumerate}[leftmargin=*, nosep]
+    \item Eigenwerte $=$ Nullstellen von $\det(A - tI)$.
+    \item Spur $=$ Summe der Eigenwerte, $\det =$ Produkt -- immer als Kontrolle nutzen.
+    \item Konstante Spaltensummen $s$ $\Rightarrow$ Faktor $(s-t)$ und Eigenwert $s$ geschenkt.
+    \item $\det = 0 \Leftrightarrow 0$ ist Eigenwert; Rang-$1$-Matrix $\Rightarrow$ Eigenwerte $\operatorname{Spur}$ und $0$.
+    \item Pro Eigenwert: $(A - \lambda I)v = 0$ l\"osen $\to$ Basis $\to$ GM $=$ Anzahl freier Variablen.
+    \item Alle GM $=$ AM $\Rightarrow$ diagonalisierbar.
+\end{enumerate}
+\end{merkbox}
+
+\end{document}

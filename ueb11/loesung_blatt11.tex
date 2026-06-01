@@ -1,0 +1,439 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{geometry}\geometry{margin=2.5cm}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning, calc, decorations.pathreplacing}
+\usepackage{pgfplots}\pgfplotsset{compat=1.18}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable}
+\usepackage{xcolor}
+\newtcolorbox{begriffe}[1][]{colback=yellow!10, colframe=yellow!60!black, fonttitle=\bfseries, title={Was bedeuten die Begriffe?}, breakable, #1}
+\newtcolorbox{wastun}[1][]{colback=orange!5, colframe=orange!60!black, fonttitle=\bfseries, title={Was ist zu tun?}, breakable, #1}
+\newcommand{\piv}[1]{{\color{red}\boxed{#1}}}
+\newcommand{\grafik}{\textcolor{gray}{\small\textit{[Grafische Erkl\"arung -- nicht Teil der L\"osung]}}}
+\newcommand{\erglerk}{\textcolor{gray}{\small\textit{[Erkl\"arung erg\"anzt]}}}
+\newcommand{\EW}{Eigenwert}
+\newcommand{\EV}{Eigenvektor}
+
+\title{\"Ubungsblatt 11 -- L\"osungen \\ \large Linear Algebra}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{begriffe}
+\begin{itemize}[leftmargin=*, nosep]
+    \item \textbf{\EW{} $\lambda$ und \EV{} $v$}: Eine Zahl $\lambda$ und ein Vektor $v \neq 0$ mit $A v = \lambda v$. Das hei\ss t: $A$ \emph{streckt} den Vektor $v$ nur (um den Faktor $\lambda$), ohne seine Richtung zu \"andern.
+    \item \textbf{Charakteristisches Polynom $\chi_A(t) = \det(A - t I)$}: Die Nullstellen dieses Polynoms sind genau die \EW{}e. (Begr\"undung: $A v = \lambda v$ hei\ss t $(A - \lambda I) v = 0$ mit $v \neq 0$, also ist $A - \lambda I$ \emph{nicht} invertierbar, also $\det(A - \lambda I) = 0$.)
+    \item \textbf{Eigenraum $E_\lambda = \ker(A - \lambda I)$}: Alle \EV{}en zu $\lambda$ (plus der Nullvektor). Man findet ihn, indem man das LGS $(A - \lambda I) v = 0$ l\"ost.
+    \item \textbf{Algebraische Vielfachheit AM($\lambda$)}: Wie oft $\lambda$ als Nullstelle im char. Polynom vorkommt (der Exponent von $(t - \lambda)$).
+    \item \textbf{Geometrische Vielfachheit GM($\lambda$)}: $\dim E_\lambda$ $=$ Anzahl der Basisvektoren des Eigenraums $=$ Anzahl freier Variablen beim L\"osen von $(A - \lambda I)v = 0$.
+    \item \textbf{Es gilt immer} $\;1 \le \text{GM}(\lambda) \le \text{AM}(\lambda)$. Sind alle GM $=$ AM, ist $A$ \emph{diagonalisierbar}.
+\end{itemize}
+\end{begriffe}
+
+\grafik
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0, >={Stealth[scale=1.1]}]
+% axes
+\draw[help lines, gray!25] (-0.3,-0.3) grid (4.2,3.2);
+\draw[->, gray] (-0.3,0) -- (4.4,0) node[right, gray]{};
+\draw[->, gray] (0,-0.3) -- (0,3.4) node[above, gray]{};
+% eigen-direction: v and Av = lambda v on the SAME line
+\draw[->, red!80, very thick] (0,0) -- (1.4,0.8) node[below right, red!80]{$v$};
+\draw[->, red!50, very thick] (0,0) -- (2.8,1.6) node[above]{\,$Av = \lambda v$};
+\draw[red!40, dashed] (1.4,0.8) -- (2.8,1.6);
+% generic vector: w and Aw point in DIFFERENT directions
+\draw[->, blue!80, very thick] (0,0) -- (0.7,2.2) node[above left, blue!80]{$w$};
+\draw[->, blue!45, very thick] (0,0) -- (2.4,2.5) node[right, blue!70]{$Aw$};
+\draw[blue!35, dashed] (0.7,2.2) -- (2.4,2.5);
+\end{tikzpicture}
+\end{center}
+
+\textcolor{gray}{\small\textit{Die Grundidee: Multipliziert man einen Vektor mit $A$, wird er normalerweise gedreht \emph{und} gestreckt (blau: $w \to Aw$ zeigt woanders hin). Ein \textbf{\EV} (rot) ist eine besondere Richtung, die $A$ \emph{nur streckt} -- $Av$ liegt auf derselben Geraden wie $v$. Der Streckfaktor ist der \EW{} $\lambda$.}}
+
+\bigskip
+\hrule
+\bigskip
+
+%% ============================================================
+\subsection*{Aufgabe 43}
+%% ============================================================
+
+\textbf{Angabe.} Bestimme f\"ur $A = \begin{pmatrix} 4 & 1 & 1 \\ 2 & 5 & 2 \\ -1 & -1 & 2 \end{pmatrix}$ und $B = \begin{pmatrix} 5 & 2 & 3 \\ 2 & 4 & 2 \\ -3 & -2 & -1 \end{pmatrix}$
+das charakteristische Polynom, die \EW{}e mit algebraischer und geometrischer Vielfachheit sowie eine Basis jedes Eigenraums -- auf \textbf{zwei Wegen}.
+
+\begin{wastun}
+\begin{itemize}[leftmargin=*, nosep]
+    \item \textbf{Weg 1:} $\chi_A(t) = \det(A - tI)$ mit der \textbf{Sarrus-Regel} ausmultiplizieren, dann mit dem \textbf{Satz \"uber ganzzahlige Nullstellen} faktorisieren (Kandidaten $=$ Teiler des konstanten Glieds).
+    \item \textbf{Weg 2:} Durch \textbf{Zeilen-/Spaltenoperationen} fr\"uh einen Faktor $(\lambda - t)$ herausziehen -- das spart das Ausmultiplizieren.
+    \item Danach pro \EW{} $\lambda$ das LGS $(A - \lambda I)v = 0$ l\"osen $\Rightarrow$ Basis des Eigenraums und GM.
+\end{itemize}
+\end{wastun}
+
+%% --- 43 A ---
+\subsubsection*{Matrix $A$}
+
+\textbf{Weg 1: Sarrus $+$ ganzzahlige Nullstellen.}
+
+\grafik
+
+\begin{center}
+\begin{tikzpicture}[scale=0.85, every node/.style={font=\small}]
+% 3x3 matrix entries plus repeated first two columns
+\foreach \x/\lab in {0/a,1/b,2/c,3/a,4/b} { \node at (\x,2) {$\lab$}; }
+\foreach \x/\lab in {0/d,1/e,2/f,3/d,4/e} { \node at (\x,1) {$\lab$}; }
+\foreach \x/\lab in {0/g,1/h,2/i,3/g,4/h} { \node at (\x,0) {$\lab$}; }
+% separator after column 3
+\draw[gray!40] (2.5,-0.5) -- (2.5,2.5);
+% down diagonals (+) blue
+\foreach \sx in {0,1,2} {
+  \draw[->, blue!70, thick] (\sx-0.25,2.25) -- (\sx+1.75,-0.25);
+}
+% up diagonals (-) red
+\foreach \sx in {0,1,2} {
+  \draw[->, red!75, thick] (\sx-0.25,-0.25) -- (\sx+1.75,2.25);
+}
+\node[blue!70] at (1.0,-0.8) {$+\;(\text{nach unten})$};
+\node[red!75] at (3.6,-0.8) {$-\;(\text{nach oben})$};
+\end{tikzpicture}
+\end{center}
+
+\textcolor{gray}{\small\textit{Sarrus-Regel: Man schreibt die ersten zwei Spalten nochmal rechts daneben. Die drei Diagonalen \emph{nach unten} (blau) werden $+$ gez\"ahlt, die drei \emph{nach oben} (rot) $-$. Formel: $\det = aei + bfg + cdh - ceg - afh - bdi$.}}
+
+\textbf{Schritt 1: $A - tI$ hinschreiben.}
+\[
+A - tI = \begin{pmatrix} 4-t & 1 & 1 \\ 2 & 5-t & 2 \\ -1 & -1 & 2-t \end{pmatrix}.
+\]
+
+\textbf{Schritt 2: Sarrus anwenden.} Mit der Formel oben (die drei $+$ Diagonalen, dann die drei $-$ Diagonalen):
+\begin{align*}
+\det(A - tI) &= \underbrace{(4-t)(5-t)(2-t)}_{aei} + \underbrace{1\cdot 2 \cdot(-1)}_{bfg} + \underbrace{1\cdot 2\cdot(-1)}_{cdh} \\
+&\quad - \underbrace{1\cdot(5-t)\cdot(-1)}_{ceg} - \underbrace{(4-t)\cdot 2\cdot(-1)}_{afh} - \underbrace{1\cdot 2\cdot(2-t)}_{bdi} \\[2pt]
+&= (4-t)(5-t)(2-t) \;-2\;-2\;+(5-t)\;+2(4-t)\;-2(2-t).
+\end{align*}
+Der Klammerterm ausmultipliziert: $(4-t)(5-t)(2-t) = -t^3 + 11t^2 - 38t + 40$. Die restlichen Terme: $-2 -2 +5 -t +8 -2t -4 +2t = 5 - t$. Zusammen:
+\[
+\chi_A(t) = -t^3 + 11t^2 - 38t + 40 + 5 - t = -t^3 + 11t^2 - 39t + 45.
+\]
+
+\erglerk\ \textcolor{gray}{\small Schnellcheck: konstantes Glied $\chi_A(0) = 45 = \det A$ \checkmark, und der $t^2$-Koeffizient $11 = \operatorname{Spur}(A) = 4+5+2$ \checkmark.}
+
+\textbf{Schritt 3: Faktorisieren mit ganzzahligen Nullstellen.} Klammere $-1$ aus: $\chi_A(t) = -(t^3 - 11t^2 + 39t - 45)$. Ganzzahlige Nullstellen teilen das konstante Glied $45$ (Kandidaten $\pm 1, 3, 5, 9, 15, 45$). Einsetzen:
+\[
+t = 3:\; 27 - 99 + 117 - 45 = 0 \;\checkmark, \qquad t = 5:\; 125 - 275 + 195 - 45 = 0 \;\checkmark.
+\]
+Die dritte Nullstelle aus der Spur: $3 + 5 + \lambda_3 = 11 \Rightarrow \lambda_3 = 3$. Also
+\[
+\boxed{\chi_A(t) = -(t-3)^2(t-5) = (3-t)^2(5-t).}
+\]
+\EW{}e: $\lambda = 3$ (AM $2$), $\lambda = 5$ (AM $1$).
+
+\bigskip
+
+\textbf{Weg 2: Faktor fr\"uh herausziehen (Spaltentrick).}
+
+\grafik
+
+\begin{center}
+\begin{tikzpicture}[scale=0.85, every node/.style={font=\small}]
+\node[anchor=west] (M) at (0,0) {$\begin{pmatrix} 4{-}t & 1 & 1 \\ 2 & 5{-}t & 2 \\ -1 & -1 & 2{-}t \end{pmatrix}$};
+\draw[->, orange!80!black, thick] (3.6,0) -- (5.3,0);
+\node[orange!80!black] at (4.45,0.45) {\footnotesize $Z_1\!+\!Z_2\!+\!Z_3$};
+\node[anchor=west] (R) at (5.6,0) {$\begin{pmatrix} 5{-}t & 5{-}t & 5{-}t \\ 2 & 5{-}t & 2 \\ -1 & -1 & 2{-}t \end{pmatrix}$};
+\end{tikzpicture}
+\end{center}
+
+\textcolor{gray}{\small\textit{Beobachtung: In $A$ summiert jede Spalte zu $5$ (z.\,B. $4+2-1 = 5$). Also summiert in $A - tI$ jede Spalte zu $5 - t$. Wenn man alle Zeilen aufaddiert ($Z_1 \to Z_1 + Z_2 + Z_3$), entsteht oben eine Zeile aus lauter $(5-t)$ -- die kann man als Faktor herausziehen.}}
+
+\textbf{Schritt 1: $Z_1 \to Z_1 + Z_2 + Z_3$} (\"andert die Determinante nicht), dann $(5-t)$ ausklammern:
+\[
+\det(A - tI) = \det\!\begin{pmatrix} 5-t & 5-t & 5-t \\ 2 & 5-t & 2 \\ -1 & -1 & 2-t \end{pmatrix}
+= (5-t)\,\det\!\begin{pmatrix} 1 & 1 & 1 \\ 2 & 5-t & 2 \\ -1 & -1 & 2-t \end{pmatrix}.
+\]
+
+\textbf{Schritt 2: Spalten $C_2 \to C_2 - C_1$ und $C_3 \to C_3 - C_1$} (macht die erste Zeile zu $1,0,0$):
+\[
+= (5-t)\,\det\!\begin{pmatrix} 1 & 0 & 0 \\ 2 & 3-t & 0 \\ -1 & 0 & 3-t \end{pmatrix}
+= (5-t)\,(3-t)(3-t) = (5-t)(3-t)^2.
+\]
+
+\erglerk\ \textcolor{gray}{\small Die letzte Matrix ist (untere) Dreiecksform $\Rightarrow$ Determinante $=$ Produkt der Diagonale $1\cdot(3-t)\cdot(3-t)$.}
+
+Gleiches Ergebnis wie Weg 1: $\chi_A(t) = (5-t)(3-t)^2$, \EW{}e $\lambda = 5$ (AM $1$), $\lambda = 3$ (AM $2$).
+
+\medskip
+\textbf{Eigenr\"aume.}
+
+\textit{$\lambda = 5$:} L\"ose $(A - 5I)v = 0$:
+\[
+A - 5I = \begin{pmatrix} -1 & 1 & 1 \\ 2 & 0 & 2 \\ -1 & -1 & -3 \end{pmatrix}
+\xrightarrow[Z_3 \to Z_3 - Z_1]{Z_2 \to Z_2 + 2Z_1}
+\begin{pmatrix} \piv{-1} & 1 & 1 \\ 0 & \piv{2} & 4 \\ 0 & -2 & -4 \end{pmatrix}
+\xrightarrow{Z_3 \to Z_3 + Z_2}
+\begin{pmatrix} \piv{-1} & 1 & 1 \\ 0 & \piv{2} & 4 \\ 0 & 0 & 0 \end{pmatrix}.
+\]
+Freie Variable $z$: aus $2y + 4z = 0 \Rightarrow y = -2z$; aus $-x + y + z = 0 \Rightarrow x = y + z = -z$. Mit $z = 1$:
+\[
+E_5 = \operatorname{span}\{(-1, -2, 1)\}, \qquad \text{GM}(5) = 1.
+\]
+
+\textit{$\lambda = 3$:}
+\[
+A - 3I = \begin{pmatrix} 1 & 1 & 1 \\ 2 & 2 & 2 \\ -1 & -1 & -1 \end{pmatrix}
+\xrightarrow[Z_3 \to Z_3 + Z_1]{Z_2 \to Z_2 - 2Z_1}
+\begin{pmatrix} \piv{1} & 1 & 1 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \end{pmatrix}.
+\]
+Nur eine Gleichung $x + y + z = 0$, freie Variablen $y, z$. Mit $(y,z) = (1,0)$ und $(0,1)$:
+\[
+E_3 = \operatorname{span}\{(-1, 1, 0),\, (-1, 0, 1)\}, \qquad \text{GM}(3) = 2.
+\]
+
+\[
+\fbox{\parbox{0.93\textwidth}{\centering
+$\chi_A(t) = (5-t)(3-t)^2$. \\[3pt]
+$\lambda = 5$: AM $1$, GM $1$, Basis $\{(-1,-2,1)\}$. \quad
+$\lambda = 3$: AM $2$, GM $2$, Basis $\{(-1,1,0),(-1,0,1)\}$. \\[3pt]
+Alle GM $=$ AM $\Rightarrow$ $A$ ist diagonalisierbar.
+}}
+\]
+
+%% --- 43 B ---
+\subsubsection*{Matrix $B$}
+
+\textbf{Weg 1: Sarrus.} Mit $B - tI = \begin{pmatrix} 5-t & 2 & 3 \\ 2 & 4-t & 2 \\ -3 & -2 & -1-t \end{pmatrix}$ liefert die Sarrus-Regel (gleiches Schema wie oben):
+\[
+\chi_B(t) = (5-t)(4-t)(-1-t) + 36 - 9t = -t^3 + 8t^2 - 20t + 16.
+\]
+
+\erglerk\ \textcolor{gray}{\small Check: $\chi_B(0) = 16 = \det B$ \checkmark, $t^2$-Koeffizient $8 = \operatorname{Spur}(B) = 5+4-1$ \checkmark.}
+
+\textbf{Faktorisieren:} $\chi_B(t) = -(t^3 - 8t^2 + 20t - 16)$. Teiler von $16$ testen: $t = 2:\; 8 - 32 + 40 - 16 = 0$ \checkmark. Polynomdivision durch $(t-2)$:
+\[
+t^3 - 8t^2 + 20t - 16 = (t-2)(t^2 - 6t + 8) = (t-2)(t-2)(t-4).
+\]
+\[
+\boxed{\chi_B(t) = -(t-2)^2(t-4) = (2-t)^2(4-t).}
+\]
+
+\textbf{Weg 2: Spaltentrick.} Auch in $B$ summiert jede Spalte zu $4$ ($5+2-3=4$, $2+4-2=4$, $3+2-1=4$). Mit $Z_1 \to Z_1+Z_2+Z_3$ und dann $C_2 \to C_2 - C_1$, $C_3 \to C_3 - C_1$:
+\[
+\det(B - tI) = (4-t)\det\!\begin{pmatrix} 1 & 0 & 0 \\ 2 & 2-t & 0 \\ -3 & 1 & 2-t \end{pmatrix} = (4-t)(2-t)^2.
+\]
+Gleiches Ergebnis. \EW{}e: $\lambda = 2$ (AM $2$), $\lambda = 4$ (AM $1$).
+
+\medskip
+\textbf{Eigenr\"aume.}
+
+\textit{$\lambda = 4$:}
+\[
+B - 4I = \begin{pmatrix} 1 & 2 & 3 \\ 2 & 0 & 2 \\ -3 & -2 & -5 \end{pmatrix}
+\xrightarrow[Z_3 \to Z_3 + 3Z_1]{Z_2 \to Z_2 - 2Z_1}
+\begin{pmatrix} \piv{1} & 2 & 3 \\ 0 & \piv{-4} & -4 \\ 0 & 4 & 4 \end{pmatrix}
+\xrightarrow{Z_3 \to Z_3 + Z_2}
+\begin{pmatrix} \piv{1} & 2 & 3 \\ 0 & \piv{-4} & -4 \\ 0 & 0 & 0 \end{pmatrix}.
+\]
+$-4y - 4z = 0 \Rightarrow y = -z$; $x + 2y + 3z = 0 \Rightarrow x = -2y - 3z = -z$. Mit $z=1$:
+\[
+E_4 = \operatorname{span}\{(-1,-1,1)\}, \qquad \text{GM}(4) = 1.
+\]
+
+\textit{$\lambda = 2$:}
+\[
+B - 2I = \begin{pmatrix} 3 & 2 & 3 \\ 2 & 2 & 2 \\ -3 & -2 & -3 \end{pmatrix}
+\xrightarrow{Z_2 \to \tfrac12 Z_2}
+\begin{pmatrix} 3 & 2 & 3 \\ 1 & 1 & 1 \\ -3 & -2 & -3 \end{pmatrix}
+\xrightarrow[Z_3 \to Z_3 + 3Z_2']{Z_1 \to Z_1 - 3Z_2'}
+\begin{pmatrix} 0 & -1 & 0 \\ \piv{1} & 1 & 1 \\ 0 & 1 & 0 \end{pmatrix}.
+\]
+Aus der $(-1)$-Zeile: $-y = 0 \Rightarrow y = 0$; aus $x + y + z = 0 \Rightarrow x = -z$. Freie Variable nur $z$. Mit $z=1$:
+\[
+E_2 = \operatorname{span}\{(-1, 0, 1)\}, \qquad \text{GM}(2) = 1.
+\]
+
+\[
+\fbox{\parbox{0.93\textwidth}{\centering
+$\chi_B(t) = (2-t)^2(4-t)$. \\[3pt]
+$\lambda = 2$: AM $2$, GM $1$, Basis $\{(-1,0,1)\}$. \quad
+$\lambda = 4$: AM $1$, GM $1$, Basis $\{(-1,-1,1)\}$. \\[3pt]
+Hier ist GM$(2) = 1 < {}$AM$(2) = 2 \Rightarrow$ $B$ ist \emph{nicht} diagonalisierbar.
+}}
+\]
+
+\bigskip
+\hrule
+\bigskip
+
+%% ============================================================
+\subsection*{Aufgabe 44}
+%% ============================================================
+
+\textbf{Angabe.} Bestimme \EW{}e (mit AM, GM) und Basen der Eigenr\"aume von
+$A = \begin{pmatrix} 1 & 0 & 5 \\ 0 & 6 & 0 \\ 1 & 0 & 5 \end{pmatrix}$ und
+$B = \begin{pmatrix} 5 & 5 & 5 & 5 \\ 7 & 7 & 7 & 7 \\ 11 & 11 & 11 & 11 \\ -23 & -23 & -23 & -23 \end{pmatrix}$.
+
+\begin{wastun}
+\begin{itemize}[leftmargin=*, nosep]
+    \item \textbf{Kein charakteristisches Polynom!} Stattdessen Eigenschaften nutzen: $\lambda = 0$ genau dann, wenn $A$ nicht invertierbar ist; Summe der \EW{}e $= \operatorname{Spur}$; Produkt $= \det$; $\text{GM} \le \text{AM}$; offensichtliche \EV{}en ablesen.
+\end{itemize}
+\end{wastun}
+
+%% --- 44 A ---
+\subsubsection*{Matrix $A$}
+
+\grafik
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9, every node/.style={font=\small}]
+\node at (0,0) {$A = \begin{pmatrix} 1 & 0 & 5 \\ 0 & 6 & 0 \\ 1 & 0 & 5 \end{pmatrix}$};
+% highlight rows 1 and 3 equal
+\draw[red!70, rounded corners] (-1.15,0.5) rectangle (1.15,0.95);
+\draw[red!70, rounded corners] (-1.15,-0.95) rectangle (1.15,-0.5);
+\node[red!70, right] at (1.5,0.72) {\footnotesize Zeile 1};
+\node[red!70, right] at (1.5,-0.72) {\footnotesize $=$ Zeile 3 $\Rightarrow \det = 0 \Rightarrow \lambda = 0$};
+\node[blue!70, right] at (1.5,0.0) {\footnotesize $A e_2 = (0,6,0) = 6\,e_2 \Rightarrow \lambda = 6$};
+\end{tikzpicture}
+\end{center}
+
+\textcolor{gray}{\small\textit{Zwei Sachen sieht man sofort: (1) Zeile $1 =$ Zeile $3$, also ist $A$ singul\"ar $\Rightarrow$ $0$ ist \EW{}. (2) Die mittlere Spalte ist $(0,6,0)$, d.\,h. $A$ schickt $e_2 = (0,1,0)$ auf $6\,e_2$ $\Rightarrow$ $6$ ist \EW{} mit \EV{} $e_2$.}}
+
+\textbf{Schritt 1: $\lambda = 0$.} Zeile $1 =$ Zeile $3$ $\Rightarrow \det A = 0 \Rightarrow \lambda = 0$ ist \EW{}. Eigenraum $= \ker A$:
+\[
+A v = 0:\quad 6y = 0 \Rightarrow y = 0, \qquad x + 5z = 0 \Rightarrow x = -5z.
+\]
+\[
+E_0 = \operatorname{span}\{(-5, 0, 1)\}, \qquad \text{GM}(0) = 1.
+\]
+
+\textbf{Schritt 2: $\lambda = 6$.} Eigenraum $= \ker(A - 6I)$ mit $A - 6I = \begin{pmatrix} -5 & 0 & 5 \\ 0 & 0 & 0 \\ 1 & 0 & -1 \end{pmatrix}$. Beide nichttriviale Zeilen sagen $x = z$ ($y$ frei). Also
+\[
+E_6 = \operatorname{span}\{(0,1,0),\, (1,0,1)\}, \qquad \text{GM}(6) = 2.
+\]
+
+\textbf{Schritt 3: Vielfachheiten zusammenz\"ahlen.} Es ist $\text{GM}(6) = 2$, also $\text{AM}(6) \ge 2$. Dazu $\text{AM}(0) \ge 1$. Da eine $3\times 3$-Matrix genau $3$ \EW{}e (mit Vielfachheit) hat, bleibt nur $\text{AM}(0) = 1$, $\text{AM}(6) = 2$.
+\erglerk\ \textcolor{gray}{\small Probe mit der Spur: $0\cdot 1 + 6 \cdot 2 = 12 = \operatorname{Spur}(A) = 1+6+5$ \checkmark.}
+
+\[
+\fbox{\parbox{0.93\textwidth}{\centering
+$\lambda = 0$: AM $1$, GM $1$, Basis $\{(-5,0,1)\}$. \quad
+$\lambda = 6$: AM $2$, GM $2$, Basis $\{(0,1,0),(1,0,1)\}$. \\[3pt]
+Alle GM $=$ AM $\Rightarrow$ $A$ ist diagonalisierbar.
+}}
+\]
+
+%% --- 44 B ---
+\subsubsection*{Matrix $B$}
+
+\grafik
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9, every node/.style={font=\small}]
+\node[anchor=west] (Bm) at (0,0) {$B = \begin{pmatrix} 5 & 5 & 5 & 5 \\ 7 & 7 & 7 & 7 \\ 11 & 11 & 11 & 11 \\ -23 & -23 & -23 & -23 \end{pmatrix}$};
+\draw[decorate, decoration={brace, amplitude=5pt}, orange!80!black] ([xshift=5pt, yshift=1.45cm]Bm.east) -- ([xshift=5pt, yshift=-1.45cm]Bm.east);
+\node[orange!80!black, right] at ([xshift=13pt, yshift=0.6cm]Bm.east) {\footnotesize jede Zeile $= c_i \cdot (1,1,1,1)$};
+\node[orange!80!black, right] at ([xshift=13pt, yshift=0.0cm]Bm.east) {\footnotesize $c = (5,7,11,-23)$};
+\node[orange!80!black, right] at ([xshift=13pt, yshift=-0.6cm]Bm.east) {\footnotesize $\Rightarrow$ Rang $1$};
+\end{tikzpicture}
+\end{center}
+
+\textcolor{gray}{\small\textit{$B$ hat \"uberall identische Spalten -- jede Zeile ist ein Vielfaches von $(1,1,1,1)$. So eine Matrix hat \textbf{Rang $1$}: alle Zeilen liegen ``auf einer Linie''. Damit ist der Kern riesig (Dimension $4 - 1 = 3$) und $0$ ist \EW{}.}}
+
+\textbf{Schritt 1: $\lambda = 0$ mit GM $= 3$.} Alle Spalten von $B$ sind gleich $\Rightarrow \operatorname{Rang}(B) = 1 \Rightarrow \dim\ker(B) = 4 - 1 = 3$. Also ist $0$ \EW{} mit $\text{GM}(0) = 3$. Der Kern: $Bv = 0$ hei\ss t (jede Zeile) $5(a+b+c+d) = 0$, also $a + b + c + d = 0$:
+\[
+E_0 = \operatorname{span}\{(-1,1,0,0),\, (-1,0,1,0),\, (-1,0,0,1)\}, \qquad \text{GM}(0) = 3.
+\]
+
+\textbf{Schritt 2: Es gibt keinen weiteren \EW{}.} Die Summe aller \EW{}e $= \operatorname{Spur}(B) = 5 + 7 + 11 - 23 = 0$. Bisher haben wir $\lambda = 0$ mit $\text{AM}(0) \ge \text{GM}(0) = 3$. W\"are der vierte \EW{} $\mu \neq 0$, m\"usste die Summe $\mu \neq 0$ sein -- Widerspruch. Also $\mu = 0$ und
+\[
+\text{AM}(0) = 4.
+\]
+
+\erglerk\ \textcolor{gray}{\small Anders gesagt: Eine Rang-$1$-Matrix $c\,r^\top$ hat nur den \EW{} $r^\top c = \operatorname{Spur}$ (einfach) und sonst $0$. Hier ist $\operatorname{Spur} = 0$, also sind \emph{alle} \EW{}e $0$ (die Matrix ist nilpotent, $B^2 = 0$).}
+
+\[
+\fbox{\parbox{0.93\textwidth}{\centering
+$\lambda = 0$: AM $4$, GM $3$, Basis $\{(-1,1,0,0),(-1,0,1,0),(-1,0,0,1)\}$. \\[3pt]
+GM$(0) = 3 < {}$AM$(0) = 4 \Rightarrow$ $B$ ist \emph{nicht} diagonalisierbar.
+}}
+\]
+
+\bigskip
+\hrule
+\bigskip
+
+%% ============================================================
+\subsection*{Aufgabe 45}
+%% ============================================================
+
+\textbf{Angabe.} $A, B \in \mathbb{F}^{n\times n}$. Zeige die folgenden Aussagen.
+
+\begin{wastun}
+\begin{itemize}[leftmargin=*, nosep]
+    \item Bei jeder Aussage starten wir mit ``$\lambda$ ist \EW{} von $A$'' $=$ ``es gibt $v \neq 0$ mit $Av = \lambda v$'' und rechnen nach, dass derselbe $v$ auch \EV{} der neuen Matrix ist.
+\end{itemize}
+\end{wastun}
+
+\textbf{(a) Ist $\lambda$ \EW{} von $A$ und $c \in \mathbb{F}$, so ist $\lambda + c$ \EW{} von $A + cI$.}
+
+\textit{Beweis.} Sei $v \neq 0$ mit $Av = \lambda v$. Dann
+\[
+(A + cI)v = Av + c\,v = \lambda v + c v = (\lambda + c)\,v.
+\]
+Da $v \neq 0$, ist $\lambda + c$ \EW{} von $A + cI$ (mit demselben \EV{} $v$). $\qquad\square$
+
+\textbf{(b) Ist $\lambda$ \EW{} von $A$, so ist $\lambda^2$ \EW{} von $A^2$.}
+
+\textit{Beweis.} Sei $v \neq 0$ mit $Av = \lambda v$. Dann
+\[
+A^2 v = A(Av) = A(\lambda v) = \lambda (Av) = \lambda (\lambda v) = \lambda^2 v. \qquad\square
+\]
+
+\textbf{(c) Ist $A$ invertierbar und $\lambda$ \EW{} von $A$, so ist $\lambda^{-1}$ \EW{} von $A^{-1}$.}
+
+\textit{Beweis.} Da $A$ invertierbar ist, ist $0$ kein \EW{} (sonst g\"abe es $v \neq 0$ mit $Av = 0$, also w\"are $A$ nicht injektiv). Also $\lambda \neq 0$. Aus $Av = \lambda v$ folgt durch Anwenden von $A^{-1}$:
+\[
+v = A^{-1}(\lambda v) = \lambda\, A^{-1} v \;\Longrightarrow\; A^{-1} v = \tfrac{1}{\lambda}\, v.
+\]
+Da $v \neq 0$, ist $\lambda^{-1}$ \EW{} von $A^{-1}$. $\qquad\square$
+
+\textbf{(d) Ist $v$ \EV{} von $A$ \emph{und} von $B$, so ist $v$ auch \EV{} von $AB$.}
+
+\textit{Beweis.} Sei $v \neq 0$ mit $Av = \lambda v$ und $Bv = \mu v$. Dann
+\[
+(AB)v = A(Bv) = A(\mu v) = \mu (Av) = \mu (\lambda v) = (\lambda\mu)\,v.
+\]
+Da $v \neq 0$, ist $v$ \EV{} von $AB$ zum \EW{} $\lambda\mu$. $\qquad\square$
+
+\bigskip
+\hrule
+\bigskip
+
+%% ============================================================
+\subsection*{\"Uberblick: Ergebnisse 43 \& 44}
+%% ============================================================
+
+\begin{center}
+\begin{tabular}{@{}llll@{}}
+\toprule
+Matrix & \EW{} ($\lambda$) & AM, GM & Basis des Eigenraums \\
+\midrule
+$43\,A$ & $3$ & $2,\,2$ & $(-1,1,0),\,(-1,0,1)$ \\
+        & $5$ & $1,\,1$ & $(-1,-2,1)$ \\[2pt]
+$43\,B$ & $2$ & $2,\,1$ & $(-1,0,1)$ \\
+        & $4$ & $1,\,1$ & $(-1,-1,1)$ \\[2pt]
+$44\,A$ & $0$ & $1,\,1$ & $(-5,0,1)$ \\
+        & $6$ & $2,\,2$ & $(0,1,0),\,(1,0,1)$ \\[2pt]
+$44\,B$ & $0$ & $4,\,3$ & $(-1,1,0,0),\,(-1,0,1,0),\,(-1,0,0,1)$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textit{Diagonalisierbar} sind $43\,A$ und $44\,A$ (alle GM $=$ AM). \emph{Nicht} diagonalisierbar sind $43\,B$ und $44\,B$ (je ein GM $<$ AM).
+
+\end{document}
