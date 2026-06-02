@@ -149,10 +149,18 @@ The bracket term multiplied out: $(4-t)(5-t)(2-t) = -t^3 + 11t^2 - 38t + 40$. Th
 
 \erglerk\ \textcolor{gray}{\small Quick check: constant term $\chi_A(0) = 45 = \det A$ \checkmark, and the $t^2$-coefficient $11 = \operatorname{trace}(A) = 4+5+2$ \checkmark.}
 
-\textbf{Step 3: Factor.} Factoring out $-1$: $\chi_A(t) = -(t^3 - 11t^2 + 39t - 45)$. Integer roots are divisors of $45$ -- trying them shows: $t = 3$ and $t = 5$ give $0$. The third root comes from the trace ($3 + 5 + \lambda_3 = 11$): $\lambda_3 = 3$.
+\textbf{Step 3: Factor.} Factoring out $-1$: $\chi_A(t) = -(t^3 - 11t^2 + 39t - 45)$. Integer roots are divisors of $45$ -- trying them shows: $t = 3$ and $t = 5$ give $0$. The third root comes from the trace ($3 + 5 + \lambda_3 = 11$): $\lambda_3 = 3$. So the roots are $\mathbf{3,\ 3,\ 5}$.
+
+\emph{From roots to factored form.} Each root $\lambda$ becomes a factor $(t - \lambda)$ -- a double root accordingly becomes a square:
 \[
-\boxed{\chi_A(t) = (3-t)^2(5-t)} \qquad\Rightarrow\qquad \lambda = 3\ (\text{AM }2),\quad \lambda = 5\ (\text{AM }1).
+t^3 - 11t^2 + 39t - 45 = (t-3)\,\underbrace{(t-3)}_{\text{the } 3 \text{ twice}}(t-5) = (t-3)^2(t-5).
 \]
+We pull the $-1$ from before into the last factor, and since $(t-3)^2 = (3-t)^2$ and $-(t-5) = (5-t)$, this becomes:
+\[
+\boxed{\chi_A(t) = -(t-3)^2(t-5) = (3-t)^2(5-t).}
+\]
+
+\emph{Exponent $=$ algebraic multiplicity.} The AM is simply how often the root occurs $=$ the exponent of the factor: $\lambda = 3$ is squared $\Rightarrow$ AM $2$; $\lambda = 5$ appears once $\Rightarrow$ AM $1$.
 
 \bigskip
 
@@ -264,10 +272,11 @@ cdh &= 3\cdot 2\cdot(-2) = -12, & bdi &= 2\cdot 2\cdot(-1-t) = 4(-1-t).
 
 \erglerk\ \textcolor{gray}{\small Check: $\chi_B(0) = 16 = \det B$ \checkmark, $t^2$-coefficient $8 = \operatorname{trace}(B) = 5+4-1$ \checkmark.}
 
-\textbf{Factor.} $\chi_B(t) = -(t^3 - 8t^2 + 20t - 16)$. Test divisors of $16$: $t = 2$ and $t = 4$ give $0$. Third root from the trace ($2 + 4 + \lambda_3 = 8$): $\lambda_3 = 2$.
+\textbf{Factor.} $\chi_B(t) = -(t^3 - 8t^2 + 20t - 16)$. Test divisors of $16$: $t = 2$ and $t = 4$ give $0$. Third root from the trace ($2 + 4 + \lambda_3 = 8$): $\lambda_3 = 2$. Roots: $\mathbf{2,\ 2,\ 4}$. As for $A$, each root becomes a factor, the double $2$ a square:
 \[
-\boxed{\chi_B(t) = (2-t)^2(4-t)} \qquad\Rightarrow\qquad \lambda = 2\ (\text{AM }2),\quad \lambda = 4\ (\text{AM }1).
+\boxed{\chi_B(t) = -(t-2)^2(t-4) = (2-t)^2(4-t).}
 \]
+Exponent $=$ AM: $\lambda = 2$ squared $\Rightarrow$ AM $2$; $\lambda = 4$ once $\Rightarrow$ AM $1$.
 
 \textbf{Method 2: column trick.} In $B$ too every column sums to $4$ ($5+2-3=4$, $2+4-2=4$, $3+2-1=4$). With $R_1 \to R_1+R_2+R_3$ and then $C_2 \to C_2 - C_1$, $C_3 \to C_3 - C_1$:
 \[

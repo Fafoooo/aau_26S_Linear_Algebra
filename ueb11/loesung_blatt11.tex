@@ -151,10 +151,18 @@ Der Klammerterm ausmultipliziert: $(4-t)(5-t)(2-t) = -t^3 + 11t^2 - 38t + 40$. D
 
 \erglerk\ \textcolor{gray}{\small Schnellcheck: konstantes Glied $\chi_A(0) = 45 = \det A$ \checkmark, und der $t^2$-Koeffizient $11 = \operatorname{Spur}(A) = 4+5+2$ \checkmark.}
 
-\textbf{Schritt 3: Faktorisieren.} Mit $-1$ ausgeklammert: $\chi_A(t) = -(t^3 - 11t^2 + 39t - 45)$. Ganzzahlige Nullstellen sind Teiler von $45$ -- Ausprobieren zeigt: $t = 3$ und $t = 5$ ergeben $0$. Die dritte Nullstelle liefert die Spur ($3 + 5 + \lambda_3 = 11$): $\lambda_3 = 3$.
+\textbf{Schritt 3: Faktorisieren.} Mit $-1$ ausgeklammert: $\chi_A(t) = -(t^3 - 11t^2 + 39t - 45)$. Ganzzahlige Nullstellen sind Teiler von $45$ -- Ausprobieren zeigt: $t = 3$ und $t = 5$ ergeben $0$. Die dritte Nullstelle liefert die Spur ($3 + 5 + \lambda_3 = 11$): $\lambda_3 = 3$. Die Nullstellen sind also $\mathbf{3,\ 3,\ 5}$.
+
+\emph{Von den Nullstellen zur Faktorform.} Jede Nullstelle $\lambda$ wird zu einem Faktor $(t - \lambda)$ -- eine doppelte Nullstelle entsprechend zum Quadrat:
 \[
-\boxed{\chi_A(t) = (3-t)^2(5-t)} \qquad\Rightarrow\qquad \lambda = 3\ (\text{AM }2),\quad \lambda = 5\ (\text{AM }1).
+t^3 - 11t^2 + 39t - 45 = (t-3)\,\underbrace{(t-3)}_{\text{die } 3 \text{ doppelt}}(t-5) = (t-3)^2(t-5).
 \]
+Das $-1$ von vorne ziehen wir in den letzten Faktor hinein, und wegen $(t-3)^2 = (3-t)^2$ sowie $-(t-5) = (5-t)$ wird daraus:
+\[
+\boxed{\chi_A(t) = -(t-3)^2(t-5) = (3-t)^2(5-t).}
+\]
+
+\emph{Exponent $=$ algebraische Vielfachheit.} Die AM ist einfach, wie oft die Nullstelle vorkommt $=$ der Exponent des Faktors: $\lambda = 3$ steht im Quadrat $\Rightarrow$ AM $2$; $\lambda = 5$ steht einfach $\Rightarrow$ AM $1$.
 
 \bigskip
 
@@ -266,10 +274,11 @@ cdh &= 3\cdot 2\cdot(-2) = -12, & bdi &= 2\cdot 2\cdot(-1-t) = 4(-1-t).
 
 \erglerk\ \textcolor{gray}{\small Check: $\chi_B(0) = 16 = \det B$ \checkmark, $t^2$-Koeffizient $8 = \operatorname{Spur}(B) = 5+4-1$ \checkmark.}
 
-\textbf{Faktorisieren.} $\chi_B(t) = -(t^3 - 8t^2 + 20t - 16)$. Teiler von $16$ testen: $t = 2$ und $t = 4$ ergeben $0$. Dritte Nullstelle aus der Spur ($2 + 4 + \lambda_3 = 8$): $\lambda_3 = 2$.
+\textbf{Faktorisieren.} $\chi_B(t) = -(t^3 - 8t^2 + 20t - 16)$. Teiler von $16$ testen: $t = 2$ und $t = 4$ ergeben $0$. Dritte Nullstelle aus der Spur ($2 + 4 + \lambda_3 = 8$): $\lambda_3 = 2$. Nullstellen: $\mathbf{2,\ 2,\ 4}$. Wie bei $A$ wird jede Nullstelle zu einem Faktor, die doppelte $2$ zum Quadrat:
 \[
-\boxed{\chi_B(t) = (2-t)^2(4-t)} \qquad\Rightarrow\qquad \lambda = 2\ (\text{AM }2),\quad \lambda = 4\ (\text{AM }1).
+\boxed{\chi_B(t) = -(t-2)^2(t-4) = (2-t)^2(4-t).}
 \]
+Exponent $=$ AM: $\lambda = 2$ im Quadrat $\Rightarrow$ AM $2$; $\lambda = 4$ einfach $\Rightarrow$ AM $1$.
 
 \textbf{Weg 2: Spaltentrick.} Auch in $B$ summiert jede Spalte zu $4$ ($5+2-3=4$, $2+4-2=4$, $3+2-1=4$). Mit $Z_1 \to Z_1+Z_2+Z_3$ und dann $C_2 \to C_2 - C_1$, $C_3 \to C_3 - C_1$:
 \[
