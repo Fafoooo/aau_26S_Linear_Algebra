@@ -187,10 +187,18 @@ Das $-1$ von vorne ziehen wir in den letzten Faktor hinein, und wegen $(t-3)^2 =
 = (5-t)\,\det\!\begin{pmatrix} 1 & 1 & 1 \\ 2 & 5-t & 2 \\ -1 & -1 & 2-t \end{pmatrix}.
 \]
 
-\textbf{Schritt 2: Spalten $C_2 \to C_2 - C_1$ und $C_3 \to C_3 - C_1$} (macht die erste Zeile zu $1,0,0$):
+\textbf{Schritt 2: Mit Spaltenoperationen auf Dreiecksform.} Ziel: Wir wollen oben rechts Nullen erzeugen. Denn bei einer \emph{Dreiecksmatrix} (oben rechts nur Nullen) ist die Determinante einfach das Produkt der Diagonale -- nichts mehr zu rechnen. Die erste Zeile ist $(1,1,1)$; ziehen wir Spalte $1$ von Spalte $2$ und von Spalte $3$ ab, entstehen dort oben genau die Nullen.
+
+\emph{$C_2 \to C_2 - C_1$} (Spalte 1 von Spalte 2 abziehen, Eintrag f\"ur Eintrag): \; oben $1-1 = 0$, \; Mitte $(5-t)-2 = 3-t$, \; unten $-1-(-1) = 0$.
+
+\emph{$C_3 \to C_3 - C_1$}: \; oben $1-1 = 0$, \; Mitte $2-2 = 0$, \; unten $(2-t)-(-1) = 3-t$.
 \[
-= (5-t)\,\det\!\begin{pmatrix} 1 & 0 & 0 \\ 2 & 3-t & 0 \\ -1 & 0 & 3-t \end{pmatrix}
-= (5-t)\,(3-t)(3-t) = (5-t)(3-t)^2.
+(5-t)\,\det\!\begin{pmatrix} 1 & 1 & 1 \\ 2 & 5-t & 2 \\ -1 & -1 & 2-t \end{pmatrix}
+= (5-t)\,\det\!\begin{pmatrix} 1 & 0 & 0 \\ 2 & 3-t & 0 \\ -1 & 0 & 3-t \end{pmatrix}.
+\]
+(Solche Spaltenoperationen ``Spalte $-$ andere Spalte'' \"andern die Determinante nicht, genau wie bei Zeilen.) Die rechte Matrix ist Dreiecksform, also Determinante $=$ Produkt der Diagonale:
+\[
+= (5-t)\cdot 1 \cdot (3-t) \cdot (3-t) = (5-t)(3-t)^2.
 \]
 
 \erglerk\ \textcolor{gray}{\small Die letzte Matrix ist (untere) Dreiecksform $\Rightarrow$ Determinante $=$ Produkt der Diagonale $1\cdot(3-t)\cdot(3-t)$.}
@@ -212,7 +220,18 @@ Dann Gau\ss:
 \xrightarrow{Z_3 \to Z_3 + Z_2}
 \begin{pmatrix} \piv{-1} & 1 & 1 \\ 0 & \piv{2} & 4 \\ 0 & 0 & 0 \end{pmatrix}.
 \]
-Freie Variable $z$: aus $2y + 4z = 0 \Rightarrow y = -2z$; aus $-x + y + z = 0 \Rightarrow x = y + z = -z$. Mit $z = 1$:
+\textbf{Von der Stufenform zum Eigenvektor.} Die Stufenform als Gleichungssystem gelesen (Variablen $x, y, z$):
+\[
+\text{Zeile 1:}\;\; -x + y + z = 0, \qquad \text{Zeile 2:}\;\; 2y + 4z = 0, \qquad \text{Zeile 3:}\;\; 0 = 0.
+\]
+Zeile 3 ist $0 = 0$, sagt also nichts. Es bleiben $2$ Gleichungen f\"ur $3$ Unbekannte $\Rightarrow$ eine Variable ist \textbf{frei} w\"ahlbar. Welche? Die Pivots (rot) stehen in den Spalten von $x$ und $y$; die $z$-Spalte hat \emph{keinen} Pivot, also ist \textbf{$z$ die freie Variable}.
+
+Jetzt von unten nach oben aufl\"osen (Rest in Abh\"angigkeit von $z$ ausdr\"ucken):
+\begin{itemize}[leftmargin=*, nosep]
+  \item Zeile 2: $2y + 4z = 0 \Rightarrow y = -2z$.
+  \item Zeile 1: $-x + y + z = 0 \Rightarrow x = y + z = -2z + z = -z$.
+\end{itemize}
+Jede L\"osung hat also die Form $(x, y, z) = (-z,\, -2z,\, z) = z \cdot (-1, -2, 1)$. Setzt man $z = 1$, bekommt man einen konkreten Vektor; jedes andere $z$ liefert nur ein Vielfaches davon (dieselbe Richtung). \textbf{Eine} freie Variable $\Rightarrow$ \textbf{eine} Basisrichtung, also ist GM $= 1$:
 \[
 E_5 = \operatorname{span}\{(-1, -2, 1)\}, \qquad \text{GM}(5) = 1.
 \]
@@ -227,7 +246,16 @@ Dann Gau\ss:
 \xrightarrow[Z_3 \to Z_3 + Z_1]{Z_2 \to Z_2 - 2Z_1}
 \begin{pmatrix} \piv{1} & 1 & 1 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \end{pmatrix}.
 \]
-Nur eine Gleichung $x + y + z = 0$, freie Variablen $y, z$. Mit $(y,z) = (1,0)$ und $(0,1)$:
+\textbf{Von der Stufenform zum Eigenvektor.} Hier bleibt nur \emph{eine} echte Zeile \"ubrig (die anderen zwei sind $0 = 0$), n\"amlich
+\[
+x + y + z = 0 \;\Rightarrow\; x = -y - z.
+\]
+Eine Gleichung, drei Unbekannte $\Rightarrow$ diesmal sind \textbf{zwei} Variablen frei: nur $x$ hat einen Pivot, also sind $y$ und $z$ frei. Den Basisvektor zu jeder freien Variable bekommt man, indem man sie auf $1$ setzt und die andere auf $0$ (und $x = -y-z$ ausrechnet):
+\begin{itemize}[leftmargin=*, nosep]
+  \item $(y, z) = (1, 0)$: $x = -1 - 0 = -1 \Rightarrow (-1, 1, 0)$.
+  \item $(y, z) = (0, 1)$: $x = 0 - 1 = -1 \Rightarrow (-1, 0, 1)$.
+\end{itemize}
+\textbf{Zwei} freie Variablen $\Rightarrow$ \textbf{zwei} Basisrichtungen, also GM $= 2$:
 \[
 E_3 = \operatorname{span}\{(-1, 1, 0),\, (-1, 0, 1)\}, \qquad \text{GM}(3) = 2.
 \]
@@ -301,7 +329,7 @@ Dann Gau\ss:
 \xrightarrow{Z_3 \to Z_3 + Z_2}
 \begin{pmatrix} \piv{1} & 2 & 3 \\ 0 & \piv{-4} & -4 \\ 0 & 0 & 0 \end{pmatrix}.
 \]
-$-4y - 4z = 0 \Rightarrow y = -z$; $x + 2y + 3z = 0 \Rightarrow x = -2y - 3z = -z$. Mit $z=1$:
+Aus der Stufenform (von unten nach oben): Zeile 2 gibt $-4y - 4z = 0 \Rightarrow y = -z$; Zeile 1 gibt $x + 2y + 3z = 0 \Rightarrow x = -2y - 3z = 2z - 3z = -z$. Frei ist nur $z$ (die $z$-Spalte hat keinen Pivot). Mit $z = 1$ also eine Basisrichtung:
 \[
 E_4 = \operatorname{span}\{(-1,-1,1)\}, \qquad \text{GM}(4) = 1.
 \]
@@ -318,7 +346,7 @@ Dann Gau\ss:
 \xrightarrow[Z_3 \to Z_3 + 3Z_2']{Z_1 \to Z_1 - 3Z_2'}
 \begin{pmatrix} 0 & -1 & 0 \\ \piv{1} & 1 & 1 \\ 0 & 1 & 0 \end{pmatrix}.
 \]
-Aus der $(-1)$-Zeile: $-y = 0 \Rightarrow y = 0$; aus $x + y + z = 0 \Rightarrow x = -z$. Freie Variable nur $z$. Mit $z=1$:
+Aus der Stufenform: die $(-1)$-Zeile gibt $-y = 0 \Rightarrow y = 0$; die $\piv{1}$-Zeile gibt $x + y + z = 0 \Rightarrow x = -z$. Frei ist nur $z$ -- also \textbf{nur eine} Basisrichtung, obwohl AM $= 2$ ist (genau das macht $B$ defekt). Mit $z = 1$:
 \[
 E_2 = \operatorname{span}\{(-1, 0, 1)\}, \qquad \text{GM}(2) = 1.
 \]
@@ -371,8 +399,9 @@ $B = \begin{pmatrix} 5 & 5 & 5 & 5 \\ 7 & 7 & 7 & 7 \\ 11 & 11 & 11 & 11 \\ -23 
 
 \textbf{Schritt 1: $\lambda = 0$.} Zeile $1 =$ Zeile $3$ $\Rightarrow \det A = 0 \Rightarrow \lambda = 0$ ist \EW{}. Eigenraum $= \ker A$:
 \[
-A v = 0:\quad 6y = 0 \Rightarrow y = 0, \qquad x + 5z = 0 \Rightarrow x = -5z.
+A v = 0:\quad \text{Zeile 2:}\;\; 6y = 0 \Rightarrow y = 0, \qquad \text{Zeile 1:}\;\; x + 5z = 0 \Rightarrow x = -5z.
 \]
+Frei ist $z$ (eine freie Variable), mit $z = 1$:
 \[
 E_0 = \operatorname{span}\{(-5, 0, 1)\}, \qquad \text{GM}(0) = 1.
 \]
@@ -381,7 +410,7 @@ E_0 = \operatorname{span}\{(-5, 0, 1)\}, \qquad \text{GM}(0) = 1.
 \[
 A - 6I = \begin{pmatrix} 1 & 0 & 5 \\ 0 & 6 & 0 \\ 1 & 0 & 5 \end{pmatrix} - \begin{pmatrix} 6 & 0 & 0 \\ 0 & 6 & 0 \\ 0 & 0 & 6 \end{pmatrix} = \begin{pmatrix} -5 & 0 & 5 \\ 0 & 0 & 0 \\ 1 & 0 & -1 \end{pmatrix}.
 \]
-Beide nichttriviale Zeilen sagen $x = z$ ($y$ frei). Also
+Beide nichttriviale Zeilen sagen dasselbe: $x = z$. Auf $y$ gibt es \emph{keine} Bedingung $\Rightarrow$ $y$ und $z$ sind frei (zwei freie Variablen). Mit $(y, z) = (1, 0)$ und $(0, 1)$:
 \[
 E_6 = \operatorname{span}\{(0,1,0),\, (1,0,1)\}, \qquad \text{GM}(6) = 2.
 \]
@@ -414,7 +443,7 @@ Alle GM $=$ AM $\Rightarrow$ $A$ ist diagonalisierbar.
 
 \textcolor{gray}{\small\textit{$B$ hat \"uberall identische Spalten -- jede Zeile ist ein Vielfaches von $(1,1,1,1)$. So eine Matrix hat \textbf{Rang $1$}: alle Zeilen liegen ``auf einer Linie''. Damit ist der Kern riesig (Dimension $4 - 1 = 3$) und $0$ ist \EW{}.}}
 
-\textbf{Schritt 1: $\lambda = 0$ mit GM $= 3$.} Alle Spalten von $B$ sind gleich $\Rightarrow \operatorname{Rang}(B) = 1 \Rightarrow \dim\ker(B) = 4 - 1 = 3$. Also ist $0$ \EW{} mit $\text{GM}(0) = 3$. Der Kern: $Bv = 0$ hei\ss t (jede Zeile) $5(a+b+c+d) = 0$, also $a + b + c + d = 0$:
+\textbf{Schritt 1: $\lambda = 0$ mit GM $= 3$.} Alle Spalten von $B$ sind gleich $\Rightarrow \operatorname{Rang}(B) = 1 \Rightarrow \dim\ker(B) = 4 - 1 = 3$. Also ist $0$ \EW{} mit $\text{GM}(0) = 3$. Der Kern: $Bv = 0$ hei\ss t (jede Zeile) $5(a+b+c+d) = 0$, also $a + b + c + d = 0$. Das ist \emph{eine} Gleichung f\"ur \emph{vier} Unbekannte $\Rightarrow$ \textbf{drei} freie Variablen ($b, c, d$); jeweils eine auf $1$ setzen (Rest $0$, dann $a = -1$) gibt die drei Basisvektoren:
 \[
 E_0 = \operatorname{span}\{(-1,1,0,0),\, (-1,0,1,0),\, (-1,0,0,1)\}, \qquad \text{GM}(0) = 3.
 \]

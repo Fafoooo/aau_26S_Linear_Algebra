@@ -185,10 +185,18 @@ We pull the $-1$ from before into the last factor, and since $(t-3)^2 = (3-t)^2$
 = (5-t)\,\det\!\begin{pmatrix} 1 & 1 & 1 \\ 2 & 5-t & 2 \\ -1 & -1 & 2-t \end{pmatrix}.
 \]
 
-\textbf{Step 2: columns $C_2 \to C_2 - C_1$ and $C_3 \to C_3 - C_1$} (makes the first row $1,0,0$):
+\textbf{Step 2: To triangular form with column operations.} Goal: we want to create zeros in the upper right. Because for a \emph{triangular matrix} (only zeros in the upper right) the determinant is simply the product of the diagonal -- nothing left to compute. The first row is $(1,1,1)$; subtracting column $1$ from columns $2$ and $3$ creates exactly those zeros up top.
+
+\emph{$C_2 \to C_2 - C_1$} (subtract column 1 from column 2, entry by entry): \; top $1-1 = 0$, \; middle $(5-t)-2 = 3-t$, \; bottom $-1-(-1) = 0$.
+
+\emph{$C_3 \to C_3 - C_1$}: \; top $1-1 = 0$, \; middle $2-2 = 0$, \; bottom $(2-t)-(-1) = 3-t$.
 \[
-= (5-t)\,\det\!\begin{pmatrix} 1 & 0 & 0 \\ 2 & 3-t & 0 \\ -1 & 0 & 3-t \end{pmatrix}
-= (5-t)\,(3-t)(3-t) = (5-t)(3-t)^2.
+(5-t)\,\det\!\begin{pmatrix} 1 & 1 & 1 \\ 2 & 5-t & 2 \\ -1 & -1 & 2-t \end{pmatrix}
+= (5-t)\,\det\!\begin{pmatrix} 1 & 0 & 0 \\ 2 & 3-t & 0 \\ -1 & 0 & 3-t \end{pmatrix}.
+\]
+(Such column operations ``column $-$ another column'' do not change the determinant, just like for rows.) The right matrix is triangular, so determinant $=$ product of the diagonal:
+\[
+= (5-t)\cdot 1 \cdot (3-t) \cdot (3-t) = (5-t)(3-t)^2.
 \]
 
 \erglerk\ \textcolor{gray}{\small The last matrix is (lower) triangular $\Rightarrow$ determinant $=$ product of the diagonal $1\cdot(3-t)\cdot(3-t)$.}
@@ -210,7 +218,18 @@ Then Gauss:
 \xrightarrow{R_3 \to R_3 + R_2}
 \begin{pmatrix} \piv{-1} & 1 & 1 \\ 0 & \piv{2} & 4 \\ 0 & 0 & 0 \end{pmatrix}.
 \]
-Free variable $z$: from $2y + 4z = 0 \Rightarrow y = -2z$; from $-x + y + z = 0 \Rightarrow x = y + z = -z$. With $z = 1$:
+\textbf{From the echelon form to the eigenvector.} The echelon form read as a system of equations (variables $x, y, z$):
+\[
+\text{Row 1:}\;\; -x + y + z = 0, \qquad \text{Row 2:}\;\; 2y + 4z = 0, \qquad \text{Row 3:}\;\; 0 = 0.
+\]
+Row 3 is $0 = 0$, so it says nothing. That leaves $2$ equations for $3$ unknowns $\Rightarrow$ one variable is \textbf{free} to choose. Which one? The pivots (red) are in the columns of $x$ and $y$; the $z$-column has \emph{no} pivot, so \textbf{$z$ is the free variable}.
+
+Now solve from the bottom up (express the rest in terms of $z$):
+\begin{itemize}[leftmargin=*, nosep]
+  \item Row 2: $2y + 4z = 0 \Rightarrow y = -2z$.
+  \item Row 1: $-x + y + z = 0 \Rightarrow x = y + z = -2z + z = -z$.
+\end{itemize}
+So every solution has the form $(x, y, z) = (-z,\, -2z,\, z) = z \cdot (-1, -2, 1)$. Setting $z = 1$ gives a concrete vector; any other $z$ just gives a multiple of it (same direction). \textbf{One} free variable $\Rightarrow$ \textbf{one} basis direction, so GM $= 1$:
 \[
 E_5 = \operatorname{span}\{(-1, -2, 1)\}, \qquad \text{GM}(5) = 1.
 \]
@@ -225,7 +244,16 @@ Then Gauss:
 \xrightarrow[R_3 \to R_3 + R_1]{R_2 \to R_2 - 2R_1}
 \begin{pmatrix} \piv{1} & 1 & 1 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \end{pmatrix}.
 \]
-Only one equation $x + y + z = 0$, free variables $y, z$. With $(y,z) = (1,0)$ and $(0,1)$:
+\textbf{From the echelon form to the eigenvector.} Here only \emph{one} real row remains (the other two are $0 = 0$), namely
+\[
+x + y + z = 0 \;\Rightarrow\; x = -y - z.
+\]
+One equation, three unknowns $\Rightarrow$ this time \textbf{two} variables are free: only $x$ has a pivot, so $y$ and $z$ are free. You get the basis vector for each free variable by setting it to $1$ and the other to $0$ (and computing $x = -y-z$):
+\begin{itemize}[leftmargin=*, nosep]
+  \item $(y, z) = (1, 0)$: $x = -1 - 0 = -1 \Rightarrow (-1, 1, 0)$.
+  \item $(y, z) = (0, 1)$: $x = 0 - 1 = -1 \Rightarrow (-1, 0, 1)$.
+\end{itemize}
+\textbf{Two} free variables $\Rightarrow$ \textbf{two} basis directions, so GM $= 2$:
 \[
 E_3 = \operatorname{span}\{(-1, 1, 0),\, (-1, 0, 1)\}, \qquad \text{GM}(3) = 2.
 \]
@@ -299,7 +327,7 @@ Then Gauss:
 \xrightarrow{R_3 \to R_3 + R_2}
 \begin{pmatrix} \piv{1} & 2 & 3 \\ 0 & \piv{-4} & -4 \\ 0 & 0 & 0 \end{pmatrix}.
 \]
-$-4y - 4z = 0 \Rightarrow y = -z$; $x + 2y + 3z = 0 \Rightarrow x = -2y - 3z = -z$. With $z=1$:
+From the echelon form (bottom up): Row 2 gives $-4y - 4z = 0 \Rightarrow y = -z$; Row 1 gives $x + 2y + 3z = 0 \Rightarrow x = -2y - 3z = 2z - 3z = -z$. Only $z$ is free (the $z$-column has no pivot). With $z = 1$, one basis direction:
 \[
 E_4 = \operatorname{span}\{(-1,-1,1)\}, \qquad \text{GM}(4) = 1.
 \]
@@ -316,7 +344,7 @@ Then Gauss:
 \xrightarrow[R_3 \to R_3 + 3R_2']{R_1 \to R_1 - 3R_2'}
 \begin{pmatrix} 0 & -1 & 0 \\ \piv{1} & 1 & 1 \\ 0 & 1 & 0 \end{pmatrix}.
 \]
-From the $(-1)$ row: $-y = 0 \Rightarrow y = 0$; from $x + y + z = 0 \Rightarrow x = -z$. Only free variable $z$. With $z=1$:
+From the echelon form: the $(-1)$ row gives $-y = 0 \Rightarrow y = 0$; the $\piv{1}$ row gives $x + y + z = 0 \Rightarrow x = -z$. Only $z$ is free -- so \textbf{only one} basis direction, even though AM $= 2$ (exactly what makes $B$ defective). With $z = 1$:
 \[
 E_2 = \operatorname{span}\{(-1, 0, 1)\}, \qquad \text{GM}(2) = 1.
 \]
@@ -369,8 +397,9 @@ $B = \begin{pmatrix} 5 & 5 & 5 & 5 \\ 7 & 7 & 7 & 7 \\ 11 & 11 & 11 & 11 \\ -23 
 
 \textbf{Step 1: $\lambda = 0$.} Row $1 =$ row $3$ $\Rightarrow \det A = 0 \Rightarrow \lambda = 0$ is an eigenvalue. Eigenspace $= \ker A$:
 \[
-A v = 0:\quad 6y = 0 \Rightarrow y = 0, \qquad x + 5z = 0 \Rightarrow x = -5z.
+A v = 0:\quad \text{Row 2:}\;\; 6y = 0 \Rightarrow y = 0, \qquad \text{Row 1:}\;\; x + 5z = 0 \Rightarrow x = -5z.
 \]
+$z$ is free (one free variable), with $z = 1$:
 \[
 E_0 = \operatorname{span}\{(-5, 0, 1)\}, \qquad \text{GM}(0) = 1.
 \]
@@ -379,7 +408,7 @@ E_0 = \operatorname{span}\{(-5, 0, 1)\}, \qquad \text{GM}(0) = 1.
 \[
 A - 6I = \begin{pmatrix} 1 & 0 & 5 \\ 0 & 6 & 0 \\ 1 & 0 & 5 \end{pmatrix} - \begin{pmatrix} 6 & 0 & 0 \\ 0 & 6 & 0 \\ 0 & 0 & 6 \end{pmatrix} = \begin{pmatrix} -5 & 0 & 5 \\ 0 & 0 & 0 \\ 1 & 0 & -1 \end{pmatrix}.
 \]
-Both nontrivial rows say $x = z$ ($y$ free). So
+Both nontrivial rows say the same thing: $x = z$. There is \emph{no} condition on $y$ $\Rightarrow$ $y$ and $z$ are free (two free variables). With $(y, z) = (1, 0)$ and $(0, 1)$:
 \[
 E_6 = \operatorname{span}\{(0,1,0),\, (1,0,1)\}, \qquad \text{GM}(6) = 2.
 \]
@@ -412,7 +441,7 @@ All GM $=$ AM $\Rightarrow$ $A$ is diagonalizable.
 
 \textcolor{gray}{\small\textit{$B$ has identical columns everywhere -- every row is a multiple of $(1,1,1,1)$. Such a matrix has \textbf{rank $1$}: all rows lie ``on one line''. Hence the kernel is huge (dimension $4 - 1 = 3$) and $0$ is an eigenvalue.}}
 
-\textbf{Step 1: $\lambda = 0$ with GM $= 3$.} All columns of $B$ are equal $\Rightarrow \operatorname{rank}(B) = 1 \Rightarrow \dim\ker(B) = 4 - 1 = 3$. So $0$ is an eigenvalue with $\text{GM}(0) = 3$. The kernel: $Bv = 0$ means (each row) $5(a+b+c+d) = 0$, i.e.\ $a + b + c + d = 0$:
+\textbf{Step 1: $\lambda = 0$ with GM $= 3$.} All columns of $B$ are equal $\Rightarrow \operatorname{rank}(B) = 1 \Rightarrow \dim\ker(B) = 4 - 1 = 3$. So $0$ is an eigenvalue with $\text{GM}(0) = 3$. The kernel: $Bv = 0$ means (each row) $5(a+b+c+d) = 0$, i.e.\ $a + b + c + d = 0$. That is \emph{one} equation for \emph{four} unknowns $\Rightarrow$ \textbf{three} free variables ($b, c, d$); setting each to $1$ in turn (rest $0$, then $a = -1$) gives the three basis vectors:
 \[
 E_0 = \operatorname{span}\{(-1,1,0,0),\, (-1,0,1,0),\, (-1,0,0,1)\}, \qquad \text{GM}(0) = 3.
 \]
