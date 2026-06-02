@@ -107,9 +107,9 @@ das charakteristische Polynom, die \EW{}e mit algebraischer und geometrischer Vi
 
 \textcolor{gray}{\small\textit{Sarrus-Regel: Man schreibt die ersten zwei Spalten nochmal rechts daneben. Die drei Diagonalen \emph{nach unten} (blau) werden $+$ gez\"ahlt, die drei \emph{nach oben} (rot) $-$. Formel: $\det = aei + bfg + cdh - ceg - afh - bdi$.}}
 
-\textbf{Schritt 1: $A - tI$ hinschreiben.}
+\textbf{Schritt 1: $A - tI$ hinschreiben.} $tI$ ist die Diagonalmatrix mit lauter $t$ auf der Diagonale. Beim Abziehen \"andert sich also \emph{nur die Diagonale} von $A$:
 \[
-A - tI = \begin{pmatrix} 4-t & 1 & 1 \\ 2 & 5-t & 2 \\ -1 & -1 & 2-t \end{pmatrix}.
+A - tI = \begin{pmatrix} 4 & 1 & 1 \\ 2 & 5 & 2 \\ -1 & -1 & 2 \end{pmatrix} - \begin{pmatrix} t & 0 & 0 \\ 0 & t & 0 \\ 0 & 0 & t \end{pmatrix} = \begin{pmatrix} 4-t & 1 & 1 \\ 2 & 5-t & 2 \\ -1 & -1 & 2-t \end{pmatrix}.
 \]
 
 \textbf{Schritt 2: Sarrus anwenden.} Mit der Formel oben (die drei $+$ Diagonalen, dann die drei $-$ Diagonalen):
@@ -171,9 +171,13 @@ Gleiches Ergebnis wie Weg 1: $\chi_A(t) = (5-t)(3-t)^2$, \EW{}e $\lambda = 5$ (A
 \medskip
 \textbf{Eigenr\"aume.}
 
-\textit{$\lambda = 5$:} L\"ose $(A - 5I)v = 0$:
+\textit{$\lambda = 5$:} L\"ose $(A - 5I)v = 0$. Zuerst $A - 5I$ (nur die Diagonale wird um $5$ kleiner):
 \[
-A - 5I = \begin{pmatrix} -1 & 1 & 1 \\ 2 & 0 & 2 \\ -1 & -1 & -3 \end{pmatrix}
+A - 5I = \begin{pmatrix} 4 & 1 & 1 \\ 2 & 5 & 2 \\ -1 & -1 & 2 \end{pmatrix} - \begin{pmatrix} 5 & 0 & 0 \\ 0 & 5 & 0 \\ 0 & 0 & 5 \end{pmatrix} = \begin{pmatrix} -1 & 1 & 1 \\ 2 & 0 & 2 \\ -1 & -1 & -3 \end{pmatrix}.
+\]
+Dann Gau\ss:
+\[
+\begin{pmatrix} -1 & 1 & 1 \\ 2 & 0 & 2 \\ -1 & -1 & -3 \end{pmatrix}
 \xrightarrow[Z_3 \to Z_3 - Z_1]{Z_2 \to Z_2 + 2Z_1}
 \begin{pmatrix} \piv{-1} & 1 & 1 \\ 0 & \piv{2} & 4 \\ 0 & -2 & -4 \end{pmatrix}
 \xrightarrow{Z_3 \to Z_3 + Z_2}
@@ -184,9 +188,13 @@ Freie Variable $z$: aus $2y + 4z = 0 \Rightarrow y = -2z$; aus $-x + y + z = 0 \
 E_5 = \operatorname{span}\{(-1, -2, 1)\}, \qquad \text{GM}(5) = 1.
 \]
 
-\textit{$\lambda = 3$:}
+\textit{$\lambda = 3$:} Zuerst $A - 3I$:
 \[
-A - 3I = \begin{pmatrix} 1 & 1 & 1 \\ 2 & 2 & 2 \\ -1 & -1 & -1 \end{pmatrix}
+A - 3I = \begin{pmatrix} 4 & 1 & 1 \\ 2 & 5 & 2 \\ -1 & -1 & 2 \end{pmatrix} - \begin{pmatrix} 3 & 0 & 0 \\ 0 & 3 & 0 \\ 0 & 0 & 3 \end{pmatrix} = \begin{pmatrix} 1 & 1 & 1 \\ 2 & 2 & 2 \\ -1 & -1 & -1 \end{pmatrix}.
+\]
+Dann Gau\ss:
+\[
+\begin{pmatrix} 1 & 1 & 1 \\ 2 & 2 & 2 \\ -1 & -1 & -1 \end{pmatrix}
 \xrightarrow[Z_3 \to Z_3 + Z_1]{Z_2 \to Z_2 - 2Z_1}
 \begin{pmatrix} \piv{1} & 1 & 1 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \end{pmatrix}.
 \]
@@ -207,7 +215,11 @@ Alle GM $=$ AM $\Rightarrow$ $A$ ist diagonalisierbar.
 %% --- 43 B ---
 \subsubsection*{Matrix $B$}
 
-\textbf{Weg 1: Sarrus.} Mit $B - tI = \begin{pmatrix} 5-t & 2 & 3 \\ 2 & 4-t & 2 \\ -3 & -2 & -1-t \end{pmatrix}$ liefert die Sarrus-Regel (gleiches Schema wie oben):
+\textbf{Weg 1: Sarrus.} Zuerst $B - tI$ (wieder nur die Diagonale):
+\[
+B - tI = \begin{pmatrix} 5 & 2 & 3 \\ 2 & 4 & 2 \\ -3 & -2 & -1 \end{pmatrix} - \begin{pmatrix} t & 0 & 0 \\ 0 & t & 0 \\ 0 & 0 & t \end{pmatrix} = \begin{pmatrix} 5-t & 2 & 3 \\ 2 & 4-t & 2 \\ -3 & -2 & -1-t \end{pmatrix}.
+\]
+Damit liefert die Sarrus-Regel (gleiches Schema wie oben):
 \[
 \chi_B(t) = (5-t)(4-t)(-1-t) + 36 - 9t = -t^3 + 8t^2 - 20t + 16.
 \]
@@ -231,9 +243,13 @@ Gleiches Ergebnis. \EW{}e: $\lambda = 2$ (AM $2$), $\lambda = 4$ (AM $1$).
 \medskip
 \textbf{Eigenr\"aume.}
 
-\textit{$\lambda = 4$:}
+\textit{$\lambda = 4$:} Zuerst $B - 4I$:
 \[
-B - 4I = \begin{pmatrix} 1 & 2 & 3 \\ 2 & 0 & 2 \\ -3 & -2 & -5 \end{pmatrix}
+B - 4I = \begin{pmatrix} 5 & 2 & 3 \\ 2 & 4 & 2 \\ -3 & -2 & -1 \end{pmatrix} - \begin{pmatrix} 4 & 0 & 0 \\ 0 & 4 & 0 \\ 0 & 0 & 4 \end{pmatrix} = \begin{pmatrix} 1 & 2 & 3 \\ 2 & 0 & 2 \\ -3 & -2 & -5 \end{pmatrix}.
+\]
+Dann Gau\ss:
+\[
+\begin{pmatrix} 1 & 2 & 3 \\ 2 & 0 & 2 \\ -3 & -2 & -5 \end{pmatrix}
 \xrightarrow[Z_3 \to Z_3 + 3Z_1]{Z_2 \to Z_2 - 2Z_1}
 \begin{pmatrix} \piv{1} & 2 & 3 \\ 0 & \piv{-4} & -4 \\ 0 & 4 & 4 \end{pmatrix}
 \xrightarrow{Z_3 \to Z_3 + Z_2}
@@ -244,9 +260,13 @@ $-4y - 4z = 0 \Rightarrow y = -z$; $x + 2y + 3z = 0 \Rightarrow x = -2y - 3z = -
 E_4 = \operatorname{span}\{(-1,-1,1)\}, \qquad \text{GM}(4) = 1.
 \]
 
-\textit{$\lambda = 2$:}
+\textit{$\lambda = 2$:} Zuerst $B - 2I$:
 \[
-B - 2I = \begin{pmatrix} 3 & 2 & 3 \\ 2 & 2 & 2 \\ -3 & -2 & -3 \end{pmatrix}
+B - 2I = \begin{pmatrix} 5 & 2 & 3 \\ 2 & 4 & 2 \\ -3 & -2 & -1 \end{pmatrix} - \begin{pmatrix} 2 & 0 & 0 \\ 0 & 2 & 0 \\ 0 & 0 & 2 \end{pmatrix} = \begin{pmatrix} 3 & 2 & 3 \\ 2 & 2 & 2 \\ -3 & -2 & -3 \end{pmatrix}.
+\]
+Dann Gau\ss:
+\[
+\begin{pmatrix} 3 & 2 & 3 \\ 2 & 2 & 2 \\ -3 & -2 & -3 \end{pmatrix}
 \xrightarrow{Z_2 \to \tfrac12 Z_2}
 \begin{pmatrix} 3 & 2 & 3 \\ 1 & 1 & 1 \\ -3 & -2 & -3 \end{pmatrix}
 \xrightarrow[Z_3 \to Z_3 + 3Z_2']{Z_1 \to Z_1 - 3Z_2'}
@@ -311,7 +331,11 @@ A v = 0:\quad 6y = 0 \Rightarrow y = 0, \qquad x + 5z = 0 \Rightarrow x = -5z.
 E_0 = \operatorname{span}\{(-5, 0, 1)\}, \qquad \text{GM}(0) = 1.
 \]
 
-\textbf{Schritt 2: $\lambda = 6$.} Eigenraum $= \ker(A - 6I)$ mit $A - 6I = \begin{pmatrix} -5 & 0 & 5 \\ 0 & 0 & 0 \\ 1 & 0 & -1 \end{pmatrix}$. Beide nichttriviale Zeilen sagen $x = z$ ($y$ frei). Also
+\textbf{Schritt 2: $\lambda = 6$.} Eigenraum $= \ker(A - 6I)$. Zuerst
+\[
+A - 6I = \begin{pmatrix} 1 & 0 & 5 \\ 0 & 6 & 0 \\ 1 & 0 & 5 \end{pmatrix} - \begin{pmatrix} 6 & 0 & 0 \\ 0 & 6 & 0 \\ 0 & 0 & 6 \end{pmatrix} = \begin{pmatrix} -5 & 0 & 5 \\ 0 & 0 & 0 \\ 1 & 0 & -1 \end{pmatrix}.
+\]
+Beide nichttriviale Zeilen sagen $x = z$ ($y$ frei). Also
 \[
 E_6 = \operatorname{span}\{(0,1,0),\, (1,0,1)\}, \qquad \text{GM}(6) = 2.
 \]
