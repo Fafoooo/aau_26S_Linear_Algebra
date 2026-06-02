@@ -110,11 +110,37 @@ determine the characteristic polynomial, the eigenvalues with algebraic and geom
 A - tI = \begin{pmatrix} 4 & 1 & 1 \\ 2 & 5 & 2 \\ -1 & -1 & 2 \end{pmatrix} - \begin{pmatrix} t & 0 & 0 \\ 0 & t & 0 \\ 0 & 0 & t \end{pmatrix} = \begin{pmatrix} 4-t & 1 & 1 \\ 2 & 5-t & 2 \\ -1 & -1 & 2-t \end{pmatrix}.
 \]
 
-\textbf{Step 2: Apply Sarrus.} With the formula above (the three $+$ diagonals, then the three $-$ diagonals):
+\textbf{Step 2: Apply Sarrus.}
+
+\emph{The rule in general.} For an arbitrary $3\times3$ matrix with letters:
+\[
+\begin{pmatrix} a & b & c \\ d & e & f \\ g & h & i \end{pmatrix}
+\;\longrightarrow\;
+\det = aei + bfg + cdh \;-\; ceg - afh - bdi.
+\]
+(The first three products $=$ diagonals going down $(+)$, the last three $=$ diagonals going up $(-)$, see the figure.)
+
+\emph{Read off the letters from our matrix.} From $A - tI = \left(\begin{smallmatrix} 4-t & 1 & 1 \\ 2 & 5-t & 2 \\ -1 & -1 & 2-t \end{smallmatrix}\right)$ we read entry by entry:
+\[
+\begin{array}{lll}
+a = 4-t, & b = 1, & c = 1, \\
+d = 2, & e = 5-t, & f = 2, \\
+g = -1, & h = -1, & i = 2-t.
+\end{array}
+\]
+
+\emph{Compute the six products one by one:}
 \begin{align*}
-\det(A - tI) &= \underbrace{(4-t)(5-t)(2-t)}_{aei} + \underbrace{1\cdot 2 \cdot(-1)}_{bfg} + \underbrace{1\cdot 2\cdot(-1)}_{cdh} \\
-&\quad - \underbrace{1\cdot(5-t)\cdot(-1)}_{ceg} - \underbrace{(4-t)\cdot 2\cdot(-1)}_{afh} - \underbrace{1\cdot 2\cdot(2-t)}_{bdi} \\[2pt]
-&= (4-t)(5-t)(2-t) \;-2\;-2\;+(5-t)\;+2(4-t)\;-2(2-t).
+aei &= (4-t)(5-t)(2-t), & ceg &= 1\cdot(5-t)\cdot(-1) = -(5-t), \\
+bfg &= 1\cdot 2\cdot(-1) = -2, & afh &= (4-t)\cdot 2\cdot(-1) = -2(4-t), \\
+cdh &= 1\cdot 2\cdot(-1) = -2, & bdi &= 1\cdot 2\cdot(2-t) = 2(2-t).
+\end{align*}
+
+\emph{Substitute into the formula} (first three with $+$, last three with $-$):
+\begin{align*}
+\det(A - tI) &= aei + bfg + cdh - ceg - afh - bdi \\
+&= (4-t)(5-t)(2-t) + (-2) + (-2) - \big(-(5-t)\big) - \big(-2(4-t)\big) - 2(2-t) \\
+&= (4-t)(5-t)(2-t) - 2 - 2 + (5-t) + 2(4-t) - 2(2-t).
 \end{align*}
 The bracket term multiplied out: $(4-t)(5-t)(2-t) = -t^3 + 11t^2 - 38t + 40$. The remaining terms: $-2 -2 +5 -t +8 -2t -4 +2t = 5 - t$. Together:
 \[
@@ -217,10 +243,29 @@ All GM $=$ AM $\Rightarrow$ $A$ is diagonalizable.
 \[
 B - tI = \begin{pmatrix} 5 & 2 & 3 \\ 2 & 4 & 2 \\ -3 & -2 & -1 \end{pmatrix} - \begin{pmatrix} t & 0 & 0 \\ 0 & t & 0 \\ 0 & 0 & t \end{pmatrix} = \begin{pmatrix} 5-t & 2 & 3 \\ 2 & 4-t & 2 \\ -3 & -2 & -1-t \end{pmatrix}.
 \]
-With this the Sarrus rule gives (same scheme as above):
+\emph{Read off the letters} (same formula $\det = aei + bfg + cdh - ceg - afh - bdi$ as for $A$):
 \[
-\chi_B(t) = (5-t)(4-t)(-1-t) + 36 - 9t = -t^3 + 8t^2 - 20t + 16.
+\begin{array}{lll}
+a = 5-t, & b = 2, & c = 3, \\
+d = 2, & e = 4-t, & f = 2, \\
+g = -3, & h = -2, & i = -1-t.
+\end{array}
 \]
+
+\emph{The six products:}
+\begin{align*}
+aei &= (5-t)(4-t)(-1-t), & ceg &= 3\cdot(4-t)\cdot(-3) = -9(4-t), \\
+bfg &= 2\cdot 2\cdot(-3) = -12, & afh &= (5-t)\cdot 2\cdot(-2) = -4(5-t), \\
+cdh &= 3\cdot 2\cdot(-2) = -12, & bdi &= 2\cdot 2\cdot(-1-t) = 4(-1-t).
+\end{align*}
+
+\emph{Substitute into the formula:}
+\begin{align*}
+\chi_B(t) &= aei + bfg + cdh - ceg - afh - bdi \\
+&= (5-t)(4-t)(-1-t) + (-12) + (-12) - \big(-9(4-t)\big) - \big(-4(5-t)\big) - 4(-1-t) \\
+&= (5-t)(4-t)(-1-t) - 12 - 12 + 9(4-t) + 4(5-t) - 4(-1-t) \\
+&= (5-t)(4-t)(-1-t) + 36 - 9t = -t^3 + 8t^2 - 20t + 16.
+\end{align*}
 
 \erglerk\ \textcolor{gray}{\small Check: $\chi_B(0) = 16 = \det B$ \checkmark, $t^2$-coefficient $8 = \operatorname{trace}(B) = 5+4-1$ \checkmark.}
 
