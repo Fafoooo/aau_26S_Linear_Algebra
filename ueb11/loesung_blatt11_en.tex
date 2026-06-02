@@ -149,15 +149,10 @@ The bracket term multiplied out: $(4-t)(5-t)(2-t) = -t^3 + 11t^2 - 38t + 40$. Th
 
 \erglerk\ \textcolor{gray}{\small Quick check: constant term $\chi_A(0) = 45 = \det A$ \checkmark, and the $t^2$-coefficient $11 = \operatorname{trace}(A) = 4+5+2$ \checkmark.}
 
-\textbf{Step 3: Factor with integer roots.} Factor out $-1$: $\chi_A(t) = -(t^3 - 11t^2 + 39t - 45)$. Integer roots divide the constant term $45$ (candidates $\pm 1, 3, 5, 9, 15, 45$). Substituting:
+\textbf{Step 3: Factor.} Factoring out $-1$: $\chi_A(t) = -(t^3 - 11t^2 + 39t - 45)$. Integer roots are divisors of $45$ -- trying them shows: $t = 3$ and $t = 5$ give $0$. The third root comes from the trace ($3 + 5 + \lambda_3 = 11$): $\lambda_3 = 3$.
 \[
-t = 3:\; 27 - 99 + 117 - 45 = 0 \;\checkmark, \qquad t = 5:\; 125 - 275 + 195 - 45 = 0 \;\checkmark.
+\boxed{\chi_A(t) = (3-t)^2(5-t)} \qquad\Rightarrow\qquad \lambda = 3\ (\text{AM }2),\quad \lambda = 5\ (\text{AM }1).
 \]
-The third root from the trace: $3 + 5 + \lambda_3 = 11 \Rightarrow \lambda_3 = 3$. So
-\[
-\boxed{\chi_A(t) = -(t-3)^2(t-5) = (3-t)^2(5-t).}
-\]
-Eigenvalues: $\lambda = 3$ (AM $2$), $\lambda = 5$ (AM $1$).
 
 \bigskip
 
@@ -269,12 +264,9 @@ cdh &= 3\cdot 2\cdot(-2) = -12, & bdi &= 2\cdot 2\cdot(-1-t) = 4(-1-t).
 
 \erglerk\ \textcolor{gray}{\small Check: $\chi_B(0) = 16 = \det B$ \checkmark, $t^2$-coefficient $8 = \operatorname{trace}(B) = 5+4-1$ \checkmark.}
 
-\textbf{Factor:} $\chi_B(t) = -(t^3 - 8t^2 + 20t - 16)$. Test divisors of $16$: $t = 2:\; 8 - 32 + 40 - 16 = 0$ \checkmark. Polynomial division by $(t-2)$:
+\textbf{Factor.} $\chi_B(t) = -(t^3 - 8t^2 + 20t - 16)$. Test divisors of $16$: $t = 2$ and $t = 4$ give $0$. Third root from the trace ($2 + 4 + \lambda_3 = 8$): $\lambda_3 = 2$.
 \[
-t^3 - 8t^2 + 20t - 16 = (t-2)(t^2 - 6t + 8) = (t-2)(t-2)(t-4).
-\]
-\[
-\boxed{\chi_B(t) = -(t-2)^2(t-4) = (2-t)^2(4-t).}
+\boxed{\chi_B(t) = (2-t)^2(4-t)} \qquad\Rightarrow\qquad \lambda = 2\ (\text{AM }2),\quad \lambda = 4\ (\text{AM }1).
 \]
 
 \textbf{Method 2: column trick.} In $B$ too every column sums to $4$ ($5+2-3=4$, $2+4-2=4$, $3+2-1=4$). With $R_1 \to R_1+R_2+R_3$ and then $C_2 \to C_2 - C_1$, $C_3 \to C_3 - C_1$:
