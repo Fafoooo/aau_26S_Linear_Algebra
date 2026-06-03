@@ -284,11 +284,23 @@ $2$ und $4$ ergeben $0$, sind also Nullstellen. Die \textbf{dritte} (noch unbeka
 \]
 Exponent $=$ AM: $\lambda = 2$ im Quadrat $\Rightarrow$ AM $2$; $\lambda = 4$ einfach $\Rightarrow$ AM $1$.
 
-\textbf{Weg 2: Spaltentrick.} Auch in $B$ summiert jede Spalte zu $4$ ($5+2-3=4$, $2+4-2=4$, $3+2-1=4$). Mit $Z_1 \to Z_1+Z_2+Z_3$ und dann $C_2 \to C_2 - C_1$, $C_3 \to C_3 - C_1$:
+\textbf{Weg 2: Faktor fr\"uh herausziehen (Spaltentrick).} Auch in $B$ summiert jede Spalte zu $4$ ($5+2-3=4$, $2+4-2=4$, $3+2-1=4$), in $B - tI$ also zu $4 - t$.
+
+\textbf{Schritt 1: $Z_1 \to Z_1 + Z_2 + Z_3$} (\"andert die Determinante nicht), dann $(4-t)$ ausklammern:
 \[
-\det(B - tI) = (4-t)\det\!\begin{pmatrix} 1 & 0 & 0 \\ 2 & 2-t & 0 \\ -3 & 1 & 2-t \end{pmatrix} = (4-t)(2-t)^2.
+\det(B - tI) = \det\!\begin{pmatrix} 4-t & 4-t & 4-t \\ 2 & 4-t & 2 \\ -3 & -2 & -1-t \end{pmatrix}
+= (4-t)\,\det\!\begin{pmatrix} 1 & 1 & 1 \\ 2 & 4-t & 2 \\ -3 & -2 & -1-t \end{pmatrix}.
 \]
-Gleiches Ergebnis. \EW{}e: $\lambda = 2$ (AM $2$), $\lambda = 4$ (AM $1$).
+
+\textbf{Schritt 2: Spalten $C_2 \to C_2 - C_1$ und $C_3 \to C_3 - C_1$} (macht die erste Zeile zu $1,0,0$):
+\[
+= (4-t)\,\det\!\begin{pmatrix} 1 & 0 & 0 \\ 2 & 2-t & 0 \\ -3 & 1 & 2-t \end{pmatrix}
+= (4-t)\,(2-t)(2-t) = (4-t)(2-t)^2.
+\]
+
+\erglerk\ \textcolor{gray}{\small Die letzte Matrix ist (untere) Dreiecksform $\Rightarrow$ Determinante $=$ Produkt der Diagonale $1\cdot(2-t)\cdot(2-t)$.}
+
+Gleiches Ergebnis wie Weg 1: $\chi_B(t) = (4-t)(2-t)^2$, \EW{}e $\lambda = 2$ (AM $2$), $\lambda = 4$ (AM $1$).
 
 \medskip
 \textbf{Eigenr\"aume.}

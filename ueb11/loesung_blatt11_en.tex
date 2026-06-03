@@ -282,11 +282,23 @@ $2$ and $4$ give $0$, so they are roots. The \textbf{third} one (still unknown, 
 \]
 Exponent $=$ AM: $\lambda = 2$ squared $\Rightarrow$ AM $2$; $\lambda = 4$ once $\Rightarrow$ AM $1$.
 
-\textbf{Method 2: column trick.} In $B$ too every column sums to $4$ ($5+2-3=4$, $2+4-2=4$, $3+2-1=4$). With $R_1 \to R_1+R_2+R_3$ and then $C_2 \to C_2 - C_1$, $C_3 \to C_3 - C_1$:
+\textbf{Method 2: Factor out early (column trick).} In $B$ too every column sums to $4$ ($5+2-3=4$, $2+4-2=4$, $3+2-1=4$), so in $B - tI$ to $4 - t$.
+
+\textbf{Step 1: $R_1 \to R_1 + R_2 + R_3$} (does not change the determinant), then factor out $(4-t)$:
 \[
-\det(B - tI) = (4-t)\det\!\begin{pmatrix} 1 & 0 & 0 \\ 2 & 2-t & 0 \\ -3 & 1 & 2-t \end{pmatrix} = (4-t)(2-t)^2.
+\det(B - tI) = \det\!\begin{pmatrix} 4-t & 4-t & 4-t \\ 2 & 4-t & 2 \\ -3 & -2 & -1-t \end{pmatrix}
+= (4-t)\,\det\!\begin{pmatrix} 1 & 1 & 1 \\ 2 & 4-t & 2 \\ -3 & -2 & -1-t \end{pmatrix}.
 \]
-Same result. Eigenvalues: $\lambda = 2$ (AM $2$), $\lambda = 4$ (AM $1$).
+
+\textbf{Step 2: columns $C_2 \to C_2 - C_1$ and $C_3 \to C_3 - C_1$} (makes the first row $1,0,0$):
+\[
+= (4-t)\,\det\!\begin{pmatrix} 1 & 0 & 0 \\ 2 & 2-t & 0 \\ -3 & 1 & 2-t \end{pmatrix}
+= (4-t)\,(2-t)(2-t) = (4-t)(2-t)^2.
+\]
+
+\erglerk\ \textcolor{gray}{\small The last matrix is (lower) triangular $\Rightarrow$ determinant $=$ product of the diagonal $1\cdot(2-t)\cdot(2-t)$.}
+
+Same result as Method 1: $\chi_B(t) = (4-t)(2-t)^2$, eigenvalues $\lambda = 2$ (AM $2$), $\lambda = 4$ (AM $1$).
 
 \medskip
 \textbf{Eigenspaces.}
