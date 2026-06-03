@@ -181,13 +181,23 @@ Das $-1$ von vorne ziehen wir in den letzten Faktor hinein, und wegen $(t-3)^2 =
 
 \textcolor{gray}{\small\textit{Beobachtung: In $A$ summiert jede Spalte zu $5$ (z.\,B. $4+2-1 = 5$). Also summiert in $A - tI$ jede Spalte zu $5 - t$. Wenn man alle Zeilen aufaddiert ($Z_1 \to Z_1 + Z_2 + Z_3$), entsteht oben eine Zeile aus lauter $(5-t)$ -- die kann man als Faktor herausziehen.}}
 
-\textbf{Schritt 1: $Z_1 \to Z_1 + Z_2 + Z_3$} (\"andert die Determinante nicht), dann $(5-t)$ ausklammern:
+\textbf{Schritt 1: $Z_1 \to Z_1 + Z_2 + Z_3$} (\"andert die Determinante nicht). Wir addieren die drei Zeilen von $A - tI$ und schreiben das Ergebnis in die erste Zeile -- spaltenweise:
+\begin{align*}
+\text{Spalte 1:}\;\; (4-t) + 2 + (-1) &= 5 - t, \\
+\text{Spalte 2:}\;\; 1 + (5-t) + (-1) &= 5 - t, \\
+\text{Spalte 3:}\;\; 1 + 2 + (2-t) &= 5 - t.
+\end{align*}
+Die neue erste Zeile ist also $(5-t,\, 5-t,\, 5-t)$, die anderen beiden bleiben. Jetzt $(5-t)$ ausklammern:
 \[
 \det(A - tI) = \det\!\begin{pmatrix} 5-t & 5-t & 5-t \\ 2 & 5-t & 2 \\ -1 & -1 & 2-t \end{pmatrix}
 = (5-t)\,\det\!\begin{pmatrix} 1 & 1 & 1 \\ 2 & 5-t & 2 \\ -1 & -1 & 2-t \end{pmatrix}.
 \]
 
-\textbf{Schritt 2: Spalten $C_2 \to C_2 - C_1$ und $C_3 \to C_3 - C_1$} (macht die erste Zeile zu $1,0,0$):
+\textbf{Schritt 2: Spalten $C_2 \to C_2 - C_1$ und $C_3 \to C_3 - C_1$} (Spalte 1 von Spalte 2 und 3 abziehen, um oben rechts Nullen zu bekommen). Eintragweise:
+\begin{align*}
+C_2 - C_1:\;\; & 1-1 = 0,\;\; (5-t)-2 = 3-t,\;\; -1-(-1) = 0 \;\Rightarrow\; \text{Spalte } (0,\, 3-t,\, 0), \\
+C_3 - C_1:\;\; & 1-1 = 0,\;\; 2-2 = 0,\;\; (2-t)-(-1) = 3-t \;\Rightarrow\; \text{Spalte } (0,\, 0,\, 3-t).
+\end{align*}
 \[
 = (5-t)\,\det\!\begin{pmatrix} 1 & 0 & 0 \\ 2 & 3-t & 0 \\ -1 & 0 & 3-t \end{pmatrix}
 = (5-t)\,(3-t)(3-t) = (5-t)(3-t)^2.
@@ -286,13 +296,23 @@ Exponent $=$ AM: $\lambda = 2$ im Quadrat $\Rightarrow$ AM $2$; $\lambda = 4$ ei
 
 \textbf{Weg 2: Faktor fr\"uh herausziehen (Spaltentrick).} Auch in $B$ summiert jede Spalte zu $4$ ($5+2-3=4$, $2+4-2=4$, $3+2-1=4$), in $B - tI$ also zu $4 - t$.
 
-\textbf{Schritt 1: $Z_1 \to Z_1 + Z_2 + Z_3$} (\"andert die Determinante nicht), dann $(4-t)$ ausklammern:
+\textbf{Schritt 1: $Z_1 \to Z_1 + Z_2 + Z_3$} (\"andert die Determinante nicht). Die drei Zeilen von $B - tI$ aufaddiert, spaltenweise:
+\begin{align*}
+\text{Spalte 1:}\;\; (5-t) + 2 + (-3) &= 4 - t, \\
+\text{Spalte 2:}\;\; 2 + (4-t) + (-2) &= 4 - t, \\
+\text{Spalte 3:}\;\; 3 + 2 + (-1-t) &= 4 - t.
+\end{align*}
+Neue erste Zeile $(4-t,\, 4-t,\, 4-t)$, die anderen bleiben. Jetzt $(4-t)$ ausklammern:
 \[
 \det(B - tI) = \det\!\begin{pmatrix} 4-t & 4-t & 4-t \\ 2 & 4-t & 2 \\ -3 & -2 & -1-t \end{pmatrix}
 = (4-t)\,\det\!\begin{pmatrix} 1 & 1 & 1 \\ 2 & 4-t & 2 \\ -3 & -2 & -1-t \end{pmatrix}.
 \]
 
-\textbf{Schritt 2: Spalten $C_2 \to C_2 - C_1$ und $C_3 \to C_3 - C_1$} (macht die erste Zeile zu $1,0,0$):
+\textbf{Schritt 2: Spalten $C_2 \to C_2 - C_1$ und $C_3 \to C_3 - C_1$} (Spalte 1 von Spalte 2 und 3 abziehen). Eintragweise:
+\begin{align*}
+C_2 - C_1:\;\; & 1-1 = 0,\;\; (4-t)-2 = 2-t,\;\; -2-(-3) = 1 \;\Rightarrow\; \text{Spalte } (0,\, 2-t,\, 1), \\
+C_3 - C_1:\;\; & 1-1 = 0,\;\; 2-2 = 0,\;\; (-1-t)-(-3) = 2-t \;\Rightarrow\; \text{Spalte } (0,\, 0,\, 2-t).
+\end{align*}
 \[
 = (4-t)\,\det\!\begin{pmatrix} 1 & 0 & 0 \\ 2 & 2-t & 0 \\ -3 & 1 & 2-t \end{pmatrix}
 = (4-t)\,(2-t)(2-t) = (4-t)(2-t)^2.
