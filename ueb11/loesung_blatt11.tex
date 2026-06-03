@@ -405,24 +405,25 @@ $B = \begin{pmatrix} 5 & 5 & 5 & 5 \\ 7 & 7 & 7 & 7 \\ 11 & 11 & 11 & 11 \\ -23 
 
 \textcolor{gray}{\small\textit{Zwei Sachen sieht man sofort: (1) Zeile $1 =$ Zeile $3$, also ist $A$ singul\"ar $\Rightarrow$ $0$ ist \EW{}. (2) Die mittlere Spalte ist $(0,6,0)$, d.\,h. $A$ schickt $e_2 = (0,1,0)$ auf $6\,e_2$ $\Rightarrow$ $6$ ist \EW{} mit \EV{} $e_2$.}}
 
-\textbf{Schritt 1: $\lambda = 0$.} Zeile $1 =$ Zeile $3$ $\Rightarrow \det A = 0 \Rightarrow \lambda = 0$ ist \EW{}. Eigenraum $= \ker A$:
+\textbf{Schritt 1: $\lambda = 0$.} Zeile $1 =$ Zeile $3$, und zwei gleiche Zeilen geben $\det A = 0$. Also ist $A$ nicht invertierbar, d.\,h. es gibt $v \neq 0$ mit $Av = 0 = 0\cdot v$ -- $\lambda = 0$ ist \EW{}, und der Eigenraum ist $\ker A$. Die Zeilen von $Av = 0$ als Gleichungen:
 \[
-A v = 0:\quad 6y = 0 \Rightarrow y = 0, \qquad x + 5z = 0 \Rightarrow x = -5z.
+\text{Zeile 2}\ (0,6,0): \ 6y = 0 \Rightarrow y = 0; \qquad \text{Zeile 1}\ (1,0,5): \ x + 5z = 0 \Rightarrow x = -5z.
 \]
+Frei ist $z$; mit $z = 1$:
 \[
 E_0 = \operatorname{span}\{(-5, 0, 1)\}, \qquad \text{GM}(0) = 1.
 \]
 
-\textbf{Schritt 2: $\lambda = 6$.} Eigenraum $= \ker(A - 6I)$. Zuerst
+\textbf{Schritt 2: $\lambda = 6$.} Die mittlere Spalte ist $(0,6,0)$, d.\,h. $A e_2 = 6 e_2$ -- also ist $6$ ein \EW{} mit \EV{} $e_2$. Den ganzen Eigenraum gibt $\ker(A - 6I)$:
 \[
 A - 6I = \begin{pmatrix} 1 & 0 & 5 \\ 0 & 6 & 0 \\ 1 & 0 & 5 \end{pmatrix} - \begin{pmatrix} 6 & 0 & 0 \\ 0 & 6 & 0 \\ 0 & 0 & 6 \end{pmatrix} = \begin{pmatrix} -5 & 0 & 5 \\ 0 & 0 & 0 \\ 1 & 0 & -1 \end{pmatrix}.
 \]
-Beide nichttriviale Zeilen sagen $x = z$ ($y$ frei). Also
+Zeilen als Gleichungen: $(-5,0,5) \Rightarrow -5x + 5z = 0 \Rightarrow x = z$; $(1,0,-1) \Rightarrow x - z = 0$ (dasselbe). Auf $y$ keine Bedingung, also sind $y$ und $z$ frei. Mit $(y,z) = (1,0)$ und $(0,1)$:
 \[
 E_6 = \operatorname{span}\{(0,1,0),\, (1,0,1)\}, \qquad \text{GM}(6) = 2.
 \]
 
-\textbf{Schritt 3: Vielfachheiten zusammenz\"ahlen.} Es ist $\text{GM}(6) = 2$, also $\text{AM}(6) \ge 2$. Dazu $\text{AM}(0) \ge 1$. Da eine $3\times 3$-Matrix genau $3$ \EW{}e (mit Vielfachheit) hat, bleibt nur $\text{AM}(0) = 1$, $\text{AM}(6) = 2$.
+\textbf{Schritt 3: Vielfachheiten.} Eine $3\times3$-Matrix hat insgesamt $3$ \EW{}e (mit Vielfachheit), die AMs summieren sich also zu $3$. Wegen GM $\le$ AM ist $\text{AM}(6) \ge \text{GM}(6) = 2$, und $0$ ist \EW{}, also $\text{AM}(0) \ge 1$. Schon $2 + 1 = 3$ -- damit ist alles vergeben: $\text{AM}(6) = 2$, $\text{AM}(0) = 1$.
 \erglerk\ \textcolor{gray}{\small Probe mit der Spur: $0\cdot 1 + 6 \cdot 2 = 12 = \operatorname{Spur}(A) = 1+6+5$ \checkmark.}
 
 \[
@@ -450,12 +451,14 @@ Alle GM $=$ AM $\Rightarrow$ $A$ ist diagonalisierbar.
 
 \textcolor{gray}{\small\textit{$B$ hat \"uberall identische Spalten -- jede Zeile ist ein Vielfaches von $(1,1,1,1)$. So eine Matrix hat \textbf{Rang $1$}: alle Zeilen liegen ``auf einer Linie''. Damit ist der Kern riesig (Dimension $4 - 1 = 3$) und $0$ ist \EW{}.}}
 
-\textbf{Schritt 1: $\lambda = 0$ mit GM $= 3$.} Alle Spalten von $B$ sind gleich $\Rightarrow \operatorname{Rang}(B) = 1 \Rightarrow \dim\ker(B) = 4 - 1 = 3$. Also ist $0$ \EW{} mit $\text{GM}(0) = 3$. Der Kern: $Bv = 0$ hei\ss t (jede Zeile) $5(a+b+c+d) = 0$, also $a + b + c + d = 0$:
+\textbf{Schritt 1: $\lambda = 0$.} Jede Zeile von $B$ ist ein Vielfaches von $(1,1,1,1)$ -- es gibt also nur \emph{eine} unabh\"angige Zeile, $\operatorname{Rang}(B) = 1$. Mit der Dimensionsformel $\dim\ker(B) = 4 - \operatorname{Rang} = 4 - 1 = 3$. Ein Kern gr\"o\ss er als $\{0\}$ hei\ss t: es gibt $v \neq 0$ mit $Bv = 0$, also ist $0$ \EW{} mit $\text{GM}(0) = \dim\ker = 3$.
+
+Der Kern: jede Zeile von $Bv = 0$ ist (z.\,B. Zeile 1) $5a + 5b + 5c + 5d = 5(a+b+c+d) = 0$, also $a + b + c + d = 0$. Eine Gleichung, vier Unbekannte $\Rightarrow$ drei freie Variablen ($b, c, d$; \, $a = -b-c-d$):
 \[
 E_0 = \operatorname{span}\{(-1,1,0,0),\, (-1,0,1,0),\, (-1,0,0,1)\}, \qquad \text{GM}(0) = 3.
 \]
 
-\textbf{Schritt 2: Es gibt keinen weiteren \EW{}.} Die Summe aller \EW{}e $= \operatorname{Spur}(B) = 5 + 7 + 11 - 23 = 0$. Bisher haben wir $\lambda = 0$ mit $\text{AM}(0) \ge \text{GM}(0) = 3$. W\"are der vierte \EW{} $\mu \neq 0$, m\"usste die Summe $\mu \neq 0$ sein -- Widerspruch. Also $\mu = 0$ und
+\textbf{Schritt 2: $\text{AM}(0) = 4$.} $B$ ist $4\times4$, hat also $4$ \EW{}e (mit Vielfachheit). Drei davon sind $0$ (denn $\text{AM}(0) \ge \text{GM}(0) = 3$). Der vierte hei\ss e $\mu$. Die Summe aller \EW{}e ist die Spur: $5 + 7 + 11 - 23 = 0$, also $0 + 0 + 0 + \mu = 0 \Rightarrow \mu = 0$. Damit ist $0$ der einzige \EW{}:
 \[
 \text{AM}(0) = 4.
 \]
