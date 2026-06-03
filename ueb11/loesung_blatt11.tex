@@ -274,7 +274,11 @@ cdh &= 3\cdot 2\cdot(-2) = -12, & bdi &= 2\cdot 2\cdot(-1-t) = 4(-1-t).
 
 \erglerk\ \textcolor{gray}{\small Check: $\chi_B(0) = 16 = \det B$ \checkmark, $t^2$-Koeffizient $8 = \operatorname{Spur}(B) = 5+4-1$ \checkmark.}
 
-\textbf{Faktorisieren.} $\chi_B(t) = -(t^3 - 8t^2 + 20t - 16)$. Teiler von $16$ testen: $t = 2$ und $t = 4$ ergeben $0$. Dritte Nullstelle aus der Spur ($2 + 4 + \lambda_3 = 8$): $\lambda_3 = 2$. Nullstellen: $\mathbf{2,\ 2,\ 4}$. Wie bei $A$ wird jede Nullstelle zu einem Faktor, die doppelte $2$ zum Quadrat:
+\textbf{Faktorisieren.} $\chi_B(t) = -(t^3 - 8t^2 + 20t - 16)$. Ganzzahlige Nullstellen k\"onnen nur Teiler von $16$ sein ($\pm1, \pm2, \pm4, \dots$). Man probiert sie durch -- \emph{testen} hei\ss t: f\"ur $t$ einsetzen und schauen, ob $0$ herauskommt:
+\[
+t = 2:\; 8 - 32 + 40 - 16 = 0\ \checkmark, \qquad t = 4:\; 64 - 128 + 80 - 16 = 0\ \checkmark.
+\]
+$2$ und $4$ ergeben $0$, sind also Nullstellen. Die \textbf{dritte} (noch unbekannt, hei\ss e $\lambda_3$) ist geschenkt: die drei Nullstellen summieren sich zu $8$ (der Spur), und $2 + 4 + \lambda_3 = 8$ gibt $\lambda_3 = 2$. Nullstellen also $\mathbf{2,\ 2,\ 4}$. Jede Nullstelle wird zu einem Faktor, die doppelte $2$ zum Quadrat:
 \[
 \boxed{\chi_B(t) = -(t-2)^2(t-4) = (2-t)^2(4-t).}
 \]

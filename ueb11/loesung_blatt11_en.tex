@@ -272,7 +272,11 @@ cdh &= 3\cdot 2\cdot(-2) = -12, & bdi &= 2\cdot 2\cdot(-1-t) = 4(-1-t).
 
 \erglerk\ \textcolor{gray}{\small Check: $\chi_B(0) = 16 = \det B$ \checkmark, $t^2$-coefficient $8 = \operatorname{trace}(B) = 5+4-1$ \checkmark.}
 
-\textbf{Factor.} $\chi_B(t) = -(t^3 - 8t^2 + 20t - 16)$. Test divisors of $16$: $t = 2$ and $t = 4$ give $0$. Third root from the trace ($2 + 4 + \lambda_3 = 8$): $\lambda_3 = 2$. Roots: $\mathbf{2,\ 2,\ 4}$. As for $A$, each root becomes a factor, the double $2$ a square:
+\textbf{Factor.} $\chi_B(t) = -(t^3 - 8t^2 + 20t - 16)$. Integer roots can only be divisors of $16$ ($\pm1, \pm2, \pm4, \dots$). You try them out -- \emph{testing} means: plug in for $t$ and see whether $0$ comes out:
+\[
+t = 2:\; 8 - 32 + 40 - 16 = 0\ \checkmark, \qquad t = 4:\; 64 - 128 + 80 - 16 = 0\ \checkmark.
+\]
+$2$ and $4$ give $0$, so they are roots. The \textbf{third} one (still unknown, call it $\lambda_3$) comes for free: the three roots sum to $8$ (the trace), and $2 + 4 + \lambda_3 = 8$ gives $\lambda_3 = 2$. So the roots are $\mathbf{2,\ 2,\ 4}$. Each root becomes a factor, the double $2$ a square:
 \[
 \boxed{\chi_B(t) = -(t-2)^2(t-4) = (2-t)^2(4-t).}
 \]
