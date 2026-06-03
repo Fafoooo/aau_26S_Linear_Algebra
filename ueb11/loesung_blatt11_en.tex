@@ -210,7 +210,7 @@ Then Gauss:
 \xrightarrow{R_3 \to R_3 + R_2}
 \begin{pmatrix} \piv{-1} & 1 & 1 \\ 0 & \piv{2} & 4 \\ 0 & 0 & 0 \end{pmatrix}.
 \]
-Free variable $z$: from $2y + 4z = 0 \Rightarrow y = -2z$; from $-x + y + z = 0 \Rightarrow x = y + z = -z$. With $z = 1$:
+Each row of the echelon form is an equation for $(x,y,z)$ -- entries times $x, y, z$, equal to $0$: \; $(0,2,4) \Rightarrow 2y + 4z = 0$, \quad $(-1,1,1) \Rightarrow -x + y + z = 0$. The free variable is $z$; solving: $2y + 4z = 0 \Rightarrow y = -2z$, then $-x + y + z = 0 \Rightarrow x = y + z = -z$. With $z = 1$:
 \[
 E_5 = \operatorname{span}\{(-1, -2, 1)\}, \qquad \text{GM}(5) = 1.
 \]
@@ -225,7 +225,7 @@ Then Gauss:
 \xrightarrow[R_3 \to R_3 + R_1]{R_2 \to R_2 - 2R_1}
 \begin{pmatrix} \piv{1} & 1 & 1 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \end{pmatrix}.
 \]
-Only one equation $x + y + z = 0$, free variables $y, z$. With $(y,z) = (1,0)$ and $(0,1)$:
+The only nontrivial row $(1,1,1)$ means $x + y + z = 0$ (entries times $x, y, z$). Free variables $y, z$, so $x = -y - z$. With $(y,z) = (1,0)$ and $(0,1)$:
 \[
 E_3 = \operatorname{span}\{(-1, 1, 0),\, (-1, 0, 1)\}, \qquad \text{GM}(3) = 2.
 \]
@@ -299,7 +299,7 @@ Then Gauss:
 \xrightarrow{R_3 \to R_3 + R_2}
 \begin{pmatrix} \piv{1} & 2 & 3 \\ 0 & \piv{-4} & -4 \\ 0 & 0 & 0 \end{pmatrix}.
 \]
-$-4y - 4z = 0 \Rightarrow y = -z$; $x + 2y + 3z = 0 \Rightarrow x = -2y - 3z = -z$. With $z=1$:
+Rows as equations: $(0,-4,-4) \Rightarrow -4y - 4z = 0 \Rightarrow y = -z$; \; $(1,2,3) \Rightarrow x + 2y + 3z = 0 \Rightarrow x = -2y - 3z = -z$. With $z=1$:
 \[
 E_4 = \operatorname{span}\{(-1,-1,1)\}, \qquad \text{GM}(4) = 1.
 \]
@@ -316,7 +316,7 @@ Then Gauss:
 \xrightarrow[R_3 \to R_3 + 3R_2']{R_1 \to R_1 - 3R_2'}
 \begin{pmatrix} 0 & -1 & 0 \\ \piv{1} & 1 & 1 \\ 0 & 1 & 0 \end{pmatrix}.
 \]
-From the $(-1)$ row: $-y = 0 \Rightarrow y = 0$; from $x + y + z = 0 \Rightarrow x = -z$. Only free variable $z$. With $z=1$:
+Rows as equations: $(0,-1,0) \Rightarrow -y = 0$, so $y = 0$; \; $(1,1,1) \Rightarrow x + y + z = 0 \Rightarrow x = -z$. Only free variable $z$. With $z=1$:
 \[
 E_2 = \operatorname{span}\{(-1, 0, 1)\}, \qquad \text{GM}(2) = 1.
 \]
