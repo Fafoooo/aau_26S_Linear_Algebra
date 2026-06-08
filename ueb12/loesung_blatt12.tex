@@ -1,0 +1,388 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{geometry}\geometry{margin=2.5cm}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning, calc, decorations.pathreplacing}
+\usepackage{pgfplots}\pgfplotsset{compat=1.18}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable}
+\usepackage{xcolor}
+\newtcolorbox{begriffe}[1][]{colback=yellow!10, colframe=yellow!60!black, fonttitle=\bfseries, title={Was bedeuten die Begriffe?}, breakable, #1}
+\newtcolorbox{wastun}[1][]{colback=orange!5, colframe=orange!60!black, fonttitle=\bfseries, title={Was ist zu tun?}, breakable, #1}
+\newcommand{\piv}[1]{{\color{red}\boxed{#1}}}
+\newcommand{\grafik}{\textcolor{gray}{\small\textit{[Grafische Erkl\"arung -- nicht Teil der L\"osung]}}}
+\newcommand{\erglerk}{\textcolor{gray}{\small\textit{[Erkl\"arung erg\"anzt]}}}
+\newcommand{\EW}{Eigenwert}
+\newcommand{\EV}{Eigenvektor}
+
+\title{\"Ubungsblatt 12 -- L\"osungen \\ \large Linear Algebra}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{begriffe}
+\begin{itemize}[leftmargin=*, nosep]
+    \item \textbf{Diagonalisierbar}: $A$ hei\ss t diagonalisierbar, wenn es eine \emph{invertierbare} Matrix $P$ und eine \emph{Diagonalmatrix} $D$ gibt mit
+    \[
+    D = P^{-1} A P \qquad\Longleftrightarrow\qquad A = P D P^{-1}.
+    \]
+    \item \textbf{Was sind $P$ und $D$?} Die \textbf{Spalten von $P$} sind die Eigenvektoren von $A$. Die \textbf{Diagonale von $D$} sind die zugeh\"origen Eigenwerte -- in \emph{derselben Reihenfolge} wie die Spalten.
+    \item \textbf{Kriterium}: Eine $n\times n$-Matrix ist diagonalisierbar $\Leftrightarrow$ es gibt $n$ linear unabh\"angige Eigenvektoren $\Leftrightarrow$ f\"ur \emph{jeden} Eigenwert ist $\text{GM} = \text{AM}$ (die Eigenraum-Dimensionen summieren sich zu $n$).
+    \item \textbf{Erinnerung}: AM $=$ Vielfachheit als Nullstelle des char.\ Polynoms; GM $= \dim$ Eigenraum $=$ Anzahl unabh\"angiger Eigenvektoren zu diesem Eigenwert.
+\end{itemize}
+\end{begriffe}
+
+\grafik
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0, >={Stealth[scale=1.1]}, every node/.style={font=\small}]
+\node (vE)  at (0,2)   {$v$ \;(Standard)};
+\node (wE)  at (5.4,2) {$Av$ \;(Standard)};
+\node (vB)  at (0,0)   {$P^{-1}v$ \;(Eigen-Basis)};
+\node (wB)  at (5.4,0) {$D\,P^{-1}v$ \;(Eigen-Basis)};
+\draw[->, blue!70, thick] (vE) -- (wE) node[midway, above]{$A$};
+\draw[->, red!80, thick] (vB) -- (wB) node[midway, below]{$D$ \;(nur strecken)};
+\draw[->, gray] (vE) -- (vB) node[midway, left]{$P^{-1}$};
+\draw[->, gray] (wB) -- (wE) node[midway, right]{$P$};
+\end{tikzpicture}
+\end{center}
+
+\textcolor{gray}{\small\textit{Diagonalisieren hei\ss t: $A$ in der richtigen Brille anschauen. Statt $A$ direkt anzuwenden, geht man mit $P^{-1}$ in die Eigenvektor-Basis, dort ist die Abbildung nur ein \emph{Strecken} pro Achse (die Diagonalmatrix $D$), dann mit $P$ zur\"uck. Genau das ist $A = P D P^{-1}$.}}
+
+\bigskip
+\hrule
+\bigskip
+
+%% ============================================================
+\subsection*{Aufgabe 47}
+%% ============================================================
+
+\textbf{Angabe.} Sind die Matrizen \"uber $\mathbb{R}$ diagonalisierbar? Falls ja, gib $P$ (invertierbar) und $D$ (diagonal) mit $D = P^{-1}AP$ an; falls nein, begr\"unde warum.
+\[
+\text{(a)}\ \begin{pmatrix} 4 & 1 & 1 \\ 2 & 5 & 2 \\ -1 & -1 & 2 \end{pmatrix}, \qquad
+\text{(b)}\ \begin{pmatrix} 5 & 2 & 3 \\ 2 & 4 & 2 \\ -3 & -2 & -1 \end{pmatrix}, \qquad
+\text{(c)}\ \begin{pmatrix} 1 & 0 & 5 \\ 0 & 6 & 0 \\ 1 & 0 & 5 \end{pmatrix}.
+\]
+
+\begin{wastun}
+\begin{itemize}[leftmargin=*, nosep]
+    \item Das sind genau die Matrizen aus \textbf{Blatt 11} (Aufgaben 43 und 44). Eigenwerte, AM, GM und Eigenraum-Basen haben wir dort schon ausgerechnet -- wir starten mit der \textbf{Zusammenfassung} (Tabelle unten).
+    \item Pro Matrix nur noch pr\"ufen: \textbf{Sind alle GM $=$ AM?} Wenn ja $\to$ diagonalisierbar, dann $P =$ Eigenvektoren als Spalten, $D =$ Eigenwerte auf der Diagonale. Wenn nein $\to$ nicht diagonalisierbar (zu wenige Eigenvektoren).
+\end{itemize}
+\end{wastun}
+
+\textbf{Zusammenfassung aus Blatt 11.}
+\begin{center}
+\begin{tabular}{@{}clll@{}}
+\toprule
+Matrix & \EW{} $\lambda$ & AM, GM & Basis des Eigenraums \\
+\midrule
+(a) & $3$ & $2,\,2$ & $(-1,1,0),\ (-1,0,1)$ \\
+    & $5$ & $1,\,1$ & $(-1,-2,1)$ \\[2pt]
+(b) & $2$ & $2,\,\mathbf{1}$ & $(-1,0,1)$ \\
+    & $4$ & $1,\,1$ & $(-1,-1,1)$ \\[2pt]
+(c) & $0$ & $1,\,1$ & $(-5,0,1)$ \\
+    & $6$ & $2,\,2$ & $(0,1,0),\ (1,0,1)$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\grafik
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0, every node/.style={font=\small}]
+\node at (0,0) {$P = \left(\begin{array}{ccc} \color{red!80}\big| & \color{blue!80}\big| & \color{green!55!black}\big| \\[-2pt] \color{red!80}v_1 & \color{blue!80}v_2 & \color{green!55!black}v_3 \\[-2pt] \color{red!80}\big| & \color{blue!80}\big| & \color{green!55!black}\big| \end{array}\right)$};
+\node at (5.2,0) {$D = \begin{pmatrix} \color{red!80}\lambda_1 & 0 & 0 \\ 0 & \color{blue!80}\lambda_2 & 0 \\ 0 & 0 & \color{green!55!black}\lambda_3 \end{pmatrix}$};
+\draw[->, gray, thick] (1.7,0) -- (2.9,0) node[midway, above]{\footnotesize gleiche};
+\node[gray] at (2.3,-0.4){\footnotesize Reihenfolge};
+\end{tikzpicture}
+\end{center}
+
+\textcolor{gray}{\small\textit{Bauanleitung: Jede Spalte von $P$ ist ein \EV{}, und an derselben Stelle auf der Diagonale von $D$ steht sein \EW{}. Spalte $1$ geh\"ort zu $\lambda_1$, Spalte $2$ zu $\lambda_2$, usw. -- die Reihenfolge muss zusammenpassen.}}
+
+%% --- 47 (a) ---
+\subsubsection*{(a) Matrix $A = \left(\begin{smallmatrix} 4 & 1 & 1 \\ 2 & 5 & 2 \\ -1 & -1 & 2 \end{smallmatrix}\right)$}
+
+\textbf{Diagonalisierbar?} Eigenwerte $3$ (AM $2$, GM $2$) und $5$ (AM $1$, GM $1$). Bei beiden ist GM $=$ AM, und $2 + 1 = 3$ unabh\"angige Eigenvektoren $\Rightarrow$ \textbf{ja, diagonalisierbar}.
+
+\textbf{$P$ und $D$ bauen.} Ich nehme die drei Eigenvektoren als Spalten (erst die beiden zu $\lambda = 3$, dann der zu $\lambda = 5$) und schreibe die Eigenwerte in derselben Reihenfolge auf die Diagonale:
+\[
+P = \begin{pmatrix} -1 & -1 & -1 \\ 1 & 0 & -2 \\ 0 & 1 & 1 \end{pmatrix}, \qquad
+D = \begin{pmatrix} 3 & 0 & 0 \\ 0 & 3 & 0 \\ 0 & 0 & 5 \end{pmatrix}.
+\]
+\erglerk\ \textcolor{gray}{\small Spalte 1 $=(-1,1,0)$ und Spalte 2 $=(-1,0,1)$ sind die \EV{}en zu $3$, Spalte 3 $=(-1,-2,1)$ der zu $5$ -- darum steht auf der Diagonale $3, 3, 5$.}
+
+\textbf{Probe} (statt $P^{-1}$ auszurechnen): $D = P^{-1}AP$ ist gleichbedeutend mit $AP = PD$ (einfach von links mit $P$ multipliziert). Und $AP = PD$ hei\ss t Spalte f\"ur Spalte: $A v_i = \lambda_i v_i$. Genau das sind unsere Eigenvektoren:
+\[
+A\begin{pmatrix}-1\\1\\0\end{pmatrix} = 3\begin{pmatrix}-1\\1\\0\end{pmatrix},\quad
+A\begin{pmatrix}-1\\0\\1\end{pmatrix} = 3\begin{pmatrix}-1\\0\\1\end{pmatrix},\quad
+A\begin{pmatrix}-1\\-2\\1\end{pmatrix} = 5\begin{pmatrix}-1\\-2\\1\end{pmatrix}. \ \checkmark
+\]
+\[
+\fbox{\parbox{0.93\textwidth}{\centering
+$A$ ist diagonalisierbar mit
+$P = \left(\begin{smallmatrix} -1 & -1 & -1 \\ 1 & 0 & -2 \\ 0 & 1 & 1 \end{smallmatrix}\right)$,
+$\ D = \left(\begin{smallmatrix} 3 & 0 & 0 \\ 0 & 3 & 0 \\ 0 & 0 & 5 \end{smallmatrix}\right)$,
+\ und $D = P^{-1}AP$.
+}}
+\]
+
+%% --- 47 (b) ---
+\subsubsection*{(b) Matrix $A = \left(\begin{smallmatrix} 5 & 2 & 3 \\ 2 & 4 & 2 \\ -3 & -2 & -1 \end{smallmatrix}\right)$}
+
+\textbf{Diagonalisierbar?} Eigenwerte $2$ (AM $\mathbf{2}$, GM $\mathbf{1}$) und $4$ (AM $1$, GM $1$). Beim Eigenwert $2$ ist GM $= 1 <$ AM $= 2$.
+
+\grafik
+
+\begin{center}
+\begin{tikzpicture}[scale=0.95, >={Stealth[scale=1.0]}, every node/.style={font=\small}]
+% a plane (span of two eigenvectors) inside R^3, third direction missing
+\draw[fill=blue!8, draw=blue!40] (-1.6,-0.7) -- (1.9,-0.5) -- (2.6,0.9) -- (-0.9,0.7) -- cycle;
+\draw[->, red!80, very thick] (0.5,0.1) -- (-0.6,0.45);
+\draw[->, red!80, very thick] (0.5,0.1) -- (1.7,0.35);
+\node[red!80] at (-0.95,0.62){$v_2$};
+\node[red!80] at (2.05,0.42){$v_4$};
+\node[blue!60] at (2.3,-0.35){\footnotesize nur eine Ebene};
+% missing third direction
+\draw[->, gray!50, very thick, dashed] (0.5,0.1) -- (0.95,1.7);
+\node[gray] at (1.7,1.6){\footnotesize 3.\ Richtung fehlt};
+\end{tikzpicture}
+\end{center}
+
+\textcolor{gray}{\small\textit{Wir haben nur $1 + 1 = 2$ unabh\"angige Eigenvektoren (einen zu $2$, einen zu $4$). Zwei Richtungen spannen im $\mathbb{R}^3$ nur eine \emph{Ebene} auf -- es fehlt eine dritte Richtung f\"ur eine ganze Basis. Darum kann man kein $P$ aus Eigenvektoren bauen.}}
+
+\textbf{Begr\"undung.} Diagonalisierbar w\"are $A$ nur mit $3$ unabh\"angigen Eigenvektoren. Wir haben aber nur $\text{GM}(2) + \text{GM}(4) = 1 + 1 = 2 < 3$. Beim Eigenwert $2$ ``fehlt'' ein \EV{} (GM $1 <$ AM $2$).
+\[
+\fbox{\parbox{0.93\textwidth}{\centering
+$A$ ist \emph{nicht} diagonalisierbar, weil $\text{GM}(2) = 1 < \text{AM}(2) = 2$ \\
+(nur $2$ statt $3$ unabh\"angige Eigenvektoren).
+}}
+\]
+
+%% --- 47 (c) ---
+\subsubsection*{(c) Matrix $A = \left(\begin{smallmatrix} 1 & 0 & 5 \\ 0 & 6 & 0 \\ 1 & 0 & 5 \end{smallmatrix}\right)$}
+
+\textbf{Diagonalisierbar?} Eigenwerte $0$ (AM $1$, GM $1$) und $6$ (AM $2$, GM $2$). Beide GM $=$ AM, $1 + 2 = 3$ unabh\"angige Eigenvektoren $\Rightarrow$ \textbf{ja}.
+
+\textbf{$P$ und $D$ bauen.} Spalten: der \EV{} zu $0$, dann die beiden zu $6$:
+\[
+P = \begin{pmatrix} -5 & 0 & 1 \\ 0 & 1 & 0 \\ 1 & 0 & 1 \end{pmatrix}, \qquad
+D = \begin{pmatrix} 0 & 0 & 0 \\ 0 & 6 & 0 \\ 0 & 0 & 6 \end{pmatrix}.
+\]
+
+\textbf{Probe} $AP = PD$, Spalte f\"ur Spalte ($A v_i = \lambda_i v_i$):
+\[
+A\begin{pmatrix}-5\\0\\1\end{pmatrix} = \begin{pmatrix}0\\0\\0\end{pmatrix} = 0\cdot v_1,\quad
+A\begin{pmatrix}0\\1\\0\end{pmatrix} = 6\begin{pmatrix}0\\1\\0\end{pmatrix},\quad
+A\begin{pmatrix}1\\0\\1\end{pmatrix} = 6\begin{pmatrix}1\\0\\1\end{pmatrix}. \ \checkmark
+\]
+\[
+\fbox{\parbox{0.93\textwidth}{\centering
+$A$ ist diagonalisierbar mit
+$P = \left(\begin{smallmatrix} -5 & 0 & 1 \\ 0 & 1 & 0 \\ 1 & 0 & 1 \end{smallmatrix}\right)$,
+$\ D = \left(\begin{smallmatrix} 0 & 0 & 0 \\ 0 & 6 & 0 \\ 0 & 0 & 6 \end{smallmatrix}\right)$,
+\ und $D = P^{-1}AP$.
+}}
+\]
+
+\bigskip
+\hrule
+\bigskip
+
+%% ============================================================
+\subsection*{Aufgabe 48}
+%% ============================================================
+
+\textbf{Angabe.} F\"ur welche Werte des Parameters $a$ ist die Matrix diagonalisierbar?
+\[
+\text{(a)}\ A = \begin{pmatrix} a & 1 & 1 \\ 1 & a & 1 \\ 1 & 1 & a \end{pmatrix}, \qquad
+\text{(b)}\ A = \begin{pmatrix} 1 & 2 & 3 \\ 2 & 4 & 6 \\ a & 2a & 3a \end{pmatrix}.
+\]
+
+%% --- 48 (a) ---
+\subsubsection*{(a) $A = \left(\begin{smallmatrix} a & 1 & 1 \\ 1 & a & 1 \\ 1 & 1 & a \end{smallmatrix}\right)$}
+
+\begin{wastun}
+\begin{itemize}[leftmargin=*, nosep]
+    \item Char.\ Polynom aufstellen (h\"angt von $a$ ab), Eigenwerte und ihre AM ablesen, dann die GM des mehrfachen Eigenwerts pr\"ufen. Diagonalisierbar $\Leftrightarrow$ \"uberall GM $=$ AM.
+\end{itemize}
+\end{wastun}
+
+\textbf{Schritt 1: Char.\ Polynom.} Auf der Diagonale von $A - tI$ steht $a - t$; ich k\"urze $s := a - t$ ab. Dann
+\[
+\det(A - tI) = \det\begin{pmatrix} s & 1 & 1 \\ 1 & s & 1 \\ 1 & 1 & s \end{pmatrix}.
+\]
+Mit der Sarrus-Regel ($\det = aei + bfg + cdh - ceg - afh - bdi$, hier alle Au\ss erdiagonal-Eintr\"age $= 1$):
+\[
+= \underbrace{s^3}_{aei} + \underbrace{1}_{bfg} + \underbrace{1}_{cdh} - \underbrace{s}_{ceg} - \underbrace{s}_{afh} - \underbrace{s}_{bdi} = s^3 - 3s + 2.
+\]
+Faktorisieren: $s = 1$ ist Nullstelle ($1 - 3 + 2 = 0$), Abspalten gibt $s^3 - 3s + 2 = (s-1)^2(s+2)$.
+
+\textbf{Schritt 2: Eigenwerte} (zur\"uck mit $s = a - t$, also $t = a - s$). Die Nullstellen $s = 1$ (doppelt) und $s = -2$ (einfach) werden zu
+\[
+t = a - 1 \ (\text{AM } 2), \qquad t = a + 2 \ (\text{AM } 1).
+\]
+Diese sind \emph{immer} verschieden ($a - 1 \neq a + 2$), egal welches $a$.
+
+\textbf{Schritt 3: GM des doppelten Eigenwerts $a-1$.} Hier passiert das Sch\"one -- ich ziehe $(a-1)I$ ab:
+\[
+A - (a-1)I = \begin{pmatrix} a & 1 & 1 \\ 1 & a & 1 \\ 1 & 1 & a \end{pmatrix} - \begin{pmatrix} a-1 & 0 & 0 \\ 0 & a-1 & 0 \\ 0 & 0 & a-1 \end{pmatrix} = \begin{pmatrix} 1 & 1 & 1 \\ 1 & 1 & 1 \\ 1 & 1 & 1 \end{pmatrix}.
+\]
+Das ist die ``Alles-Einsen''-Matrix -- alle Zeilen gleich, also \textbf{Rang $1$}. Damit
+\[
+\text{GM}(a-1) = \dim\ker = 3 - 1 = 2 = \text{AM}(a-1). \quad\checkmark
+\]
+Der einfache Eigenwert $a+2$ hat automatisch GM $= 1 =$ AM. \textbf{Das gilt f\"ur jedes $a$} -- die Matrix $A - (a-1)I$ ist \emph{immer} die Einsen-Matrix.
+
+\[
+\fbox{\parbox{0.93\textwidth}{\centering
+$A$ ist \textbf{f\"ur alle $a \in \mathbb{R}$ diagonalisierbar.}
+}}
+\]
+
+\erglerk\ \textcolor{gray}{\small Kein Wunder: $A$ ist symmetrisch ($A = A^\top$), und reelle symmetrische Matrizen sind immer diagonalisierbar. Unser Weg zeigt es aber direkt \"uber GM $=$ AM.}
+
+%% --- 48 (b) ---
+\subsubsection*{(b) $A = \left(\begin{smallmatrix} 1 & 2 & 3 \\ 2 & 4 & 6 \\ a & 2a & 3a \end{smallmatrix}\right)$}
+
+\grafik
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9, every node/.style={font=\small}]
+\node[anchor=west] (M) at (0,0) {$A = \begin{pmatrix} 1 & 2 & 3 \\ 2 & 4 & 6 \\ a & 2a & 3a \end{pmatrix}$};
+\draw[decorate, decoration={brace, amplitude=5pt}, orange!80!black] ([xshift=5pt, yshift=1.05cm]M.east) -- ([xshift=5pt, yshift=-1.05cm]M.east);
+\node[orange!80!black, right] at ([xshift=12pt, yshift=0.55cm]M.east) {\footnotesize Zeile 1 $= 1\cdot(1,2,3)$};
+\node[orange!80!black, right] at ([xshift=12pt, yshift=0.0cm]M.east) {\footnotesize Zeile 2 $= 2\cdot(1,2,3)$};
+\node[orange!80!black, right] at ([xshift=12pt, yshift=-0.55cm]M.east) {\footnotesize Zeile 3 $= a\cdot(1,2,3)$};
+\end{tikzpicture}
+\end{center}
+
+\textcolor{gray}{\small\textit{Jede Zeile ist ein Vielfaches von $(1,2,3)$: das $1$-, $2$- bzw.\ $a$-fache. So eine Matrix hat \textbf{Rang $1$} (alle Zeilen ``auf einer Linie''). Genau wie bei der Rang-$1$-Matrix auf Blatt 11 (44b) sind dann fast alle Eigenwerte $0$.}}
+
+\textbf{Schritt 1: Rang und Eigenwert $0$.} Alle Zeilen sind Vielfache von $(1,2,3)$ $\Rightarrow \operatorname{Rang}(A) = 1$. Dimensionsformel: $\dim\ker(A) = 3 - 1 = 2$. Also ist $0$ ein Eigenwert mit $\text{GM}(0) = 2$.
+
+\textbf{Schritt 2: der andere Eigenwert.} Eine Rang-$1$-Matrix hat nur \emph{einen} Eigenwert $\neq 0$, und der ist die Spur:
+\[
+\operatorname{Spur}(A) = 1 + 4 + 3a = 5 + 3a.
+\]
+Das char.\ Polynom ist $\chi_A(t) = t^2\,(t - (5+3a))$ -- Nullstellen $0$ (doppelt) und $5+3a$.
+
+\textbf{Schritt 3: Fallunterscheidung.}
+\begin{itemize}[leftmargin=*, nosep]
+    \item \textbf{$5 + 3a \neq 0$}, also $a \neq -\tfrac{5}{3}$: Eigenwerte $0$ (AM $2$, GM $2$) und $5+3a$ (AM $1$, GM $1$). \"Uberall GM $=$ AM $\Rightarrow$ \textbf{diagonalisierbar}.
+    \item \textbf{$5 + 3a = 0$}, also $a = -\tfrac{5}{3}$: jetzt ist auch der dritte Eigenwert $0$, d.\,h.\ $0$ hat AM $3$. Aber GM$(0) = 2$ (der Rang bleibt $1$). Wegen $\text{GM}(0) = 2 < 3 = \text{AM}(0)$ \textbf{nicht diagonalisierbar}.
+\end{itemize}
+
+\[
+\fbox{\parbox{0.93\textwidth}{\centering
+$A$ ist diagonalisierbar \textbf{genau dann, wenn $a \neq -\tfrac{5}{3}$.} \\
+F\"ur $a = -\tfrac{5}{3}$ ist $A$ \emph{nicht} diagonalisierbar ($\text{GM}(0)=2 < \text{AM}(0)=3$).
+}}
+\]
+
+\bigskip
+\hrule
+\bigskip
+
+%% ============================================================
+\subsection*{Aufgabe 49}
+%% ============================================================
+
+\textbf{Angabe.} Die Folge $(a_0, a_1, a_2, \dots)$ ist gegeben durch
+\[
+a_0 = 4, \quad a_1 = -1, \quad a_k = 3a_{k-1} + 10 a_{k-2} \ (k \ge 2).
+\]
+Finde mit \textbf{Matrix-Diagonalisierung} eine explizite Formel f\"ur $a_k$.
+
+\begin{wastun}
+\begin{itemize}[leftmargin=*, nosep]
+    \item Zwei aufeinanderfolgende Glieder in einen Vektor packen -- dann wird ``ein Schritt der Folge'' zu \emph{einer} Matrix-Multiplikation $v_k = M v_{k-1}$. Also $v_k = M^k v_0$. Die hohe Potenz $M^k$ rechnet man \"uber $M = PDP^{-1}$ aus, denn $M^k = P D^k P^{-1}$ und $D^k$ ist nur die $k$-te Potenz der Diagonale.
+\end{itemize}
+\end{wastun}
+
+\grafik
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0, >={Stealth[scale=1.0]}, every node/.style={font=\small}]
+\node (rec) at (0,0) {$\begin{aligned} a_k &= 3a_{k-1} \\ &\quad + 10a_{k-2}\end{aligned}$};
+\node (vec) at (3.6,0) {$v_k = \begin{pmatrix} a_{k+1} \\ a_k \end{pmatrix}$};
+\node (mat) at (7.4,0) {$v_k = M^k v_0$};
+\draw[->, orange!80!black, thick] (1.2,0) -- (2.3,0) node[midway, above]{\footnotesize packen};
+\draw[->, blue!70, thick] (5.0,0) -- (6.2,0) node[midway, above]{\footnotesize $M^k = P D^k P^{-1}$};
+\end{tikzpicture}
+\end{center}
+
+\textcolor{gray}{\small\textit{Die Folge ``schaut zwei Schritte zur\"uck''. Packt man $(a_{k+1}, a_k)$ in einen Vektor, macht die Matrix $M$ aus dem alten Paar das neue. $k$-mal anwenden $=$ $M^k$ -- und das ist \"uber die Diagonalisierung leicht, weil $D^k$ einfach die Eintr\"age hoch $k$ sind.}}
+
+\textbf{Schritt 1: Vektor und Matrix.} Setze $v_k = \begin{pmatrix} a_{k+1} \\ a_k \end{pmatrix}$. Mit $M = \begin{pmatrix} 3 & 10 \\ 1 & 0 \end{pmatrix}$ gilt
+\[
+M v_{k-1} = \begin{pmatrix} 3 & 10 \\ 1 & 0 \end{pmatrix}\begin{pmatrix} a_k \\ a_{k-1} \end{pmatrix} = \begin{pmatrix} 3a_k + 10 a_{k-1} \\ a_k \end{pmatrix} = \begin{pmatrix} a_{k+1} \\ a_k \end{pmatrix} = v_k.
+\]
+Startvektor $v_0 = \begin{pmatrix} a_1 \\ a_0 \end{pmatrix} = \begin{pmatrix} -1 \\ 4 \end{pmatrix}$, und damit $v_k = M^k v_0$.
+
+\textbf{Schritt 2: $M$ diagonalisieren.} Char.\ Polynom:
+\[
+\det(M - tI) = \det\begin{pmatrix} 3-t & 10 \\ 1 & -t \end{pmatrix} = (3-t)(-t) - 10 = t^2 - 3t - 10 = (t-5)(t+2).
+\]
+Eigenwerte $\lambda = 5$ und $\lambda = -2$. Eigenvektoren:
+\begin{itemize}[leftmargin=*, nosep]
+    \item $\lambda = 5$: $M - 5I = \left(\begin{smallmatrix} -2 & 10 \\ 1 & -5 \end{smallmatrix}\right)$, Zeile $1$: $-2x + 10y = 0 \Rightarrow x = 5y$. \EV{} $(5, 1)$.
+    \item $\lambda = -2$: $M + 2I = \left(\begin{smallmatrix} 5 & 10 \\ 1 & 2 \end{smallmatrix}\right)$, Zeile $2$: $x + 2y = 0 \Rightarrow x = -2y$. \EV{} $(-2, 1)$.
+\end{itemize}
+\[
+P = \begin{pmatrix} 5 & -2 \\ 1 & 1 \end{pmatrix},\quad D = \begin{pmatrix} 5 & 0 \\ 0 & -2 \end{pmatrix},\quad
+\det P = 7,\ \ P^{-1} = \frac{1}{7}\begin{pmatrix} 1 & 2 \\ -1 & 5 \end{pmatrix}.
+\]
+
+\textbf{Schritt 3: $v_k = P D^k P^{-1} v_0$.} Von rechts nach links rechnen. Zuerst $P^{-1} v_0$:
+\[
+P^{-1} v_0 = \frac{1}{7}\begin{pmatrix} 1 & 2 \\ -1 & 5 \end{pmatrix}\begin{pmatrix} -1 \\ 4 \end{pmatrix} = \frac{1}{7}\begin{pmatrix} -1 + 8 \\ 1 + 20 \end{pmatrix} = \frac{1}{7}\begin{pmatrix} 7 \\ 21 \end{pmatrix} = \begin{pmatrix} 1 \\ 3 \end{pmatrix}.
+\]
+Dann $D^k$ davor ($D^k = \left(\begin{smallmatrix} 5^k & 0 \\ 0 & (-2)^k \end{smallmatrix}\right)$):
+\[
+D^k P^{-1} v_0 = \begin{pmatrix} 5^k & 0 \\ 0 & (-2)^k \end{pmatrix}\begin{pmatrix} 1 \\ 3 \end{pmatrix} = \begin{pmatrix} 5^k \\ 3\,(-2)^k \end{pmatrix}.
+\]
+Zuletzt $P$ davor:
+\[
+v_k = \begin{pmatrix} 5 & -2 \\ 1 & 1 \end{pmatrix}\begin{pmatrix} 5^k \\ 3\,(-2)^k \end{pmatrix} = \begin{pmatrix} 5\cdot 5^k - 6\,(-2)^k \\ 5^k + 3\,(-2)^k \end{pmatrix}.
+\]
+
+\textbf{Schritt 4: $a_k$ ablesen.} $a_k$ ist die \emph{untere} Komponente von $v_k$:
+\[
+\fbox{\parbox{0.93\textwidth}{\centering
+$a_k = 5^k + 3\cdot(-2)^k.$
+}}
+\]
+
+\textbf{Probe:} $a_0 = 1 + 3 = 4$ \checkmark, \ $a_1 = 5 + 3\cdot(-2) = -1$ \checkmark, \ $a_2 = 25 + 3\cdot 4 = 37 = 3(-1) + 10(4)$ \checkmark.
+
+\bigskip
+\hrule
+\bigskip
+
+%% ============================================================
+\subsection*{\"Uberblick: Ergebnisse}
+%% ============================================================
+
+\begin{center}
+\begin{tabular}{@{}ll@{}}
+\toprule
+Aufgabe & Ergebnis \\
+\midrule
+$47$ (a) & diagonalisierbar, $D = \operatorname{diag}(3,3,5)$ \\
+$47$ (b) & \emph{nicht} diagonalisierbar (GM$(2)=1 <$ AM$(2)=2$) \\
+$47$ (c) & diagonalisierbar, $D = \operatorname{diag}(0,6,6)$ \\[2pt]
+$48$ (a) & diagonalisierbar f\"ur \textbf{alle} $a \in \mathbb{R}$ \\
+$48$ (b) & diagonalisierbar $\Leftrightarrow a \neq -\tfrac{5}{3}$ \\[2pt]
+$49$ & $a_k = 5^k + 3\cdot(-2)^k$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\end{document}

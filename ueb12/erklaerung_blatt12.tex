@@ -1,0 +1,186 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{geometry}\geometry{margin=2.5cm}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning, calc, decorations.pathreplacing}
+\usepackage{pgfplots}\pgfplotsset{compat=1.18}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable}
+\usepackage{xcolor}
+
+\newtcolorbox{merkbox}[1][]{colback=blue!5, colframe=blue!40, fonttitle=\bfseries, title={Merke}, breakable, #1}
+\newtcolorbox{analogie}[1][]{colback=green!5, colframe=green!40, fonttitle=\bfseries, title={Analogie}, breakable, #1}
+\newtcolorbox{begriffe}[1][]{colback=yellow!10, colframe=yellow!60!black, fonttitle=\bfseries, title={Was bedeuten die Begriffe?}, breakable, #1}
+\newcommand{\EW}{Eigenwert}
+\newcommand{\EV}{Eigenvektor}
+
+\title{Erkl\"arung -- HW12: Diagonalisierung \& Anwendungen}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+%=============================================================================
+\part*{Teil 1: Grundlagen -- einfach erkl\"art}
+
+%-----------------------------------------------------------------------------
+\section*{1. Was hei\ss t ``diagonalisieren''? Die richtige Brille}
+
+Eine Matrix $A$ verformt den Raum -- meistens kompliziert (drehen \emph{und} strecken). Aber in HW11 haben wir gesehen: es gibt besondere Richtungen, die \textbf{Eigenvektoren}, die $A$ nur \emph{streckt}. Diagonalisieren hei\ss t: den Raum durch die ``Eigenvektor-Brille'' anschauen. In dieser Brille macht $A$ gar nichts Kompliziertes mehr -- es streckt nur jede Achse um ihren Eigenwert. Das ist die \textbf{Diagonalmatrix $D$}.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0, >={Stealth[scale=1.1]}, every node/.style={font=\small}]
+\node (vE)  at (0,2)   {$v$ \;(Standard)};
+\node (wE)  at (5.4,2) {$Av$ \;(Standard)};
+\node (vB)  at (0,0)   {Eigen-Basis};
+\node (wB)  at (5.4,0) {Eigen-Basis};
+\draw[->, blue!70, thick] (vE) -- (wE) node[midway, above]{$A$ \;(kompliziert)};
+\draw[->, red!80, thick] (vB) -- (wB) node[midway, below]{$D$ \;(nur strecken)};
+\draw[->, gray] (vE) -- (vB) node[midway, left]{$P^{-1}$};
+\draw[->, gray] (wB) -- (wE) node[midway, right]{$P$};
+\end{tikzpicture}
+\end{center}
+
+\begin{analogie}
+Stell dir vor, du beschreibst eine Landschaft. In normalen Himmelsrichtungen (Nord/Ost) ist ein Hang ``schr\"ag'' und unangenehm zu rechnen. Drehst du dich aber so, dass du \emph{direkt den Hang hinauf} schaust, ist alles einfach: vorne geht's nur hoch, seitlich nur flach. Die Eigenvektoren sind diese ``bequemen Richtungen'', und $D$ ist die Landschaft in dieser Ansicht.
+\end{analogie}
+
+\begin{merkbox}[title={Die Formel}]
+$A$ ist \textbf{diagonalisierbar}, wenn
+\[
+D = P^{-1} A P \qquad\text{bzw.}\qquad A = P D P^{-1},
+\]
+mit $P$ invertierbar und $D$ diagonal. Dabei sind die \textbf{Spalten von $P$ die Eigenvektoren} und die \textbf{Diagonale von $D$ die zugeh\"origen Eigenwerte} (gleiche Reihenfolge!).
+\end{merkbox}
+
+%-----------------------------------------------------------------------------
+\section*{2. Wann geht es? Genug Eigenvektoren}
+
+Damit $P$ invertierbar ist, m\"ussen seine Spalten -- die Eigenvektoren -- eine \textbf{ganze Basis} bilden. Bei einer $n\times n$-Matrix braucht man also $n$ linear unabh\"angige Eigenvektoren.
+
+\begin{merkbox}[title={Diagonalisierbarkeits-Kriterium}]
+$A$ ($n\times n$) ist diagonalisierbar
+\[
+\Longleftrightarrow \ \text{es gibt } n \text{ unabh\"angige Eigenvektoren}
+\Longleftrightarrow \ \text{f\"ur \emph{jeden} Eigenwert ist } \text{GM} = \text{AM}.
+\]
+Sobald \emph{ein} Eigenwert GM $<$ AM hat (ein \EV{} ``fehlt''), ist $A$ \textbf{nicht} diagonalisierbar.
+\end{merkbox}
+
+\begin{analogie}
+Du brauchst f\"ur den $\mathbb{R}^3$ genau $3$ ``Stangen'', die in verschiedene Richtungen zeigen, um ein Ger\"ust (eine Basis) zu bauen. Hast du nur $2$ Stangen, liegen sie in einer Ebene -- der Raum bleibt unvollst\"andig. Genauso: $2$ Eigenvektoren reichen im $\mathbb{R}^3$ nicht.
+\end{analogie}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.95, every node/.style={font=\footnotesize}]
+% left: 3 vectors -> basis (good)
+\draw[->, green!55!black, thick] (0,0) -- (0.9,0.2);
+\draw[->, green!55!black, thick] (0,0) -- (0.2,0.9);
+\draw[->, green!55!black, thick] (0,0) -- (-0.5,-0.4);
+\node at (0.2,-0.9) {$3$ Richtungen $=$ Basis \checkmark};
+\node[green!55!black] at (0.2,-1.25) {diagonalisierbar};
+% right: 2 vectors -> plane (bad)
+\begin{scope}[xshift=6cm]
+\draw[fill=red!8, draw=red!30] (-1.1,-0.5) -- (1.1,-0.4) -- (1.4,0.5) -- (-0.8,0.4) -- cycle;
+\draw[->, red!75, thick] (0,0) -- (0.9,0.2);
+\draw[->, red!75, thick] (0,0) -- (-0.5,0.25);
+\node at (0.2,-0.9) {nur $2$ Richtungen $=$ Ebene};
+\node[red!75] at (0.2,-1.25) {nicht diagonalisierbar};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+%-----------------------------------------------------------------------------
+\section*{3. Wozu das Ganze? Potenzen werden leicht}
+
+Der gr\"o\ss te Vorteil: Mit $A = P D P^{-1}$ wird jede \textbf{Potenz} kinderleicht. Denn die mittleren $P^{-1}P$ heben sich weg:
+\[
+A^k = (PDP^{-1})(PDP^{-1})\cdots(PDP^{-1}) = P\,D^k\,P^{-1},
+\]
+und $D^k$ ist nur die Diagonale hoch $k$:
+\[
+D = \begin{pmatrix} \lambda_1 & 0 \\ 0 & \lambda_2 \end{pmatrix} \ \Rightarrow\
+D^k = \begin{pmatrix} \lambda_1^k & 0 \\ 0 & \lambda_2^k \end{pmatrix}.
+\]
+
+\begin{merkbox}[title={Anwendung: Folgen}]
+Eine Rekursion wie $a_k = 3a_{k-1} + 10a_{k-2}$ schreibt man als $v_k = M v_{k-1}$, also $v_k = M^k v_0$. \"Uber $M^k = P D^k P^{-1}$ bekommt man eine \textbf{explizite Formel} f\"ur $a_k$ -- ohne alle Zwischenglieder auszurechnen.
+\end{merkbox}
+
+%-----------------------------------------------------------------------------
+\section*{4. Parameter-Aufgaben: ``f\"ur welche $a$?''}
+
+Manchmal steht ein Buchstabe $a$ in der Matrix. Dann h\"angen die Eigenwerte von $a$ ab, und man fragt: f\"ur welche $a$ ist $A$ diagonalisierbar? \textbf{Strategie:} Eigenwerte (mit AM) als Ausdruck in $a$ bestimmen, dann die GM des mehrfachen Eigenwerts pr\"ufen. Meist gibt es nur \emph{wenige} ``b\"ose'' $a$, bei denen zwei Eigenwerte zusammenfallen und ein \EV{} fehlt.
+
+\begin{merkbox}[title={Zwei n\"utzliche Strukturen (aus HW11)}]
+\begin{itemize}[leftmargin=*, nosep]
+    \item \textbf{$A = cI + (\text{Einsen-Matrix})$}: Abziehen von $cI$ verschiebt nur die Eigenwerte. Die Einsen-Matrix hat Rang $1$ $\Rightarrow$ gro\ss er Eigenraum.
+    \item \textbf{Rang-$1$-Matrix} (alle Zeilen Vielfache derselben Zeile): Eigenwerte sind $\operatorname{Spur}$ (einmal) und $0$ (sonst). GM$(0) = n - 1$.
+\end{itemize}
+\end{merkbox}
+
+\newpage
+
+%=============================================================================
+\part*{Teil 2: Die Aufgaben im \"Uberblick}
+
+\section*{Aufgabe 47 -- diagonalisieren (mit HW11-Daten)}
+
+Die drei Matrizen kennen wir schon aus HW11 (43, 44). Man startet mit der Tabelle (Eigenwerte, AM, GM, Basen) und pr\"uft nur noch GM $=$ AM:
+\begin{itemize}[leftmargin=*, nosep]
+    \item \textbf{(a)} alle GM $=$ AM $\Rightarrow$ diagonalisierbar. $P =$ Eigenvektoren als Spalten, $D = \operatorname{diag}(3,3,5)$.
+    \item \textbf{(b)} GM$(2) = 1 <$ AM$(2) = 2$ $\Rightarrow$ nur $2$ statt $3$ Eigenvektoren $\Rightarrow$ \emph{nicht} diagonalisierbar.
+    \item \textbf{(c)} alle GM $=$ AM $\Rightarrow$ diagonalisierbar. $D = \operatorname{diag}(0,6,6)$.
+\end{itemize}
+Statt $P^{-1}$ auszurechnen, pr\"uft man $AP = PD$ -- das hei\ss t Spalte f\"ur Spalte nur $A v_i = \lambda_i v_i$.
+
+\section*{Aufgabe 48 -- f\"ur welche $a$?}
+
+\begin{itemize}[leftmargin=*, nosep]
+    \item \textbf{(a)} $A = \left(\begin{smallmatrix} a&1&1\\1&a&1\\1&1&a \end{smallmatrix}\right)$. Char.\ Polynom (Sarrus) gibt Eigenwerte $a-1$ (doppelt) und $a+2$ (einfach), \emph{immer} verschieden. Und $A - (a-1)I$ ist die Einsen-Matrix (Rang $1$) $\Rightarrow$ GM$(a-1) = 2 =$ AM. Also \textbf{f\"ur alle $a$} diagonalisierbar.
+    \item \textbf{(b)} $A = \left(\begin{smallmatrix} 1&2&3\\2&4&6\\a&2a&3a \end{smallmatrix}\right)$ hat Rang $1$ (alle Zeilen Vielfache von $(1,2,3)$). Eigenwerte $0$ (AM $2$, GM $2$) und $5+3a$ (Spur). Solange $5+3a \neq 0$ ist alles GM $=$ AM. Bei $a = -\tfrac{5}{3}$ wird der dritte Eigenwert auch $0$ (AM $3$), aber GM bleibt $2$ $\Rightarrow$ \textbf{nur dann nicht} diagonalisierbar.
+\end{itemize}
+
+\section*{Aufgabe 49 -- Folge \"uber Diagonalisierung}
+
+\begin{itemize}[leftmargin=*, nosep]
+    \item $v_k = (a_{k+1}, a_k)^\top$, dann $v_k = M v_{k-1}$ mit $M = \left(\begin{smallmatrix} 3&10\\1&0 \end{smallmatrix}\right)$, also $v_k = M^k v_0$, $v_0 = (-1,4)^\top$.
+    \item $M$ diagonalisieren: Eigenwerte $5, -2$, Eigenvektoren $(5,1), (-2,1)$.
+    \item $v_k = P D^k P^{-1} v_0$. Mit $P^{-1} v_0 = (1,3)^\top$ folgt $a_k = 5^k + 3\cdot(-2)^k$.
+\end{itemize}
+
+%=============================================================================
+\section*{Zusammenfassung}
+
+\begin{center}
+\begin{tabular}{@{}ll@{}}
+\toprule
+Aufgabe & Ergebnis \\
+\midrule
+$47$ (a) & diagonalisierbar, $D = \operatorname{diag}(3,3,5)$ \\
+$47$ (b) & \emph{nicht} diagonalisierbar (GM$(2) < $ AM$(2)$) \\
+$47$ (c) & diagonalisierbar, $D = \operatorname{diag}(0,6,6)$ \\
+$48$ (a) & f\"ur alle $a \in \mathbb{R}$ \\
+$48$ (b) & genau f\"ur $a \neq -\tfrac{5}{3}$ \\
+$49$ & $a_k = 5^k + 3\cdot(-2)^k$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{merkbox}[title={Goldene Regeln}]
+\begin{enumerate}[leftmargin=*, nosep]
+    \item Diagonalisierbar $\Leftrightarrow$ f\"ur jeden Eigenwert GM $=$ AM (genug Eigenvektoren f\"ur eine Basis).
+    \item $P =$ Eigenvektoren als Spalten, $D =$ Eigenwerte auf der Diagonale -- \emph{gleiche Reihenfolge}.
+    \item Pr\"ufen mit $AP = PD$ (Spalte f\"ur Spalte $A v_i = \lambda_i v_i$) -- kein $P^{-1}$ n\"otig.
+    \item Potenzen: $A^k = P D^k P^{-1}$, und $D^k$ ist die Diagonale hoch $k$.
+    \item Parameter: nur die wenigen $a$ suchen, bei denen GM $<$ AM wird.
+    \item Folgen: in Vektor packen, Matrix $M^k$ \"uber Diagonalisierung, Komponente ablesen.
+\end{enumerate}
+\end{merkbox}
+
+\end{document}
